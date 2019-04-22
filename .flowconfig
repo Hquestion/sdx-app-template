@@ -1,0 +1,40 @@
+[ignore]
+;忽略掉的文件，不使用flow进行类型检查
+.*/node_modules/.*
+.*/build/.*
+.*/public/.*
+.*/babel.config.js
+.*/vue.config.js
+.*/tests/.*
+.*/flow-typed/.*
+.*/dist/.*
+[include]
+.*/src/.*
+[libs]
+;指定flow类型声明的位置，这里是根目录下flow文件夹
+flow
+[lints]
+
+[options]
+;可以不指定，默认即node_modules
+module.system.node.resolve_dirname=node_modules
+;支持的文件后缀，必须加上.vue，.scss不加会报错
+module.file_ext=.js
+module.file_ext=.vue
+module.file_ext=.scss
+;webpack路径别名映射，需要配置让Flow认识
+module.name_mapper.extension='scss' -> 'CSSModule'
+module.name_mapper='^@\/\(.*\)$' -> '<PROJECT_ROOT>/src/\1'
+module.name_mapper='^src\/\(.*\)$' -> '<PROJECT_ROOT>/src/\1'
+module.name_mapper='^styles\/\(.*\)$' -> '<PROJECT_ROOT>/src/assets/styles/\1'
+module.name_mapper='^assets\/\(.*\)$' -> '<PROJECT_ROOT>/src/assets/\1'
+module.name_mapper='^views\/\(.*\)$' -> '<PROJECT_ROOT>/src/views/\1'
+module.name_mapper='^components\/\(.*\)$' -> '<PROJECT_ROOT>/src/components/\1'
+module.name_mapper='^store\/\(.*\)$' -> '<PROJECT_ROOT>/src/store/\1'
+module.name_mapper='^api\/\(.*\)$' -> '<PROJECT_ROOT>/src/api/\1'
+module.name_mapper='^router\/\(.*\)$' -> '<PROJECT_ROOT>/src/router/\1'
+module.name_mapper='^utils\/\(.*\)$' -> '<PROJECT_ROOT>/src/utils/\1'
+module.name_mapper='^fonts\/\(.*\)$' -> '<PROJECT_ROOT>/src/assets/fonts/\1'
+;all=true指定include配置下所有的文件使用Flow进行静态类型检查，配置了之后可以不用在每个文件中加// @flow 注释
+;all=true
+[strict]

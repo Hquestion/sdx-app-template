@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>协助大屏项目实现各应用跨域自动登陆</title>
+</head>
+<body>
+<p style="display: none">
+    这个页面的功能说明：
+    1.接收父容器传过来的账号密码信息，填充到登陆表单里，并主动触发表单提交
+    2.需要部署在前端项目的同级目录（与index.html平级）
+</p>
+<script type="text/javascript">
+    var doc = parent.window.frames["mainIframe"].document;
+    var input = doc.querySelector("input[name=username]");
+    var pwd = doc.querySelector("input[name=passwd]");
+    // 需要从父容器获取账号信息，以避免账号泄露
+    window.addEventListener('message', function(data) {
+        // 这边要根据具体配置改一下
+        // 目前已知：
+        // 教育（'edu'）
+        // 平台（'plate'）
+        // 医疗（‘health’）
+        var accountInfo = data.data['plate'];
+        input.value = accountInfo.account;
+        pwd.value = accountInfo.pwd;
+        input.dispatchEvent(new Event('input'));
+        pwd.dispatchEvent(new Event('input'));
+        setTimeout(() => {
+            doc.querySelector('.form-submit button').click();
+        }, 0);
+    });
+</script>
+</body>
+</html>

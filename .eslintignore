@@ -1,0 +1,12 @@
+build
+config
+src/assets
+src/fonts
+src/components/packages
+node_modules
+vue.config.js
+babel.config.js
+flow
+flow-typed
+dist
+**/sdx-component/**/*.js
