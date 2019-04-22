@@ -9139,6 +9139,11 @@ sane@^2.0.0:
   optionalDependencies:
     fsevents "^1.2.3"
 
+sass-bem-constructor@^1.1.0:
+  version "1.1.0"
+  resolved "http://192.168.20.38:4873/sass-bem-constructor/-/sass-bem-constructor-1.1.0.tgz#1a5a78283b29b96faf65d6dd74d4d1c9b893549b"
+  integrity sha1-Glp4KDspuW+vZdbddNTRybiTVJs=
+
 sass-graph@^2.2.4:
   version "2.2.4"
   resolved "http://192.168.20.38:4873/sass-graph/-/sass-graph-2.2.4.tgz#13fbd63cd1caf0908b9fd93476ad43a51d1e0b49"
