@@ -18,6 +18,8 @@ import EmitAsync from './plugins/asyncEmit';
 import directives from '@/directives';
 import i18n from './i18n';
 import SdxUI from '@sdx/ui';
+import febAlive from 'feb-alive';
+Vue.use(febAlive, { router, keyName: 'feb' });
 console.log(SdxUI);
 Vue.use(EmitAsync);
 

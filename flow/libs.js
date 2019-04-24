@@ -13,6 +13,6 @@ declare module 'normalize.css/normalize.css' {
 declare module 'styles/app.scss' {}
 
 declare module '@sdx/ui' {}
-
+declare module 'feb-alive' {}
 declare var React: $Exports<'react'>;
 

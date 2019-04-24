@@ -9,7 +9,9 @@ import Login from '../views/login/';
 
 // about
 import about from '../views/about/about';
-
+// feb-alive
+import febAlive from 'feb-alive';
+febAlive.resetHistory();
 Vue.use(Router);
 
 /**
