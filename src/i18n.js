@@ -16,8 +16,24 @@ function loadLocaleMessages() {
     return messages;
 }
 
-export default new VueI18n({
+// 加载错误码国际化资源
+const enErrorMessages = require('./assets/error-message/message.en');
+const cnErrorMessages = require('./assets/error-message/message.zh-CN');
+
+// 加载组件库国际化资源
+const enComponentLibMessages = require('@sdx/utils/lib/locale/lang/en');
+const cnComponentLibMessages = require('@sdx/utils/lib/locale/lang/zh-CN');
+
+const i18n = new VueI18n({
     locale: process.env.VUE_APP_I18N_LOCALE || 'zh-CN',
     fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'zh-CN',
     messages: loadLocaleMessages()
 });
+
+i18n.mergeLocaleMessage('en', enErrorMessages);
+i18n.mergeLocaleMessage('zh-CN', cnErrorMessages);
+
+i18n.mergeLocaleMessage('en', enComponentLibMessages);
+i18n.mergeLocaleMessage('zh-CN', cnComponentLibMessages);
+
+export default i18n;
