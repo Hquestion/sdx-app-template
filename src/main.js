@@ -20,7 +20,6 @@ import i18n from './i18n';
 import SdxUI from '@sdx/ui';
 import febAlive from 'feb-alive';
 Vue.use(febAlive, { router, keyName: 'feb' });
-console.log(SdxUI);
 Vue.use(EmitAsync);
 
 // import directives by shaojs 2018年 2月22日 星期四 17时11分29秒 CST

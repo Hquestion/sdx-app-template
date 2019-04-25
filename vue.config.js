@@ -5,6 +5,25 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 const resolve = dir => path.join(__dirname, dir);
 
+const alias = {
+    'vue$': 'vue/dist/vue.esm.js',
+    '@': resolve('src'),
+    'src': resolve('src'),
+    'assets': resolve('src/assets'),
+    'views': resolve('src/views'),
+    'components': resolve('src/components'),
+    'styles': resolve('src/assets/styles'),
+    'api': resolve('src/api'),
+    'store': resolve('src/store'),
+    'router': resolve('src/router'),
+    'utils': resolve('src/utils')
+};
+
+if (!isProduction) {
+    // 为了方便开发环境开发，这里只在开发时设置,可根据实际目录结构修改，勿上传
+    alias['@sdx'] = resolve('../sdx-component/packages');
+}
+
 module.exports = {
     lintOnSave: !isProduction ? 'default' : false,
     publicPath: isProduction ? '/' : '/',
@@ -31,7 +50,9 @@ module.exports = {
         entry: ['babel-polyfill', './src/main.js'],
         plugins: [
             new FlowWebpackPlugin({
-                flowArgs: ['status']
+                failOnError: true,
+                flowPath: require.main.require('flow-bin'),
+                flowArgs: ['status', '--color=always']
             }),
             new webpack.ProvidePlugin({
                 _: 'lodash'
@@ -60,19 +81,7 @@ module.exports = {
             }
         },
         resolve: {
-            alias: {
-                'vue$': 'vue/dist/vue.esm.js',
-                '@': resolve('src'),
-                'src': resolve('src'),
-                'assets': resolve('src/assets'),
-                'views': resolve('src/views'),
-                'components': resolve('src/components'),
-                'styles': resolve('src/assets/styles'),
-                'api': resolve('src/api'),
-                'store': resolve('src/store'),
-                'router': resolve('src/router'),
-                'utils': resolve('src/utils')
-            }
+            alias
         }
     },
 

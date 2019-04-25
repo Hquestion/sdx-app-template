@@ -4,7 +4,5 @@
  */
 export const MOCK_API_CONFIG: Array<string> = [
     '/v2/test',
-    '/v2/overview'
-    // '/v2/task/skyflow/execute/crontabs',
-    // '/v2/task/skyflow/execute/crontabs/scheduleJobs'
+    /v2\/overview/
 ];
