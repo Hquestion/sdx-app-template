@@ -20,8 +20,8 @@ const alias = {
 };
 
 if (!isProduction) {
-    // 为了方便开发环境开发，这里只在开发时设置,可根据实际目录结构修改，勿上传
-    alias['@sdx'] = resolve('../sdx-component/packages');
+    // 为了方便开发环境开发，这里只在开发时设置
+    alias['@sdx'] = resolve('../sdx-component/packages')
 }
 
 module.exports = {
@@ -51,8 +51,8 @@ module.exports = {
         plugins: [
             new FlowWebpackPlugin({
                 failOnError: true,
-                flowPath: require.main.require('flow-bin'),
-                flowArgs: ['status', '--color=always']
+                // flowPath: require.main.require('flow-bin'),
+                flowArgs: ['--color=always']
             }),
             new webpack.ProvidePlugin({
                 _: 'lodash'
