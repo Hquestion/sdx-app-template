@@ -19,10 +19,10 @@ const alias = {
     'utils': resolve('src/utils')
 };
 
-if (!isProduction) {
-    // 为了方便开发环境开发，这里只在开发时设置
-    alias['@sdx'] = resolve('../sdx-component/packages')
-}
+// if (!isProduction) {
+//     // 为了方便开发环境开发，这里只在开发时设置
+//     alias['@sdx'] = resolve('../sdx-component/packages')
+// }
 
 module.exports = {
     lintOnSave: !isProduction ? 'default' : false,
