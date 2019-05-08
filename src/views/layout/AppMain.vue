@@ -51,6 +51,7 @@ export default {
         .app-main-view {
             overflow: auto;
             height: calc(100% - 48px);
+            padding: 20px;
         }
 	}
 </style>

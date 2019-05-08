@@ -53,12 +53,12 @@ const leftmenu = [
 const manageMenus = [
     {
         name: '资源管理',
-        icon: 'iconfont icon-xiazai44',
+        icon: 'iconfont iconicon-zichanguanli',
         path: '/resource'
     },
     {
         name: '用户管理',
-        icon: 'iconfont icon-xiazai44',
+        icon: 'iconfont iconicon-zichanguanli',
         path: '/user',
         children: [
             {
@@ -73,7 +73,7 @@ const manageMenus = [
     },
     {
         name: '权限管理',
-        icon: 'iconfont icon-xiazai44',
+        icon: 'iconfont iconicon-zichanguanli',
         path: '/rights',
         children: [
             {
@@ -92,7 +92,7 @@ const manageMenus = [
     },
     {
         name: '监控中心',
-        icon: 'iconfont icon-xiazai44',
+        icon: 'iconfont iconicon-zichanguanli',
         path: '/home'
     },
 ];

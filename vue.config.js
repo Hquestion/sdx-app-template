@@ -25,6 +25,14 @@ module.exports = {
     assetsDir: isProduction ? '' : '',
     productionSourceMap: false,
 
+    transpileDependencies: isProduction ? [] :
+        [
+            './node_modules/@sdx/ui/components',
+            './node_modules/@sdx/utils/src',
+            './node_modules/@sdx/widget/components',
+            './node_modules/@sdx/view/components'
+        ],
+
     css: {
         extract: isProduction,
         sourceMap: !isProduction,
