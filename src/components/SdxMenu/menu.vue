@@ -80,14 +80,25 @@ export default {
     padding-left: 36px !important;
 }
 
+.el-menu .el-menu-item {
+    &:hover, &:active {
+        background: linear-gradient(-90deg, #6B69F8 0%, #4781F8 98%);
+    }
+}
 .el-menu,
 .el-submenu {
-    .el-menu-item, .el-submenu__title {
+    position: relative;
+    & /deep/ .el-menu-item, & /deep/ .el-submenu__title {
         width: 100%;
         font-size: 14px;
         border-radius: $border-radius;
+        height: 46px;
+        line-height: 46px;
         .el-menu-item {
             padding-left: 62px !important;
+        }
+        &:hover, &:active {
+            background: linear-gradient(-90deg, #6B69F8 0%, #4781F8 98%);
         }
     }
 
@@ -103,18 +114,21 @@ export default {
         }
     }
 
+    .is-active {
+        color: #fff;
+    }
     .is-active2 {
         color: $white;
-        position: relative;
-        background: $sdx-color-primary;
+        background-image: linear-gradient(-90deg, #6B69F8 0%, #4781F8 98%);
     }
     .is-active-p {
-        background: $sdx-color-primary;
+        background: #303750;
     }
 }
 .main-menu-icon {
-    margin-right: 26px;
+    margin-right: 14px;
     position: relative;
     top: -1px;
+    font-size: 18px;
 }
 </style>

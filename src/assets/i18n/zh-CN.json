@@ -1,3 +1,8 @@
 {
-  "message": "hello i18n !!"
+    "message": "hello i18n !!",
+    "manage_plateform": "管理平台",
+    "sourcemanage": "资源管理",
+    "usermanage": "用户管理",
+    "rightsmanage": "权限管理",
+    "monitormanage": "监控"
 }

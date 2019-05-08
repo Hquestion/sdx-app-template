@@ -4,7 +4,6 @@ import App from './App';
 import router from './router';
 import store from './store';
 import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
 import NProgress from 'nprogress'; // Progress 进度条
 import 'nprogress/nprogress.css'; // Progress 进度条 样式
 import 'normalize.css/normalize.css'; // normalize.css 样式格式化
@@ -18,7 +17,9 @@ import EmitAsync from './plugins/asyncEmit';
 import directives from '@/directives';
 import i18n from './i18n';
 import SdxUI from '@sdx/ui';
+import SdxWidget from '@sdx/widget';
 import febAlive from 'feb-alive';
+
 Vue.use(febAlive, { router, keyName: 'feb' });
 Vue.use(EmitAsync);
 
@@ -28,31 +29,11 @@ Vue.use(directives);
 // register globally
 Vue.use(ElementUI);
 Vue.use(SdxUI);
+Vue.use(SdxWidget);
 // register global utility filters.
 Object.keys(filters).forEach(key => {
     Vue.filter(key, filters[key]);
 });
-
-router.beforeEach((to, from, next) => {
-    NProgress.start(); // 开启Progress
-    next();
-});
-
-router.afterEach(() => {
-    NProgress.done(); // 结束Progress
-});
-
-// 生产环境错误日志
-if (process.env.NODE_ENV === 'production') {
-    Vue.config.errorHandler = function(err, vm) {
-        console.log(err, window.location.href);
-        errLog.pushLog({
-            err,
-            url: window.location.href,
-            vm
-        });
-    };
-}
 
 new Vue({
     router,
@@ -66,3 +47,32 @@ new Vue({
         eventHub: new Vue()
     }
 }).$mount('#app');
+
+store.dispatch('auth').then(() => {
+    router.beforeEach((to, from, next) => {
+        NProgress.start(); // 开启Progress
+        next();
+    });
+
+    router.afterEach(() => {
+        NProgress.done(); // 结束Progress
+    });
+
+    // 生产环境错误日志
+    if (process.env.NODE_ENV === 'production') {
+        Vue.config.errorHandler = function(err, vm) {
+            console.log(err, window.location.href);
+            errLog.pushLog({
+                err,
+                url: window.location.href,
+                vm
+            });
+        };
+    }
+}, () => {
+    router.replace({
+        name: 'Login'
+    });
+});
+
+

@@ -1,98 +1,45 @@
-/*
- * 用户信息存储,只存储当前用户的信息
- * @Author: jiasong.shao
- * @Date: 2018-04-25 09:27:55
- * @Last Modified by: jiasong.shao
- * @Last Modified time: 2018-07-31 18:05:26
- */
+import { login, logout } from '../../api/auth';
+import { getUserDetail } from '@sdx/utils/lib/api/user';
+import moment from 'moment';
+import router from '../../router';
 
-import { login, logout, userDetail } from '@/utils/authApis';
+let cachedToken = sessionStorage.getItem('token');
+if (cachedToken) {
+    cachedToken = JSON.parse(cachedToken);
+} else {
+    cachedToken = {};
+}
+let expireTimer = null;
+
 
 const user = {
     state: {
-        userId: '',
-        session: false,
-        role: {},
-        user: {
-            role: {}
-        },
-        userName: '',
-        quota: null,
-        group: null
+        token: cachedToken,
+        user: null
     },
 
     mutations: {
-        SET_USERID(state, id) {
-            state.userId = id;
-        },
-
-        SET_USERNAME(state, userName) {
-            state.userName = userName;
-        },
-
         SET_USER(state, user) {
             state.user = user;
         },
-
-        SET_ROLE(state, role) {
-            state.role = role;
-        },
-        SET_QUOTA(state, quota) {
-            state.quota = quota;
-        },
-        SET_GROUP(state, group) {
-            state.group = group;
-        },
-        SET_SESSION_INIT(state) {
-            state.session = true;
-        },
-
-        SET_SESSION_REMOVE(state) {
-            state.session = false;
-        },
         REMOVE_ALL(state) {
-            state.userId = '';
-            state.session = false;
-            state.role = {};
-            state.user = {
-                role: {}
-            };
-            state.userName = '';
-            state.quota = null;
-            state.group = null;
+            state.token = {};
+            state.user = null;
+            sessionStorage.removeItem('token');
+            clearTimeout(expireTimer);
+        },
+        SET_TOKEN(state, token) {
+            sessionStorage.setItem('token', JSON.stringify(token));
+            state.token = token;
         }
     },
 
     actions: {
-        login({ commit }, userInfo) {
+        login({ commit, dispatch }, userInfo) {
             return login(userInfo)
                 .then(data => {
-                    if (data.redirect) {
-                        window.location.href = data.redirect;
-                    }
-                    commit('SET_SESSION_INIT');
-                    commit('SET_ROLE', data.role);
-                    commit('SET_USERID', data._id);
-                    commit('SET_QUOTA', data.quota);
-                    commit('SET_GROUP', data.group);
-                    commit('SET_USERNAME', data.name);
-                    commit('SET_USER', data);
-                })
-                .catch(error => {
-                    commit('REMOVE_ALL');
-                    return Promise.reject(error);
-                });
-        },
-        currentUser({ commit }) {
-            return userDetail()
-                .then(data => {
-                    commit('SET_SESSION_INIT');
-                    commit('SET_ROLE', data.role);
-                    commit('SET_USERID', data._id);
-                    commit('SET_QUOTA', data.quota);
-                    commit('SET_GROUP', data.group);
-                    commit('SET_USERNAME', data.name);
-                    commit('SET_USER', data);
+                    commit('SET_TOKEN', data);
+                    return dispatch('auth');
                 })
                 .catch(error => {
                     commit('REMOVE_ALL');
@@ -103,8 +50,53 @@ const user = {
             return logout()
                 .then(() => {
                     commit('REMOVE_ALL');
-                })
-                .catch(error => error);
+                });
+        },
+        userInfo({ commit, state }) {
+            return new Promise((resolve, reject) => {
+                if (state.user) {
+                    resolve(state.user);
+                } else {
+                    if (state.token.userId) {
+                        getUserDetail(state.token.userId).then(res => {
+                            commit('SET_USER', res);
+                            resolve(res);
+                        }, e => {
+                            reject(e);
+                        });
+                    } else {
+                        reject('Unauthorize');
+                    }
+                }
+            });
+        },
+        auth({ commit, state }) {
+            return new Promise((resolve, reject) => {
+                if (state.token && state.token.accessToken) {
+                    // 用户存在，校验失效时间，如果未过期则启动失效定时器，否则直接退出登陆
+                    const expireTime = moment.utc(state.token.expiresAt);
+                    const now = moment.utc();
+                    if (now > expireTime) {
+                        // 失效，退出登陆
+                        reject();
+                    } else {
+                        // 未失效，启动定时器
+                        clearTimeout(expireTimer);
+                        expireTimer = setTimeout(() => {
+                            logout().then(() => {
+                                commit('REMOVE_ALL');
+                                router.replace({
+                                    name: 'Login'
+                                });
+                            });
+                        }, expireTime - now);
+                        resolve();
+                    }
+                } else {
+                    // 没有用户信息直接退出登陆
+                    reject();
+                }
+            });
         }
     }
 };

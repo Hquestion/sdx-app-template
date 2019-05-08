@@ -85,8 +85,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-
 export default {
     name: 'Login',
     data() {
@@ -99,9 +97,7 @@ export default {
             showDialog: false
         };
     },
-    computed: {
-        ...mapGetters(['auth_type'])
-    },
+    computed: {},
     methods: {
         handleLogin() {
             this.$refs.loginForm.validate(valid => {
@@ -113,14 +109,14 @@ export default {
                             this.loading = false;
                             // 设置显式登陆状态
                             this.$store.commit('SET_EXPLICIT_LOGIN');
-                            this.$router.push({ path: '/' });
+                            this.$router.push({ name: 'Home' });
                         })
                         .catch(() => {
                             this.loading = false;
-                            this.$router.push({ path: '/login' });
+                            // this.$router.push({ path: '/login' });
                         });
                 } else {
-                    this.$message.error('提交错误！');
+                    // this.$message.error('提交错误！');
                     return false;
                 }
             });
@@ -262,7 +258,6 @@ export default {
             background: transparent;
             color: #000;
             .el-input__inner {
-                padding-left: 45px;
                 border: 1px solid #a5c6e5 !important;
             }
             .el-input__inner:focus {

@@ -4,5 +4,6 @@
  */
 export const MOCK_API_CONFIG: Array<string | RegExp> = [
     '/v2/test',
-    /v2\/overview/
+    /v2\/overview/,
+    /\/api\/v1\/(.*)?/
 ];

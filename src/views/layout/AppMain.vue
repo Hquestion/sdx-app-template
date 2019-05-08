@@ -1,6 +1,13 @@
 <template>
     <section class="app-main">
-        <router-view />
+        <div class="app-main-breadcrumb">
+            <SdxwBreadcrumb></SdxwBreadcrumb>
+        </div>
+        <div class="app-main-view">
+            <feb-alive>
+                <router-view />
+            </feb-alive>
+        </div>
     </section>
 </template>
 
@@ -31,8 +38,19 @@ export default {
 </script>
 <style lang="scss" scoped>
 	.app-main {
-		height: 100%;
-        overflow: auto;
+		height: calc(100% - 60px);
         flex: 1;
+        .app-main-breadcrumb {
+            line-height: 48px;
+            height: 48px;
+            padding:0 20px;
+            border: 1px solid $sdx-border-color;
+            display: flex;
+            align-items: center;
+        }
+        .app-main-view {
+            overflow: auto;
+            height: calc(100% - 48px);
+        }
 	}
 </style>

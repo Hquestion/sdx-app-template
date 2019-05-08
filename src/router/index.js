@@ -30,20 +30,37 @@ export default new Router({
         {
             path: '/login',
             component: Login,
+            name: 'Login',
             hidden: true
         },
         {
             path: '/',
             component: Layout,
+            name: 'Home',
             redirect: '/home',
-            meta: {},
+            meta: {
+                breadcrumb: '首页'
+            },
             hidden: true,
             children: [
                 {
                     path: '/home',
                     component: about,
+                    name: 'About',
                     meta: {
-                        name: '关于SkyDiscovery'
+                        name: '关于SkyDiscovery',
+                        breadcrumb: '关于SkyDiscovery',
+                        system: 'user'
+                    }
+                },
+                {
+                    path: '/resource',
+                    component: about,
+                    name: 'About',
+                    meta: {
+                        name: '资源管理',
+                        breadcrumb: '资源管理',
+                        system: 'manage'
                     }
                 }
             ]

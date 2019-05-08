@@ -39,12 +39,17 @@ export default {
     overflow: hidden;
     &.hideSidebar {
         .sidebar-wrapper {
-            transform: translate(-180px, 0);
+            transform: translate(-170px, 0);
             .sidebar-container {
-                transform: translate(165px, 0);
-                & /deep/ .el-menu .el-menu {
-                    height: 0;
-                    overflow: hidden;
+                transform: translate(155px, 0);
+                & /deep/ .el-menu {
+                    .main-menu-icon {
+                        margin-right: 26px;
+                    }
+                    .el-menu {
+                        height: 0;
+                        overflow: hidden;
+                    }
                 }
                 & /deep/ .logo {
                     transform: translate(-$ls-siderbar, 0);
@@ -54,8 +59,13 @@ export default {
                  transform: translate(0, 0);
                  .sidebar-container {
                      transform: translate(0, 0);
-                     & /deep/ .el-menu .el-menu {
-                         height: auto;
+                     & /deep/ .el-menu {
+                         .main-menu-icon {
+                             margin-right: 14px;
+                         }
+                         .el-menu {
+                             height: auto;
+                         }
                      }
                      & /deep/ .logo {
                          transform: translate(0, 0);

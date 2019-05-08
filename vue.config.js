@@ -19,11 +19,6 @@ const alias = {
     'utils': resolve('src/utils')
 };
 
-if (!isProduction) {
-    // 为了方便开发环境开发，这里只在开发时设置
-    alias['@sdx'] = resolve('../sdx-component/packages')
-}
-
 module.exports = {
     lintOnSave: !isProduction ? 'default' : false,
     publicPath: isProduction ? '/' : '/',
@@ -49,11 +44,11 @@ module.exports = {
     configureWebpack: {
         entry: ['babel-polyfill', './src/main.js'],
         plugins: [
-            new FlowWebpackPlugin({
-                failOnError: true,
-                // flowPath: require.main.require('flow-bin'),
-                flowArgs: ['--color=always']
-            }),
+            // new FlowWebpackPlugin({
+            //     failOnError: true,
+            //     // flowPath: require.main.require('flow-bin'),
+            //     flowArgs: ['--color=always']
+            // }),
             new webpack.ProvidePlugin({
                 _: 'lodash'
             }),
@@ -94,9 +89,12 @@ module.exports = {
                 changeOrigin: true
             },
             '/mock': {
-                target: 'http://localhost:3000',
+                target: 'https://easy-mock.com',
                 ws: true,
-                changeOrigin: true
+                changeOrigin: true,
+                pathRewrite: {
+                    '/mock': '/mock/5cd04685adb0973be6a3d969/'
+                }
             }
         },
         overlay: true

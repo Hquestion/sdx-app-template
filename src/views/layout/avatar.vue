@@ -1,18 +1,80 @@
 <template>
     <div class="sdx-avatar">
-        <sdxui-button>中文</sdxui-button>
+        <SdxuButton
+            type="default"
+            trigger="click"
+            :shadow="true"
+            v-show="$route.meta.system !== 'manage'"
+        >
+            {{ $t('manage_plateform') }}
+            <template slot="dropdown">
+                <SdxuButton
+                    type="text"
+                    :block="true"
+                    @click="goManage('source')"
+                >
+                    {{ $t('sourcemanage') }}
+                </SdxuButton>
+                <SdxuButton
+                    type="text"
+                    :block="true"
+                    @click="goManage('user')"
+                >
+                    {{ $t('usermanage') }}
+                </SdxuButton>
+                <SdxuButton
+                    type="text"
+                    :block="true"
+                    @click="goManage('rights')"
+                >
+                    {{ $t('rightsmanage') }}
+                </SdxuButton>
+                <SdxuButton
+                    type="text"
+                    :block="true"
+                    @click="goManage('monitor')"
+                >
+                    {{ $t('monitormanage') }}
+                </SdxuButton>
+            </template>
+        </SdxuButton>
+        <div
+            class="split-line"
+            v-show="$route.meta.system !== 'manage'"
+        />
+        <SdxuButton
+            type="text"
+            trigger="click"
+            style="margin-right: 14px;min-width: 0;"
+            dropdown-width="90px"
+        >
+            {{ langTextMap[currentLang] }}
+            <template slot="dropdown">
+                <SdxuButton
+                    type="text"
+                    :block="true"
+                    @click="currentLang='zh-CN'"
+                >
+                    {{ langTextMap['zh-CN'] }}
+                </SdxuButton>
+                <SdxuButton
+                    type="text"
+                    :block="true"
+                    @click="currentLang='en'"
+                >
+                    {{ langTextMap['en'] }}
+                </SdxuButton>
+            </template>
+        </SdxuButton>
         <el-dropdown
             class="avatar-container"
             trigger="click"
+            @command="onCommand"
         >
             <div class="avatar-wrapper">
                 <div
                     class="avatar-box"
                 >
-                    <img
-                        class="user-indicator-icon"
-                        :src="userIcon"
-                    >
                     <img
                         class="user-avatar"
                         src="../../assets/images/user-s.png"
@@ -24,100 +86,110 @@
                 class="user-dropdown"
                 slot="dropdown"
             >
-                <el-dropdown-item class="account-container">
+                <el-dropdown-item
+                    class="account-container"
+                    command="userInfo"
+                >
                     <div class="account-dropdown-item">
                         <div class="dropdown-avatar-box">
                             <img
                                 class="user-avatar"
                                 src="../../assets/images/user-s.png"
                             >
-                            <img
-                                class="user-indicator-icon"
-                                :src="userIcon"
-                            >
                         </div>
                         <div class="account-info">
                             <div class="user-name">
-                                {{ userInfo.fullname }}
+                                {{ userMeta.fullName }}
                             </div>
                             <div class="user-role">
-                                {{ userInfo.role && userInfo.role.name }}
+                                {{ userMeta.role && userMeta.role.name }}
                             </div>
                         </div>
                     </div>
                 </el-dropdown-item>
-                <router-link
-                    class="inlineBlock"
-                    to="/userInfo"
+                <el-dropdown-item
+                    divided
+                    command="modifyPassword"
                 >
-                    <el-dropdown-item divided>
-                        修改密码
-                    </el-dropdown-item>
-                </router-link>
-                <el-dropdown-item divided>
-                    <span
-                        @click="logout"
-                        style="display:block;"
-                    >
+                    修改密码
+                </el-dropdown-item>
+                <el-dropdown-item
+                    divided
+                    command="logout"
+                >
+                    <span>
                         退出登录
                     </span>
                 </el-dropdown-item>
             </el-dropdown-menu>
         </el-dropdown>
+        <SdxwUserInfoDialog
+            :visible.sync="userInfoVisible"
+            :user-info-data="userMeta"
+        />
+        <SdxwChangePassword :visible.sync="modifyPwdVisible" />
     </div>
 </template>
 <script>
 import { mapState, mapActions } from 'vuex';
 import { version } from '../../../package';
 
-const BASE_API = process.env.VUE_APP_BASE_API;
-const groupManagerIcon = require('../../assets/images/group-manager.png');
-const adminIcon = require('../../assets/images/admin.png');
 export default {
     data() {
         return {
             dialogVisible: false,
-            version
+            version,
+            currentLang: 'zh-CN',
+            langTextMap: {
+                'zh-CN': '中文',
+                en: 'English'
+            },
+            userInfoVisible: false,
+            modifyPwdVisible: false
         };
     },
     computed: {
         ...mapState({
-            userInfo: state => state.user && state.user.user || {}
-        }),
-        isAdmin() {
-            return this.userInfo.role.name === 'admin';
-        },
-        userIcon() {
-            const map = {
-                admin: adminIcon,
-                group_admin: groupManagerIcon
-            };
-            return this.userInfo.role && map[this.userInfo.role.name] || '';
-        }
+            userMeta: state => state.user && state.user.user || {}
+        })
     },
     methods: {
-        ...mapActions(['toggleGuide']),
+        ...mapActions(['toggleGuide', 'userInfo']),
         logout() {
             this.$store.dispatch('logout').then(() => {
                 this.$store.commit('removeAll');
                 this.$router.push({ path: '/login' });
             });
         },
-        handleJumpToUserGuide() {
-            let url = `${BASE_API}/help/index.html`;
-            window.open(url);
+        showUserInfo() {
+            this.userInfoVisible = true;
         },
-        handleAbout() {
-            // this.dialogVisible = true;
-            this.$router.push('/about');
+        modifyPassword() {
+            this.modifyPwdVisible = true;
         },
-        handleJumpToSkyManager() {
-            let url = '/v2/skymanager/';
-            window.open(url);
+        goManage(type) {
+            // todo 跳转管理页面
+            const typeRouterMap = {
+                source: '/#/resource'
+            };
+            window.open(typeRouterMap[type]);
+        },
+        onCommand(command) {
+            const commandMap = {
+                logout: this.logout,
+                userInfo: this.showUserInfo,
+                modifyPassword: this.modifyPassword
+            };
+            commandMap[command]();
         }
     },
-    beforeCreate() {
-        this.$store.dispatch('currentUser').then(() => ({}));
+    mounted() {
+        this.userInfo();
+    },
+    watch: {
+        currentLang(val) {
+            this.$i18n.locale = val;
+        }
     }
 };
 </script>
@@ -128,19 +200,20 @@ export default {
         display: flex;
         justify-content: flex-end;
         align-items: center;
+        .split-line {
+            display: inline-block;;
+            width: 1px;
+            height: 20px;
+            background: #BBC4CF;;
+            vertical-align: middle;
+            margin-left: 14px;
+            margin-right: 14px;
+        }
     }
     .avatar-container {
         .avatar-wrapper {
             cursor: pointer;
             position: relative;
-            .split-line {
-                display: inline-block;;
-                width: 1px;
-                height: 10px;
-                background: #f2f2f2;
-                vertical-align: middle;
-                margin-right: 10px;
-            }
             .avatar-box {
                 position: relative;
                 width: 45px;
@@ -168,11 +241,15 @@ export default {
         }
     }
     .account-container {
-        pointer-events: none;
+        pointer-events: auto;
         background: $sdx-color-primary;
         padding-left: 20px;
         display: inline-block;
         border: none;
+        &:hover, &:active {
+            background-color: $sdx-color-primary !important;
+            color: #fff !important;
+        }
         .account-dropdown-item {
             display: flex;
             justify-content: flex-start;

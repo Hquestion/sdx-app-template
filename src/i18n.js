@@ -21,8 +21,8 @@ const enErrorMessages = require('./assets/error-message/message.en');
 const cnErrorMessages = require('./assets/error-message/message.zh-CN');
 
 // 加载组件库国际化资源
-const enComponentLibMessages = require('@sdx/utils/lib/locale/lang/en');
-const cnComponentLibMessages = require('@sdx/utils/lib/locale/lang/zh-CN');
+const enComponentLibMessages = require('@sdx/utils/lib/locale/lang/en').default;
+const cnComponentLibMessages = require('@sdx/utils/lib/locale/lang/zh-CN').default;
 
 const i18n = new VueI18n({
     locale: process.env.VUE_APP_I18N_LOCALE || 'zh-CN',

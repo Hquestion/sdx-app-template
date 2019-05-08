@@ -4,7 +4,9 @@
             <div
                 class="inner"
                 :class="{hideLogo:!sidebar.opened}"
-            />
+            >
+                <wscn-icon-svg iconClass="iconDiscovery1" class="logo-icon"></wscn-icon-svg>
+            </div>
         </div>
         <ElScrollbar
             class="sdx--slidebar--scrollbar"
@@ -16,8 +18,9 @@
 </template>
 
 <script>
-import leftmenu from '../../config/menuConfig';
+import { leftmenu, manageMenus } from '../../config/menuConfig';
 import SdxMenu from '../../components/SdxMenu/index.vue';
+// todo 处理权限相关的菜单
 
 export default {
     name: 'Sidebar',
@@ -33,6 +36,13 @@ export default {
     computed: {
         sidebar() {
             return this.$store.state.app.sidebar;
+        }
+    },
+    mounted() {
+        if (this.$route.meta.system === 'manage') {
+            this.permissionRoutes = manageMenus;
+        } else {
+            this.permissionRoutes = leftmenu;
         }
     }
 };
@@ -51,20 +61,17 @@ export default {
         text-align: center;
         transition: all 0.1s ease-out;
         .inner {
-            background: url('../../assets/images/logonew.png') no-repeat;
-            background-size:cover;
+            /*background: url('../../assets/images/logonew.png') no-repeat;*/
+            /*background-size:cover;*/
             width: 100%;
             height: 100%;
             position: relative;
+            .logo-icon {
+                width: 100%;
+                height: 100%;
+                padding: 0 15px;
+            }
         }
-        /*.hideLogo {*/
-        /*    !*background: none;*!*/
-        /*    width: 100%;*/
-        /*    !*height: 80%;*!*/
-        /*    position: absolute;*/
-        /*    top: 0;*/
-        /*    left: 0;*/
-        /*}*/
     }
     .sdx--slidebar--scrollbar {
         flex: 1;

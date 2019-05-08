@@ -42,7 +42,7 @@ export default {
                     list.push(`${this.idx}-${index}`);
                 }
             });
-            return list;
+            return list.slice(0, 1);
         }
     }
 };
