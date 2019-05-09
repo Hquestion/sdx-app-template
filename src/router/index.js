@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import Router from 'vue-router';
+import Router from '../assets/lib/vue-router.common';
 
 /* layout*/
 import Layout from '../views/layout/Layout';
@@ -11,6 +11,8 @@ import Login from '../views/login/';
 import about from '../views/about/about';
 // feb-alive
 import febAlive from 'feb-alive';
+import RoleManage from '@sdx/view/components/role-manage';
+import AuthorizeManage from '@sdx/view/components/authorize-manage';
 febAlive.resetHistory();
 Vue.use(Router);
 
@@ -21,7 +23,7 @@ Vue.use(Router);
  * noDropdown : if noDropdown:true will not has submenu
  * meta : { role: ['admin'] }  will control the page role
  */
-export default new Router({
+const router = new Router({
     // mode: 'history', //后端支持可开
     scrollBehavior: () => ({
         y: 0
@@ -35,16 +37,20 @@ export default new Router({
         },
         {
             path: '/',
+            redirct: '/home'
+        },
+        {
+            path: '/home',
             component: Layout,
             name: 'Home',
-            redirect: '/home',
+            redirect: '/dashboard',
             meta: {
                 breadcrumb: '首页'
             },
             hidden: true,
             children: [
                 {
-                    path: '/home',
+                    path: '/dashboard',
                     component: about,
                     name: 'About',
                     meta: {
@@ -67,3 +73,7 @@ export default new Router({
         }
     ]
 });
+
+RoleManage.viewRouter.register(router, '/home');
+AuthorizeManage.viewRouter.register(router, '/home');
+export default router;

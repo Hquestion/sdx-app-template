@@ -78,7 +78,7 @@ const manageMenus = [
         children: [
             {
                 name: '授权',
-                path: '/taskResource'
+                path: '/sdxv-authorize-manage'
             },
             {
                 name: '权限',
@@ -86,7 +86,7 @@ const manageMenus = [
             },
             {
                 name: '角色',
-                path: '/modelManage'
+                path: '/sdxv-role-manage',
             }
         ]
     },
