@@ -82,7 +82,7 @@ const manageMenus = [
             },
             {
                 name: '权限',
-                path: '/filemanage'
+                path: '/sdxv-privilege'
             },
             {
                 name: '角色',

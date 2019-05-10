@@ -13,6 +13,9 @@ import about from '../views/about/about';
 import febAlive from 'feb-alive';
 import RoleManage from '@sdx/view/lib/role-manage';
 import AuthorizeManage from '@sdx/view/lib/authorize-manage';
+
+import SdxvPrivilege from '@sdx/view/components/privilege';
+
 febAlive.resetHistory();
 Vue.use(Router);
 
@@ -23,6 +26,7 @@ Vue.use(Router);
  * noDropdown : if noDropdown:true will not has submenu
  * meta : { role: ['admin'] }  will control the page role
  */
+
 const router = new Router({
     // mode: 'history', //后端支持可开
     scrollBehavior: () => ({
@@ -76,4 +80,6 @@ const router = new Router({
 
 RoleManage.viewRouter.register(router, '/home');
 AuthorizeManage.viewRouter.register(router, '/home');
+SdxvPrivilege.viewRouter.register(router, '/home');
+
 export default router;
