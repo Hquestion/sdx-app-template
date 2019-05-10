@@ -14,7 +14,7 @@ import febAlive from 'feb-alive';
 import RoleManage from '@sdx/view/lib/role-manage';
 import AuthorizeManage from '@sdx/view/lib/authorize-manage';
 
-import SdxvPrivilege from '@sdx/view/components/privilege';
+import SdxvPrivilege from '@sdx/view/lib/privilege';
 
 febAlive.resetHistory();
 Vue.use(Router);
