@@ -48,6 +48,7 @@ export default {
     align-items: center;
     justify-content: space-between;
     padding-right: $ls-content-margin;
+    width: 100%;
     .hamburger-container {
         height: 56px;
         float: left;

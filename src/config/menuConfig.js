@@ -54,7 +54,7 @@ const manageMenus = [
     {
         name: '资源管理',
         icon: 'iconfont iconicon-zichanguanli',
-        path: '/resource'
+        path: '/sdxv-resource-manage'
     },
     {
         name: '用户管理',

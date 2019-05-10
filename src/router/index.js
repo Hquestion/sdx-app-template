@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import Router from 'vue-router';
+import Router from '../assets/lib/vue-router.common';
 
 /* layout*/
 import Layout from '../views/layout/Layout';
@@ -14,6 +14,9 @@ import febAlive from 'feb-alive';
 febAlive.resetHistory();
 Vue.use(Router);
 
+import ResourceManageView from '@sdx/view/lib/resource-manage';
+
+
 /**
  * icon : the icon show in the sidebar
  * hidden : if hidden:true will not show in the sidebar
@@ -21,7 +24,7 @@ Vue.use(Router);
  * noDropdown : if noDropdown:true will not has submenu
  * meta : { role: ['admin'] }  will control the page role
  */
-export default new Router({
+const router = new Router({
     // mode: 'history', //后端支持可开
     scrollBehavior: () => ({
         y: 0
@@ -35,16 +38,20 @@ export default new Router({
         },
         {
             path: '/',
+            redirect: '/home'
+        },
+        {
+            path: '/home',
             component: Layout,
             name: 'Home',
-            redirect: '/home',
+            redirect: '/dashboard',
             meta: {
                 breadcrumb: '首页'
             },
             hidden: true,
             children: [
                 {
-                    path: '/home',
+                    path: '/dashboard',
                     component: about,
                     name: 'About',
                     meta: {
@@ -52,18 +59,12 @@ export default new Router({
                         breadcrumb: '关于SkyDiscovery',
                         system: 'user'
                     }
-                },
-                {
-                    path: '/resource',
-                    component: about,
-                    name: 'About',
-                    meta: {
-                        name: '资源管理',
-                        breadcrumb: '资源管理',
-                        system: 'manage'
-                    }
                 }
             ]
         }
     ]
 });
+
+ResourceManageView.viewRouter.register(router, '/home');
+
+export default router;
