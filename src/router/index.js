@@ -13,6 +13,7 @@ import about from '../views/about/about';
 import febAlive from 'feb-alive';
 import RoleManage from '@sdx/view/lib/role-manage';
 import AuthorizeManage from '@sdx/view/lib/authorize-manage';
+import ProjectManage from '@sdx/view/lib/project-management';
 febAlive.resetHistory();
 Vue.use(Router);
 
@@ -76,4 +77,5 @@ const router = new Router({
 
 RoleManage.viewRouter.register(router, '/home');
 AuthorizeManage.viewRouter.register(router, '/home');
+ProjectManage.viewRouter.register(router, '/home');
 export default router;

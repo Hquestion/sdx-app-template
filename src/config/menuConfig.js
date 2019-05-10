@@ -13,7 +13,7 @@ const leftmenu = [
     {
         name: '项目',
         icon: 'iconfont iconicon-project',
-        path: '/projectManage'
+        path: '/sdxv-project-manage'
     },
     {
         name: 'SkyFlow',
