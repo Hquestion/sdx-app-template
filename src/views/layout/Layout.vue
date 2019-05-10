@@ -51,8 +51,11 @@ export default {
                         overflow: hidden;
                     }
                 }
-                & /deep/ .logo {
+                & /deep/ .logo-icon {
                     transform: translate(-$ls-siderbar, 0);
+                }
+                & /deep/ .logo-icon-mini {
+                    transform: translate(-85px, 0);
                 }
             }
             &:hover {
@@ -67,8 +70,11 @@ export default {
                              height: auto;
                          }
                      }
-                     & /deep/ .logo {
+                     & /deep/ .logo-icon {
                          transform: translate(0, 0);
+                     }
+                     & /deep/ .logo-icon-mini {
+                         transform: translate(155px, 0);
                      }
                  }
             }

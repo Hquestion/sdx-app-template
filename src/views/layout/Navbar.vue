@@ -1,10 +1,6 @@
 <template>
     <div class="navbar">
-        <Hamburger
-            class="hamburger-container"
-            :toggle-click="toggleSideBar"
-            :is-active="sidebar.opened"
-        />
+        <i class="iconfont iconicon-shousuo toggle-icon" @click="toggleSideBar"></i>
         <avatar />
     </div>
 </template>
@@ -49,12 +45,11 @@ export default {
     justify-content: space-between;
     padding-right: $ls-content-margin;
     width: 100%;
-    .hamburger-container {
-        height: 56px;
-        float: left;
-        line-height: 64px;
+    .toggle-icon {
+        color: $sdx-text-minor-color;
+        font-size: 24px;
         padding: 0 10px;
-        color: #d1d1d1;
+        cursor: pointer;
     }
 }
 </style>

@@ -5,7 +5,8 @@
                 class="inner"
                 :class="{hideLogo:!sidebar.opened}"
             >
-                <wscn-icon-svg iconClass="iconDiscovery1" class="logo-icon"></wscn-icon-svg>
+                <wscn-icon-svg iconClass="iconicon-Logo" class="logo-icon"></wscn-icon-svg>
+                <i class="iconfont iconico_project logo-icon-mini"></i>
             </div>
         </div>
         <ElScrollbar
@@ -66,10 +67,25 @@ export default {
             width: 100%;
             height: 100%;
             position: relative;
+            text-align: center;
+            line-height: $ls-headerbar;;
             .logo-icon {
                 width: 100%;
                 height: 100%;
                 padding: 0 15px;
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+            .logo-icon-mini {
+                display: inline-block;
+                font-size: 30px;
+                position: absolute;
+                left: 50%;
+                top: 0;
+                transform: translate(155px, 0);
+                color: $sdx-success-color;
+                transition: transform ease-in .1s;
             }
         }
     }

@@ -11,16 +11,16 @@ import Login from '../views/login/';
 import about from '../views/about/about';
 // feb-alive
 import febAlive from 'feb-alive';
+
 import RoleManage from '@sdx/view/lib/role-manage';
 import AuthorizeManage from '@sdx/view/lib/authorize-manage';
-
 import SdxvPrivilege from '@sdx/view/lib/privilege';
+import ResourceManageView from '@sdx/view/lib/resource-manage';
+import Project from '@sdx/view/lib/project-management';
+import UserManage from '@sdx/view/lib/user-manage';
 
 febAlive.resetHistory();
 Vue.use(Router);
-
-import ResourceManageView from '@sdx/view/lib/resource-manage';
-
 
 /**
  * icon : the icon show in the sidebar
@@ -75,5 +75,7 @@ ResourceManageView.viewRouter.register(router, '/home');
 RoleManage.viewRouter.register(router, '/home');
 AuthorizeManage.viewRouter.register(router, '/home');
 SdxvPrivilege.viewRouter.register(router, '/home');
+Project.viewRouter.register(router, '/home');
+UserManage.viewRouter.register(router, '/home');
 
 export default router;

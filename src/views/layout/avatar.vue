@@ -4,6 +4,7 @@
             type="default"
             trigger="click"
             :shadow="true"
+            icon="iconfont iconicon-jiankongzhongxin1"
             v-show="$route.meta.system !== 'manage'"
         >
             {{ $t('manage_plateform') }}
@@ -170,7 +171,9 @@ export default {
         goManage(type) {
             // todo 跳转管理页面
             const typeRouterMap = {
-                source: '/#/resource'
+                source: '/#/sdxv-resource-manage',
+                user: '/#/sdxv-user-manage',
+                rights: '/#/authorize-manage'
             };
             window.open(typeRouterMap[type]);
         },
