@@ -67,7 +67,7 @@ const manageMenus = [
             },
             {
                 name: '用户组',
-                path: '/filemanage'
+                path: '/sdxv-user-group'
             }
         ]
     },

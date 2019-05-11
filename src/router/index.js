@@ -18,6 +18,7 @@ import SdxvPrivilege from '@sdx/view/lib/privilege';
 import ResourceManageView from '@sdx/view/lib/resource-manage';
 import Project from '@sdx/view/lib/project-management';
 import UserManage from '@sdx/view/lib/user-manage';
+import UserGroupManage from '@sdx/view/lib/user-group';
 
 febAlive.resetHistory();
 Vue.use(Router);
@@ -77,5 +78,6 @@ AuthorizeManage.viewRouter.register(router, '/home');
 SdxvPrivilege.viewRouter.register(router, '/home');
 Project.viewRouter.register(router, '/home');
 UserManage.viewRouter.register(router, '/home');
+UserGroupManage.viewRouter.register(router, '/home');
 
 export default router;
