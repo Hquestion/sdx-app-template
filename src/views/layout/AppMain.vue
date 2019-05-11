@@ -38,6 +38,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 	.app-main {
+        width: 100%;
 		height: calc(100% - 60px);
         flex: 1;
         .app-main-breadcrumb {

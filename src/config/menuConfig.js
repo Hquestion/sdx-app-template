@@ -53,17 +53,17 @@ const leftmenu = [
 const manageMenus = [
     {
         name: '资源管理',
-        icon: 'iconfont iconicon-zichanguanli',
-        path: '/resource'
+        icon: 'iconfont iconicon-ziyuanguanli1',
+        path: '/sdxv-resource-manage'
     },
     {
         name: '用户管理',
-        icon: 'iconfont iconicon-zichanguanli',
+        icon: 'iconfont iconicon-yonghuguanli1',
         path: '/user',
         children: [
             {
                 name: '用户',
-                path: '/taskResource'
+                path: '/sdxv-user-manage'
             },
             {
                 name: '用户组',
@@ -73,7 +73,7 @@ const manageMenus = [
     },
     {
         name: '权限管理',
-        icon: 'iconfont iconicon-zichanguanli',
+        icon: 'iconfont iconicon-quanxianguanli',
         path: '/rights',
         children: [
             {
@@ -92,7 +92,7 @@ const manageMenus = [
     },
     {
         name: '监控中心',
-        icon: 'iconfont iconicon-zichanguanli',
+        icon: 'iconfont iconicon-jiankongzhongxin1',
         path: '/home'
     },
 ];

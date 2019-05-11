@@ -11,11 +11,14 @@ import Login from '../views/login/';
 import about from '../views/about/about';
 // feb-alive
 import febAlive from 'feb-alive';
+
 import RoleManage from '@sdx/view/lib/role-manage';
 import AuthorizeManage from '@sdx/view/lib/authorize-manage';
 import ProjectManage from '@sdx/view/lib/project-management';
 
 import SdxvPrivilege from '@sdx/view/lib/privilege';
+import ResourceManageView from '@sdx/view/lib/resource-manage';
+import UserManage from '@sdx/view/lib/user-manage';
 
 febAlive.resetHistory();
 Vue.use(Router);
@@ -42,7 +45,7 @@ const router = new Router({
         },
         {
             path: '/',
-            redirct: '/home'
+            redirect: '/home'
         },
         {
             path: '/home',
@@ -63,25 +66,17 @@ const router = new Router({
                         breadcrumb: '关于SkyDiscovery',
                         system: 'user'
                     }
-                },
-                {
-                    path: '/resource',
-                    component: about,
-                    name: 'About',
-                    meta: {
-                        name: '资源管理',
-                        breadcrumb: '资源管理',
-                        system: 'manage'
-                    }
                 }
             ]
         }
     ]
 });
 
+ResourceManageView.viewRouter.register(router, '/home');
 RoleManage.viewRouter.register(router, '/home');
 AuthorizeManage.viewRouter.register(router, '/home');
 ProjectManage.viewRouter.register(router, '/home');
 SdxvPrivilege.viewRouter.register(router, '/home');
+UserManage.viewRouter.register(router, '/home');
 
 export default router;
