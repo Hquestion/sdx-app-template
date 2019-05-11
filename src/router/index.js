@@ -14,9 +14,10 @@ import febAlive from 'feb-alive';
 
 import RoleManage from '@sdx/view/lib/role-manage';
 import AuthorizeManage from '@sdx/view/lib/authorize-manage';
+import ProjectManage from '@sdx/view/lib/project-management';
+
 import SdxvPrivilege from '@sdx/view/lib/privilege';
 import ResourceManageView from '@sdx/view/lib/resource-manage';
-import Project from '@sdx/view/lib/project-management';
 import UserManage from '@sdx/view/lib/user-manage';
 import UserGroupManage from '@sdx/view/lib/user-group';
 
@@ -75,8 +76,8 @@ const router = new Router({
 ResourceManageView.viewRouter.register(router, '/home');
 RoleManage.viewRouter.register(router, '/home');
 AuthorizeManage.viewRouter.register(router, '/home');
+ProjectManage.viewRouter.register(router, '/home');
 SdxvPrivilege.viewRouter.register(router, '/home');
-Project.viewRouter.register(router, '/home');
 UserManage.viewRouter.register(router, '/home');
 UserGroupManage.viewRouter.register(router, '/home');
 
