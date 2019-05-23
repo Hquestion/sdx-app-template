@@ -28,23 +28,18 @@ const leftmenu = [
     {
         name: '资产管理',
         icon: 'iconfont iconicon-zichanguanli',
-        path: '',
         children: [
             {
-                name: '我的任务',
-                path: '/taskResource'
+                name: '任务管理',
+                path: '/assets/taskManage'
             },
             {
-                name: '我的文件',
-                path: '/filemanage'
+                name: '文件管理',
+                path: '/assets/fileManage'
             },
             {
-                name: '我的模型',
-                path: '/modelManage'
-            },
-            {
-                name: '我的镜像',
-                path: '/imageManage'
+                name: '镜像管理',
+                path: '/assets/sdxv-image-manage'
             }
         ]
     }
