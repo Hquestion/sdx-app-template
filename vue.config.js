@@ -91,6 +91,16 @@ module.exports = {
     devServer: {
         port: 3100,
         proxy: {
+            '^/user-manager': {
+                target: 'http://10.115.1.130:30080',
+                ws: true,
+                changeOrigin: true,
+            },
+            '/fe-compose': {
+                target: 'http://10.115.1.130:30080',
+                ws: true,
+                changeOrigin: true,
+            },
             '/v2': {
                 target: 'http://10.115.1.130',
                 ws: true,

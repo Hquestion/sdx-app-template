@@ -11,6 +11,9 @@ errorHandler.register(errorMessageMap, i18n);
 httpService.register({
     handler: errorHandler,
     config: {
+        headers: {
+            'Content-Type': 'application/json'
+        },
         tokenKey: 'authorization',
         tokenValue() {
             return store && store.state.user && store.state.user.token.accessToken || '';

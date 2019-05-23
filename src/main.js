@@ -18,6 +18,7 @@ import directives from '@/directives';
 import i18n from './i18n';
 import SdxUI from '@sdx/ui';
 import SdxWidget from '@sdx/widget';
+import shareCenter from '@sdx/utils/lib/helper/shareCenter';
 import febAlive from 'feb-alive';
 
 Vue.use(febAlive, { router, keyName: 'feb' });
@@ -33,6 +34,12 @@ Vue.use(SdxWidget);
 // register global utility filters.
 Object.keys(filters).forEach(key => {
     Vue.filter(key, filters[key]);
+});
+
+shareCenter.setup({
+    user() {
+        return store.state.user.user;
+    }
 });
 
 new Vue({

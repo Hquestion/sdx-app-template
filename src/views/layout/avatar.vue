@@ -127,6 +127,7 @@
         <SdxwUserInfoDialog
             :visible.sync="userInfoVisible"
             :user-info-data="userMeta"
+            theme="dashboard"
         />
         <SdxwChangePassword :visible.sync="modifyPwdVisible" />
     </div>

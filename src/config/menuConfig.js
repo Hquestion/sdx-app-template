@@ -3,7 +3,7 @@ const leftmenu = [
     {
         name: '首页',
         icon: 'iconfont iconicon-home-selected',
-        path: '/home'
+        path: '/dashboard'
     },
     {
         name: '数据',
