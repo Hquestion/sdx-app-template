@@ -16,3 +16,16 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
     margin-top: 7px;
     margin-bottom: 7px;
 }
+
+.el-menu--horizontal{
+
+    &  > .el-menu-item.is-active {
+        color:rgba(71,129,248,1) !important;
+        font-weight: 500;
+    }
+
+    & > .el-menu-item {
+        color: #303133 !important;
+    }
+}
+
