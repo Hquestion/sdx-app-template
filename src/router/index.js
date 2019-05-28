@@ -7,6 +7,8 @@ import Layout from '../views/layout/Layout';
 /* login*/
 import Login from '../views/login/';
 
+//  dashboard
+import Dashboard from '../views/dashboard/Index';
 // about
 import about from '../views/about/about';
 // feb-alive
@@ -60,7 +62,7 @@ const router = new Router({
             children: [
                 {
                     path: '/dashboard',
-                    component: about,
+                    component: Dashboard,
                     name: 'About',
                     meta: {
                         name: '关于SkyDiscovery',
