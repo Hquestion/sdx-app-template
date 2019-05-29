@@ -60,7 +60,7 @@
                                         </div>
                                         <div class="resource-items-content">
                                             <div>
-                                                {{ resource.memory / (1024*1024*1024) }}
+                                                {{ (resource.memory / (1024*1024*1024)).toFixed(0) }}
                                             </div>
                                             <div>
                                                 <span>内存</span>（GB）
@@ -73,7 +73,7 @@
                                         </div>
                                         <div class="resource-items-content">
                                             <div>
-                                                20
+                                                {{ diskCount }}
                                             </div>
                                             <div>
                                                 <span>DISK</span>（GB）
@@ -93,6 +93,8 @@
                                 <CircleProgress
                                     :percentage="20"
                                     :strokeWidth="12"
+                                    :totalSteps="this.taskTotal"
+                                    :completedSteps="this.taskCompleted"
                                 />
                             </sdxu-content-panel>
                         </el-col>
@@ -122,21 +124,69 @@
                         <sdxu-content-panel
                             title="任务资源使用Top 10"
                         >
-                            <bar-echarts height="354px" />
+                            <el-select
+                                size="small"
+                                v-model="orderBy"
+                                placeholder="请选择"
+                            >
+                                <el-option
+                                    v-for="item in resourceType"
+                                    :key="item.label"
+                                    :label="item.label"
+                                    :value="item.value"
+                                />
+                            </el-select>
+                            <MoreBtn
+                                class="morebtn"
+                                @getMore="getTaskMore"
+                            />
+                            <bar-echarts
+                                height="354px"
+                                :barData="barData"
+                                :barNameList="barNameList"
+                                tipTitle="任务资源使用"
+                            />
+                            <span class="xname">单位（{{ taskXname }}）</span>
                         </sdxu-content-panel>
                     </el-col>
                     <el-col :span="12">
                         <sdxu-content-panel
                             title="模型版本调用次数Top 10"
                         >
-                            <bar-echarts height="354px" />
+                            <MoreBtn
+                                class="morebtn"
+                                @getMore="getTaskMore"
+                            />
+                            <bar-echarts
+                                height="354px"
+                                :barData="barData"
+                                :barNameList="barNameList"
+                                tipTitle="任务资源使用"
+                                :colorList="colorList"
+                            />
+                            <span class="xname">单位（次）</span>
                         </sdxu-content-panel>
                     </el-col>
                 </el-row>
             </div>
         </div>
         <div class="right">
-            right
+            <recent-updates
+                title="最近更新的项目"
+                :nameTimes="projectInfo"
+            />
+            <recent-updates
+                title="最近更新的SkyFlow"
+                :nameTimes="projectInfo"
+            />
+            <recent-updates
+                title="最近更新的模型"
+                :nameTimes="projectInfo"
+            />
+            <recent-updates
+                title="最近更新的数据集"
+                :nameTimes="projectInfo"
+            />
         </div>
     </div>
 </template>
@@ -146,7 +196,10 @@ import CircleProgress from './SvgCircle';
 import RainTransit from './RainTransit';
 import WindIndustry from './WindIndustry';
 import BarEcharts from './BarEcharts';
-import { getUserResource } from 'api/dashboard';
+import { getUserResource, getTaskList, getDisk, getProjects } from 'api/dashboard';
+import MoreBtn from './MoreBtn';
+import RecentUpdates from './RecentUpdates';
+import { parse } from 'path';
 
 export default {
     name: 'Dashboard',
@@ -154,15 +207,42 @@ export default {
         return {
             resource: {},
             options: [],
-            gpuValue: ''
-            // gpuCount: 0
+            gpuValue: '',
+            taskCompleted: 0,
+            taskTotal: 9,
+            diskCount: 0,
+            orderBy: 'CPU',
+            resourceType: [
+                {
+                    label: '按CPU降序',
+                    value: 'CPU'
+                },
+                {
+                    label: '按内存降序',
+                    value: 'MEMORY'
+                }, {
+                    label: '按GPU降序',
+                    value: 'GPU'
+                }
+            ],
+            barData: [],
+            barNameList: [],
+            taskXname: '核',
+            colorList: [
+                'rgba(70,192,255,1)', 'rgba(70,192,255,0.9)', 'rgba(70,192,255,0.8)', 'rgba(70,192,255,0.7)',
+                'rgba(70,192,255,0.6)', 'rgba(70,192,255,0.5)', 'rgba(70,192,255,0.4)',
+                'rgba(70,192,255,0.3)', 'rgba(70,192,255,0.2)', 'rgba(70,192,255,0.1)'
+            ],
+            projectInfo: []
         };
     },
     components: {
         CircleProgress,
         RainTransit,
         WindIndustry,
-        BarEcharts
+        BarEcharts,
+        MoreBtn,
+        RecentUpdates
     },
     computed: {
         gpuCount() {
@@ -177,8 +257,15 @@ export default {
     },
     created() {
         this.getResource();
+        this.getTask().then(res => {
+            this.taskTotal = res.data.items.length;
+            this.taskCompleted = res.data && res.data.items && (res.data.items.filter(item => item.state === 'RUNNING')).length;
+        });
+        this.getDiskCount();
+        this.getProjectList();
     },
     methods: {
+        // 资源
         getResource() {
             let userId = this.$store.state.user.token.userId;
             getUserResource(userId)
@@ -189,9 +276,94 @@ export default {
                         return item;
                     });
                     this.gpuValue = data.gpus[0].label;
-
-                    console.log(data, this.options, 88);
                 });
+        },
+        // 任务列表
+        getTask(purpose, resourcetype) {
+            let params = {};
+            if (purpose === 'top') {
+                params = {
+                    ownerId: this.$store.state.user.token.userId,
+                    start: 1,
+                    count: 10,
+                    order: 'desc',
+                    orderBy: resourcetype
+                };
+            } else {
+                params = {
+                    ownerId: this.$store.state.user.token.userId,
+                    start: 1,
+                    count: -1
+                };
+            }
+            return new Promise((resolve, reject) => {
+                getTaskList(params)
+                    .then(res =>
+                        resolve(res)
+                    ).catch(error => {
+                        reject(error);
+                    });
+            });
+        },
+        // disk 信息
+        getDiskCount() {
+            let params = {
+                ownerId: this.$store.state.user.token.userId
+            };
+            getDisk(params)
+                .then(res => {
+                    this.diskCount = (res.usedBytes / (1024 * 1024 * 1024)).toFixed(0);
+                });
+        },
+        // 获取更多任务
+        getTaskMore() {
+            console.log('任务更多');
+        },
+        // 项目列表
+        getProjectList() {
+            let params = {
+                start: 1,
+                count: 5,
+                order: 'desc',
+                orderBy: 'updatedAt'
+            };
+            getProjects(params)
+                .then(res => {
+                    for (let i = 0; i < res.data.items.length; i++) {
+                        this.projectInfo.push(
+                            {
+                                name: res.data.items[i].name,
+                                time: res.data.items[i].updatedAt
+                            }
+                        );
+                    }
+                    console.log(res, 'xm');
+                });
+        }
+    },
+    watch: {
+        orderBy: {
+            immediate: true,
+            handler(nval) {
+                let [name, data] = [[], []];
+                this.getTask('top', nval).then(res => {
+                    for (let i = 0; i < res.data.items.length; i++) {
+                        name.push(res.data.items[i].name);
+                        if (nval === 'CPU') {
+                            this.taskXname = '核';
+                            data.push(res.data.items[i].quota.cpu / 1000);
+                        } else if (nval === 'GPU') {
+                            this.taskXname = '块';
+                            data.push(res.data.items[i].quota.gpu);
+                        } else if (nval === 'MEMORY') {
+                            this.taskXname = 'GB';
+                            data.push(res.data.items[i].quota.memory / (1024 * 1024 * 1024));
+                        }
+                    }
+                    this.barData = data.reverse(),
+                    this.barNameList = name.reverse();
+                });
+            }
         }
     }
 };
@@ -212,7 +384,8 @@ export default {
         margin-top: 20px;
     }
     .left {
-        flex:3;/*这里设置为占比1，填充满剩余空间*/
+        flex:3;
+        margin-right: 20px;
         .left-top {
             height: 304px;
             .resource {
@@ -267,6 +440,7 @@ export default {
                             color: rgba(96,98,102,1);
                             line-height: 26px;
                             height: 16px;
+                            font-family:Roboto-Black;
                             span {
                                 font-weight: 900;
                             }
@@ -284,6 +458,8 @@ export default {
                             background: #F7F7F7;
                             font-size: 14px;
                             color: #606266;
+                            font-weight: 900;
+                            font-family:Roboto-Black;
                         }
                     }
                 }
@@ -308,6 +484,32 @@ export default {
         .left-bottom {
             @extend .marginTop20;
             height: 430px;
+            .el-input__inner {
+                padding: 0 10px 0 0;
+                border: none;
+                color: #606266;
+            }
+            .el-select {
+                position: absolute;
+                top: 15px;
+                right: 90px;
+                width: 102px;
+            }
+            .sdxu-content-panel {
+                position: relative;
+            }
+            .xname {
+                position: absolute;
+                bottom: 54px;
+                right: 20px;
+                color: rgba(96,98,102,1);
+                font-size: 12px;
+            }
+            .morebtn {
+                position: absolute;
+                top: 10px;
+                right: 20px;
+            }
         }
     }
     .right {

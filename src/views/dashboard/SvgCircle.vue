@@ -8,8 +8,12 @@
         innerStrokeColor="#ECF3FD"
         :strokeWidth="16"
     >
-        <p>{{ totalSteps }}</p>
-        <p>运行中任务<span>个</span></p>
+        <p class="completedNumber">
+            {{ completedSteps }}
+        </p>
+        <p class="content">
+            <span>运行中任务</span>（个）
+        </p>
     </radial-progress-bar>
 </template>
 
@@ -19,13 +23,38 @@ import RadialProgressBar from 'vue-radial-progress';
 export default {
     data() {
         return {
-            completedSteps: 3,
-            totalSteps: 10
         };
     },
-
+    props: {
+        completedSteps: {
+            type: Number,
+            default: 0
+        },
+        totalSteps: {
+            type: Number,
+            default: 0
+        }
+    },
     components: {
         RadialProgressBar
     }
 };
 </script>
+<style rel="stylesheet/scss" lang="scss" scoped>
+.completedNumber {
+    color: #303133;
+    color: #303133;
+    font-size: 36px;
+    font-family: Impact;
+}
+.content {
+    font-size: 14px;
+    color: rgba(96,98,102,1);
+    line-height: 26px;
+    height: 16px;
+    font-family:Roboto-Black;
+    span {
+        font-weight: 900;
+    }
+}
+</style>
