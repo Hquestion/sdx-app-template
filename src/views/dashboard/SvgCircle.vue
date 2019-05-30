@@ -1,5 +1,5 @@
 <template>
-    <radial-progress-bar
+    <sdxu-radial-progress
         :diameter="200"
         :completed-steps="completedSteps"
         :total-steps="totalSteps"
@@ -7,6 +7,7 @@
         startColor="#8AEBFF"
         innerStrokeColor="#ECF3FD"
         :strokeWidth="16"
+        :slideWidth="16"
     >
         <p class="completedNumber">
             {{ completedSteps }}
@@ -14,11 +15,10 @@
         <p class="content">
             <span>运行中任务</span>（个）
         </p>
-    </radial-progress-bar>
+    </sdxu-radial-progress>
 </template>
 
 <script>
-import RadialProgressBar from 'vue-radial-progress';
 
 export default {
     data() {
@@ -34,9 +34,6 @@ export default {
             type: Number,
             default: 0
         }
-    },
-    components: {
-        RadialProgressBar
     }
 };
 </script>

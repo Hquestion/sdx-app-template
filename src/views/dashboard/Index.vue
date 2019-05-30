@@ -145,6 +145,7 @@
                                 :barData="barData"
                                 :barNameList="barNameList"
                                 tipTitle="任务资源使用"
+                                :colorList="taskColorList"
                             />
                             <span class="xname">单位（{{ taskXname }}）</span>
                         </sdxu-content-panel>
@@ -162,7 +163,7 @@
                                 :barData="barData"
                                 :barNameList="barNameList"
                                 tipTitle="任务资源使用"
-                                :colorList="colorList"
+                                :colorList="modelColorList"
                             />
                             <span class="xname">单位（次）</span>
                         </sdxu-content-panel>
@@ -177,15 +178,15 @@
             />
             <recent-updates
                 title="最近更新的SkyFlow"
-                :nameTimes="projectInfo"
+                :nameTimes="skyflowInfo"
             />
             <recent-updates
                 title="最近更新的模型"
-                :nameTimes="projectInfo"
+                :nameTimes="modelInfo"
             />
             <recent-updates
                 title="最近更新的数据集"
-                :nameTimes="projectInfo"
+                :nameTimes="datasetInfo"
             />
         </div>
     </div>
@@ -196,10 +197,10 @@ import CircleProgress from './SvgCircle';
 import RainTransit from './RainTransit';
 import WindIndustry from './WindIndustry';
 import BarEcharts from './BarEcharts';
-import { getUserResource, getTaskList, getDisk, getProjects } from 'api/dashboard';
+import { getUserResource, getTaskList, getDisk, getProjects, getModels, getDatasets } from 'api/dashboard';
 import MoreBtn from './MoreBtn';
 import RecentUpdates from './RecentUpdates';
-import { parse } from 'path';
+
 
 export default {
     name: 'Dashboard',
@@ -228,12 +229,18 @@ export default {
             barData: [],
             barNameList: [],
             taskXname: '核',
-            colorList: [
+            taskColorList: ['#5C89FF', 'rgba(92,137,255,0.9)', 'rgba(92,137,255,0.8)',
+                'rgba(92,137,255,0.7)', 'rgba(92,137,255,0.6)', 'rgba(92,137,255,0.5)',
+                'rgba(92,137,255,0.4)', 'rgba(92,137,255,0.3)', 'rgba(92,137,255,0.2)', 'rgba(92,137,255,0.1)'],
+            modelColorList: [
                 'rgba(70,192,255,1)', 'rgba(70,192,255,0.9)', 'rgba(70,192,255,0.8)', 'rgba(70,192,255,0.7)',
                 'rgba(70,192,255,0.6)', 'rgba(70,192,255,0.5)', 'rgba(70,192,255,0.4)',
                 'rgba(70,192,255,0.3)', 'rgba(70,192,255,0.2)', 'rgba(70,192,255,0.1)'
             ],
-            projectInfo: []
+            projectInfo: [],
+            modelInfo: [],
+            datasetInfo: [],
+            skyflowInfo: []
         };
     },
     components: {
@@ -263,6 +270,8 @@ export default {
         });
         this.getDiskCount();
         this.getProjectList();
+        this.getModelList();
+        this.getDatasetList();
     },
     methods: {
         // 资源
@@ -330,14 +339,58 @@ export default {
             getProjects(params)
                 .then(res => {
                     for (let i = 0; i < res.data.items.length; i++) {
-                        this.projectInfo.push(
+                        this.modelInfo.push(
                             {
                                 name: res.data.items[i].name,
                                 time: res.data.items[i].updatedAt
                             }
                         );
                     }
-                    console.log(res, 'xm');
+                });
+        },
+        // 模型列表
+        getModelList() {
+            let params = {
+                order: 'desc',
+                start: 1,
+                count: 5,
+                orderBy: 'updatedAt'
+            };
+            getModels(params)
+                .then(res => {
+                    for (let i = 0; i < res.items.length; i++) {
+                        this.projectInfo.push(
+                            {
+                                name: res.items[i].name,
+                                time: res.items[i].updatedAt
+                            }
+                        );
+                    }
+                });
+        },
+        // 数据集列表
+        getDatasetList() {
+            let params = {
+                name: '',
+                page: 1,
+                page_size: 5,
+                share_kind: -1,
+                data_size: -1,
+                order: 'desc',
+                order_by: 'updated_at',
+                data_format: -1,
+                tag: -1
+            };
+            getDatasets(params)
+                .then(res => {
+                    for (let i = 0; i < res.data.items.length; i++) {
+                        this.datasetInfo.push(
+                            {
+                                name: res.data.items[i].name,
+                                time: res.data.items[i].updated_at
+                            }
+                        );
+                    }
                 });
         }
     },

@@ -13,7 +13,7 @@
                     v-for="(item, index) in nameTimes.slice(0, 5)"
                     :key="index"
                 >
-                    <span>{{ item.name }}</span>
+                    <span :title="item.name">{{ item.name }}</span>
                     <span>{{ getDateDiff(item.time) }}</span>
                 </div>
             </div>
@@ -23,7 +23,7 @@
 
 <script>
 import MoreBtn from './MoreBtn';
-
+import { getDateDiff } from '@sdx/utils/lib/helper/transform';
 export default {
     name: 'RecentUpdates',
     data() {
@@ -52,33 +52,8 @@ export default {
         getTaskMore() {
             console.log('more');
         },
-        getDateDiff(dateTimeStamp) {
-            let minute = 1000 * 60;
-            let hour = minute * 60;
-            let day = hour * 24;
-            let month = day * 30;
-            let now = new Date().getTime();
-            let diffValue = now - new Date(dateTimeStamp);
-            if (diffValue < 0) { return; }
-            let monthC = diffValue / month;
-            let weekC = diffValue / (7 * day);
-            let dayC = diffValue / day;
-            let hourC = diffValue / hour;
-            let minC = diffValue / minute;
-            let result = '';
-            if (monthC >= 1) {
-                result = '' + parseInt(monthC) + '月前';
-            } else if (weekC >= 1) {
-                result = '' + parseInt(weekC) + '周前';
-            } else if (dayC >= 1) {
-                result = '' + parseInt(dayC) + '天前';
-            } else if (hourC >= 1) {
-                result = '' + parseInt(hourC) + '小时前';
-            } else if (minC >= 1) {
-                result = '' + parseInt(minC) + '分钟前';
-            } else { result = '刚刚'; }
-            return result;
-        }
+        // 注册
+        getDateDiff
     },
     watch: {
 
@@ -112,6 +87,11 @@ export default {
                     font-size:14px;
                     color:rgba(96,98,102,1);
                     font-family:SourceHanSansCN-Normal;
+                    width: 78%;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    cursor: pointer;
                 }
                 span:last-child{
                     font-size:12px;

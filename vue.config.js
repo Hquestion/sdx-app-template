@@ -102,9 +102,12 @@ module.exports = {
                 changeOrigin: true,
             },
             '/v2': {
-                target: 'http://10.115.1.130',
+                target: 'https://easy-mock.com',
                 ws: true,
-                changeOrigin: true
+                changeOrigin: true,
+                pathRewrite: {
+                    '/v2': '/mock/5cd04685adb0973be6a3d969/v2'
+                }
             },
             '/mock': {
                 target: 'https://easy-mock.com',

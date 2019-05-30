@@ -116,6 +116,12 @@
                 </el-dropdown-item>
                 <el-dropdown-item
                     divided
+                    command="modifyPassword"
+                >
+                    版本信息
+                </el-dropdown-item>
+                <el-dropdown-item
+                    divided
                     command="logout"
                 >
                     <span>

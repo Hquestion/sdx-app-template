@@ -17,3 +17,10 @@ export function getDisk(params) {
 export function getProjects(params) {
     return httpService.get('/api/v1/projects', params);
 }
+export function getModels(params) {
+    return httpService.get('/api/v1/models', params);
+}
+
+export function getDatasets(params) {
+    return httpService.get('/v2/dataset', params);
+}
