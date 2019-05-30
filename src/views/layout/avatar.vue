@@ -116,7 +116,7 @@
                 </el-dropdown-item>
                 <el-dropdown-item
                     divided
-                    command="modifyPassword"
+                    command="versioninfo"
                 >
                     版本信息
                 </el-dropdown-item>
@@ -136,6 +136,19 @@
             theme="dashboard"
         />
         <SdxwChangePassword :visible.sync="modifyPwdVisible" />
+        <sdxu-dialog
+            :visible.sync="versionVisible"
+            size="small"
+            no-footer
+            title-icon="iconicon-banbenxinxi"
+            title="版本信息"
+        >
+            <div class="dashboard-version-content">
+                <div>SkyDiscovery</div>
+                <div>版本号： X</div>
+                <div>南京天数智芯科技有限公司</div>
+            </div>
+        </sdxu-dialog>
     </div>
 </template>
 <script>
@@ -153,7 +166,8 @@ export default {
                 en: 'English'
             },
             userInfoVisible: false,
-            modifyPwdVisible: false
+            modifyPwdVisible: false,
+            versionVisible: false
         };
     },
     computed: {
@@ -175,6 +189,9 @@ export default {
         modifyPassword() {
             this.modifyPwdVisible = true;
         },
+        versioninfo() {
+            this.versionVisible = true;
+        },
         goManage(type) {
             // todo 跳转管理页面
             const typeRouterMap = {
@@ -188,7 +205,8 @@ export default {
             const commandMap = {
                 logout: this.logout,
                 userInfo: this.showUserInfo,
-                modifyPassword: this.modifyPassword
+                modifyPassword: this.modifyPassword,
+                versioninfo: this.versioninfo
             };
             commandMap[command]();
         }
@@ -322,6 +340,23 @@ export default {
 
         .el-dropdown-menu__item--divided:before {
             height: 0;
+        }
+    }
+
+    .dashboard-version-content {
+        text-align: center;
+        div {
+            height: 32px;
+        }
+        div:first-child {
+            font-family:SourceHanSansCN-Medium;
+            font-weight:500;
+            color:rgba(48,49,51,1);
+        }
+        div:nth-child(n+1) {
+            font-family:SourceHanSansCN-Normal;
+            font-weight:400;
+            color:rgba(48,49,51,1);
         }
     }
 </style>
