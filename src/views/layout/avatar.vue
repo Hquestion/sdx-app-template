@@ -138,7 +138,6 @@
         <SdxwChangePassword :visible.sync="modifyPwdVisible" />
         <sdxu-dialog
             :visible.sync="versionVisible"
-            size="small"
             no-footer
             title-icon="iconicon-banbenxinxi"
             title="版本信息"
