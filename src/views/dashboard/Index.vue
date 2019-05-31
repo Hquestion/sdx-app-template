@@ -197,7 +197,7 @@ import CircleProgress from './SvgCircle';
 import RainTransit from './RainTransit';
 import WindIndustry from './WindIndustry';
 import BarEcharts from './BarEcharts';
-import { getUserResource, getTaskList, getDisk, getProjects, getModels, getDatasets } from 'api/dashboard';
+import { getUserResource, getTaskList, getDisk, getProjects, getModels, getDatasets, getSkyflows } from 'api/dashboard';
 import MoreBtn from './MoreBtn';
 import RecentUpdates from './RecentUpdates';
 
@@ -272,6 +272,7 @@ export default {
         this.getProjectList();
         this.getModelList();
         this.getDatasetList();
+        this.getSkyflowList();
     },
     methods: {
         // 资源
@@ -385,6 +386,27 @@ export default {
                 .then(res => {
                     for (let i = 0; i < res.data.items.length; i++) {
                         this.datasetInfo.push(
+                            {
+                                name: res.data.items[i].name,
+                                time: res.data.items[i].updated_at
+                            }
+                        );
+                    }
+                });
+        },
+        // skyflow 列表
+        getSkyflowList() {
+            let params = {
+                name: '',
+                order: 'desc',
+                order_by: 'updated_at',
+                page: 1,
+                page_size: 5
+            };
+            getSkyflows(params)
+                .then(res => {
+                    for (let i = 0; i < res.data.items.length; i++) {
+                        this.skyflowInfo.push(
                             {
                                 name: res.data.items[i].name,
                                 time: res.data.items[i].updated_at

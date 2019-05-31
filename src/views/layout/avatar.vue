@@ -134,6 +134,7 @@
             :visible.sync="userInfoVisible"
             :user-info-data="userMeta"
             theme="dashboard"
+            @confirmUser="confirmUser"
         />
         <SdxwChangePassword :visible.sync="modifyPwdVisible" />
         <sdxu-dialog
@@ -208,6 +209,10 @@ export default {
                 versioninfo: this.versioninfo
             };
             commandMap[command]();
+        },
+        // 组件传过来的值更新vuex里面的用户信息
+        confirmUser(data) {
+            this.$store.commit('SET_USER', data);
         }
     },
     mounted() {
