@@ -142,8 +142,8 @@
                             />
                             <bar-echarts
                                 height="354px"
-                                :barData="barData"
-                                :barNameList="barNameList"
+                                :barData="taskData"
+                                :barNameList="taskNameList"
                                 tipTitle="任务资源使用"
                                 :colorList="taskColorList"
                             />
@@ -160,9 +160,9 @@
                             />
                             <bar-echarts
                                 height="354px"
-                                :barData="barData"
-                                :barNameList="barNameList"
-                                tipTitle="任务资源使用"
+                                :barData="modelData"
+                                :barNameList="modelNameList"
+                                tipTitle="模型版本调用次数"
                                 :colorList="modelColorList"
                             />
                             <span class="xname">单位（次）</span>
@@ -200,7 +200,7 @@ import BarEcharts from './BarEcharts';
 import { getUserResource, getTaskList, getDisk, getProjects, getModels, getDatasets, getSkyflows } from 'api/dashboard';
 import MoreBtn from './MoreBtn';
 import RecentUpdates from './RecentUpdates';
-
+import { getVersionList } from '@sdx/utils/lib/api/model';
 
 export default {
     name: 'Dashboard',
@@ -226,8 +226,8 @@ export default {
                     value: 'GPU'
                 }
             ],
-            barData: [],
-            barNameList: [],
+            taskData: [],
+            taskNameList: [],
             taskXname: '核',
             taskColorList: ['#5C89FF', 'rgba(92,137,255,0.9)', 'rgba(92,137,255,0.8)',
                 'rgba(92,137,255,0.7)', 'rgba(92,137,255,0.6)', 'rgba(92,137,255,0.5)',
@@ -240,7 +240,9 @@ export default {
             projectInfo: [],
             modelInfo: [],
             datasetInfo: [],
-            skyflowInfo: []
+            skyflowInfo: [],
+            modelNameList: [],
+            modelData: []
         };
     },
     components: {
@@ -273,6 +275,7 @@ export default {
         this.getModelList();
         this.getDatasetList();
         this.getSkyflowList();
+        this.getVersionS();
     },
     methods: {
         // 资源
@@ -340,7 +343,7 @@ export default {
             getProjects(params)
                 .then(res => {
                     for (let i = 0; i < res.data.items.length; i++) {
-                        this.modelInfo.push(
+                        this.projectInfo.push(
                             {
                                 name: res.data.items[i].name,
                                 time: res.data.items[i].updatedAt
@@ -360,7 +363,7 @@ export default {
             getModels(params)
                 .then(res => {
                     for (let i = 0; i < res.items.length; i++) {
-                        this.projectInfo.push(
+                        this.modelInfo.push(
                             {
                                 name: res.items[i].name,
                                 time: res.items[i].updatedAt
@@ -414,29 +417,58 @@ export default {
                         );
                     }
                 });
+        },
+        // 获取模型版本列表
+        getVersionS() {
+            let params = {
+                order: 'desc',
+                order_by: 'updatedAt',
+                start: 1,
+                count: 10
+            };
+            getVersionList('ALL', params)
+                .then(res => {
+                    let [name, data, items] = [[], [], []];
+                    if (res.items.length > 10) {
+                        items = res.items.slice(0, 10);
+                    } else {
+                        items = res.items;
+                    }
+                    for (let i = 0; i < items.length; i++) {
+                        name.push(items[i].name);
+                        data.push(items[i].apiCallNum);
+                    }
+                    this.modelData = data.reverse(),
+                    this.modelNameList = name.reverse();
+                });
         }
     },
     watch: {
         orderBy: {
             immediate: true,
             handler(nval) {
-                let [name, data] = [[], []];
+                let [name, data, items] = [[], [], []];
                 this.getTask('top', nval).then(res => {
-                    for (let i = 0; i < res.data.items.length; i++) {
-                        name.push(res.data.items[i].name);
+                    if (res.data.items.length > 10) {
+                        items = res.data.items.slice(0, 10);
+                    } else {
+                        items = res.data.items;
+                    }
+                    for (let i = 0; i < items.length; i++) {
+                        name.push(items[i].name);
                         if (nval === 'CPU') {
                             this.taskXname = '核';
-                            data.push(res.data.items[i].quota.cpu / 1000);
+                            data.push(items[i].quota.cpu / 1000);
                         } else if (nval === 'GPU') {
                             this.taskXname = '块';
-                            data.push(res.data.items[i].quota.gpu);
+                            data.push(items[i].quota.gpu);
                         } else if (nval === 'MEMORY') {
                             this.taskXname = 'GB';
-                            data.push(res.data.items[i].quota.memory / (1024 * 1024 * 1024));
+                            data.push(items[i].quota.memory / (1024 * 1024 * 1024));
                         }
                     }
-                    this.barData = data.reverse(),
-                    this.barNameList = name.reverse();
+                    this.taskData = data.reverse(),
+                    this.taskNameList = name.reverse();
                 });
             }
         }

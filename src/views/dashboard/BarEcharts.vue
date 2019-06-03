@@ -30,6 +30,12 @@ export default {
                 return [];
             }
         },
+        colorList: {
+            type: Array,
+            default() {
+                return [];
+            }
+        },
         tipTitle: {
             type: String,
             default: ''
@@ -37,12 +43,6 @@ export default {
         xname: {
             type: String,
             default: ''
-        },
-        colorList: {
-            type: Array,
-            default() {
-                return [];
-            }
         }
     },
     data() {
@@ -71,11 +71,10 @@ export default {
         initChart() {
             this.chart && this.chart.clear();
             this.chart = echarts.init(this.$el, 'macarons');
-            localStorage.setItem('colorList', JSON.stringify(this.colorList));
-            localStorage.setItem('dataLength', JSON.stringify(this.barData.length));
             this.chart.setOption({
                 tooltip: {
-
+                    trigger: 'item',
+                    formatter: '{a} <br/>{b}: {c}'
                 },
                 grid: {
                     left: '10px',
@@ -98,9 +97,17 @@ export default {
                             show: false
                         },
                         axisLabel: {
-                            color: '#606266'
+                            color: '#606266',
+                            formatter(value) {
+                                let ret = '';
+                                if (value.length > 5) {
+                                    ret = `${value.substring(0, 5)}...`;
+                                } else {
+                                    ret = value;
+                                }
+                                return ret;
+                            }
                         }
-
                     }
                 ],
                 xAxis: [
@@ -136,11 +143,9 @@ export default {
                         data: this.barData,
                         itemStyle: {
                             barBorderRadius: [0, 10, 10, 0], // （顺时针左上，右上，右下，左下）
-                            color(params) {
-                                let dataLength = JSON.parse(localStorage.getItem('dataLength'));
-                                let colorList = JSON.parse(localStorage.getItem('colorList'));
-                                colorList = colorList.slice(0, dataLength);
-                                return colorList[colorList.length - params.dataIndex - 1];//
+                            color: params => {
+                                let colorList = this.colorList.slice(0, this.barData.length);
+                                return colorList[colorList.length - params.dataIndex - 1];
                             }
                         }
                     }
@@ -152,13 +157,9 @@ export default {
     watch: {
         barData(nval, oval) {
             this.barData = nval;
-            this.initChart();
-            this.__resizeHanlder = debounce(() => {
-                if (this.chart) {
-                    this.chart.resize();
-                }
-            }, 100);
-            window.addEventListener('resize', this.__resizeHanlder);
+            if (JSON.stringify(nval) !== JSON.stringify(oval)) {
+                this.initChart();
+            }
         }
     }
 };

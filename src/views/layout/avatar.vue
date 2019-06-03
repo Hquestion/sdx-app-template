@@ -103,7 +103,7 @@
                                 {{ userMeta.fullName }}
                             </div>
                             <div class="user-role">
-                                {{ userMeta.role && userMeta.role.name }}
+                                {{ userMeta.roleNames && userMeta.roleNames[0] }}
                             </div>
                         </div>
                     </div>
