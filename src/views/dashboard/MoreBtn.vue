@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="dashboard_morebtn">
         <SdxuButton
             type="primary"
             size="regular"
@@ -18,6 +18,14 @@ export default {
 
 };
 </script>
-<style rel="stylesheet/scss" lang="scss" scoped>
-
+<style rel="stylesheet/scss" lang="scss" >
+.dashboard_morebtn {
+    .iconfont {
+        font-size: 12px;
+    }
+    .sdxu-button__main {
+        font-size: 12px;
+        color: #5C89FF;
+    }
+}
 </style>

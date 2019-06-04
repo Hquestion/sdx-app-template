@@ -109,11 +109,11 @@ module.exports = {
                     '/v2': '/mock/5cd04685adb0973be6a3d969/v2'
                 }
             },
-            // '/projects': {
-            //     target: 'http://10.115.1.130:50010',
-            //     ws: true,
-            //     changeOrigin: true
-            // },
+            '/project-manager': {
+                target: 'http://10.115.1.130:30080',
+                ws: true,
+                changeOrigin: true
+            },
             '/mock': {
                 target: 'https://easy-mock.com',
                 ws: true,
