@@ -23,7 +23,7 @@ const leftmenu = [
     {
         name: '模型',
         icon: 'iconfont iconicon-model',
-        path: '/skyflow'
+        path: '/sdxv-model-manage'
     },
     {
         name: '资产管理',
