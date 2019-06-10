@@ -14,10 +14,11 @@ import about from '../views/about/about';
 // feb-alive
 import febAlive from 'feb-alive';
 
-import RoleManage from '@sdx/view/components/role-manage';
-import AuthorizeManage from '@sdx/view/components/authorize-manage';
-import ProjectManage from '@sdx/view/components/project-management';
-import ImageManage from '@sdx/view/components/image-management';
+import RoleManage from '@sdx/view/lib/role-manage';
+import AuthorizeManage from '@sdx/view/lib/authorize-manage';
+import ProjectManage from '@sdx/view/lib/project-management';
+import ModelManage from '@sdx/view/lib/model-manage';
+import ImageManage from '@sdx/view/lib/image-management';
 import SdxvPrivilege from '@sdx/view/lib/privilege';
 import ResourceManageView from '@sdx/view/lib/resource-manage';
 import UserManage from '@sdx/view/lib/user-manage';
@@ -71,17 +72,6 @@ const router = new Router({
                     }
                 }
             ]
-        },
-        {
-            path: '/assets',
-            component: Layout,
-            name: 'Assets',
-            meta: {
-                breadcrumb: '资产管理'
-            },
-            hidden: true,
-            children: [
-            ]
         }
     ]
 });
@@ -90,7 +80,8 @@ ResourceManageView.viewRouter.register(router, '/home');
 RoleManage.viewRouter.register(router, '/home');
 AuthorizeManage.viewRouter.register(router, '/home');
 ProjectManage.viewRouter.register(router, '/home');
-ImageManage.viewRouter.register(router, '/assets');
+ModelManage.viewRouter.register(router, '/home');
+ImageManage.viewRouter.register(router, '/home');
 SdxvPrivilege.viewRouter.register(router, '/home');
 UserManage.viewRouter.register(router, '/home');
 UserGroupManage.viewRouter.register(router, '/home');
