@@ -39,7 +39,7 @@ const leftmenu = [
             },
             {
                 name: '镜像管理',
-                path: '/assets/sdxv-image-manage'
+                path: '/sdxv-image-manage'
             }
         ]
     }

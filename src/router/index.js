@@ -72,17 +72,6 @@ const router = new Router({
                     }
                 }
             ]
-        },
-        {
-            path: '/assets',
-            component: Layout,
-            name: 'Assets',
-            meta: {
-                breadcrumb: '资产管理'
-            },
-            hidden: true,
-            children: [
-            ]
         }
     ]
 });
@@ -92,7 +81,7 @@ RoleManage.viewRouter.register(router, '/home');
 AuthorizeManage.viewRouter.register(router, '/home');
 ProjectManage.viewRouter.register(router, '/home');
 ModelManage.viewRouter.register(router, '/home');
-ImageManage.viewRouter.register(router, '/assets');
+ImageManage.viewRouter.register(router, '/home');
 SdxvPrivilege.viewRouter.register(router, '/home');
 UserManage.viewRouter.register(router, '/home');
 UserGroupManage.viewRouter.register(router, '/home');
