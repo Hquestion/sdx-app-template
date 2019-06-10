@@ -124,30 +124,36 @@
                         <sdxu-content-panel
                             title="任务资源使用Top 10"
                         >
-                            <el-select
-                                size="small"
-                                v-model="orderBy"
-                                placeholder="请选择"
-                            >
-                                <el-option
-                                    v-for="item in resourceType"
-                                    :key="item.label"
-                                    :label="item.label"
-                                    :value="item.value"
+                            <div v-if="taskNameList && taskNameList.length">
+                                <el-select
+                                    size="small"
+                                    v-model="orderBy"
+                                    placeholder="请选择"
+                                >
+                                    <el-option
+                                        v-for="item in resourceType"
+                                        :key="item.label"
+                                        :label="item.label"
+                                        :value="item.value"
+                                    />
+                                </el-select>
+                                <MoreBtn
+                                    class="morebtn"
+                                    @getMore="getTaskMore"
                                 />
-                            </el-select>
-                            <MoreBtn
-                                class="morebtn"
-                                @getMore="getTaskMore"
-                            />
-                            <bar-echarts
+                                <bar-echarts
+                                    height="354px"
+                                    :barData="taskData"
+                                    :barNameList="taskNameList"
+                                    tipTitle="任务资源使用"
+                                    :colorList="taskColorList"
+                                />
+                                <span class="xname">单位（{{ taskXname }}）</span>
+                            </div>
+                            <SdxuEmpty
+                                v-else
                                 height="354px"
-                                :barData="taskData"
-                                :barNameList="taskNameList"
-                                tipTitle="任务资源使用"
-                                :colorList="taskColorList"
                             />
-                            <span class="xname">单位（{{ taskXname }}）</span>
                         </sdxu-content-panel>
                     </el-col>
                     <el-col :span="12">
@@ -267,8 +273,8 @@ export default {
     created() {
         this.getResource();
         this.getTask().then(res => {
-            this.taskTotal = res.data.items.length;
-            this.taskCompleted = res.data && res.data.items && (res.data.items.filter(item => item.state === 'RUNNING')).length;
+            this.taskTotal = res.data.total;
+            this.taskCompleted = res.data && res.data.items.length;
         });
         this.getDiskCount();
         this.getProjectList();
@@ -306,7 +312,8 @@ export default {
                 params = {
                     ownerId: this.$store.state.user.token.userId,
                     start: 1,
-                    count: -1
+                    count: -1,
+                    states: 'RUNNING'
                 };
             }
             return new Promise((resolve, reject) => {

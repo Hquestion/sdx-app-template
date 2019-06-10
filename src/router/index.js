@@ -14,10 +14,10 @@ import about from '../views/about/about';
 // feb-alive
 import febAlive from 'feb-alive';
 
-import RoleManage from '@sdx/view/lib/role-manage';
-import AuthorizeManage from '@sdx/view/lib/authorize-manage';
+import RoleManage from '@sdx/view/components/role-manage';
+import AuthorizeManage from '@sdx/view/components/authorize-manage';
 import ProjectManage from '@sdx/view/components/project-management';
-import ImageManage from '@sdx/view/lib/image-management';
+import ImageManage from '@sdx/view/components/image-management';
 import SdxvPrivilege from '@sdx/view/lib/privilege';
 import ResourceManageView from '@sdx/view/lib/resource-manage';
 import UserManage from '@sdx/view/lib/user-manage';

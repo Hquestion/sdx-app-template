@@ -87,7 +87,7 @@ export default {
                     font-size:14px;
                     color:rgba(96,98,102,1);
                     font-family:SourceHanSansCN-Normal;
-                    width: 78%;
+                    max-width: 78%;
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;
