@@ -40,7 +40,8 @@
     "vue-i18n": "^8.0.0",
     "vue-radial-progress": "^0.2.10",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "co": "^4.6.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",

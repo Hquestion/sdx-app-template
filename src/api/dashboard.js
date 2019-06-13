@@ -1,7 +1,7 @@
 import httpService from '../helper/httpService';
 
 export function getUserResource(userId) {
-    return httpService.get('/resource-manager/api/v1/resource_state', {
+    return httpService.get('/resource-manager/api/v1/resource_states', {
         userId
     });
 }

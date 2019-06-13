@@ -7,6 +7,7 @@
                         <el-col :span="16">
                             <sdxu-content-panel
                                 title="资源使用情况"
+                                size="small"
                             >
                                 <el-row
                                     :gutter="20"
@@ -89,6 +90,7 @@
                         >
                             <sdxu-content-panel
                                 title="运行任务总数"
+                                size="small"
                             >
                                 <CircleProgress
                                     :percentage="20"
@@ -104,6 +106,7 @@
             <div class="left-center">
                 <sdxu-content-panel
                     title="行业模版"
+                    size="small"
                 >
                     <el-row
                         class=""
@@ -123,6 +126,7 @@
                     <el-col :span="12">
                         <sdxu-content-panel
                             title="任务资源使用Top 10"
+                            size="small"
                         >
                             <div v-if="taskNameList && taskNameList.length">
                                 <el-select
@@ -159,6 +163,7 @@
                     <el-col :span="12">
                         <sdxu-content-panel
                             title="模型版本调用次数Top 10"
+                            size="small"
                         >
                             <MoreBtn
                                 class="morebtn"

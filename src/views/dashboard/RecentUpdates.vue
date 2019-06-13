@@ -2,6 +2,7 @@
     <div class="recent-updates">
         <sdxu-content-panel
             :title="title"
+            size="small"
         >
             <more-btn
                 class="morebtn"
@@ -64,7 +65,7 @@ export default {
 .recent-updates {
     & /deep/ {
         .sdxu-content-panel__main {
-            margin-top: 0 ;
+            margin-top: 0;
         }
         .sdxu-content-panel {
             padding: 20px;
