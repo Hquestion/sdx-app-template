@@ -13,6 +13,8 @@ import Dashboard from '../views/dashboard/Index';
 import about from '../views/about/about';
 // feb-alive
 import febAlive from 'feb-alive';
+// skyflow
+import Editor from '../views/skyflow/editor/';
 
 import RoleManage from '@sdx/view/lib/role-manage';
 import AuthorizeManage from '@sdx/view/lib/authorize-manage';
@@ -83,6 +85,11 @@ const router = new Router({
             hidden: true,
             children: [
             ]
+        }, {
+            path: '/editor/:id/:executeId?',
+            component: Editor,
+            name: 'Editor',
+            hidden: true
         }
     ]
 });

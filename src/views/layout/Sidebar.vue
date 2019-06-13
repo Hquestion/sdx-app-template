@@ -5,8 +5,11 @@
                 class="inner"
                 :class="{hideLogo:!sidebar.opened}"
             >
-                <wscn-icon-svg iconClass="iconicon-Logo" class="logo-icon"></wscn-icon-svg>
-                <i class="iconfont iconico_project logo-icon-mini"></i>
+                <wscn-icon-svg
+                    iconClass="iconicon-Logo"
+                    class="logo-icon"
+                />
+                <i class="iconfont iconico_project logo-icon-mini" />
             </div>
         </div>
         <ElScrollbar

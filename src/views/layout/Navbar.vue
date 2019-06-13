@@ -1,6 +1,9 @@
 <template>
     <div class="navbar">
-        <i class="iconfont iconicon-shousuo toggle-icon" @click="toggleSideBar"></i>
+        <i
+            class="iconfont iconicon-shousuo toggle-icon"
+            @click="toggleSideBar"
+        />
         <avatar />
     </div>
 </template>
