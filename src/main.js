@@ -10,9 +10,11 @@ import 'normalize.css/normalize.css'; // normalize.css 样式格式化
 import 'styles/app.scss'; // 全局自定义的css样式
 import 'components/Icon-svg/index'; // 封装的svg组件
 import 'assets/fonts/icon/iconfont.js'; // iconfont (从iconfont里面打包来的)
+import 'assets/fonts/skyflow/iconfont.js'; // iconfont (从iconfont里面打包来的)
 import * as filters from './filters'; // 全局vue filter
 import errLog from 'store/errLog'; // error log组件f
 import 'assets/fonts/icon/iconfont.css'; // 引入自己下载的iconfont
+import 'assets/fonts/skyflow/iconfont.css'; // 引入自己下载的iconfont
 import EmitAsync from './plugins/asyncEmit';
 import directives from '@/directives';
 import i18n from './i18n';
@@ -81,5 +83,3 @@ store.dispatch('auth').then(() => {
         name: 'Login'
     });
 });
-
-

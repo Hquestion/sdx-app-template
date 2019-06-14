@@ -5,89 +5,39 @@
             <span>资源配置</span>
         </div>
         <div class="setting-options">
-            <div class="resource-info clearfix">
-                <span><strong>剩余资源总量</strong>/资源总量</span>
-                <span class="current-user">
-                    (当前用户)
-                </span>
-                <table class="resource-table">
-                    <tr>
-                        <td>CPU(核)</td>
-                        <td>内存(GB)</td>
-                        <td>GPU(块)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>{{ quota.cpu }}</strong>/{{ total.cpu }}</td>
-                        <td><strong>{{ quota.mem }}</strong>/{{ total.mem }}</td>
-                        <td><strong>{{ quota.gpu }}</strong>/{{ total.gpu }}</td>
-                    </tr>
-                </table>
-            </div>
-            <div
-                v-if="isEditable"
-                class="resource-option-button clearfix"
-            >
-                <span
-                    v-if="hasLowAllocation && !isSpark"
-                    class="resource-button"
-                    :class="{&quot;active&quot;: isLowAllocation}"
-                    @click="autoAllocation(&quot;low&quot;)"
-                >
-                    低配
-                </span>
-                <span
-                    v-if="hasMiddleAllocation"
-                    class="resource-button"
-                    :class="{&quot;active&quot;: isMiddleAllocaton}"
-                    @click="autoAllocation(&quot;middle&quot;)"
-                >
-                    中配
-                </span>
-                <span
-                    v-if="hasHighAllocation"
-                    class="resource-button"
-                    :class="{&quot;active&quot;: isHighAllocation}"
-                    @click="autoAllocation(&quot;high&quot;)"
-                >
-                    高配
-                </span>
-            </div>
-            <el-form
-                :model="resource"
-                :gpuModel.sync="gpuModel"
-            >
-                <number-pick
-                    v-for="(item, key) in resource"
-                    :key="key"
-                    v-model="resource[key]"
-                    :resource="resource"
-                    :quota="quota"
-                    :total="total"
-                    :is-editable="isEditable"
-                    :resource-item="key"
-                    :gpuModel.sync="_gpuModel"
+            <div class="setting-options-item" v-if="executorCPU">
+                <ResourceConfig
+                    v-model="executorCPU"
+                    type="cpu"
                 />
-            </el-form>
-            <div
-                class="resource-value"
-                v-if="resourceHint"
-            >
-                请配置{{ hintContent }}
             </div>
-            <div
-                class="resource-desc"
-                v-if="resourceDesc"
-            >
-                配置的资源大于当前剩余资源，如果要正常运行，请手动释放一些群组资源。
+            <div class="setting-options-item" v-if="executorGPU">
+                <ResourceConfig
+                    v-model="executorGPU"
+                    type="gpu"
+                />
+            </div>
+            <div class="setting-options-item" v-if="sparkDriverCPU">
+                <ResourceConfig
+                    v-model="sparkDriverCPU"
+                    type="cpu"
+                    cpulabel="Driver CPU/内存"
+                />
+            </div>
+            <div class="setting-options-item" v-if="sparkExecutorCPU">
+                <ResourceConfig
+                    v-model="sparkExecutorCPU"
+                    type="cpu"
+                    cpulabel="Executor CPU/内存"
+                />
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import numberPick from './numberPick';
-import { resourceAllocationAuto, resourceInfo } from '../../js/skyflowConfig';
 import ResourceConfig from '@sdx/widget/lib/resource-config';
+import { TASK_KIND } from '../../util/const';
 
 export default {
     name: 'ResourceSetting',
@@ -96,36 +46,20 @@ export default {
             type: Object,
             default: null
         },
-        quota: {
-            type: Object,
-            default: null
-        },
-        total: {
-            type: Object,
-            default: null
-        },
         isEditable: {
             type: Boolean,
             default: true
         },
-        dockerImage: {
-            type: Object,
-            default: null
-        },
         gpuModel: {
             type: String,
             default: ''
+        },
+        taskKind: {
+            type: Number,
+            default: 1
         }
     },
-    data() {
-        return {
-            resourceHint: false,
-            hintContent: '',
-            resourceDesc: false
-        };
-    },
     components: {
-        numberPick,
         ResourceConfig
     },
     computed: {
@@ -137,99 +71,77 @@ export default {
                 this.$emit('update:gpuModel', nval);
             }
         },
-        // 是否为spark
-        isSpark() {
-            return !!this.dockerImage.name.includes('spark');
+        executorCPU: {
+            get() {
+                return TASK_KIND[taskKind] === 'SPARK' ? null : {
+                    cpu: this.microCoreToCore(this.resource.EXECUTOR_CPUS),
+                    memory: this.byteToGB(this.resource.EXECUTOR_MEMORY),
+                    uuid: this.microCoreToCore(this.resource.EXECUTOR_CPUS) + '-' + this.byteToGB(this.resource.EXECUTOR_MEMORY)
+                };
+            },
+            set(nval) {
+                this.resource.EXECUTOR_CPUS = this.coreToMicroCore(nval.cpu);
+                this.resource.EXECUTOR_MEMORY = this.GBToByte(nval.memory);
+            }
         },
-        hasHighAllocation() {
-            return this.autoAllocationRight('high');
+        executorGPU: {
+            get() {
+                return TASK_KIND[taskKind] === 'SPARK' ? null : {
+                    count: this.resource.EXECUTOR_GPUS,
+                    label: this._gpuModel,
+                    uuid: this._gpuModel + '-' + this.resource.EXECUTOR_GPUS
+                };
+            },
+            set(nval) {
+                this.resource.EXECUTOR_GPUS = nval.count;
+                this._gpuModel = nval.label;
+            }
         },
-        hasMiddleAllocation() {
-            return this.autoAllocationRight('middle');
+        sparkDriverCPU: {
+            get() {
+                return TASK_KIND[taskKind] === 'SPARK' ? {
+                    cpu: this.microCoreToCore(this.resource.SPARK_DRIVER_CPUS),
+                    memory: this.byteToGB(this.resource.SPARK_DRIVER_MEMORY),
+                    uuid: this.microCoreToCore(this.resource.SPARK_DRIVER_CPUS) + '-' + this.byteToGB(this.resource.SPARK_DRIVER_MEMORY)
+                } : null;
+            },
+            set(nval) {
+                this.resource.SPARK_DRIVER_CPUS = this.coreToMicroCore(nval.cpu);
+                this.resource.SPARK_DRIVER_MEMORY = this.GBToByte(nval.memory);
+            }
         },
-        hasLowAllocation() {
-            return this.autoAllocationRight('low');
-        },
-        isLowAllocation() {
-            return this.matchingAllocationBtn('low');
-        },
-        isMiddleAllocaton() {
-            return this.matchingAllocationBtn('middle');
-        },
-        isHighAllocation() {
-            return this.matchingAllocationBtn('high');
+        sparkExecutorCPU: {
+            get() {
+                return TASK_KIND[taskKind] === 'SPARK' ? {
+                    cpu: this.microCoreToCore(this.resource.SPARK_EXECUTOR_CPUS),
+                    memory: this.byteToGB(this.resource.SPARK_EXECUTOR_MEMORY),
+                    uuid: this.microCoreToCore(this.resource.SPARK_EXECUTOR_CPUS) + '-' + this.byteToGB(this.resource.SPARK_EXECUTOR_MEMORY)
+                } : null;
+            },
+            set(nval) {
+                this.resource.SPARK_EXECUTOR_CPUS = this.coreToMicroCore(nval.cpu);
+                this.resource.SPARK_EXECUTOR_MEMORY = this.GBToByte(nval.memory);
+            }
         }
     },
     methods: {
-        autoAllocation(type) {
-            const allocation = resourceAllocationAuto[type];
-            for (let name in this.resource) {
-                let res = resourceInfo.find(el => el.name === name);
-                this.$set(this.resource, name, allocation[res.type]);
-            }
+        microCoreToCore(value) {
+            return value / 1000;
         },
-        autoAllocationRight(type) {
-            const allocation = resourceAllocationAuto[type];
-            return allocation.cpu <= this.quota.cpu && allocation.mem <= this.quota.mem;
+        coreToMicroCore(value) {
+            return value * 1000;
         },
-        matchingAllocationBtn(type) {
-            const allocation = resourceAllocationAuto[type];
-            let ret = true;
-            let match = false;
-            for (let name in this.resource) {
-                match = true;
-                let res = resourceInfo.find(el => el.name === name);
-                if (allocation[res.type] !== this.resource[name]) {
-                    ret = false;
-                    break;
-                }
-            }
-            return ret && match;
+        byteToGB(value) {
+            return value / (1024 * 1024 * 1024);
+        },
+        GBToByte(value) {
+            return value * 1024 * 1024 * 1024;
         }
     },
     watch: {
         resource: {
             deep: true,
             handler() {
-                let [cpu, gpu, mem] = [0, 0, 0];
-                // 剩余资源校验
-                for (let key in this.resource) {
-                    if (key.includes('CORES')) {
-                        cpu += this.resource[key];
-                    } else if (key.includes('MEMORY')) {
-                        mem += this.resource[key];
-                    } else if (key.includes('GPUS')) {
-                        gpu += this.resource[key];
-                    }
-                }
-                if (cpu > this.quota.cpu || gpu > this.quota.gpu || mem > this.quota.mem) {
-                    this.resourceDesc = true;
-                } else {
-                    this.resourceDesc = false;
-                }
-
-
-                // 资源配置校验
-                for (let key in this.resource) {
-                    if (key.includes('CORES')) {
-                        if (this.resource[key] === 0) {
-                            this.hintContent = 'cpu';
-                            this.resourceHint = true;
-                            break;
-                        } else {
-                            this.resourceHint = false;
-                        }
-                    } else if (key.includes('MEMORY')) {
-                        if (this.resource[key] === 0) {
-                            this.resourceHint = true;
-                            this.hintContent = '内存';
-                            break;
-                        } else {
-                            this.resourceHint = false;
-                        }
-                    }
-                }
-
                 this.$emit('updateResource', this.resource);
             }
         }

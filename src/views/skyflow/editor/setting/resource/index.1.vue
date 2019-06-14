@@ -5,6 +5,53 @@
             <span>资源配置</span>
         </div>
         <div class="setting-options">
+            <div class="resource-info clearfix">
+                <span><strong>剩余资源总量</strong>/资源总量</span>
+                <span class="current-user">
+                    (当前用户)
+                </span>
+                <table class="resource-table">
+                    <tr>
+                        <td>CPU(核)</td>
+                        <td>内存(GB)</td>
+                        <td>GPU(块)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>{{ quota.cpu }}</strong>/{{ total.cpu }}</td>
+                        <td><strong>{{ quota.mem }}</strong>/{{ total.mem }}</td>
+                        <td><strong>{{ quota.gpu }}</strong>/{{ total.gpu }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div
+                v-if="isEditable"
+                class="resource-option-button clearfix"
+            >
+                <span
+                    v-if="hasLowAllocation && !isSpark"
+                    class="resource-button"
+                    :class="{&quot;active&quot;: isLowAllocation}"
+                    @click="autoAllocation(&quot;low&quot;)"
+                >
+                    低配
+                </span>
+                <span
+                    v-if="hasMiddleAllocation"
+                    class="resource-button"
+                    :class="{&quot;active&quot;: isMiddleAllocaton}"
+                    @click="autoAllocation(&quot;middle&quot;)"
+                >
+                    中配
+                </span>
+                <span
+                    v-if="hasHighAllocation"
+                    class="resource-button"
+                    :class="{&quot;active&quot;: isHighAllocation}"
+                    @click="autoAllocation(&quot;high&quot;)"
+                >
+                    高配
+                </span>
+            </div>
             <el-form
                 :model="resource"
                 :gpuModel.sync="gpuModel"
@@ -21,12 +68,25 @@
                     :gpuModel.sync="_gpuModel"
                 />
             </el-form>
+            <div
+                class="resource-value"
+                v-if="resourceHint"
+            >
+                请配置{{ hintContent }}
+            </div>
+            <div
+                class="resource-desc"
+                v-if="resourceDesc"
+            >
+                配置的资源大于当前剩余资源，如果要正常运行，请手动释放一些群组资源。
+            </div>
         </div>
     </div>
 </template>
 
 <script>
 import numberPick from './numberPick';
+import { resourceAllocationAuto, resourceInfo } from '../../js/skyflowConfig';
 import ResourceConfig from '@sdx/widget/lib/resource-config';
 
 export default {
@@ -61,8 +121,7 @@ export default {
         return {
             resourceHint: false,
             hintContent: '',
-            resourceDesc: false,
-            resourceGroups: []
+            resourceDesc: false
         };
     },
     components: {
@@ -81,14 +140,51 @@ export default {
         // 是否为spark
         isSpark() {
             return !!this.dockerImage.name.includes('spark');
+        },
+        hasHighAllocation() {
+            return this.autoAllocationRight('high');
+        },
+        hasMiddleAllocation() {
+            return this.autoAllocationRight('middle');
+        },
+        hasLowAllocation() {
+            return this.autoAllocationRight('low');
+        },
+        isLowAllocation() {
+            return this.matchingAllocationBtn('low');
+        },
+        isMiddleAllocaton() {
+            return this.matchingAllocationBtn('middle');
+        },
+        isHighAllocation() {
+            return this.matchingAllocationBtn('high');
         }
     },
     methods: {
-        resourceToGroups() {
-            // todo:
+        autoAllocation(type) {
+            const allocation = resourceAllocationAuto[type];
+            for (let name in this.resource) {
+                let res = resourceInfo.find(el => el.name === name);
+                this.$set(this.resource, name, allocation[res.type]);
+            }
         },
-        groupsToResource() {
-            // todo:
+        autoAllocationRight(type) {
+            const allocation = resourceAllocationAuto[type];
+            return allocation.cpu <= this.quota.cpu && allocation.mem <= this.quota.mem;
+        },
+        matchingAllocationBtn(type) {
+            const allocation = resourceAllocationAuto[type];
+            let ret = true;
+            let match = false;
+            for (let name in this.resource) {
+                match = true;
+                let res = resourceInfo.find(el => el.name === name);
+                if (allocation[res.type] !== this.resource[name]) {
+                    ret = false;
+                    break;
+                }
+            }
+            return ret && match;
         }
     },
     watch: {
