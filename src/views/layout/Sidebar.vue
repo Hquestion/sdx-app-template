@@ -26,10 +26,7 @@ import SdxMenu from '../../components/SdxMenu/index.vue';
 export default {
     name: 'Sidebar',
     data() {
-        return {
-            // 不渲染当前用户没有权限访问的菜单
-            permissionRoutes: leftmenu
-        };
+        return {};
     },
     components: {
         SdxMenu
@@ -37,13 +34,45 @@ export default {
     computed: {
         sidebar() {
             return this.$store.state.app.sidebar;
-        }
-    },
-    mounted() {
-        if (this.$route.meta.system === 'manage') {
-            this.permissionRoutes = manageMenus;
-        } else {
-            this.permissionRoutes = leftmenu;
+        },
+        permissionRoutes() {
+            if (this.$route.meta.system === 'manage') {
+                return manageMenus.filter(item => {
+                    if (item.auth) {
+                        return this.$auth(item.auth, 'MENU');
+                    } else {
+                        if (item.children) {
+                            item.children = item.children.filter(child => {
+                                if (child.auth) {
+                                    return this.$auth(child.auth, 'MENU');
+                                } else {
+                                    return true;
+                                }
+                            });
+                            return item.children.length > 0;
+                        }
+                        return true;
+                    }
+                });
+            } else {
+                return leftmenu.filter(item => {
+                    if (item.auth) {
+                        return this.$auth(item.auth, 'MENU');
+                    } else {
+                        if (item.children) {
+                            item.children = item.children.filter(child => {
+                                if (child.auth) {
+                                    return this.$auth(child.auth, 'MENU');
+                                } else {
+                                    return true;
+                                }
+                            });
+                            return item.children.length > 0;
+                        }
+                        return true;
+                    }
+                });
+            }
         }
     }
 };

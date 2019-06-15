@@ -38,7 +38,12 @@ Object.keys(filters).forEach(key => {
 
 shareCenter.setup({
     user() {
-        return store.state.user.user;
+        const user = store.state.user.token;
+        user && (user.user.allPermissions = [
+            { key: 'APPLICATION:DASHBOARD_MENU:ACCESS:""', tags: ['MENU'] }
+        ]);
+        user.user.userId = user.user.uuid;
+        return user.user;
     }
 });
 

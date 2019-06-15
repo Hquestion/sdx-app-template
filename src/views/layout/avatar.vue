@@ -152,11 +152,11 @@ export default {
     },
     computed: {
         ...mapState({
-            userMeta: state => state.user && state.user.user || {}
+            userMeta: state => state.user && state.user.token && state.user.token.user || {}
         })
     },
     methods: {
-        ...mapActions(['toggleGuide', 'userInfo']),
+        ...mapActions(['toggleGuide']),
         logout() {
             this.$store.dispatch('logout').then(() => {
                 this.$store.commit('removeAll');
@@ -186,9 +186,6 @@ export default {
             };
             commandMap[command]();
         }
-    },
-    mounted() {
-        this.userInfo();
     },
     watch: {
         currentLang(val) {

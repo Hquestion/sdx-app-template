@@ -15,11 +15,12 @@ import febAlive from 'feb-alive';
 import RoleManage from '@sdx/view/lib/role-manage';
 import AuthorizeManage from '@sdx/view/lib/authorize-manage';
 import ProjectManage from '@sdx/view/lib/project-management';
-import ImageManage from '@sdx/view/lib/image-management';
+import ImageManage from '@sdx/view/components/image-management';
 import SdxvPrivilege from '@sdx/view/lib/privilege';
-import ResourceManageView from '@sdx/view/lib/resource-manage';
-import UserManage from '@sdx/view/lib/user-manage';
+import ResourceManageView from '@sdx/view/components/resource-manage';
+import UserManage from '@sdx/view/components/user-manage';
 import UserGroupManage from '@sdx/view/lib/user-group';
+import FileManage from '@sdx/view/components/file';
 
 febAlive.resetHistory();
 Vue.use(Router);
@@ -92,5 +93,6 @@ ImageManage.viewRouter.register(router, '/assets');
 SdxvPrivilege.viewRouter.register(router, '/home');
 UserManage.viewRouter.register(router, '/home');
 UserGroupManage.viewRouter.register(router, '/home');
+FileManage.viewRouter.register(router, '/assets');
 
 export default router;
