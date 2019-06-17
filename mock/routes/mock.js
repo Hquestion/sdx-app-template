@@ -76,7 +76,71 @@ router.get('/task/skyflow/execute/crontabs/scheduleJobs', (req, res, next) => {
         total: 100
     })
     res.send(new Response(data).toJSONString());
-})
+});
+
+router.get('/file-manager/api/v1/files', (req, res, next) => {
+    let data = Mock.mock({
+        userId: 'xxxx',
+        name: '@string',
+        path: req.query.path,
+        isFile: false,
+        mineType: 'text/directory',
+        createdAt: '2019-04-18T19:20:33.923Z',
+        updatedAt: '2019-04-18T19:20:33.923Z',
+        total: 500,
+        'children|100': [{
+            userId: 'xxxx',
+            'name|1': ['@name', '@name' + '.zip'],
+            path: req.query.path.indexOf('/') === req.query.path.length - 1 ? `${req.query.path}@string` : `${req.query.path}/@string`,
+            isFile: '@boolean',
+            'fileExtension|1': ['.zip', 'csv', '.jpg', ''],
+            mineType: 'text/directory',
+            createdAt: '2019-04-18T19:20:33.923Z',
+            updatedAt: '2019-04-18T19:20:33.923Z',
+            'shareId|1': ['', '@guid'],
+            size: 610000
+        }]
+    });
+    res.send(JSON.stringify(data));
+});
+
+router.get('/file-manager/api/v1/files/search', (req, res, next) => {
+    let data = Mock.mock({
+        total: 500,
+        'files|100': [{
+            userId: 'xxxx',
+            'name|1': ['@name', '@name.zip'],
+            path: req.query.path.indexOf('/') === req.query.path.length - 1 ? `${req.query.path}@string` : `${req.query.path}/@string`,
+            isFile: '@boolean',
+            'fileExtension|1': ['.zip', 'csv', '.jpg', ''],
+            mineType: 'text/directory',
+            createdAt: '2019-04-18T19:20:33.923Z',
+            updatedAt: '2019-04-18T19:20:33.923Z',
+            'shareId|1': ['', '@guid'],
+            size: 610000
+        }]
+    });
+    res.send(JSON.stringify(data));
+});
+
+router.get('/file-manager/api/v1/files/preview', (req, res, next) => {
+    let data = Mock.mock({
+        total: 500,
+        'files|10': [{
+            userId: 'xxxx',
+            'name|1': ['@name', '@name.zip'],
+            path: req.query.path.indexOf('/') === req.query.path.length - 1 ? `${req.query.path}@string` : `${req.query.path}/@string`,
+            isFile: '@boolean',
+            'fileExtension|1': ['.zip', 'csv', '.jpg', ''],
+            mineType: 'text/directory',
+            createdAt: '2019-04-18T19:20:33.923Z',
+            updatedAt: '2019-04-18T19:20:33.923Z',
+            'shareId|1': ['', '@guid'],
+            size: 610000
+        }]
+    });
+    res.send(JSON.stringify(data));
+});
 
 
 module.exports = router;

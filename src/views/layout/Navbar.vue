@@ -7,12 +7,10 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import Hamburger from 'components/Hamburger';
 import errLogStore from 'store/errLog';
 import avatar from './avatar';
 export default {
     components: {
-        Hamburger,
         avatar
     },
     data() {

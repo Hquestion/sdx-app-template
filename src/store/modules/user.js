@@ -1,9 +1,10 @@
 import { login, logout } from '../../api/auth';
 import { getUserDetail } from '@sdx/utils/lib/api/user';
 import moment from 'moment';
+import VueCookie from 'vue-cookies';
 import router from '../../router';
 
-let cachedToken = sessionStorage.getItem('token');
+let cachedToken = localStorage.getItem('token');
 if (cachedToken) {
     cachedToken = JSON.parse(cachedToken);
 } else {
@@ -25,18 +26,20 @@ const user = {
         REMOVE_ALL(state) {
             state.token = {};
             state.user = null;
-            sessionStorage.removeItem('token');
+            localStorage.removeItem('token');
+            VueCookie.remove('token');
             clearTimeout(expireTimer);
         },
         SET_TOKEN(state, token) {
-            sessionStorage.setItem('token', JSON.stringify(token));
+            localStorage.setItem('token', JSON.stringify(token));
+            VueCookie.set('token', token.accessToken);
             state.token = token;
         }
     },
 
     actions: {
-        login({ commit, dispatch }, userInfo) {
-            return login(userInfo)
+        login({ commit, dispatch }, { username, password }) {
+            return login(username, password)
                 .then(data => {
                     commit('SET_TOKEN', data);
                     return dispatch('auth');
@@ -72,6 +75,10 @@ const user = {
         },
         auth({ commit, state }) {
             return new Promise((resolve, reject) => {
+                if (!VueCookie.get('token')) {
+                    // 没有用户信息直接退出登陆
+                    reject();
+                }
                 if (state.token && state.token.accessToken) {
                     // 用户存在，校验失效时间，如果未过期则启动失效定时器，否则直接退出登陆
                     const expireTime = moment.utc(state.token.expiresAt);

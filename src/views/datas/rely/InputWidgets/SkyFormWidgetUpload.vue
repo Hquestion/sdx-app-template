@@ -121,7 +121,7 @@ import UploadList from '../../packages/upload/src/upload-list';
 import FileSelect from '../../project/formItems/fileSelect';
 import SkyFormWidgetMixin from './SkyFormWidgetMixin';
 import { getSourceCodeFilterByTaskKind } from '../../../utils/taskApis';
-import emitter from 'element-ui/lib/mixins/emitter'
+import emitter from 'element-ui/lib/mixins/emitter';
 
 const inputTypeMap = {
     LOCAL_UPLOAD: 'local',
@@ -297,7 +297,7 @@ export default {
             });
         },
         handlerFileChange() {
-            console.log(arguments)
+            console.log(arguments);
             this.makeFileList();
         },
         handlerDirectoryChange() {
@@ -441,7 +441,7 @@ export default {
             }
         }
     }
-}
+};
 // </script>
 
 /*

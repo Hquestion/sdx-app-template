@@ -5,7 +5,7 @@
             trigger="click"
             :shadow="true"
             icon="iconfont iconicon-jiankongzhongxin1"
-            v-show="$route.meta.system !== 'manage'"
+            v-show="$route.meta.system !== 'manage' && hasPlatformPermission"
         >
             {{ $t('manage_plateform') }}
             <template slot="dropdown">
@@ -41,7 +41,7 @@
         </SdxuButton>
         <div
             class="split-line"
-            v-show="$route.meta.system !== 'manage'"
+            v-show="$route.meta.system !== 'manage' && hasPlatformPermission"
         />
         <SdxuButton
             type="text"
@@ -154,6 +154,7 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import { version } from '../../../package';
+import permission from '../../config/permissions';
 
 export default {
     data() {
@@ -167,16 +168,18 @@ export default {
             },
             userInfoVisible: false,
             modifyPwdVisible: false,
-            versionVisible: false
+            versionVisible: false,
+            permission,
+            hasPlatformPermission: false
         };
     },
     computed: {
         ...mapState({
-            userMeta: state => state.user && state.user.user || {}
+            userMeta: state => state.user && state.user.token && state.user.token.user || {}
         })
     },
     methods: {
-        ...mapActions(['toggleGuide', 'userInfo']),
+        ...mapActions(['toggleGuide']),
         logout() {
             this.$store.dispatch('logout').then(() => {
                 this.$store.commit('removeAll');
@@ -215,13 +218,13 @@ export default {
             this.$store.commit('SET_USER', data);
         }
     },
-    mounted() {
-        this.userInfo();
-    },
     watch: {
         currentLang(val) {
             this.$i18n.locale = val;
         }
+    },
+    mounted() {
+        this.hasPlatformPermission = this.$auth(permission.MANAGE_PLATFORM_ACCESS, 'MENU');
     }
 };
 </script>

@@ -20,9 +20,10 @@ import ProjectManage from '@sdx/view/components/project-management';
 import ModelManage from '@sdx/view/lib/model-manage';
 import ImageManage from '@sdx/view/components/image-management';
 import SdxvPrivilege from '@sdx/view/lib/privilege';
-import ResourceManageView from '@sdx/view/lib/resource-manage';
-import UserManage from '@sdx/view/lib/user-manage';
+import ResourceManageView from '@sdx/view/components/resource-manage';
+import UserManage from '@sdx/view/components/user-manage';
 import UserGroupManage from '@sdx/view/lib/user-group';
+import FileManage from '@sdx/view/components/file';
 
 // datas
 import datasManager from '../views/datas/index';
@@ -157,6 +158,17 @@ const router = new Router({
                     ]
                 }
             ]
+        },
+        {
+            path: '/assets',
+            component: Layout,
+            name: 'Assets',
+            meta: {
+                breadcrumb: '资产管理'
+            },
+            hidden: true,
+            children: [
+            ]
         }
     ]
 });
@@ -170,5 +182,6 @@ ImageManage.viewRouter.register(router, '/home');
 SdxvPrivilege.viewRouter.register(router, '/home');
 UserManage.viewRouter.register(router, '/home');
 UserGroupManage.viewRouter.register(router, '/home');
+FileManage.viewRouter.register(router, '/assets');
 
 export default router;

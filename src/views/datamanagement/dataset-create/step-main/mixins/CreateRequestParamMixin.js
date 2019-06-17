@@ -110,7 +110,7 @@ export default {
                     // path: '/Users/chenxiaoliu/work/code/skyflow_new/src/rest/target/classes/csv/',
                     partition: this.$store.state.dataset.form.structDataTarget.local.partition,
                     save_mode: this.$store.state.dataset.form.structDataTarget.local.saveType
-                }
+                };
             } else if (targetKind === '2') {
                 const { fileType, savePath, partition, saveType, rights } = this.$store.state.dataset.form.structDataTarget.hdfs;
                 let hdfsPath = savePath;
@@ -121,7 +121,7 @@ export default {
                     path: hdfsPath,
                     partition,
                     save_mode: saveType
-                }
+                };
             } else {
                 const { partition, saveType, tableName, rights } = this.$store.state.dataset.form.structDataTarget.sql;
                 shareKind = shareKindMap[rights];
@@ -131,7 +131,7 @@ export default {
                     save_mode: saveType,
                     table: tableName,
                     data_format: 'JDBC'
-                }
+                };
             }
             params.sink_option = sink_option;
             params.share_kind = shareKind;
@@ -166,18 +166,18 @@ export default {
                 sink_option = {
                     ...sink_option,
                     path: this.$store.state.dataset.form.structDataTarget.local.savePath[0] && this.$store.state.dataset.form.structDataTarget.local.savePath[0].cephName
-                }
+                };
             } else if (targetKind === '2') {
                 const { savePath, rights } = this.$store.state.dataset.form.structDataTarget.hdfs;
                 shareKind = shareKindMap[rights];
                 sink_option = {
                     ...sink_option,
                     path: savePath
-                }
+                };
             }
             params.sink_option = sink_option;
             params.share_kind = shareKind;
             return params;
         }
     }
-}
+};

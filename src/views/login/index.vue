@@ -104,7 +104,7 @@ export default {
                 if (valid) {
                     this.loading = true;
                     this.$store
-                        .dispatch('login', this.loginForm)
+                        .dispatch('login', { username: this.loginForm.username, password: this.loginForm.passwd })
                         .then(() => {
                             this.loading = false;
                             // 设置显式登陆状态

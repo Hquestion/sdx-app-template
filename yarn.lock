@@ -819,31 +819,33 @@
   resolved "http://192.168.20.38:4873/@nodelib%2ffs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
-"@sdx/ui@^1.0.4":
-  version "1.0.5"
-  resolved "http://192.168.20.38:4873/@sdx%2fui/-/ui-1.0.5.tgz#1283fdfc4131ff954a07b11314415affc5727ee0"
-  integrity sha512-1NepGL6nabi6s9c7Bf0c26gh76yCv7JHEkQy+0NweE3vxj3Z8aYE31lcRFLoi7NrRp2H1+gclz1Gwm6zzarnqw==
+"@sdx/ui@latest":
+  version "1.0.7"
+  resolved "http://192.168.20.38:4873/@sdx%2fui/-/ui-1.0.7.tgz#453aa49faa59638f13752475bc11cf63b0cab54d"
+  integrity sha512-6W/Ggr1rw2FS/9JLyB0XomDGZgDdFgNvtmlEfuvtjWu3Z6IMgA/qt+uKWDC6sTx3Jgc/kZwGH3J32vlb/H3zTA==
   dependencies:
-    "@sdx/utils" "^1.0.2"
+    "@sdx/utils" "^1.0.4"
 
-"@sdx/utils@^1.0.2":
-  version "1.0.2"
-  resolved "http://192.168.20.38:4873/@sdx%2futils/-/utils-1.0.2.tgz#e02200c0eca1fc271f88f2e5757768f1d6f01ebf"
-  integrity sha512-Gc9vKt7SPtPCxjWi9or3Vn+B6B3I5mIs/6v5NcUZsiL33Sc4IErI1u599DN47ODaejQg9z11sWqyctN93Zn8hg==
-
-"@sdx/view@^1.0.2":
-  version "1.0.2"
-  resolved "http://192.168.20.38:4873/@sdx%2fview/-/view-1.0.2.tgz#54f9f9685295ad60faf77d0208c27748853046b5"
-  integrity sha512-3sNXbaSt+l35tE+KuOmfMn8jsyIFev4Eb5dg+mR5yd2fxoT1pkrFPUZODFF7dNnOy3NEH52VPjZnKaTt3SOiNg==
+"@sdx/utils@^1.0.4", "@sdx/utils@latest":
+  version "1.0.4"
+  resolved "http://192.168.20.38:4873/@sdx%2futils/-/utils-1.0.4.tgz#0faff48e76614fb4dd1fa74c38078080ac8077d1"
+  integrity sha512-G64lhWA0sRL8PGwtUBOSKi17snSRKNQX6XE1zWdX/wvjafBUwuPlQ4XXUOGvvIk9FsSR1HYKzKKncLJapzm9eA==
   dependencies:
-    "@sdx/utils" "^1.0.2"
+    axios "^0.18.0"
 
-"@sdx/widget@^1.0.2":
-  version "1.0.2"
-  resolved "http://192.168.20.38:4873/@sdx%2fwidget/-/widget-1.0.2.tgz#2425346bf398007b417ec245d89588a777b314ba"
-  integrity sha512-nAdjejRsfYrGH//rofJ6zfYZAes62EcZ5uukas6nv6vOPtqV0SbKmdJlW6zrIPrs1Ds4IST0dBqZx1OIGjhqjg==
+"@sdx/view@latest":
+  version "1.0.4"
+  resolved "http://192.168.20.38:4873/@sdx%2fview/-/view-1.0.4.tgz#b8e0d188dce4c0a976597a3d0ba08fd3debb4238"
+  integrity sha512-ZPH/cibrSqbVlWaibF0v20cWGR2gxDbIa0o7bcev24nAy4yJztik87ed1QOnauSpQyhKFVXqVq9V3IiJPi4BTA==
   dependencies:
-    "@sdx/utils" "^1.0.2"
+    "@sdx/utils" "^1.0.4"
+
+"@sdx/widget@latest":
+  version "1.0.4"
+  resolved "http://192.168.20.38:4873/@sdx%2fwidget/-/widget-1.0.4.tgz#6bae66d71ae9ae7734830f0279c88e020e27730b"
+  integrity sha512-dUqPOaNy8kHlcAtt2D4bw5JGdjtDcKGJWlgj2S2hd5vumyKPrUKuwSOdXstIHdgRgkI6wYsLTnlAMJRIGGnBdA==
+  dependencies:
+    "@sdx/utils" "^1.0.4"
 
 "@soda/friendly-errors-webpack-plugin@^1.7.1":
   version "1.7.1"
@@ -10795,6 +10797,11 @@ vue-cli-plugin-i18n@^0.6.0:
     vue-i18n "^8.0.0"
     vue-i18n-extract "^0.4.13"
 
+vue-cookies@^1.5.13:
+  version "1.5.13"
+  resolved "http://192.168.20.38:4873/vue-cookies/-/vue-cookies-1.5.13.tgz#b1ca79a2663bf9a4f36982557011cab5ee2196c0"
+  integrity sha512-8pjpXnvbNWx1Lft0t3MJnW+ylv0Wa2Tb6Ch617u/pQah3+SfXUZZdkh3EL3bSpe/Sw2Wdw3+DhycgQsKANSxXg==
+
 vue-eslint-parser@^2.0.3:
   version "2.0.3"
   resolved "http://192.168.20.38:4873/vue-eslint-parser/-/vue-eslint-parser-2.0.3.tgz#c268c96c6d94cfe3d938a5f7593959b0ca3360d1"
@@ -10917,6 +10924,11 @@ vue@^2.5.16, vue@^2.6.10:
   version "2.6.10"
   resolved "http://192.168.20.38:4873/vue/-/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
   integrity sha512-ImThpeNU9HbdZL3utgMCq0oiMzAkt1mcgy3/E6zWC/G6AaQoeuFdsl9nDhTDU3X1R6FK7nsIUuRACVcjI+A2GQ==
+
+vuescroll@^4.12.2:
+  version "4.12.2"
+  resolved "http://192.168.20.38:4873/vuescroll/-/vuescroll-4.12.2.tgz#fc61e8e8867881475f99d5ae753d47db05d8cce7"
+  integrity sha512-ND29bRjG0loUNIY6UjsXhmnb/jStWjNJKB1upUycUBj6jAo1XfT7K2kniaNo67kV2VZpIKziMh2MgjtktaRfyw==
 
 vuex@^3.0.1:
   version "3.1.0"

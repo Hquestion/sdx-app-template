@@ -52,14 +52,14 @@ export default {
         initChart() {
             this.chart && this.chart.clear();
             this.chart = echarts.init(this.$el, 'macarons');
-            let colors = ['#30A2F2', '#D7F4FA', '#FCA800', '#FFF4DF', '#1271E7', '#C7E0FF', '#85CA97', '#E9FFEF', '#7364A2', '#F4F0FF']
-            let [arr, gpus] = [[], _.cloneDeep(this.pieData.assignedGpus)]
+            let colors = ['#30A2F2', '#D7F4FA', '#FCA800', '#FFF4DF', '#1271E7', '#C7E0FF', '#85CA97', '#E9FFEF', '#7364A2', '#F4F0FF'];
+            let [arr, gpus] = [[], _.cloneDeep(this.pieData.assignedGpus)];
             for (let i = 0; i < gpus.length; i++) {
-                gpus[i].itemStyle = { color: colors[i] }
-                gpus[i].emphasis = { itemStyle: { color: colors[i], opacity: 0.7 } }
-                arr.push(gpus[i])
+                gpus[i].itemStyle = { color: colors[i] };
+                gpus[i].emphasis = { itemStyle: { color: colors[i], opacity: 0.7 } };
+                arr.push(gpus[i]);
             }
-            this.assigned = arr
+            this.assigned = arr;
             this.chart.setOption({
                 tooltip: {
                     trigger: 'item',
@@ -98,7 +98,7 @@ export default {
     },
     watch: {
         pieData(nval, oval) {
-            this.pieData = nval
+            this.pieData = nval;
             if (nval.assigned !== oval.assigned || nval.total !== oval.total) {
                 this.initChart();
             }

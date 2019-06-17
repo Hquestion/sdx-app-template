@@ -90,12 +90,12 @@ const droppable = {
                     ) {
                         ev.dataTransfer.dropEffect = option.dropEffect;
                     }
-                    let data = null
+                    let data = null;
                     try {
                         // take data
                         data = JSON.parse(ev.dataTransfer.getData('text/plain'));
                     } catch (e) {
-                        console.log(e)
+                        console.log(e);
                     }
                     // do classes
                     removeClass(el, option.droppableClassPreFix + '-dragover');

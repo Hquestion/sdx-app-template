@@ -92,7 +92,7 @@ export default {
             this.$emit('revoke');
         }
     }
-}
+};
 </script>
 
 <style lang="scss" scoped>

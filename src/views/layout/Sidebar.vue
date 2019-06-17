@@ -5,8 +5,11 @@
                 class="inner"
                 :class="{hideLogo:!sidebar.opened}"
             >
-                <wscn-icon-svg iconClass="iconicon-Logo" class="logo-icon"></wscn-icon-svg>
-                <i class="iconfont iconico_project logo-icon-mini"></i>
+                <wscn-icon-svg
+                    iconClass="iconicon-Logo"
+                    class="logo-icon"
+                />
+                <i class="iconfont iconico_project logo-icon-mini" />
             </div>
         </div>
         <ElScrollbar
@@ -21,14 +24,12 @@
 <script>
 import { leftmenu, manageMenus } from '../../config/menuConfig';
 import SdxMenu from '../../components/SdxMenu/index.vue';
-// todo 处理权限相关的菜单
 
 export default {
     name: 'Sidebar',
     data() {
         return {
-            // 不渲染当前用户没有权限访问的菜单
-            permissionRoutes: leftmenu
+            permissionRoutes: []
         };
     },
     components: {
@@ -41,9 +42,41 @@ export default {
     },
     mounted() {
         if (this.$route.meta.system === 'manage') {
-            this.permissionRoutes = manageMenus;
+            this.permissionRoutes = manageMenus.filter(item => {
+                if (item.auth) {
+                    return this.$auth(item.auth, 'MENU');
+                } else {
+                    if (item.children) {
+                        item.children = item.children.filter(child => {
+                            if (child.auth) {
+                                return this.$auth(child.auth, 'MENU');
+                            } else {
+                                return true;
+                            }
+                        });
+                        return item.children.length > 0;
+                    }
+                    return true;
+                }
+            });
         } else {
-            this.permissionRoutes = leftmenu;
+            this.permissionRoutes = leftmenu.filter(item => {
+                if (item.auth) {
+                    return this.$auth(item.auth, 'MENU');
+                } else {
+                    if (item.children) {
+                        item.children = item.children.filter(child => {
+                            if (child.auth) {
+                                return this.$auth(child.auth, 'MENU');
+                            } else {
+                                return true;
+                            }
+                        });
+                        return item.children.length > 0;
+                    }
+                    return true;
+                }
+            });
         }
     }
 };
