@@ -44,7 +44,7 @@ export default {
             return compMap[this.targetType];
         }
     }
-}
+};
 </script>
 
 <style lang="scss">

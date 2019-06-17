@@ -175,7 +175,7 @@ export default {
     updated() {
         // pass
     }
-}
+};
 // </script>
 
 /*

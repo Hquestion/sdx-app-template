@@ -24,6 +24,7 @@
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
     "clipboard": "^2.0.0",
+    "co": "^4.6.0",
     "d3": "^5.5.0",
     "echarts": "4.2.1",
     "element-ui": "^2.4.7",
@@ -42,8 +43,7 @@
     "vue-radial-progress": "^0.2.10",
     "vue-router": "^3.0.1",
     "vuescroll": "^4.12.2",
-    "vuex": "^3.0.1",
-    "co": "^4.6.0"
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",

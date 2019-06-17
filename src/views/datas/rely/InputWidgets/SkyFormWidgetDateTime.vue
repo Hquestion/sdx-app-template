@@ -12,7 +12,7 @@
 */
 // <!--eslint-disable-next-line-->
 // <script>
-import SkyFormWidgetMixin from './SkyFormWidgetMixin'
+import SkyFormWidgetMixin from './SkyFormWidgetMixin';
 export default {
     name: 'SkyFormWidgetDateTime',
     mixins: [SkyFormWidgetMixin],
@@ -25,7 +25,7 @@ export default {
             type: String
         }
     }
-}
+};
 // </script>
 
 /*

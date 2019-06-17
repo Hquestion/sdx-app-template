@@ -1,7 +1,7 @@
 export default {
     update(el, binding) {
         const selectWrap = el.querySelector('.el-checkbox-group');
-        if (selectWrap === null) { return }
+        if (selectWrap === null) { return; }
         let boxHeight = 0;
         el.$$lastScrollLeft = 0;
         el.$$lastScrollTop = 0;
@@ -29,7 +29,7 @@ export default {
     unbind(el) {
         const selectWrap = el.querySelector('.el-checkbox-group');
         el.$$lastScrollLeft = 0;
-        if (selectWrap === null) { return }
+        if (selectWrap === null) { return; }
         selectWrap.removeEventListener('scroll', el.$$scrollcb);
     }
-}
+};

@@ -89,7 +89,7 @@ export default {
 
     watch: {
         pieData(nval, oval) {
-            this.pieData = nval
+            this.pieData = nval;
             if (nval.assigned !== oval.assigned || nval.total !== oval.total) {
                 this.initChart();
             }

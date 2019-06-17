@@ -28,4 +28,4 @@ export default {
         el.$$lastScrollLeft = 0;
         selectWrap.removeEventListener('scroll', el.$$scrollcb);
     }
-}
+};

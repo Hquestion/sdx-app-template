@@ -1,45 +1,67 @@
 <template>
-  <transition name="el-zoom-in-top">
-    <div
-      class="el-table-filter"
-      v-if="multiple"
-      v-clickoutside="handleOutsideClick"
-      v-show="showPopper">
-      <div class="el-table-filter__content">
-        <el-scrollbar wrap-class="el-table-filter__wrap">
-          <el-checkbox-group class="el-table-filter__checkbox-group" v-model="filteredValue">
-            <el-checkbox
-              v-for="filter in filters"
-              :key="filter.value"
-              :label="filter.value">{{ filter.text }}</el-checkbox>
-          </el-checkbox-group>
-        </el-scrollbar>
-      </div>
-      <div class="el-table-filter__bottom">
-        <button @click="handleConfirm"
-          :class="{ 'is-disabled': filteredValue.length === 0 }"
-          :disabled="filteredValue.length === 0">{{ t('el.table.confirmFilter') }}</button>
-        <button @click="handleReset">{{ t('el.table.resetFilter') }}</button>
-      </div>
-    </div>
-    <div
-      class="el-table-filter"
-      v-else
-      v-clickoutside="handleOutsideClick"
-      v-show="showPopper">
-      <ul class="el-table-filter__list">
-        <li class="el-table-filter__list-item"
-            :class="{ 'is-active': filterValue === undefined || filterValue === null }"
-            @click="handleSelect(null)">{{ t('el.table.clearFilter') }}</li>
-        <li class="el-table-filter__list-item"
-            v-for="filter in filters"
-            :label="filter.value"
-            :key="filter.value"
-            :class="{ 'is-active': isActive(filter) }"
-            @click="handleSelect(filter.value)" >{{ filter.text }}</li>
-      </ul>
-    </div>
-  </transition>
+    <transition name="el-zoom-in-top">
+        <div
+            class="el-table-filter"
+            v-if="multiple"
+            v-clickoutside="handleOutsideClick"
+            v-show="showPopper"
+        >
+            <div class="el-table-filter__content">
+                <el-scrollbar wrap-class="el-table-filter__wrap">
+                    <el-checkbox-group
+                        class="el-table-filter__checkbox-group"
+                        v-model="filteredValue"
+                    >
+                        <el-checkbox
+                            v-for="filter in filters"
+                            :key="filter.value"
+                            :label="filter.value"
+                        >
+                            {{ filter.text }}
+                        </el-checkbox>
+                    </el-checkbox-group>
+                </el-scrollbar>
+            </div>
+            <div class="el-table-filter__bottom">
+                <button
+                    @click="handleConfirm"
+                    :class="{ 'is-disabled': filteredValue.length === 0 }"
+                    :disabled="filteredValue.length === 0"
+                >
+                    {{ t('el.table.confirmFilter') }}
+                </button>
+                <button @click="handleReset">
+                    {{ t('el.table.resetFilter') }}
+                </button>
+            </div>
+        </div>
+        <div
+            class="el-table-filter"
+            v-else
+            v-clickoutside="handleOutsideClick"
+            v-show="showPopper"
+        >
+            <ul class="el-table-filter__list">
+                <li
+                    class="el-table-filter__list-item"
+                    :class="{ 'is-active': filterValue === undefined || filterValue === null }"
+                    @click="handleSelect(null)"
+                >
+                    {{ t('el.table.clearFilter') }}
+                </li>
+                <li
+                    class="el-table-filter__list-item"
+                    v-for="filter in filters"
+                    :label="filter.value"
+                    :key="filter.value"
+                    :class="{ 'is-active': isActive(filter) }"
+                    @click="handleSelect(filter.value)"
+                >
+                    {{ filter.text }}
+                </li>
+            </ul>
+        </div>
+    </transition>
 </template>
 
 <script type="text/babel">

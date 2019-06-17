@@ -36,7 +36,7 @@ export default {
     data() {
         return {
             sourceType: this.$store.state.dataset.form.nonStructDataSource.sourceType || '1'
-        }
+        };
     },
     computed: {
         comp() {
@@ -52,7 +52,7 @@ export default {
             });
         }
     }
-}
+};
 </script>
 
 <style lang="scss">

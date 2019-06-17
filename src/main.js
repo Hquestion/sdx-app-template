@@ -17,8 +17,9 @@ import EmitAsync from './plugins/asyncEmit';
 import directives from '@/directives';
 import i18n from './i18n';
 import SdxUI from '@sdx/ui';
-import SdxWidget from '@sdx/widget';
-import shareCenter from '@sdx/utils/lib/helper/shareCenter';
+import { FileSelect, Breadcrumb, UserinfoDialog, ChangePassword } from '@sdx/widget';
+import Auth from '@sdx/widget/components/auth';
+import shareCenter from '@sdx/utils/src/helper/shareCenter';
 import febAlive from 'feb-alive';
 
 Vue.use(febAlive, { router, keyName: 'feb' });
@@ -30,7 +31,11 @@ Vue.use(directives);
 // register globally
 Vue.use(ElementUI);
 Vue.use(SdxUI);
-Vue.use(SdxWidget);
+Vue.use(FileSelect);
+Vue.use(Breadcrumb);
+Vue.use(UserinfoDialog);
+Vue.use(ChangePassword);
+Vue.use(Auth);
 // register global utility filters.
 Object.keys(filters).forEach(key => {
     Vue.filter(key, filters[key]);
@@ -40,7 +45,13 @@ shareCenter.setup({
     user() {
         const user = store.state.user.token;
         user && (user.user.allPermissions = [
-            { key: 'APPLICATION:DASHBOARD_MENU:ACCESS:""', tags: ['MENU'] }
+            { key: 'APPLICATION:DASHBOARD_MENU:ACCESS:""', tags: ['MENU'] },
+            { key: 'APPLICATION:PROJECT_MANAGER_MENU:ACCESS:""', tags: ['MENU'] },
+            { key: 'APPLICATION:FILE_MANAGER_MENU:ACCESS:""', tags: ['MENU'] },
+            { key: 'APPLICATION:MANAEGR_PLATFORM_MENU:ACCESS:""', tags: ['MENU'] },
+            { key: 'APPLICATION:MODEL_MANAGER_MENU:ACCESS:""', tags: ['MENU'] },
+            { key: 'RESOURCE-MANAGER:TEMPLATE:READ:""', tags: ['BUTTON'] },
+            { key: 'RESOURCE-MANAGER:TEMPLATE:WRITE:""', tags: ['BUTTON'] }
         ]);
         user.user.userId = user.user.uuid;
         return user.user;

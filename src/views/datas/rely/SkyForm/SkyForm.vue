@@ -187,7 +187,7 @@ export default {
             delete this.eventEmitTimerMap[item];
         });
     }
-}
+};
 </script>
 
 <style lang="scss" scoped>
