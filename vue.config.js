@@ -138,12 +138,9 @@ module.exports = {
                 }
             },
             '^/file-manager': {
-                target: 'http://127.0.0.1:3400',
+                target: 'http://10.115.1.130:30080',
                 ws: true,
-                changeOrigin: true,
-                pathRewrite: {
-                    '/file-manager': '/mock/file-manager'
-                }
+                changeOrigin: true
             },
             '^/resource-manager': {
                 target: 'http://10.115.1.130:30080',
