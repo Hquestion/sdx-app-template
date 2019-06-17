@@ -14,8 +14,8 @@ import about from '../views/about/about';
 // feb-alive
 import febAlive from 'feb-alive';
 
-import RoleManage from '@sdx/view/lib/role-manage';
-import AuthorizeManage from '@sdx/view/lib/authorize-manage';
+import RoleManage from '@sdx/view/components/role-manage';
+import AuthorizeManage from '@sdx/view/components/authorize-manage';
 import ProjectManage from '@sdx/view/components/project-management';
 import ModelManage from '@sdx/view/lib/model-manage';
 import ImageManage from '@sdx/view/components/image-management';
@@ -43,7 +43,7 @@ Vue.use(Router);
  */
 
 const router = new Router({
-    // mode: 'history', //后端支持可开
+    // mode: 'history', // 后端支持可开
     scrollBehavior: () => ({
         y: 0
     }),

@@ -8,13 +8,15 @@ import httpService from '../../../helper/httpService';
  * @param Object params={}
  * @returns Array
  */
+// export function getSourceList(params) {
+//     return httpService
+//         .get('/v2/datasource/', {
+//             ...params
+//         });
+// }
 export function getSourceList(params = {}) {
-    return httpService
-        .get('/v2/datasource/', {
-            params
-        });
+    return httpService.get('/v2/datasource/', { ...params });
 }
-
 /**
  * 添加数据源
  *
@@ -69,7 +71,7 @@ export function getDataSourceOptions() {
  * 数据集查询
  */
 export function getDataset(params = {}) {
-    return httpService.get('/v2/dataset/', { params });
+    return httpService.get('/v2/dataset/', { ...params });
 }
 
 /**

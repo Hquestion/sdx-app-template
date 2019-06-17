@@ -143,7 +143,7 @@
                                 </el-select>
                                 <MoreBtn
                                     class="morebtn"
-                                    @getMore="getTaskMore"
+                                    @getMore="getTaskMore('/assets/taskManage')"
                                 />
                                 <bar-echarts
                                     height="354px"
@@ -167,7 +167,7 @@
                         >
                             <MoreBtn
                                 class="morebtn"
-                                @getMore="getTaskMore"
+                                @getMore="getTaskMore('/sdxv-model-manage')"
                             />
                             <bar-echarts
                                 height="354px"
@@ -186,18 +186,22 @@
             <recent-updates
                 title="最近更新的项目"
                 :nameTimes="projectInfo"
+                path="/sdxv-project-manage"
             />
             <recent-updates
                 title="最近更新的SkyFlow"
                 :nameTimes="skyflowInfo"
+                path="/skyflow"
             />
             <recent-updates
                 title="最近更新的模型"
                 :nameTimes="modelInfo"
+                path="/sdxv-model-manage"
             />
             <recent-updates
                 title="最近更新的数据集"
                 :nameTimes="datasetInfo"
+                path="/datasManage"
             />
         </div>
     </div>
@@ -341,8 +345,8 @@ export default {
                 });
         },
         // 获取更多任务
-        getTaskMore() {
-            console.log('任务更多');
+        getTaskMore(path) {
+            this.$router.push(path);
         },
         // 项目列表
         getProjectList() {
@@ -493,10 +497,13 @@ export default {
     flex-flow:row;/*伸缩项目单行排列*/
     & /deep/ {
         .sdxu-content-panel__main {
-            margin-top: 0 ;
+            margin-top: 0 !important;
         }
         .sdxu-content-panel {
             padding: 20px;
+        }
+        .sdxu-empty {
+            height: 355px !important;
         }
     }
     .marginTop20 {

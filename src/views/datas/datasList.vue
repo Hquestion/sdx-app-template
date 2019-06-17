@@ -35,7 +35,7 @@
                         <el-option
                             label="全部"
                             :value="-1"
-                            key="-1"
+                            key="all"
                         />
                         <el-option
                             v-for="item in tags"
@@ -166,7 +166,11 @@
                         label="创建时间"
                         prop="created_at"
                         sortable="custom"
-                    />
+                    >
+                        <template slot-scope="scope">
+                            {{ dateFormatter(scope.row.created_at) }}
+                        </template>
+                    </el-table-column>
                     <el-table-column
                         label="操作"
                         min-width="120px"
@@ -179,7 +183,7 @@
                                 @click="handleViewDataSource(scope.row.dataset)"
                             >
                                 <i
-                                    class="iconfont icon-Icon-eye"
+                                    class="iconfont iconicon-detail"
                                     title="详情"
                                 />
                             </el-button>
@@ -190,7 +194,7 @@
                                 @click="handleEditDataSource(scope.row)"
                             >
                                 <i
-                                    class="iconfont icon-ico_edite"
+                                    class="iconfont sdx-icon-edit"
                                     title="编辑"
                                 />
                             </el-button>
@@ -202,7 +206,7 @@
                                 @click="handleDeleteDataSource(scope.row)"
                             >
                                 <i
-                                    class="iconfont icon-delete"
+                                    class="iconfont sdx-icon-delete"
                                     title="删除"
                                 />
                             </el-button>
@@ -382,7 +386,7 @@ import CreateDatasetOption from '../datamanagement/dataset-create/CreateDatasetO
 import stateLabel from './rely/stateLabel';
 import { dataTypes } from '../datamanagement/dataset-create/config';
 import FormTip from './rely/SkyForm/FormTip';
-
+import { dateFormatter } from '@sdx/utils/src/helper/transform';
 const datatype = dataTypes;
 export default {
     components: { CreateDatasetOption, stateLabel, FormTip },
@@ -526,6 +530,7 @@ export default {
         }
     },
     methods: {
+        dateFormatter,
         // 数据集标签
         getTags() {
             getDataTag()
@@ -540,9 +545,9 @@ export default {
         // 数据集查询
         datasetList() {
             getDataset(this.search)
-                .then(data => {
-                    this.tableData = data.items || [];
-                    this.total = data.total;
+                .then(res => {
+                    this.tableData = res.data.items || [];
+                    this.total = res.data.total;
                     // bugfix 修正当前页数,如果最后一页的最后一项被删除,会导致页面停留在一个空页上
                     if (
                         Math.ceil(this.total / this.search.page_size) <

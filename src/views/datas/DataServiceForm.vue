@@ -41,18 +41,18 @@
                 prop="imageId"
                 label="运行环境:"
             >
-                <el-select
+                <CusSelect
                     v-model="params.imageId"
                     size="small"
                     placeholder="请输入运行环境"
                 >
                     <el-option
-                        v-for="item in imageOptions"
+                        v-for="item in images"
                         :key="item.value"
                         :label="item.label"
                         :value="item.value"
                     />
-                </el-select>
+                </CusSelect>
             </el-form-item>
             <el-form-item
                 prop="resourceConfig"
@@ -91,10 +91,12 @@ import { getImageList } from '@sdx/utils/src/api/image';
 import ResourceConfig from '@sdx/view/components/project-management/src/forms/ResourceConfig';
 import { createTask, updateTask } from '@sdx/utils/src/api/project';
 import { cNameValidate } from '@sdx/utils/src/helper/validate';
+import ElSelect from 'element-ui/lib/select';
 export default {
     name: 'DataServiceForm',
     components: {
-        ResourceConfig
+        ResourceConfig,
+        CusSelect: ElSelect
     },
     props: {
         visible: {
@@ -131,6 +133,7 @@ export default {
                     SPARK_EXECUTOR_INSTANCES: 1
                 }
             },
+            images: [],
             imageOptions: [],
             cpuDriver: {},
             cpuExecute: {},
@@ -210,6 +213,13 @@ export default {
         },
         'params.imageId'() {
             this.$refs.dataService.clearValidate('resourceConfig');
+        },
+        imageOptions: {
+            immediate: true,
+            deep: true,
+            handler(val) {
+                this.images = val;
+            }
         }
     }
 };

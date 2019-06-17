@@ -124,7 +124,7 @@
 
 <script>
 
-import { getSourceList, removeDataSource, testDataSourceConnection } from './rely/dataApi';
+import { getSourceList, removeDataSource, testDataSourceConnection } from './rely/dataSourceApi';
 
 export default {
     name: 'DataSourceList',

@@ -40,6 +40,10 @@ export default {
         nameTimes: {
             type: Array,
             default: () => []
+        },
+        path: {
+            type: String,
+            default: ''
         }
     },
     components: {
@@ -51,7 +55,7 @@ export default {
 
     methods: {
         getTaskMore() {
-            console.log('more');
+            this.$router.push(this.path);
         },
         // 注册
         getDateDiff
