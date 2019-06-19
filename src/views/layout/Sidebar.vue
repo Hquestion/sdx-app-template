@@ -83,6 +83,9 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
+    @import "../../assets/styles/base/colors";
+    @import "../../assets/styles/base/constants";
+    @import "../../assets/styles/base/mixin";
 .sdx-slidebar {
     height: 100%;
     width: $ls-siderbar;
