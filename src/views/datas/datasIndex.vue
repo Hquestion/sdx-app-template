@@ -53,7 +53,9 @@
         <!-- 数据集列表 -->
         <datas-list :services="services" />
 
-        <data-service-form :visible.sync="dataServicevisible" />
+        <data-service-form
+            :visible.sync="dataServicevisible"
+        />
     </div>
 </template>
 <script>

@@ -14,12 +14,13 @@ import about from '../views/about/about';
 // feb-alive
 import febAlive from 'feb-alive';
 
-import RoleManage from '@sdx/view/lib/role-manage';
-import AuthorizeManage from '@sdx/view/lib/authorize-manage';
+import RoleManage from '@sdx/view/components/role-manage';
+import AuthorizeManage from '@sdx/view/components/authorize-manage';
 import ProjectManage from '@sdx/view/components/project-management';
 import ModelManage from '@sdx/view/lib/model-manage';
 import ImageManage from '@sdx/view/components/image-management';
 import SdxvPrivilege from '@sdx/view/lib/privilege';
+import Skyflow from '@sdx/view/lib/skyflow';
 import ResourceManageView from '@sdx/view/components/resource-manage';
 import UserManage from '@sdx/view/components/user-manage';
 import UserGroupManage from '@sdx/view/lib/user-group';
@@ -44,7 +45,7 @@ Vue.use(Router);
  */
 
 const router = new Router({
-    // mode: 'history', //后端支持可开
+    // mode: 'history', // 后端支持可开
     scrollBehavior: () => ({
         y: 0
     }),
@@ -179,6 +180,7 @@ AuthorizeManage.viewRouter.register(router, '/home');
 ProjectManage.viewRouter.register(router, '/home');
 ModelManage.viewRouter.register(router, '/home');
 ImageManage.viewRouter.register(router, '/home');
+Skyflow.viewRouter.register(router, '/home');
 SdxvPrivilege.viewRouter.register(router, '/home');
 UserManage.viewRouter.register(router, '/home');
 UserGroupManage.viewRouter.register(router, '/home');

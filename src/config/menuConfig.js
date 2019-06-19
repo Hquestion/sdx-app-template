@@ -22,7 +22,7 @@ const leftmenu = [
     {
         name: 'SkyFlow',
         icon: 'iconfont iconicon-Skyflow',
-        path: '/skyflow',
+        path: '/sdxv-skyflow',
         auth: permissions.SKYFLOW_MENU_ACCESS
     },
     {

@@ -11,14 +11,14 @@ export function getTaskList(params) {
 }
 
 export function getDisk(params) {
-    return httpService.get('/api/v1/volumes/stats', params);
+    return httpService.get('/system-manager/api/v1/volumes/stats', params);
 }
 
 export function getProjects(params) {
     return httpService.get('/project-manager/api/v1/projects', params);
 }
 export function getModels(params) {
-    return httpService.get('/model-manager/api/v1/models', params);
+    return httpService.get('/model-manager/api/v1/models/', params);
 }
 
 export function getDatasets(params) {
