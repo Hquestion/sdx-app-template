@@ -168,6 +168,16 @@ module.exports = {
                 target: 'http://10.115.1.130:30080',
                 ws: true,
                 changeOrigin: true
+            },
+            '^/model-manager': {
+                target: 'http://10.115.1.130:30080',
+                ws: true,
+                changeOrigin: true
+            },
+            '^/skyflow-manager': {
+                target: 'http://10.115.1.130:30080',
+                ws: true,
+                changeOrigin: true
             }
         },
         overlay: true
