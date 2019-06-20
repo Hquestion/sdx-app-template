@@ -49,6 +49,7 @@ shareCenter.setup({
             { key: 'APPLICATION:PROJECT_MANAGER_MENU:ACCESS:""', tags: ['MENU'] },
             { key: 'APPLICATION:SKYFLOW_MANAGER_MENU:ACCESS:""', tags: ['MENU'] },
             { key: 'APPLICATION:FILE_MANAGER_MENU:ACCESS:""', tags: ['MENU'] },
+            { key: 'APPLICATION:IMAGE_MANAGER_MENU:ACCESS:""', tags: ['MENU'] },
             { key: 'APPLICATION:MANAEGR_PLATFORM_MENU:ACCESS:""', tags: ['MENU'] },
             { key: 'APPLICATION:MODEL_MANAGER_MENU:ACCESS:""', tags: ['MENU'] },
             { key: 'RESOURCE-MANAGER:TEMPLATE:READ:""', tags: ['BUTTON'] },
