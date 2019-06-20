@@ -116,7 +116,7 @@ module.exports = {
         'no-unused-expressions': 0,
 
         // disallow unnecessary calls to .call() and .apply()
-        'no-useless-call': 'error',
+        'no-useless-call': 0,
 
         // disallow unnecessary concatenation of literals or template literals
         'no-useless-concat': 'error',

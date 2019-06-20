@@ -7,6 +7,7 @@
                         <el-col :span="16">
                             <sdxu-content-panel
                                 title="资源使用情况"
+                                size="small"
                             >
                                 <el-row
                                     :gutter="20"
@@ -89,6 +90,7 @@
                         >
                             <sdxu-content-panel
                                 title="运行任务总数"
+                                size="small"
                             >
                                 <CircleProgress
                                     :percentage="20"
@@ -104,6 +106,7 @@
             <div class="left-center">
                 <sdxu-content-panel
                     title="行业模版"
+                    size="small"
                 >
                     <el-row
                         class=""
@@ -123,40 +126,48 @@
                     <el-col :span="12">
                         <sdxu-content-panel
                             title="任务资源使用Top 10"
+                            size="small"
                         >
-                            <el-select
-                                size="small"
-                                v-model="orderBy"
-                                placeholder="请选择"
-                            >
-                                <el-option
-                                    v-for="item in resourceType"
-                                    :key="item.label"
-                                    :label="item.label"
-                                    :value="item.value"
+                            <div v-if="taskNameList && taskNameList.length">
+                                <el-select
+                                    size="small"
+                                    v-model="orderBy"
+                                    placeholder="请选择"
+                                >
+                                    <el-option
+                                        v-for="item in resourceType"
+                                        :key="item.label"
+                                        :label="item.label"
+                                        :value="item.value"
+                                    />
+                                </el-select>
+                                <MoreBtn
+                                    class="morebtn"
+                                    @getMore="getTaskMore('/assets/taskManage')"
                                 />
-                            </el-select>
-                            <MoreBtn
-                                class="morebtn"
-                                @getMore="getTaskMore"
-                            />
-                            <bar-echarts
+                                <bar-echarts
+                                    height="354px"
+                                    :barData="taskData"
+                                    :barNameList="taskNameList"
+                                    tipTitle="任务资源使用"
+                                    :colorList="taskColorList"
+                                />
+                                <span class="xname">单位（{{ taskXname }}）</span>
+                            </div>
+                            <SdxuEmpty
+                                v-else
                                 height="354px"
-                                :barData="taskData"
-                                :barNameList="taskNameList"
-                                tipTitle="任务资源使用"
-                                :colorList="taskColorList"
                             />
-                            <span class="xname">单位（{{ taskXname }}）</span>
                         </sdxu-content-panel>
                     </el-col>
                     <el-col :span="12">
                         <sdxu-content-panel
                             title="模型版本调用次数Top 10"
+                            size="small"
                         >
                             <MoreBtn
                                 class="morebtn"
-                                @getMore="getTaskMore"
+                                @getMore="getTaskMore('/sdxv-model-manage')"
                             />
                             <bar-echarts
                                 height="354px"
@@ -175,18 +186,22 @@
             <recent-updates
                 title="最近更新的项目"
                 :nameTimes="projectInfo"
+                path="/sdxv-project-manage"
             />
             <recent-updates
                 title="最近更新的SkyFlow"
                 :nameTimes="skyflowInfo"
+                path="/skyflow"
             />
             <recent-updates
                 title="最近更新的模型"
                 :nameTimes="modelInfo"
+                path="/sdxv-model-manage"
             />
             <recent-updates
                 title="最近更新的数据集"
                 :nameTimes="datasetInfo"
+                path="/datasManage"
             />
         </div>
     </div>
@@ -267,8 +282,8 @@ export default {
     created() {
         this.getResource();
         this.getTask().then(res => {
-            this.taskTotal = res.data.items.length;
-            this.taskCompleted = res.data && res.data.items && (res.data.items.filter(item => item.state === 'RUNNING')).length;
+            this.taskTotal = res.data.total;
+            this.taskCompleted = res.data && res.data.items.length;
         });
         this.getDiskCount();
         this.getProjectList();
@@ -306,7 +321,8 @@ export default {
                 params = {
                     ownerId: this.$store.state.user.token.userId,
                     start: 1,
-                    count: -1
+                    count: -1,
+                    states: 'RUNNING'
                 };
             }
             return new Promise((resolve, reject) => {
@@ -329,8 +345,8 @@ export default {
                 });
         },
         // 获取更多任务
-        getTaskMore() {
-            console.log('任务更多');
+        getTaskMore(path) {
+            this.$router.push(path);
         },
         // 项目列表
         getProjectList() {
@@ -481,10 +497,13 @@ export default {
     flex-flow:row;/*伸缩项目单行排列*/
     & /deep/ {
         .sdxu-content-panel__main {
-            margin-top: 0 ;
+            margin-top: 0 !important;
         }
         .sdxu-content-panel {
             padding: 20px;
+        }
+        .sdxu-empty {
+            height: 355px !important;
         }
     }
     .marginTop20 {

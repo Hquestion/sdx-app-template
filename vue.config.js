@@ -35,18 +35,18 @@ module.exports = {
 
     css: {
         extract: isProduction,
-        sourceMap: !isProduction,
-        loaderOptions: {
-            // 给 sass-loader 传递选项
-            sass: {
-                // styles/ 是 src/styles/ 的别名
-                data: `
-                    @import "styles/base/constants.scss";
-                    @import "styles/base/colors.scss";
-                    @import "styles/base/mixin.scss";
-                `
-            }
-        }
+        sourceMap: false,
+        // loaderOptions: {
+        //     // 给 sass-loader 传递选项
+        //     sass: {
+        //         // styles/ 是 src/styles/ 的别名
+        //         data: `
+        //             @import "styles/base/constants.scss";
+        //             @import "styles/base/colors.scss";
+        //             @import "styles/base/mixin.scss";
+        //         `
+        //     }
+        // }
     },
 
     configureWebpack: {
@@ -88,10 +88,27 @@ module.exports = {
         }
     },
 
+    chainWebpack: config => {
+        ['scss', 'sass'].forEach(style => {
+            ['vue', 'vue-modules', 'normal-modules', 'normal'].forEach(one => {
+                config.module.rule(style)
+                    .oneOf(one)
+                    .use('sass-loader')
+                    .loader('fast-sass-loader')
+                    .end()
+            })
+        })
+    },
+
     devServer: {
         port: 3100,
         proxy: {
             '^/user-manager': {
+                target: 'http://10.115.1.130:30080',
+                ws: true,
+                changeOrigin: true,
+            },
+            '^/image-manager': {
                 target: 'http://10.115.1.130:30080',
                 ws: true,
                 changeOrigin: true,
@@ -114,6 +131,16 @@ module.exports = {
                 ws: true,
                 changeOrigin: true
             },
+            '/image-manager': {
+                target: 'http://10.115.1.130:30080',
+                ws: true,
+                changeOrigin: true
+            },
+            '/resource-manager': {
+                target: 'http://10.115.1.130:30080',
+                ws: true,
+                changeOrigin: true
+            },
             '/mock': {
                 target: 'https://easy-mock.com',
                 ws: true,
@@ -122,6 +149,16 @@ module.exports = {
                     '/mock': '/mock/5cd04685adb0973be6a3d969/'
                 }
             },
+            '^/file-manager': {
+                target: 'http://10.115.1.130:30080',
+                ws: true,
+                changeOrigin: true
+            },
+            '^/resource-manager': {
+                target: 'http://10.115.1.130:30080',
+                ws: true,
+                changeOrigin: true
+            }
         },
         overlay: true
     },

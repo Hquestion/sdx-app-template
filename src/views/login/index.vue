@@ -104,7 +104,7 @@ export default {
                 if (valid) {
                     this.loading = true;
                     this.$store
-                        .dispatch('login', this.loginForm)
+                        .dispatch('login', { username: this.loginForm.username, password: this.loginForm.passwd })
                         .then(() => {
                             this.loading = false;
                             // 设置显式登陆状态
@@ -126,6 +126,9 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
+    @import "../../assets/styles/base/mixin.scss";
+    @import "../../assets/styles/base/colors.scss";
+    @import "../../assets/styles/base/constants.scss";
 .login-wrap {
     background: linear-gradient(47deg, #3e8ef5, #3b17d7);
     background-size: cover;

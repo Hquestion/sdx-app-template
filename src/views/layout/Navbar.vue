@@ -10,12 +10,10 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import Hamburger from 'components/Hamburger';
 import errLogStore from 'store/errLog';
 import avatar from './avatar';
 export default {
     components: {
-        Hamburger,
         avatar
     },
     data() {
@@ -35,6 +33,9 @@ export default {
 };
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
+@import "../../assets/styles/base/mixin.scss";
+@import "../../assets/styles/base/colors.scss";
+@import "../../assets/styles/base/constants.scss";
 .navbar {
     height: $ls-headerbar;
     line-height: $ls-headerbar;

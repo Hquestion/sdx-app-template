@@ -2,6 +2,7 @@
     <div class="recent-updates">
         <sdxu-content-panel
             :title="title"
+            size="small"
         >
             <more-btn
                 class="morebtn"
@@ -39,6 +40,10 @@ export default {
         nameTimes: {
             type: Array,
             default: () => []
+        },
+        path: {
+            type: String,
+            default: ''
         }
     },
     components: {
@@ -50,7 +55,7 @@ export default {
 
     methods: {
         getTaskMore() {
-            console.log('more');
+            this.$router.push(this.path);
         },
         // 注册
         getDateDiff
@@ -64,7 +69,7 @@ export default {
 .recent-updates {
     & /deep/ {
         .sdxu-content-panel__main {
-            margin-top: 0 ;
+            margin-top: 0;
         }
         .sdxu-content-panel {
             padding: 20px;
@@ -87,7 +92,7 @@ export default {
                     font-size:14px;
                     color:rgba(96,98,102,1);
                     font-family:SourceHanSansCN-Normal;
-                    width: 78%;
+                    max-width: 78%;
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;

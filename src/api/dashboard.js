@@ -1,24 +1,24 @@
 import httpService from '../helper/httpService';
 
 export function getUserResource(userId) {
-    return httpService.get('/api/v1/resource_states', {
+    return httpService.get('/resource-manager/api/v1/resource_states', {
         userId
     });
 }
 
 export function getTaskList(params) {
-    return httpService.get('/api/v1/tasks', params);
+    return httpService.get('/project-manager/api/v1/tasks', params);
 }
 
 export function getDisk(params) {
-    return httpService.get('/api/v1/volumes/stats', params);
+    return httpService.get('/system-manager/api/v1/volumes/stats', params);
 }
 
 export function getProjects(params) {
-    return httpService.get('/api/v1/projects', params);
+    return httpService.get('/project-manager/api/v1/projects', params);
 }
 export function getModels(params) {
-    return httpService.get('/api/v1/models', params);
+    return httpService.get('/model-manager/api/v1/models/', params);
 }
 
 export function getDatasets(params) {

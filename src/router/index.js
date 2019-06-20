@@ -16,16 +16,25 @@ import febAlive from 'feb-alive';
 // skyflow
 import Editor from '../views/skyflow/editor/';
 
-import RoleManage from '@sdx/view/lib/role-manage';
-import AuthorizeManage from '@sdx/view/lib/authorize-manage';
-import ProjectManage from '@sdx/view/lib/project-management';
+import RoleManage from '@sdx/view/components/role-manage';
+import AuthorizeManage from '@sdx/view/components/authorize-manage';
+import ProjectManage from '@sdx/view/components/project-management';
 import ModelManage from '@sdx/view/lib/model-manage';
-import ImageManage from '@sdx/view/lib/image-management';
+import ImageManage from '@sdx/view/components/image-management';
 import SdxvPrivilege from '@sdx/view/lib/privilege';
-import ResourceManageView from '@sdx/view/lib/resource-manage';
-import UserManage from '@sdx/view/lib/user-manage';
+import Skyflow from '@sdx/view/lib/skyflow';
+import ResourceManageView from '@sdx/view/components/resource-manage';
+import UserManage from '@sdx/view/components/user-manage';
 import UserGroupManage from '@sdx/view/lib/user-group';
+import FileManage from '@sdx/view/components/file';
 
+// datas
+import datasManager from '../views/datas/index';
+import datasList from '../views/datas/datasIndex';
+import FormView from '@sdx/view/components/project-management/src/FormView.vue';
+import datasView from '../views/datas/datasView';
+import DataSourceCreate from '../views/datamanagement/datasource/DataSourceCreate';
+import CreateDataset from '../views/datamanagement/dataset-create/index';
 febAlive.resetHistory();
 Vue.use(Router);
 
@@ -38,7 +47,7 @@ Vue.use(Router);
  */
 
 const router = new Router({
-    // mode: 'history', //后端支持可开
+    // mode: 'history', // 后端支持可开
     scrollBehavior: () => ({
         y: 0
     }),
@@ -72,6 +81,84 @@ const router = new Router({
                         breadcrumb: '关于SkyDiscovery',
                         system: 'user'
                     }
+                },
+                // 新的数据集
+                {
+                    path: '/datasManage',
+                    component: datasManager,
+                    redirect: '/datasManage/datasList',
+                    meta: {
+                        name: '数据'
+                    },
+                    children: [{
+                        path: 'datasList',
+                        component: datasList,
+                        meta: {
+                            name: '数据列表'
+                        }
+                    },
+                    {
+                        path: 'data-source-create/:id?/:read?',
+                        component: DataSourceCreate,
+                        name: 'CreateDataSource',
+                        meta: {
+                            name: '新建数据源'
+                        },
+                        props: true
+                    },
+
+                    // {
+                    //     path: 'modifyService/:type',
+                    //     component: formView,
+                    //     meta: {
+                    //         name: '编辑服务'
+                    //     },
+                    //     props: ({
+                    //         params
+                    //     }) => ({
+                    //         formComp: forms[params.type]
+                    //     })
+                    // },
+                    // {
+                    //     path: 'modifyTask/:type/:taskId',
+                    //     component: formView,
+                    //     meta: {
+                    //         name: '编辑任务'
+                    //     },
+                    //     props: ({
+                    //         params
+                    //     }) => ({
+                    //         formComp: forms[params.type]
+                    //     })
+                    // },
+                    // {
+                    //     path: 'taskInfo/:type/:taskId',
+                    //     component: formView,
+                    //     meta: {
+                    //         name: '任务详情'
+                    //     },
+                    //     props: ({
+                    //         params
+                    //     }) => ({
+                    //         formComp: infos[params.type]
+                    //     })
+                    // },
+                    {
+                        path: 'dataView/',
+                        component: datasView,
+                        meta: {
+                            name: '数据集预览'
+                        },
+                        props: true
+                    },
+                    {
+                        path: 'create-dataset/:type',
+                        component: CreateDataset,
+                        meta: {
+                            name: '创建数据集'
+                        }
+                    }
+                    ]
                 }
             ]
         },
@@ -99,9 +186,11 @@ RoleManage.viewRouter.register(router, '/home');
 AuthorizeManage.viewRouter.register(router, '/home');
 ProjectManage.viewRouter.register(router, '/home');
 ModelManage.viewRouter.register(router, '/home');
-ImageManage.viewRouter.register(router, '/assets');
+ImageManage.viewRouter.register(router, '/home');
+Skyflow.viewRouter.register(router, '/home');
 SdxvPrivilege.viewRouter.register(router, '/home');
 UserManage.viewRouter.register(router, '/home');
 UserGroupManage.viewRouter.register(router, '/home');
+FileManage.viewRouter.register(router, '/assets');
 
 export default router;
