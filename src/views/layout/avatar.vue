@@ -136,7 +136,10 @@
             theme="dashboard"
             @confirmUser="confirmUser"
         />
-        <SdxwChangePassword :visible.sync="modifyPwdVisible" />
+        <SdxwChangePassword
+            :visible.sync="modifyPwdVisible"
+            :user-info-data="userMeta"
+        />
         <sdxu-dialog
             :visible.sync="versionVisible"
             no-footer
@@ -155,7 +158,8 @@
 import { mapState, mapActions } from 'vuex';
 import { version } from '../../../package';
 import permission from '../../config/permissions';
-
+import UserinfoDialog from '@sdx/widget/components/userinfo-dialog';
+import ChangePassword from '@sdx/widget/components/change-password';
 export default {
     data() {
         return {
@@ -172,6 +176,10 @@ export default {
             permission,
             hasPlatformPermission: false
         };
+    },
+    components: {
+        [UserinfoDialog.name]: UserinfoDialog,
+        [ChangePassword.name]: ChangePassword
     },
     computed: {
         ...mapState({

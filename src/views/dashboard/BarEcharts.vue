@@ -68,6 +68,26 @@ export default {
         this.chart = null;
     },
     methods: {
+        judgeCharacter(characters) {
+            // 汉字记2，英文记1 lang 记的长度， subLength 截取的长度
+            let [lang, pattern, res, subLength] = [0, new RegExp('[\u4E00-\u9FA5]+'), '', 0];
+            for (let i = 0; i < characters.length; i++) {
+                if (lang > 10) break;
+                if (pattern.test(characters[i])) {
+                    lang += 2;
+                    ++subLength;
+                } else {
+                    ++lang;
+                    ++subLength;
+                }
+            }
+            if (lang > 10) {
+                res = `${characters.substring(0, subLength)}...`;
+            } else {
+                res = characters;
+            }
+            return res;
+        },
         initChart() {
             this.chart && this.chart.clear();
             this.chart = echarts.init(this.$el, 'macarons');
@@ -98,15 +118,7 @@ export default {
                         },
                         axisLabel: {
                             color: '#606266',
-                            formatter(value) {
-                                let ret = '';
-                                if (value.length > 5) {
-                                    ret = `${value.substring(0, 5)}...`;
-                                } else {
-                                    ret = value;
-                                }
-                                return ret;
-                            }
+                            formatter: value => this.judgeCharacter(value)
                         }
                     }
                 ],
@@ -125,7 +137,7 @@ export default {
                         axisLabel: {
                             color: '#606266'
                         },
-                        // name: `单位（${this.xname}）`,
+                        minInterval: 1,
                         splitLine: {
                             lineStyle: {
                                 type: 'dotted',
