@@ -16,16 +16,33 @@ import febAlive from 'feb-alive';
 // skyflow
 import Editor from '../views/skyflow/editor/';
 
+// import RoleManage from '@sdx/view/lib/role-manage';
+// import AuthorizeManage from '@sdx/view/lib/authorize-manage';
+// import ProjectManage from '@sdx/view/lib/project-management';
+// import ModelManage from '@sdx/view/lib/model-manage';
+// import ImageManage from '@sdx/view/lib/image-management';
+// import SdxvPrivilege from '@sdx/view/lib/privilege';
+// import ResourceManageView from '@sdx/view/lib/resource-manage';
+// import UserManage from '@sdx/view/lib/user-manage';
+// import UserGroupManage from '@sdx/view/lib/user-group';
+// import TaskManagement from '@sdx/view/lib/task-management';
+// import ResourceStatistics from '@sdx/view/lib/resource-statistics';
+// import ComponentState from '@sdx/view/lib/component-state';
+
 import RoleManage from '@sdx/view/components/role-manage';
 import AuthorizeManage from '@sdx/view/components/authorize-manage';
 import ProjectManage from '@sdx/view/components/project-management';
-import ModelManage from '@sdx/view/lib/model-manage';
+import ModelManage from '@sdx/view/components/model-manage';
 import ImageManage from '@sdx/view/components/image-management';
-import SdxvPrivilege from '@sdx/view/lib/privilege';
-import Skyflow from '@sdx/view/lib/skyflow';
+import SdxvPrivilege from '@sdx/view/components/privilege';
 import ResourceManageView from '@sdx/view/components/resource-manage';
 import UserManage from '@sdx/view/components/user-manage';
-import UserGroupManage from '@sdx/view/lib/user-group';
+import UserGroupManage from '@sdx/view/components/user-group';
+import TaskManagement from '@sdx/view/components/task-management';
+import ResourceStatistics from '@sdx/view/components/resource-statistics';
+import ComponentState from '@sdx/view/components/component-state';
+
+import Skyflow from '@sdx/view/components/skyflow';
 import FileManage from '@sdx/view/components/file';
 
 // datas
@@ -187,10 +204,14 @@ AuthorizeManage.viewRouter.register(router, '/home');
 ProjectManage.viewRouter.register(router, '/home');
 ModelManage.viewRouter.register(router, '/home');
 ImageManage.viewRouter.register(router, '/home');
+
 Skyflow.viewRouter.register(router, '/home');
 SdxvPrivilege.viewRouter.register(router, '/home');
 UserManage.viewRouter.register(router, '/home');
 UserGroupManage.viewRouter.register(router, '/home');
 FileManage.viewRouter.register(router, '/assets');
+TaskManagement.viewRouter.register(router, '/home');
+ResourceStatistics.viewRouter.register(router, '/home');
+ComponentState.viewRouter.register(router, '/home');
 
 export default router;

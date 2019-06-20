@@ -731,28 +731,24 @@
 "@sdx/ui@latest":
   version "1.0.7"
   resolved "http://192.168.20.38:4873/@sdx%2fui/-/ui-1.0.7.tgz#453aa49faa59638f13752475bc11cf63b0cab54d"
-  integrity sha512-6W/Ggr1rw2FS/9JLyB0XomDGZgDdFgNvtmlEfuvtjWu3Z6IMgA/qt+uKWDC6sTx3Jgc/kZwGH3J32vlb/H3zTA==
   dependencies:
     "@sdx/utils" "^1.0.4"
 
 "@sdx/utils@^1.0.4", "@sdx/utils@latest":
   version "1.0.4"
   resolved "http://192.168.20.38:4873/@sdx%2futils/-/utils-1.0.4.tgz#0faff48e76614fb4dd1fa74c38078080ac8077d1"
-  integrity sha512-G64lhWA0sRL8PGwtUBOSKi17snSRKNQX6XE1zWdX/wvjafBUwuPlQ4XXUOGvvIk9FsSR1HYKzKKncLJapzm9eA==
   dependencies:
     axios "^0.18.0"
 
 "@sdx/view@latest":
   version "1.0.4"
   resolved "http://192.168.20.38:4873/@sdx%2fview/-/view-1.0.4.tgz#b8e0d188dce4c0a976597a3d0ba08fd3debb4238"
-  integrity sha512-ZPH/cibrSqbVlWaibF0v20cWGR2gxDbIa0o7bcev24nAy4yJztik87ed1QOnauSpQyhKFVXqVq9V3IiJPi4BTA==
   dependencies:
     "@sdx/utils" "^1.0.4"
 
 "@sdx/widget@latest":
   version "1.0.4"
   resolved "http://192.168.20.38:4873/@sdx%2fwidget/-/widget-1.0.4.tgz#6bae66d71ae9ae7734830f0279c88e020e27730b"
-  integrity sha512-dUqPOaNy8kHlcAtt2D4bw5JGdjtDcKGJWlgj2S2hd5vumyKPrUKuwSOdXstIHdgRgkI6wYsLTnlAMJRIGGnBdA==
   dependencies:
     "@sdx/utils" "^1.0.4"
 
@@ -2313,7 +2309,6 @@ cli-cursor@^2.1.0:
 cli-source-preview@^1.0.0:
   version "1.1.0"
   resolved "http://192.168.20.38:4873/cli-source-preview/-/cli-source-preview-1.1.0.tgz#05303ab1279a9093ead1a3837b3ee231f3006544"
-  integrity sha1-BTA6sSeakJPq0aODez7iMfMAZUQ=
   dependencies:
     chalk "^1.1.3"
 
@@ -3080,7 +3075,7 @@ d3-zoom@1:
     d3-selection "1"
     d3-transition "1"
 
-d3@^5.9.2:
+d3@^5.5.0:
   version "5.9.2"
   resolved "http://192.168.20.38:4873/d3/-/d3-5.9.2.tgz#64e8a7e9c3d96d9e6e4999d2c8a2c829767e67f5"
   dependencies:
@@ -3441,7 +3436,7 @@ ecc-jsbn@~0.1.1:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
 
-echarts@^4.2.1:
+echarts@4.2.1:
   version "4.2.1"
   resolved "http://192.168.20.38:4873/echarts/-/echarts-4.2.1.tgz#9a8ea3b03354f86f824d97625c334cf16965ef03"
   dependencies:
@@ -3988,14 +3983,6 @@ extsprintf@^1.2.0:
   version "1.4.0"
   resolved "http://192.168.20.38:4873/extsprintf/-/extsprintf-1.4.0.tgz#e2689f8f356fad62cca65a3a91c5df5f9551692f"
 
-fast-css-loader@^1.0.2:
-  version "1.0.2"
-  resolved "http://192.168.20.38:4873/fast-css-loader/-/fast-css-loader-1.0.2.tgz#6cf24ffbbea4ecb24bb599d603533f1a7d17a243"
-  integrity sha1-bPJP+76k7LJLtZnWA1M/Gn0XokM=
-  dependencies:
-    loader-utils "^1.1.0"
-    parse-import "^2.0.0"
-
 fast-deep-equal@^1.0.0:
   version "1.1.0"
   resolved "http://192.168.20.38:4873/fast-deep-equal/-/fast-deep-equal-1.1.0.tgz#c053477817c86b51daa853c81e059b733d023614"
@@ -4026,7 +4013,6 @@ fast-levenshtein@~2.0.4:
 fast-sass-loader@^1.5.0:
   version "1.5.0"
   resolved "http://192.168.20.38:4873/fast-sass-loader/-/fast-sass-loader-1.5.0.tgz#b3bcf91aaa5fd042e01c536bb338db74b03fef0c"
-  integrity sha512-3K4/xG/sm0MqdjrOBKZhnOrrQ3TWMsdvqjxI4ZN0FlVwImNqChYHFUChpyQ9ecQsXS0pytOMEa5H+MDfatPqBA==
   dependencies:
     async "^2.0.1"
     cli-source-preview "^1.0.0"
@@ -4296,7 +4282,6 @@ from2@^2.1.0:
 fs-extra@3.x:
   version "3.0.1"
   resolved "http://192.168.20.38:4873/fs-extra/-/fs-extra-3.0.1.tgz#3794f378c58b342ea7dbbb23095109c4b3b62291"
-  integrity sha1-N5TzeMWLNC6n27sjCVEJxLO2IpE=
   dependencies:
     graceful-fs "^4.1.2"
     jsonfile "^3.0.0"
@@ -4383,14 +4368,6 @@ get-caller-file@^1.0.1:
 get-caller-file@^2.0.1:
   version "2.0.5"
   resolved "http://registry.npm.taobao.org/get-caller-file/download/get-caller-file-2.0.5.tgz#4f94412a82db32f36e3b0b9741f8a97feb031f7e"
-
-get-imports@^1.0.0:
-  version "1.0.0"
-  resolved "http://192.168.20.38:4873/get-imports/-/get-imports-1.0.0.tgz#47c0b4ee989351642c54977193bf4fcaabf5378f"
-  integrity sha1-R8C07piTUWQsVJdxk79Pyqv1N48=
-  dependencies:
-    array-uniq "^1.0.1"
-    import-regex "^1.1.0"
 
 get-stdin@^4.0.1:
   version "4.0.1"
@@ -4884,11 +4861,6 @@ import-local@^2.0.0:
   dependencies:
     pkg-dir "^3.0.0"
     resolve-cwd "^2.0.0"
-
-import-regex@^1.1.0:
-  version "1.1.0"
-  resolved "http://192.168.20.38:4873/import-regex/-/import-regex-1.1.0.tgz#a55c52e4c705c765ca210e9242a06bbcc8aa7f66"
-  integrity sha1-pVxS5McFx2XKIQ6SQqBrvMiqf2Y=
 
 imurmurhash@^0.1.4:
   version "0.1.4"
@@ -5943,7 +5915,6 @@ json5@^2.1.0:
 jsonfile@^3.0.0:
   version "3.0.1"
   resolved "http://192.168.20.38:4873/jsonfile/-/jsonfile-3.0.1.tgz#a5ecc6f65f53f662c4415c7675a0331d0992ec66"
-  integrity sha1-pezG9l9T9mLEQVx2daAzHQmS7GY=
   optionalDependencies:
     graceful-fs "^4.1.6"
 
@@ -7134,13 +7105,6 @@ parse-glob@^3.0.4:
     is-dotfile "^1.0.0"
     is-extglob "^1.0.0"
     is-glob "^2.0.0"
-
-parse-import@^2.0.0:
-  version "2.0.0"
-  resolved "http://192.168.20.38:4873/parse-import/-/parse-import-2.0.0.tgz#2b2474030e008ab98db76c4bcbf4db5ae7306f5f"
-  integrity sha1-KyR0Aw4AirmNt2xLy/TbWucwb18=
-  dependencies:
-    get-imports "^1.0.0"
 
 parse-json@^2.2.0:
   version "2.2.0"
@@ -9439,7 +9403,6 @@ vue-cli-plugin-i18n@^0.6.0:
 vue-cookies@^1.5.13:
   version "1.5.13"
   resolved "http://192.168.20.38:4873/vue-cookies/-/vue-cookies-1.5.13.tgz#b1ca79a2663bf9a4f36982557011cab5ee2196c0"
-  integrity sha512-8pjpXnvbNWx1Lft0t3MJnW+ylv0Wa2Tb6Ch617u/pQah3+SfXUZZdkh3EL3bSpe/Sw2Wdw3+DhycgQsKANSxXg==
 
 vue-eslint-parser@^2.0.3:
   version "2.0.3"
@@ -9553,7 +9516,6 @@ vue@^2.5.16, vue@^2.6.10:
 vuescroll@^4.12.2:
   version "4.12.2"
   resolved "http://192.168.20.38:4873/vuescroll/-/vuescroll-4.12.2.tgz#fc61e8e8867881475f99d5ae753d47db05d8cce7"
-  integrity sha512-ND29bRjG0loUNIY6UjsXhmnb/jStWjNJKB1upUycUBj6jAo1XfT7K2kniaNo67kV2VZpIKziMh2MgjtktaRfyw==
 
 vuex@^3.0.1:
   version "3.1.0"
