@@ -128,14 +128,6 @@ module.exports = {
                 ws: true,
                 changeOrigin: true,
             },
-            '/v2': {
-                target: 'https://easy-mock.com',
-                ws: true,
-                changeOrigin: true,
-                pathRewrite: {
-                    '/v2': '/mock/5cd04685adb0973be6a3d969/v2'
-                }
-            },
             '/project-manager': {
                 target: 'http://10.115.1.130:30080',
                 ws: true,

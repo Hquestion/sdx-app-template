@@ -196,6 +196,13 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+.clearfix::after {
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+    clear: both;
+  }
 .component {
     * {
         margin: 0;

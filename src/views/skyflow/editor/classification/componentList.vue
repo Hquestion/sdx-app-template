@@ -451,6 +451,13 @@ export default {
 </style>
 
 <style lang='scss' scoped>
+.clearfix::after {
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+    clear: both;
+  }
 .level1 {
     * {
         margin: 0;
