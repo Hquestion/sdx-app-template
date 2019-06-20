@@ -76,6 +76,8 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
+    @import "../../assets/styles/base/constants";
+    @import "../../assets/styles/base/colors";
 .el-submenu .el-menu-item {
     padding-left: 36px !important;
 }

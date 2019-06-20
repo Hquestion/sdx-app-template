@@ -531,6 +531,9 @@ export default {
 </script>
 
 <style lang="scss">
+    @import "../../../assets/styles/base/colors";
+    @import "../../../assets/styles/base/constants";
+    @import "../../../assets/styles/base/mixin";
     .hdfs-select {
         .hdfs-select-btn {
             width: 130px;

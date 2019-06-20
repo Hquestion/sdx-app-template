@@ -126,6 +126,9 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
+    @import "../../assets/styles/base/mixin.scss";
+    @import "../../assets/styles/base/colors.scss";
+    @import "../../assets/styles/base/constants.scss";
 .login-wrap {
     background: linear-gradient(47deg, #3e8ef5, #3b17d7);
     background-size: cover;

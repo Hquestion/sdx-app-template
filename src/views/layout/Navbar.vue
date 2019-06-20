@@ -30,6 +30,9 @@ export default {
 };
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
+@import "../../assets/styles/base/mixin.scss";
+@import "../../assets/styles/base/colors.scss";
+@import "../../assets/styles/base/constants.scss";
 .navbar {
     height: $ls-headerbar;
     line-height: $ls-headerbar;

@@ -171,6 +171,9 @@ export default {
 };
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
+    @import "../../assets/styles/base/mixin.scss";
+    @import "../../assets/styles/base/colors.scss";
+    @import "../../assets/styles/base/constants.scss";
 .service-panel {
     background-color: $white;
     border: 1px solid $c-split;

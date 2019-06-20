@@ -3,7 +3,7 @@
 @font-face {font-family: siyuan-heavy;src: url('../fonts/siyuan/SourceHanSansCN-Heavy.otf') }
 @font-face {font-family: siyuan-lt;src: url('../fonts/siyuan/SourceHanSansCN-Light.otf') }
 @font-face {font-family: siyuan-normal;src: url('../fonts/siyuan/SourceHanSansCN-Normal.otf') }
-
+@import "base/constants";
 @import "./customize/index";
 
 * {

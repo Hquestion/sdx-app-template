@@ -72,6 +72,8 @@ export default {
 };
 </script>
 <style lang="scss">
+    @import "../../../assets/styles/base/constants";
+    @import "../../../assets/styles/base/colors";
 .card-btn {
     display: inline-block;
     height: 100%;

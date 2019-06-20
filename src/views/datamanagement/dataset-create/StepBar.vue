@@ -36,6 +36,9 @@ export default {
 </script>
 
 <style lang="scss">
+    @import "../../../assets/styles/base/colors";
+    @import "../../../assets/styles/base/constants";
+    @import "../../../assets/styles/base/mixin";
     .dataset-step-bar {
         height: 154px;
         display: flex;
