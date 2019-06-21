@@ -16,7 +16,7 @@
                 >
                     <span>{{ item.label }}</span>
                     <i
-                        class="iconfont"
+                        class="sf-icon"
                         :class="displayStatus[item.name] ? iconsMap.arrowDown : iconsMap.arrowRight"
                     />
                 </div>
@@ -50,13 +50,13 @@
                     :draggable="isEditable"
                 >
                     <i
-                        class="iconfont component-card-icon"
+                        class="sf-icon component-card-icon"
                         :class="getIconByName(item.name)"
                     />
                     <span>{{ item.label }}</span>
                     <i
                         v-show="item.isShare"
-                        class="iconfont sf-fenxiang3 is-share-icon"
+                        class="sf-icon sf-fenxiang3 is-share-icon"
                     />
                     <el-tooltip
                         placement="bottom"
@@ -87,7 +87,7 @@
                         </div>
                         <i
                             v-show="(item.name + i) === hoverComponentName"
-                            class="iconfont sf-information component-tips-icon"
+                            class="sf-icon sf-information component-tips-icon"
                         />
                     </el-tooltip>
                 </div>

@@ -16,7 +16,7 @@
                     class="add-param-btn"
                     @click="addExecParam"
                 >
-                    <i class="iconfont sf-jiahao" /> 添加参数
+                    <i class="sf-icon sf-jiahao" /> 添加参数
                 </el-button>
             </ParamsPanel>
             <ParamsPanel title="参数组配置">
@@ -37,7 +37,7 @@
                     class="add-param-btn"
                     @click="addExecParamGroup"
                 >
-                    <i class="iconfont sf-jiahao" /> 添加参数组
+                    <i class="sf-icon sf-jiahao" /> 添加参数组
                 </el-button>
             </ParamsPanel>
         </ParamsPanel>

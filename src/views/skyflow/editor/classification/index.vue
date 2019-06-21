@@ -11,7 +11,7 @@
                 :class="{active: item.name === currentLabel}"
             >
                 <i
-                    class="iconfont"
+                    class="sf-icon"
                     :class="item.icon"
                     :title="item.label"
                 />
@@ -31,7 +31,7 @@
                     placeholder="请输入组件关键字"
                 >
                 <i
-                    class="iconfont sf-chazhao"
+                    class="sf-icon sf-chazhao"
                     @click="search"
                 />
             </div>
@@ -41,7 +41,7 @@
                     class="add-custom"
                     @click="createCustom"
                 >
-                    <i class="iconfont sf-jiahao" />
+                    <i class="sf-icon sf-jiahao" />
                 </div>
                 <CustomizeComp
                     v-if="dialogVisible && !editComp._id"

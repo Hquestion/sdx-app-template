@@ -1,7 +1,7 @@
 <template>
     <div class="flow-function clearfix">
         <div class="back_logo">
-            <!-- <i class='iconfont sf-fanhui'></i> -->
+            <!-- <i class='sf-icon sf-fanhui'></i> -->
             <span class="logo">
                 {{ flowName }}
             </span>
@@ -14,7 +14,7 @@
                 @click="judgeButtonOperationable (item.name) ? handleOperationClick(item.name) : false"
             >
                 <i
-                    class="iconfont"
+                    class="sf-icon"
                     :class="item.icon"
                 />
                 <div>{{ item.label }}</div>
@@ -27,7 +27,7 @@
                 @click="judgeButtonOperationable (item.name) ? handleOperationClick(item.name) : false"
             >
                 <i
-                    class="iconfont"
+                    class="sf-icon"
                     :class="item.icon"
                 />
                 <div>{{ item.label }}</div>
@@ -40,7 +40,7 @@
                 @click="judgeButtonOperationable (item.name) ? handleOperationClick(item.name) : false"
             >
                 <i
-                    class="iconfont"
+                    class="sf-icon"
                     :class="item.icon"
                 />
                 <div>{{ item.label }}</div>
@@ -55,7 +55,7 @@
                     @click="judgeButtonOperationable (item.name) ? handleOperationClick(item.name) : false"
                 >
                     <i
-                        class="iconfont"
+                        class="sf-icon"
                         :class="item.icon"
                     />
                     <div

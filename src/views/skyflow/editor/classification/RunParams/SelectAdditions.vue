@@ -33,7 +33,7 @@
                     v-if="index > 0"
                 >
                     <i
-                        class="iconfont sf-shanchu delete-option-icon"
+                        class="sf-icon sf-shanchu delete-option-icon"
                         @click.prevent.stop="deleteOption(index)"
                     />
                 </el-col>
@@ -45,7 +45,7 @@
                 size="mini"
                 @click="addOptions"
             >
-                <i class="iconfont sf-jiahao" /> 添加
+                <i class="sf-icon sf-jiahao" /> 添加
             </el-button>
         </el-form-item>
         <el-form-item label="支持多选:">

@@ -26,7 +26,7 @@
                     size="mini"
                     @click="addInputArg"
                 >
-                    <i class="iconfont sf-jiahao" /> 添加输入参数
+                    <i class="sf-icon sf-jiahao" /> 添加输入参数
                 </el-button>
             </div>
 
@@ -47,7 +47,7 @@
                     size="mini"
                     @click="addOutputArg"
                 >
-                    <i class="iconfont sf-jiahao" /> 添加输出参数
+                    <i class="sf-icon sf-jiahao" /> 添加输出参数
                 </el-button>
             </div>
         </ParamsPanel>

@@ -9,7 +9,7 @@
                 <div class="action-item_icon">
                     <i
                         v-if="removable"
-                        class="delete-group-icon iconfont sf-shanchu"
+                        class="delete-group-icon sf-icon sf-shanchu"
                         @click.stop.prevent="$emit('delete')"
                     />
                 </div>
