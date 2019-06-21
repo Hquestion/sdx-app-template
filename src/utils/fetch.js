@@ -3,7 +3,7 @@ import router from '../router';
 import store from '../store';
 import errorHandler from '../helper/error-handler';
 
-import { MOCK_API_CONFIG } from '../../mock.config';
+import { MOCK_API_CONFIG } from '../api/mock.config';
 
 // 创建axios实例
 const service = axios.create({

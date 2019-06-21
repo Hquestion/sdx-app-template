@@ -1,7 +1,7 @@
 <template>
     <section class="app-main">
         <div class="app-main-breadcrumb">
-            <SdxwBreadcrumb></SdxwBreadcrumb>
+            <SdxwBreadcrumb />
         </div>
         <div class="app-main-view">
             <feb-alive>

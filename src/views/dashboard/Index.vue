@@ -19,7 +19,7 @@
                                         </div>
                                         <div class="resource-items-content">
                                             <div>
-                                                {{ resource.cpu / 1000 }}
+                                                {{ Math.ceil(resource.cpu / 1000) }}
                                             </div>
                                             <div>
                                                 <span>CPU</span>（核）
@@ -61,7 +61,7 @@
                                         </div>
                                         <div class="resource-items-content">
                                             <div>
-                                                {{ (resource.memory / (1024*1024*1024)).toFixed(0) }}
+                                                {{ Math.ceil(resource.memory / Math.pow(1024, 3)) }}
                                             </div>
                                             <div>
                                                 <span>内存</span>（GB）
@@ -165,18 +165,24 @@
                             title="模型版本调用次数Top 10"
                             size="small"
                         >
-                            <MoreBtn
-                                class="morebtn"
-                                @getMore="getTaskMore('/sdxv-model-manage')"
-                            />
-                            <bar-echarts
+                            <div v-if="modelNameList && modelNameList.length">
+                                <MoreBtn
+                                    class="morebtn"
+                                    @getMore="getTaskMore('/sdxv-model-manage')"
+                                />
+                                <bar-echarts
+                                    height="354px"
+                                    :barData="modelData"
+                                    :barNameList="modelNameList"
+                                    tipTitle="模型版本调用次数"
+                                    :colorList="modelColorList"
+                                />
+                                <span class="xname">单位（次）</span>
+                            </div>
+                            <SdxuEmpty
+                                v-else
                                 height="354px"
-                                :barData="modelData"
-                                :barNameList="modelNameList"
-                                tipTitle="模型版本调用次数"
-                                :colorList="modelColorList"
                             />
-                            <span class="xname">单位（次）</span>
                         </sdxu-content-panel>
                     </el-col>
                 </el-row>
@@ -187,21 +193,25 @@
                 title="最近更新的项目"
                 :nameTimes="projectInfo"
                 path="/sdxv-project-manage"
+                :loading="projectLoading"
             />
             <recent-updates
                 title="最近更新的SkyFlow"
                 :nameTimes="skyflowInfo"
                 path="/skyflow"
+                :loading="skyflowLoading"
             />
             <recent-updates
                 title="最近更新的模型"
                 :nameTimes="modelInfo"
                 path="/sdxv-model-manage"
+                :loading="modelLoading"
             />
             <recent-updates
                 title="最近更新的数据集"
                 :nameTimes="datasetInfo"
                 path="/datasManage"
+                :loading="datasetLoading"
             />
         </div>
     </div>
@@ -212,10 +222,10 @@ import CircleProgress from './SvgCircle';
 import RainTransit from './RainTransit';
 import WindIndustry from './WindIndustry';
 import BarEcharts from './BarEcharts';
-import { getUserResource, getTaskList, getDisk, getProjects, getModels, getDatasets, getSkyflows } from 'api/dashboard';
+import { getUserResource, getTaskList, getDisk, getProjects, getModels, getDatasets, getSkyflows,
+    getVersions } from 'api/dashboard';
 import MoreBtn from './MoreBtn';
 import RecentUpdates from './RecentUpdates';
-import { getVersionList } from '@sdx/utils/lib/api/model';
 
 export default {
     name: 'Dashboard',
@@ -257,7 +267,12 @@ export default {
             datasetInfo: [],
             skyflowInfo: [],
             modelNameList: [],
-            modelData: []
+            modelData: [],
+            // loading
+            projectLoading: true,
+            skyflowLoading: true,
+            modelLoading: true,
+            datasetLoading: true
         };
     },
     components: {
@@ -282,15 +297,15 @@ export default {
     created() {
         this.getResource();
         this.getTask().then(res => {
-            this.taskTotal = res.data.total;
-            this.taskCompleted = res.data && res.data.items.length;
+            this.taskTotal = res.total;
+            this.taskCompleted = res && res.items.length;
         });
         this.getDiskCount();
         this.getProjectList();
         this.getModelList();
         this.getDatasetList();
         this.getSkyflowList();
-        this.getVersionS();
+        this.getVersionList();
     },
     methods: {
         // 资源
@@ -341,7 +356,7 @@ export default {
             };
             getDisk(params)
                 .then(res => {
-                    this.diskCount = (res.usedBytes / (1024 * 1024 * 1024)).toFixed(0);
+                    this.diskCount = Math.ceil(res.usedBytes / Math.pow(1024, 3));
                 });
         },
         // 获取更多任务
@@ -358,6 +373,7 @@ export default {
             };
             getProjects(params)
                 .then(res => {
+                    this.projectLoading = false;
                     for (let i = 0; i < res.data.items.length; i++) {
                         this.projectInfo.push(
                             {
@@ -378,6 +394,7 @@ export default {
             };
             getModels(params)
                 .then(res => {
+                    this.modelLoading = false;
                     for (let i = 0; i < res.items.length; i++) {
                         this.modelInfo.push(
                             {
@@ -403,6 +420,7 @@ export default {
             };
             getDatasets(params)
                 .then(res => {
+                    this.datasetLoading = false;
                     for (let i = 0; i < res.data.items.length; i++) {
                         this.datasetInfo.push(
                             {
@@ -416,33 +434,33 @@ export default {
         // skyflow 列表
         getSkyflowList() {
             let params = {
-                name: '',
                 order: 'desc',
-                order_by: 'updated_at',
-                page: 1,
-                page_size: 5
+                orderBy: 'updatedAt',
+                start: 1,
+                count: 5
             };
             getSkyflows(params)
                 .then(res => {
-                    for (let i = 0; i < res.data.items.length; i++) {
+                    this.skyflowLoading = false;
+                    for (let i = 0; i < res.items.length; i++) {
                         this.skyflowInfo.push(
                             {
-                                name: res.data.items[i].name,
-                                time: res.data.items[i].updated_at
+                                name: res.items[i].name,
+                                time: res.items[i].updatedAt
                             }
                         );
                     }
                 });
         },
         // 获取模型版本列表
-        getVersionS() {
+        getVersionList() {
             let params = {
                 order: 'desc',
-                order_by: 'updatedAt',
+                orderBy: 'updatedAt',
                 start: 1,
                 count: 10
             };
-            getVersionList('ALL', params)
+            getVersions('ALL', params)
                 .then(res => {
                     let [name, data, items] = [[], [], []];
                     if (res.items.length > 10) {
@@ -452,7 +470,7 @@ export default {
                     }
                     for (let i = 0; i < items.length; i++) {
                         name.push(items[i].name);
-                        data.push(items[i].apiCallNum);
+                        data.push(items[i].apiCallNum ? items[i].apiCallNum : 0);
                     }
                     this.modelData = data.reverse(),
                     this.modelNameList = name.reverse();
@@ -465,22 +483,22 @@ export default {
             handler(nval) {
                 let [name, data, items] = [[], [], []];
                 this.getTask('top', nval).then(res => {
-                    if (res.data.items.length > 10) {
-                        items = res.data.items.slice(0, 10);
+                    if (res.items.length > 10) {
+                        items = res.items.slice(0, 10);
                     } else {
-                        items = res.data.items;
+                        items = res.items;
                     }
                     for (let i = 0; i < items.length; i++) {
                         name.push(items[i].name);
                         if (nval === 'CPU') {
                             this.taskXname = '核';
-                            data.push(items[i].quota.cpu / 1000);
+                            data.push(Math.ceil(items[i].quota.cpu / 1000));
                         } else if (nval === 'GPU') {
                             this.taskXname = '块';
                             data.push(items[i].quota.gpu);
                         } else if (nval === 'MEMORY') {
                             this.taskXname = 'GB';
-                            data.push(items[i].quota.memory / (1024 * 1024 * 1024));
+                            data.push(Math.ceil(items[i].quota.memory / Math.pow(1024, 3)));
                         }
                     }
                     this.taskData = data.reverse(),

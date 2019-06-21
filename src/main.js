@@ -10,14 +10,16 @@ import 'normalize.css/normalize.css'; // normalize.css 样式格式化
 import 'styles/app.scss'; // 全局自定义的css样式
 import 'components/Icon-svg/index'; // 封装的svg组件
 import 'assets/fonts/icon/iconfont.js'; // iconfont (从iconfont里面打包来的)
+import 'assets/fonts/skyflow/iconfont.js'; // iconfont (从iconfont里面打包来的)
 import * as filters from './filters'; // 全局vue filter
 import errLog from 'store/errLog'; // error log组件f
 import 'assets/fonts/icon/iconfont.css'; // 引入自己下载的iconfont
+import 'assets/fonts/skyflow/iconfont.css'; // 引入自己下载的iconfont
 import EmitAsync from './plugins/asyncEmit';
 import directives from '@/directives';
 import i18n from './i18n';
 import SdxUI from '@sdx/ui';
-import { FileSelect, Breadcrumb, UserinfoDialog, ChangePassword } from '@sdx/widget';
+import { FileSelect, Breadcrumb } from '@sdx/widget';
 import Auth from '@sdx/widget/components/auth';
 import shareCenter from '@sdx/utils/src/helper/shareCenter';
 import febAlive from 'feb-alive';
@@ -33,8 +35,6 @@ Vue.use(ElementUI);
 Vue.use(SdxUI);
 Vue.use(FileSelect);
 Vue.use(Breadcrumb);
-Vue.use(UserinfoDialog);
-Vue.use(ChangePassword);
 Vue.use(Auth);
 // register global utility filters.
 Object.keys(filters).forEach(key => {
@@ -59,7 +59,12 @@ shareCenter.setup({
             { key: 'MODEL-MANAGER:MODEL:SHARE:""', tags: ['BUTTON'] },
             { key: 'IMAGE-MANAGER:IMAGE:SHARE:""', tags: ['BUTTON'] },
             { key: 'SKYFLOW-MANAGER:FLOW:CREATE:""', tags: ['BUTTON'] },
-            { key: 'SKYFLOW-MANAGER:TEMPLATE_FLOW:CREATE:""', tags: ['BUTTON'] }
+            { key: 'SKYFLOW-MANAGER:TEMPLATE_FLOW:CREATE:""', tags: ['BUTTON'] },
+            { key: 'APPLICATION:IMAGE_MANAGER_MENU:ACCESS:""', tags: ['MENU'] },
+            { key: 'IMAGE-MANAGER:IMAGE_BUILDER:BUILD_BASIC:""', tags: ['BUTTON'] },
+            { key: 'IMAGE-MANAGER:IMAGE_BUILDER:BUILD_TAR:""', tags: ['BUTTON'] },
+            { key: 'IMAGE-MANAGER:IMAGE_BUILDER:BUILD_IMAGE_FILE:""', tags: ['BUTTON'] },
+            { key: 'APPLICATION:DATA_MANAGER_MENU:ACCESS:""', tags: ['MENU'] }
         ]);
         user.user.userId = user.user.uuid;
         return user.user;
@@ -105,5 +110,3 @@ store.dispatch('auth').then(() => {
         name: 'Login'
     });
 });
-
-
