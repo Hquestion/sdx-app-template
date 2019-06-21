@@ -53,7 +53,13 @@ shareCenter.setup({
             { key: 'APPLICATION:MANAEGR_PLATFORM_MENU:ACCESS:""', tags: ['MENU'] },
             { key: 'APPLICATION:MODEL_MANAGER_MENU:ACCESS:""', tags: ['MENU'] },
             { key: 'RESOURCE-MANAGER:TEMPLATE:READ:""', tags: ['BUTTON'] },
-            { key: 'RESOURCE-MANAGER:TEMPLATE:WRITE:""', tags: ['BUTTON'] }
+            { key: 'RESOURCE-MANAGER:TEMPLATE:WRITE:""', tags: ['BUTTON'] },
+            { key: 'MODEL-MANAGER:MODEL_VERSION:CREATE:""', tags: ['BUTTON'] },
+            { key: 'MODEL-MANAGER:MODEL:CREATE:""', tags: ['BUTTON'] },
+            { key: 'MODEL-MANAGER:MODEL:SHARE:""', tags: ['BUTTON'] },
+            { key: 'IMAGE-MANAGER:IMAGE:SHARE:""', tags: ['BUTTON'] },
+            { key: 'SKYFLOW-MANAGER:FLOW:CREATE:""', tags: ['BUTTON'] },
+            { key: 'SKYFLOW-MANAGER:TEMPLATE_FLOW:CREATE:""', tags: ['BUTTON'] }
         ]);
         user.user.userId = user.user.uuid;
         return user.user;
