@@ -199,6 +199,9 @@ export default {
             color: #000;
             height: 40px;
         }
+        .el-input__inner {
+            padding-left: 40px;
+        }
         .el-input {
             display: inline-block;
             // height: 40px;
