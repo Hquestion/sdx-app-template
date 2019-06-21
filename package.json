@@ -13,7 +13,8 @@
     "lint:nofix": "vue-cli-service lint --no-fix",
     "server:mock": "nodemon mock/bin/www",
     "test:unit": "vue-cli-service test:unit",
-    "test:unit:coverage": "vue-cli-service test:unit --coverage"
+    "test:unit:coverage": "vue-cli-service test:unit --coverage",
+    "link:sdx": "yarn link @sdx/ui @sdx/utils @sdx/widget @sdx/view"
   },
   "dependencies": {
     "@sdx/ui": "latest",
