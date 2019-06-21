@@ -21,7 +21,7 @@ const user = {
 
     mutations: {
         SET_USER(state, user) {
-            state.user = user;
+            state.token.user.fullName = user.fullName;
         },
         REMOVE_ALL(state) {
             state.token = {};

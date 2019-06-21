@@ -133,11 +133,6 @@ module.exports = {
                 ws: true,
                 changeOrigin: true
             },
-            '/image-manager': {
-                target: 'http://10.115.1.130:30080',
-                ws: true,
-                changeOrigin: true
-            },
             '/resource-manager': {
                 target: 'http://10.115.1.130:30080',
                 ws: true,
