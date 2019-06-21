@@ -1,7 +1,7 @@
 <template>
     <div class="flow-function clearfix">
         <div class="back_logo">
-            <!-- <i class='iconfont icon-fanhui'></i> -->
+            <!-- <i class='iconfont sf-fanhui'></i> -->
             <span class="logo">
                 {{ flowName }}
             </span>

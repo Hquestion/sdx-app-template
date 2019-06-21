@@ -83,7 +83,7 @@
                             @click="addInputArg"
                         >
                             <i
-                                class="iconfont icon-jiahao"
+                                class="iconfont sf-jiahao"
                             /> 添加输入参数
                         </el-button>
                     </div>
@@ -106,7 +106,7 @@
                             @click="addOutputArg"
                         >
                             <i
-                                class="iconfont icon-jiahao"
+                                class="iconfont sf-jiahao"
                             /> 添加输出参数
                         </el-button>
                     </div>
@@ -187,7 +187,7 @@
                             class="add-param-btn"
                             @click="addExecParam"
                         >
-                            <i class="iconfont icon-jiahao" /> 添加参数
+                            <i class="iconfont sf-jiahao" /> 添加参数
                         </el-button>
                     </ParamsPanel>
                     <ParamsPanel title="参数组配置">
@@ -205,7 +205,7 @@
                             class="add-param-btn"
                             @click="addExecParamGroup"
                         >
-                            <i class="iconfont icon-jiahao" /> 添加参数组
+                            <i class="iconfont sf-jiahao" /> 添加参数组
                         </el-button>
                     </ParamsPanel>
                 </ParamsPanel>

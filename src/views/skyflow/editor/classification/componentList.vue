@@ -56,7 +56,7 @@
                     <span>{{ item.label }}</span>
                     <i
                         v-show="item.isShare"
-                        class="iconfont icon-fenxiang3 is-share-icon"
+                        class="iconfont sf-fenxiang3 is-share-icon"
                     />
                     <el-tooltip
                         placement="bottom"
@@ -87,7 +87,7 @@
                         </div>
                         <i
                             v-show="(item.name + i) === hoverComponentName"
-                            class="iconfont icon-information component-tips-icon"
+                            class="iconfont sf-information component-tips-icon"
                         />
                     </el-tooltip>
                 </div>
@@ -180,28 +180,28 @@ export default {
                 {
                     label: '编辑',
                     name: 'edit',
-                    icon: 'icon-ico_edite',
+                    icon: 'sf-ico_edite',
                     disabled: false,
                     cb: this.editComp.bind(this)
                 },
                 {
                     label: '删除',
                     name: 'del',
-                    icon: 'icon-delete1',
+                    icon: 'sf-delete1',
                     disabled: false,
                     cb: this.delComp.bind(this)
                 },
                 {
                     label: '分享设置',
                     name: 'share',
-                    icon: 'icon-fenxiang1',
+                    icon: 'sf-fenxiang1',
                     disabled: false,
                     cb: this.showShareDialog.bind(this)
                 },
                 {
                     label: '移除收藏',
                     name: 'cancelstar',
-                    icon: 'icon-yichushoucang1',
+                    icon: 'sf-yichushoucang1',
                     disabled: false,
                     cb: this.cancelStar.bind(this)
                 }

@@ -83,7 +83,7 @@
                         size="mini"
                         @click.stop.prevent="addMixedParams"
                     >
-                        <i class="iconfont icon-jiahao" /> 添加
+                        <i class="iconfont sf-jiahao" /> 添加
                     </el-button>
                 </div>
             </el-form>

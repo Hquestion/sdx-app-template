@@ -31,7 +31,7 @@
                     placeholder="请输入组件关键字"
                 >
                 <i
-                    class="iconfont icon-chazhao"
+                    class="iconfont sf-chazhao"
                     @click="search"
                 />
             </div>
@@ -41,7 +41,7 @@
                     class="add-custom"
                     @click="createCustom"
                 >
-                    <i class="iconfont icon-jiahao" />
+                    <i class="iconfont sf-jiahao" />
                 </div>
                 <CustomizeComp
                     v-if="dialogVisible && !editComp._id"

@@ -1,103 +1,103 @@
 export const stepOperation = [{
     label: '撤销',
-    icon: 'icon-back',
+    icon: 'sf-back',
     name: 'back'
 }, {
     label: '恢复',
-    icon: 'icon-forward',
+    icon: 'sf-forward',
     name: 'forward'
 }];
 
 export const saveOperation = [{
     label: '保存',
-    icon: 'icon-save',
+    icon: 'sf-save',
     name: 'save'
 }, {
     label: '另存为',
-    icon: 'icon-saveas',
+    icon: 'sf-saveas',
     name: 'save-as'
 }, {
     label: '清除',
-    icon: 'icon-qingchu',
+    icon: 'sf-qingchu',
     name: 'clear'
 }];
 
 export const execOperation = [{
     label: '编辑画布',
-    icon: 'icon-bianjihuabu',
+    icon: 'sf-bianjihuabu',
     name: 'edit'
 }, {
     label: '运行',
-    icon: 'icon-yunxing',
+    icon: 'sf-yunxing',
     name: 'run'
 }, {
     label: '停止',
-    icon: 'icon-pause',
+    icon: 'sf-pause',
     name: 'stop'
 }, {
     label: '恢复运行',
-    icon: 'icon-huifuyunhang',
+    icon: 'sf-huifuyunhang',
     name: 'resume'
 }, {
     label: '定时运行',
-    icon: 'icon-dingshiyunxing',
+    icon: 'sf-dingshiyunxing',
     name: 'timing'
 }, {
     label: '执行设置',
-    icon: 'icon-zhihangshezhi',
+    icon: 'sf-zhihangshezhi',
     name: 'exec-setting'
 }, {
     label: '多实例设置',
-    icon: 'icon-duoshilishezhi',
+    icon: 'sf-duoshilishezhi',
     name: 'muti-instance'
 }, {
     label: '告警设置',
-    icon: 'icon-gaojingshezhi',
+    icon: 'sf-gaojingshezhi',
     name: 'warning'
 }, {
     label: '执行记录',
-    icon: 'icon-zhihangjilu',
+    icon: 'sf-zhihangjilu',
     name: 'record'
 }];
 
 export const viewOperation = [{
     label: '缩小',
     name: 'zoomin',
-    icon: 'icon-jianhao'
+    icon: 'sf-jianhao'
 }, {
     label: '缩放',
     name: 'zoom',
-    icon: 'icon-fangdajingsvg'
+    icon: 'sf-fangdajingsvg'
 }, {
     label: '放大',
     name: 'zoomout',
-    icon: 'icon-jiahao'
+    icon: 'sf-jiahao'
 }];
 
 export const componentNav = [{
     label: '数据集',
     name: 'dataset',
-    icon: 'icon-shujuji'
+    icon: 'sf-shujuji'
 }, {
     label: '平台组件',
     name: 'platform',
-    icon: 'icon-pingtaizujian'
+    icon: 'sf-pingtaizujian'
 }, {
     label: '自定义组件',
     name: 'custom',
-    icon: 'icon-zidingyizujian'
+    icon: 'sf-zidingyizujian'
 }, {
     label: '公共组件',
     name: 'common',
-    icon: 'icon-qitazujian'
+    icon: 'sf-qitazujian'
 }, {
     label: '收藏组件',
     name: 'favorite',
-    icon: 'icon-wodeshoucang'
+    icon: 'sf-wodeshoucang'
 }, {
     label: '搜索',
     name: 'search',
-    icon: 'icon-chazhao'
+    icon: 'sf-chazhao'
 }];
 
 export const componentType = [{
@@ -217,455 +217,455 @@ export const componentType = [{
 export const componentsIcon = [{
     //     label: '数据库数据源',
     //     name: 'DatabaseDataSource',
-    //     icon: 'icon-shujuyuanzujian'
+    //     icon: 'sf-shujuyuanzujian'
     // }, {
     //     label: '文件系统数据源',
     //     name: 'FileSystemDataSource',
-    //     icon: 'icon-wenjianxitongshujuyuan'
+    //     icon: 'sf-wenjianxitongshujuyuan'
     // }, {
     //     label: '数据表连接',
     //     name: 'TableJoinComp',
-    //     icon: 'icon-shujubiaolianjie'
+    //     icon: 'sf-shujubiaolianjie'
     // }, {
     //     label: '数据集选取',
     //     name: 'SelectComp',
-    //     icon: 'icon-shujuxuanqu'
+    //     icon: 'sf-shujuxuanqu'
     // }, {
     //     label: '数据追加',
     //     name: 'AdditionComp',
-    //     icon: 'icon-shujuzhuijia'
+    //     icon: 'sf-shujuzhuijia'
     // }, {
     //     label: '数据排序',
     //     name: 'DataSort',
-    //     icon: 'icon-shujupaixu'
+    //     icon: 'sf-shujupaixu'
     // }, {
     //     label: '缺失值删除',
     //     name: 'DropMissingValuesComp',
-    //     icon: 'icon-queshizhishanchu1'
+    //     icon: 'sf-queshizhishanchu1'
     // }, {
     //     label: '缺失值填充',
     //     name: 'FillingMissingValues',
-    //     icon: 'icon-queshizhitianchong'
+    //     icon: 'sf-queshizhitianchong'
     // }, {
     //     label: '数据拆分',
     //     name: 'SplitComp',
-    //     icon: 'icon-shujuchaifen'
+    //     icon: 'sf-shujuchaifen'
     // }, {
     //     label: '数据抽样',
     //     name: 'SampleComp',
-    //     icon: 'icon-shujuchouyang'
+    //     icon: 'sf-shujuchouyang'
     // }, {
     //     label: '数据类型转换',
     //     name: 'TypeConversionComp',
-    //     icon: 'icon-shujuleixingzhuanhuan'
+    //     icon: 'sf-shujuleixingzhuanhuan'
     // }, {
     //     label: '数据运算',
     //     name: 'NumericComputingComp',
-    //     icon: 'icon-shujuyunsuan'
+    //     icon: 'sf-shujuyunsuan'
     // }, {
     //     label: '数据归一化',
     //     name: 'NormalizationComp',
-    //     icon: 'icon-shujuguiyihua'
+    //     icon: 'sf-shujuguiyihua'
     // }, {
     //     label: '数据标准化',
     //     name: 'StandardComp',
-    //     icon: 'icon-shujubiaozhunhua'
+    //     icon: 'sf-shujubiaozhunhua'
     // }, {
     //     label: '数据编码',
     //     name: 'StringIndexerComp',
-    //     icon: 'icon-shujubianma'
+    //     icon: 'sf-shujubianma'
     // }, {
     //     label: 'PCA',
     //     name: 'PCAComp',
-    //     icon: 'icon-PCA'
+    //     icon: 'sf-PCA'
     // }, {
     //     label: 'LDA',
     //     name: 'LDAComp',
-    //     icon: 'icon-LDA'
+    //     icon: 'sf-LDA'
     // }, {
     //     label: '数据集导出',
     //     name: 'DatasetExportComp',
-    //     icon: 'icon-shujujidaochu'
+    //     icon: 'sf-shujujidaochu'
     // }, {
     //     label: '监督学习标签选择',
     //     name: 'SupervisedLabelSelectorComp',
-    //     icon: 'icon-jianduxuexibiaoqianxuanze'
+    //     icon: 'sf-jianduxuexibiaoqianxuanze'
     // }, {
     //     label: '聚类特征选择',
     //     name: 'ClusterFeatureSelectorComp',
-    //     icon: 'icon-juleitezhengxuanze'
+    //     icon: 'sf-juleitezhengxuanze'
     // }, {
     //     label: 'K-Means',
     //     name: 'KMeansComp',
-    //     icon: 'icon-K-meanjuleisuanfa'
+    //     icon: 'sf-K-meanjuleisuanfa'
     // }, {
     //     label: '线性SVC',
     //     name: 'LinearSVCComp',
-    //     icon: 'icon-xianxingSVCsuanfa'
+    //     icon: 'sf-xianxingSVCsuanfa'
     // }, {
     //     label: '决策树分类',
     //     name: 'DecisionTreeClassifierComp',
-    //     icon: 'icon-jueceshusuanfa'
+    //     icon: 'sf-jueceshusuanfa'
     // }, {
     //     label: '随机森林分类',
     //     name: 'RandomForestClassifierComp',
-    //     icon: 'icon-suijisenlinfenleisuanfa'
+    //     icon: 'sf-suijisenlinfenleisuanfa'
     // }, {
     //     label: '逻辑回归模型',
     //     name: 'LogisticRegressionComp',
-    //     icon: 'icon-luojihuiguisuanfa1'
+    //     icon: 'sf-luojihuiguisuanfa1'
     // }, {
     //     label: '朴素贝叶斯分类模型',
     //     name: 'NaiveBayesComp',
-    //     icon: 'icon-pusubeiyesifenleisuanfa'
+    //     icon: 'sf-pusubeiyesifenleisuanfa'
     // }, {
     //     label: 'GBDT回归',
     //     name: 'GBTRegressorComp',
-    //     icon: 'icon-GBDThuiguisuanfa'
+    //     icon: 'sf-GBDThuiguisuanfa'
     // }, {
     //     label: '广义线性回归',
     //     name: 'GeneralizedLinearRegressionComp',
-    //     icon: 'icon-guangyixianxinghuigui'
+    //     icon: 'sf-guangyixianxinghuigui'
     // }, {
     //     label: '加速失效回归模型',
     //     name: 'AFTSurvivalRegressionComp',
-    //     icon: 'icon-jiasushixiao'
+    //     icon: 'sf-jiasushixiao'
     // }, {
     //     label: '随机森林回归模型',
     //     name: 'RandomForestRegressorComp',
-    //     icon: 'icon-suijisenlinhuiguisuanfa'
+    //     icon: 'sf-suijisenlinhuiguisuanfa'
     // }, {
     //     label: '模型预测',
     //     name: 'ModelPredictorComp',
-    //     icon: 'icon-moxingyuce'
+    //     icon: 'sf-moxingyuce'
     // }, {
     label: '模型导出',
     name: 'ModelExportComp',
-    icon: 'icon-moxingdaochu'
+    icon: 'sf-moxingdaochu'
 }, {
     label: '数据导出',
     name: 'DataExportComp',
-    icon: 'icon-shujudaochu'
+    icon: 'sf-shujudaochu'
 }, {
     label: '模型评估',
     name: 'ModelEvaluatorComp',
-    icon: 'icon-moxingpinggu'
+    icon: 'sf-moxingpinggu'
 }, {
     //     label: '回归模型评估',
     //     name: 'RegressionModelEvaluatorComp',
-    //     icon: 'icon-huiguimoxingpinggu'
+    //     icon: 'sf-huiguimoxingpinggu'
     // }, {
     //     label: '分类模型评估',
     //     name: 'ClassificationModelEvaluatorComp',
-    //     icon: 'icon-fenleimoxingpinggu'
+    //     icon: 'sf-fenleimoxingpinggu'
     // }, {
     label: '数据预处理-自定义',
     name: 'DataPreprocessCustomComp',
-    icon: 'icon-shujuyuchuli'
+    icon: 'sf-shujuyuchuli'
 }, {
     label: '特征工程-自定义',
     name: 'FeatureEngineerL2CustomComp',
-    icon: 'icon-tezhenggongcheng'
+    icon: 'sf-tezhenggongcheng'
 }, {
     label: '异常检测-自定义',
     name: 'AnomalyDetectionCustomComp',
-    icon: 'icon-jianceyichang'
+    icon: 'sf-jianceyichang'
 }, {
     label: '分类-自定义',
     name: 'ClassificationCustomComp',
-    icon: 'icon-fenlei'
+    icon: 'sf-fenlei'
 }, {
     label: '聚类-自定义',
     name: 'ClusterCustomComp',
-    icon: 'icon-julei'
+    icon: 'sf-julei'
 }, {
     label: '回归-自定义',
     name: 'RegressionCustomComp',
-    icon: 'icon-huigui'
+    icon: 'sf-huigui'
 }, {
     label: '推荐-自定义',
     name: 'RecommendCustomComp',
-    icon: 'icon-tuijian'
+    icon: 'sf-tuijian'
 }, {
     label: '时序分析-自定义',
     name: 'TimeSeriesCustomComp',
-    icon: 'icon-shixufenxi'
+    icon: 'sf-shixufenxi'
 }, {
     label: '文本分析-自定义',
     name: 'TextCustomComp',
-    icon: 'icon-wenbenfenxi-zidingyi'
+    icon: 'sf-wenbenfenxi-zidingyi'
 }, {
     label: '模型导出-自定义',
     name: 'ModelExportCustomComp',
-    icon: 'icon-moxingdaochu-zidingyi'
+    icon: 'sf-moxingdaochu-zidingyi'
 }, {
     label: '数据导出-自定义',
     name: 'DataExportCustomComp',
-    icon: 'icon-shujudaochu-zidingyi'
+    icon: 'sf-shujudaochu-zidingyi'
 }, {
     label: '模型评估-自定义',
     name: 'ModelEvaluatorCustomComp',
-    icon: 'icon-moxingdaochu-zidingyi'
+    icon: 'sf-moxingdaochu-zidingyi'
 }, {
     label: '公共数据集',
     name: 'PublicDataSet',
-    icon: 'icon-gonggongshujuji'
+    icon: 'sf-gonggongshujuji'
 }, {
     label: '组内数据集',
     name: 'GroupDataSet',
-    icon: 'icon-zuneishujuji'
+    icon: 'sf-zuneishujuji'
 }, {
     label: '私有数据集',
     name: 'PrivateDataSet',
-    icon: 'icon-siyoushujuji'
+    icon: 'sf-siyoushujuji'
 }, {
     label: '列删除',
     name: 'ColDeleteComp',
-    icon: 'icon-lieshanchu'
+    icon: 'sf-lieshanchu'
 }, {
     label: '数据过滤',
     name: 'DataFilterComp',
-    icon: 'icon-guolv'
+    icon: 'sf-guolv'
 }, {
     label: '数据拆分',
     name: 'DataSplitComp',
-    icon: 'icon-shujuchaifen'
+    icon: 'sf-shujuchaifen'
 }, {
     label: '类型转换',
     name: 'DataTransformComp',
-    icon: 'icon-shujuleixingzhuanhuan'
+    icon: 'sf-shujuleixingzhuanhuan'
 }, {
     label: '数据排序',
     name: 'DataSortComp',
-    icon: 'icon-shujupaixu'
+    icon: 'sf-shujupaixu'
 }, {
     label: '数据去重',
     name: 'DataDeduplicationComp',
-    icon: 'icon-quzhong'
+    icon: 'sf-quzhong'
 }, {
     label: '特征抽取',
     name: 'FeatureSelectComp',
-    icon: 'icon-tezhengxuanqu'
+    icon: 'sf-tezhengxuanqu'
 }, {
     label: '统计缺失',
     name: 'MissingStatComp',
-    icon: 'icon-tongjiqueshi'
+    icon: 'sf-tongjiqueshi'
 }, {
     label: '缺失填充',
     name: 'NanDealingComp',
-    icon: 'icon-queshizhitianchong1'
+    icon: 'sf-queshizhitianchong1'
 }, {
     label: '随机采样',
     name: 'DataRandomSamplingComp',
-    icon: 'icon-suijicaiyang1'
+    icon: 'sf-suijicaiyang1'
 }, {
     label: '分层采样',
     name: 'DataStratifiedSamplingComp',
-    icon: 'icon-fencengcaiyang'
+    icon: 'sf-fencengcaiyang'
 }, {
     label: '行追加',
     name: 'RowDataAppendComp',
-    icon: 'icon-hangzhuijia'
+    icon: 'sf-hangzhuijia'
 }, {
     label: '列追加',
     name: 'ColDataAppendComp',
-    icon: 'icon-liezhuijia'
+    icon: 'sf-liezhuijia'
 }, {
     label: '分词',
     name: 'WordDivideComp',
-    icon: 'icon-fenci'
+    icon: 'sf-fenci'
 }, {
     label: '数据标准化',
     name: 'StandardizationComp',
-    icon: 'icon-shujubiaozhunhua'
+    icon: 'sf-shujubiaozhunhua'
 }, {
     label: '数据二值化',
     name: 'BinarizerComp',
-    icon: 'icon-erzhihua'
+    icon: 'sf-erzhihua'
 }, {
     label: '主成分分析',
     name: 'PCAComp',
-    icon: 'icon-PCA'
+    icon: 'sf-PCA'
 }, {
     label: '数据离散化',
     name: 'DiscretizerComp',
-    icon: 'icon-lisanhua'
+    icon: 'sf-lisanhua'
 }, {
     label: 'one-hot编码',
     name: 'OneHotEncoderComp',
-    icon: 'icon-onehot'
+    icon: 'sf-onehot'
 }, {
     label: '数据归一化',
     name: 'ScalerComp',
-    icon: 'icon-shujuguiyihua'
+    icon: 'sf-shujuguiyihua'
 }, {
     label: '相关性分析',
     name: 'CorrelationComp',
-    icon: 'icon-xiangguanxingfenxi'
+    icon: 'sf-xiangguanxingfenxi'
 }, {
     label: 'dummy编码',
     name: 'DummyEncoderComp',
-    icon: 'icon-dummybianma'
+    icon: 'sf-dummybianma'
 }, {
     label: '卡方分布特征选取',
     name: 'Chi2Comp',
-    icon: 'icon-kafangfenbutezhengxuanqu'
+    icon: 'sf-kafangfenbutezhengxuanqu'
 }, {
     label: '标签编码',
     name: 'LabelEncoderComp',
-    icon: 'icon-biaoqianbianma'
+    icon: 'sf-biaoqianbianma'
 }, {
     label: 'power_transform',
     name: 'PowerTransformComp',
-    icon: 'icon-powertransform'
+    icon: 'sf-powertransform'
 }, {
     label: '字典',
     name: 'DictionaryComp',
-    icon: 'icon-zidian'
+    icon: 'sf-zidian'
 }, {
     label: '词袋模型',
     name: 'WordOfBagComp',
-    icon: 'icon-cidaimoxing'
+    icon: 'sf-cidaimoxing'
 }, {
     label: '词频-逆文档频率',
     name: 'TF-IDFComp',
-    icon: 'icon-cipin-niwendangpinshuai'
+    icon: 'sf-cipin-niwendangpinshuai'
 }, {
     label: '反向词典',
     name: 'ReverDicComp',
-    icon: 'icon-fanxiangcidian'
+    icon: 'sf-fanxiangcidian'
 }, {
     label: '随机森林分类',
     name: 'RandomForestClassifierComp',
-    icon: 'icon-suijisenlinfenleisuanfa'
+    icon: 'sf-suijisenlinfenleisuanfa'
 }, {
     label: '梯度提升树分类',
     name: 'GradientBoostingClassifierComp',
-    icon: 'icon-tidutishengshufenlei'
+    icon: 'sf-tidutishengshufenlei'
 }, {
     label: '朴素贝叶斯分类',
     name: 'GaussianNBComp',
-    icon: 'icon-pusubeiyesifenleisuanfa'
+    icon: 'sf-pusubeiyesifenleisuanfa'
 }, {
     label: '支持向量机分类',
     name: 'SVCComp',
-    icon: 'icon-xianxingSVCsuanfa'
+    icon: 'sf-xianxingSVCsuanfa'
 }, {
     label: '逻辑回归分类',
     name: 'LogisticRegressionComp',
-    icon: 'icon-luojihuiguisuanfa1'
+    icon: 'sf-luojihuiguisuanfa1'
 }, {
     label: '决策树分类',
     name: 'DecisionTreeClassifierComp',
-    icon: 'icon-jueceshusuanfa'
+    icon: 'sf-jueceshusuanfa'
 }, {
     label: '最近邻分类',
     name: 'KNeighborsClassifierComp',
-    icon: 'icon-Kjinlinhuigui'
+    icon: 'sf-Kjinlinhuigui'
 }, {
     label: '随机森林回归',
     name: 'RandomForestRegressorComp',
-    icon: 'icon-suijisenlinhuiguisuanfa'
+    icon: 'sf-suijisenlinhuiguisuanfa'
 }, {
     label: '梯度提升树回归',
     name: 'GradientBoostingRegressorComp',
-    icon: 'icon-tidutishengshuhuigui'
+    icon: 'sf-tidutishengshuhuigui'
 }, {
     label: '决策树回归',
     name: 'DecisionTreeRegressorComp',
-    icon: 'icon-jueceshuhuigui'
+    icon: 'sf-jueceshuhuigui'
 }, {
     label: '最近邻回归',
     name: 'KNeighborsRegressorComp',
-    icon: 'icon-Kjinlinhuigui'
+    icon: 'sf-Kjinlinhuigui'
 }, {
     label: '线性回归',
     name: 'LinearRegressionComp',
-    icon: 'icon-huigui1'
+    icon: 'sf-huigui1'
 }, {
     label: '支持向量机回归',
     name: 'SVRComp',
-    icon: 'icon-zhichixiangliangji'
+    icon: 'sf-zhichixiangliangji'
 }, {
     label: 'K均值聚类',
     name: 'KmeansComp',
-    icon: 'icon-K-meanjuleisuanfa'
+    icon: 'sf-K-meanjuleisuanfa'
 }, {
     label: '层次聚类',
     name: 'AgglomerativeClusteringComp',
-    icon: 'icon-fencengjulei'
+    icon: 'sf-fencengjulei'
 }, {
     label: '平台文件系统数据源',
     name: 'PlatFileDataSource',
-    icon: 'icon-pingtaiwenjianxitongshujuyuansvg'
+    icon: 'sf-pingtaiwenjianxitongshujuyuansvg'
 }, {
     label: 'HDFS数据源',
     name: 'HdfsFileDataSource',
-    icon: 'icon-HDFSshujuyuan'
+    icon: 'sf-HDFSshujuyuan'
 }, {
     label: '数据库数据源',
     name: 'DatabaseDataSource',
-    icon: 'icon-shujukushujuyuan'
+    icon: 'sf-shujukushujuyuan'
 }];
 
 export const contextMenuIcon = [{
     //     label: '运行到当前组件',
     //     name: 'runtothis',
-    //     icon: 'icon-yunhangdaodangqianzujian'
+    //     icon: 'sf-yunhangdaodangqianzujian'
     // }, {
     //     label: '从当前组件开始运行',
     //     name: 'runfromthis',
-    //     icon: 'icon-congdangqianzujiankaishiyunxing'
+    //     icon: 'sf-congdangqianzujiankaishiyunxing'
     // }, {
     //     label: '终止运行',
     //     name: 'stop',
-    //     icon: 'icon-zhongzhiyunxing'
+    //     icon: 'sf-zhongzhiyunxing'
     // }, {
     //     label: '强制终止',
     //     name: 'forcestop',
-    //     icon: 'icon-zhongzhiyunxing'
+    //     icon: 'sf-zhongzhiyunxing'
     // }, {
     label: '复制',
     name: 'copy',
-    icon: 'icon-fuzhi'
+    icon: 'sf-fuzhi'
 }, {
     label: '重命名',
     name: 'rename',
-    icon: 'icon-zhongmingming'
+    icon: 'sf-zhongmingming'
 }, {
     label: '删除',
     name: 'delete',
-    icon: 'icon-delete1'
+    icon: 'sf-delete1'
 }, {
     label: '收藏',
     name: 'star',
-    icon: 'icon-wodeshoucang'
+    icon: 'sf-wodeshoucang'
 }, {
     label: '结果导出',
     name: 'export',
-    icon: 'icon-daochujieguo'
+    icon: 'sf-daochujieguo'
 }];
 
 // 左侧自定义组件右键菜单
 export const contextMenuClassification = [{
     label: '编辑',
     name: 'edit',
-    icon: 'icon-ico_edite',
+    icon: 'sf-ico_edite',
     disabled: false
 }, {
     label: '删除',
     name: 'del',
-    icon: 'icon-delete1',
+    icon: 'sf-delete1',
     disabled: false
 }, {
     label: '分享',
     name: 'share',
-    icon: 'icon-fenxiang2',
+    icon: 'sf-fenxiang2',
     disabled: false
 }, {
     label: '取消分享',
     name: 'cancelshare',
-    icon: 'icon-fenxiang1',
+    icon: 'sf-fenxiang1',
     disabled: false
 }];
 
@@ -850,18 +850,18 @@ export const resourceAllocationAuto = {
 };
 
 export const iconsMap = {
-    maximization: 'icon-zuidahua',
-    minimization: 'icon-zuixiaohua',
-    arrowDown: 'icon-arrow-down',
-    arrowRight: 'icon-arrow-right',
-    lamb: 'icon-dengpao',
-    interrogation: 'icon-wenhao',
-    goback: 'icon-fanhui',
-    openDetail: 'icon-jiahao',
-    closeDetail: 'icon-jianhao',
-    folder: 'icon-wenjianjia',
-    success: 'icon-chenggongsvg',
-    defaultCompIcon: 'icon-morenzujian'
+    maximization: 'sf-zuidahua',
+    minimization: 'sf-zuixiaohua',
+    arrowDown: 'sf-arrow-down',
+    arrowRight: 'sf-arrow-right',
+    lamb: 'sf-dengpao',
+    interrogation: 'sf-wenhao',
+    goback: 'sf-fanhui',
+    openDetail: 'sf-jiahao',
+    closeDetail: 'sf-jianhao',
+    folder: 'sf-wenjianjia',
+    success: 'sf-chenggongsvg',
+    defaultCompIcon: 'sf-morenzujian'
 };
 
 /**
@@ -903,28 +903,28 @@ export const nodeStateDesc = {
  */
 // todo: 补全图标
 export const nodeStateIconConf = {
-    [nodeState.NOTREADY]: 'icon-gantanhaowenti',
-    [nodeState.READY]: 'icon-jiuxu',
+    [nodeState.NOTREADY]: 'sf-gantanhaowenti',
+    [nodeState.READY]: 'sf-jiuxu',
     [nodeState.STARTING]: '',
-    [nodeState.RUNNING]: 'icon-yunhangzhong',
-    [nodeState.SUCCESS]: 'icon-chenggongsvg',
-    [nodeState.FAILED]: 'icon-shibai',
+    [nodeState.RUNNING]: 'sf-yunhangzhong',
+    [nodeState.SUCCESS]: 'sf-chenggongsvg',
+    [nodeState.FAILED]: 'sf-shibai',
     [nodeState.STOPING]: '',
-    [nodeState.STOPED]: 'icon-zhongzhi',
+    [nodeState.STOPED]: 'sf-zhongzhi',
     [nodeState.STOPFAILED]: '',
     [nodeState.CRONRUNNING]: '',
-    [nodeState.FORCESTOPED]: 'icon-qiangzhizhongzhi'
+    [nodeState.FORCESTOPED]: 'sf-qiangzhizhongzhi'
 };
 
 /**
  * 节点结果状态图标配置
  */
 export const nodeResultStateIconConf = {
-    [nodeState.NOTREADY]: 'icon-gantanhaowenti',
-    [nodeState.SUCCESS]: 'icon-chenggong',
-    [nodeState.FAILED]: 'icon-shibai1',
-    [nodeState.STOPED]: 'icon-zhongzhi1',
-    [nodeState.FORCESTOPED]: 'icon-qiangzhizhongzhi1'
+    [nodeState.NOTREADY]: 'sf-gantanhaowenti',
+    [nodeState.SUCCESS]: 'sf-chenggong',
+    [nodeState.FAILED]: 'sf-shibai1',
+    [nodeState.STOPED]: 'sf-zhongzhi1',
+    [nodeState.FORCESTOPED]: 'sf-qiangzhizhongzhi1'
 };
 
 /**

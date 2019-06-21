@@ -9,7 +9,7 @@
             <div class="content">
                 <table>
                     <tr>
-                        <td><i class="iconfont icon-gantanhaowenti icon-tips" /></td>
+                        <td><i class="iconfont sf-gantanhaowenti sf-tips" /></td>
                         <td><span>编辑后的画布会从头开始执行</span></td>
                     </tr>
                     <tr>

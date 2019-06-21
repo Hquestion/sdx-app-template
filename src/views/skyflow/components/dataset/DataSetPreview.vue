@@ -266,8 +266,8 @@ export default {
                 item => item.fieldName === column.label
             );
             if (!field) return <span />;
-            isNumber(field.fieldType) && (iconClass = 'icon-N');
-            isString(field.fieldType) && (iconClass = 'icon-S');
+            isNumber(field.fieldType) && (iconClass = 'sf-N');
+            isString(field.fieldType) && (iconClass = 'sf-S');
             if (this.readonly) {
                 return (
                     <span class="table-header_customize" title={column.label}>

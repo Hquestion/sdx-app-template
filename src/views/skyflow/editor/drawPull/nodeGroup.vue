@@ -231,7 +231,7 @@ export default {
                 .append('use')
                 .attr('x', 10)
                 .attr('y', 9)
-            // 未运行 未选中: 'icon-formal' 选中: 'icon-active' 成功/失败: 'icon-finish'
+            // 未运行 未选中: 'sf-formal' 选中: 'sf-active' 成功/失败: 'sf-finish'
                 .attr('class', node =>
                     [
                         nodeState.FAILED,
@@ -239,10 +239,10 @@ export default {
                         nodeState.FORCESTOPED,
                         nodeState.SUCCESS
                     ].includes(node.state)
-                        ? 'icon icon-finish'
+                        ? 'icon sf-finish'
                         : node.active
-                            ? 'icon icon-active'
-                            : 'icon icon-formal'
+                            ? 'icon sf-active'
+                            : 'icon sf-formal'
                 )
                 .attr('width', 14)
                 .attr('height', 14)
@@ -303,7 +303,7 @@ export default {
             // 节点详情按钮
             nodeGroup
                 .append('use')
-            // 未运行 未选中: 'icon-formal' 选中: 'icon-active' 成功/失败: 'icon-finish'
+            // 未运行 未选中: 'sf-formal' 选中: 'sf-active' 成功/失败: 'sf-finish'
                 .attr('class', node =>
                     [
                         nodeState.FAILED,
@@ -311,10 +311,10 @@ export default {
                         nodeState.FORCESTOPED,
                         nodeState.SUCCESS
                     ].includes(node.state)
-                        ? 'icon icon-finish'
+                        ? 'icon sf-finish'
                         : node.active
-                            ? 'icon icon-active'
-                            : 'icon icon-formal'
+                            ? 'icon sf-active'
+                            : 'icon sf-formal'
                 )
                 .attr('x', config.nWidth - 25)
                 .attr('y', 6)
