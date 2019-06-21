@@ -235,7 +235,7 @@ export default {
             options: [],
             gpuValue: '',
             taskCompleted: 0,
-            taskTotal: 9,
+            taskTotal: 0,
             diskCount: 0,
             orderBy: 'CPU',
             resourceType: [
@@ -418,18 +418,20 @@ export default {
                 data_format: -1,
                 tag: -1
             };
-            getDatasets(params)
-                .then(res => {
-                    this.datasetLoading = false;
-                    for (let i = 0; i < res.data.items.length; i++) {
-                        this.datasetInfo.push(
-                            {
-                                name: res.data.items[i].name,
-                                time: res.data.items[i].updated_at
-                            }
-                        );
-                    }
-                });
+
+            this.datasetLoading = false;
+            // getDatasets(params)
+            //     .then(res => {
+            //         this.datasetLoading = false;
+            //         for (let i = 0; i < res.data.items.length; i++) {
+            //             this.datasetInfo.push(
+            //                 {
+            //                     name: res.data.items[i].name,
+            //                     time: res.data.items[i].updated_at
+            //                 }
+            //             );
+            //         }
+            //     });
         },
         // skyflow 列表
         getSkyflowList() {
