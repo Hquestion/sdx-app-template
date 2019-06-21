@@ -37,7 +37,7 @@ const leftmenu = [
         children: [
             {
                 name: '任务管理',
-                path: '/assets/taskManage',
+                path: '/sdxv-task-management',
                 auth: permissions.PROJECT_MENU_ACCESS
             },
             {
@@ -100,8 +100,18 @@ const manageMenus = [
     {
         name: '监控中心',
         icon: 'iconfont iconicon-jiankongzhongxin1',
-        path: '/home',
-        auth: permissions.SYSTEM_MENU_ACCESS
+        auth: permissions.SYSTEM_MENU_ACCESS,
+        path: '/monitor',
+        children: [
+            {
+                name: '资源统计',
+                path: '/sdxv-resource-statistics'
+            },
+            {
+                name: '组件状态',
+                path: '/sdxv-component-state'
+            }
+        ]
     },
 ];
 
