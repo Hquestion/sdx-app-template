@@ -13,6 +13,6 @@ export default {
 <style rel="stylesheet/scss" lang="scss" scoped>
 .service-container {
     min-height: 100%;
-    padding: 20px;
+    // padding: 20px;
 }
 </style>
