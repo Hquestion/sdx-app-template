@@ -1,8 +1,8 @@
 <template>
     <div id="app">
-        <feb-alive>
-            <router-view />
-        </feb-alive>
+        <!--        <feb-alive>-->
+        <router-view />
+        <!--        </feb-alive>-->
     </div>
 </template>
 

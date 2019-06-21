@@ -56,7 +56,8 @@ shareCenter.setup({
         ]);
         user.user.userId = user.user.uuid;
         return user.user;
-    }
+    },
+    authSwitch: 'OFF'
 });
 
 new Vue({
