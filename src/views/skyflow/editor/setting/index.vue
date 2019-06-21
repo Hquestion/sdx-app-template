@@ -20,12 +20,10 @@
         <resource-setting
             v-if="node && node.resource"
             :resource="node.resource"
-            :quota="quota"
-            :total="total"
             :is-editable="isEditable"
             @updateResource="handleResourceUpdate"
-            :docker-image="node.dockerImage"
             :gpuModel.sync="node.gpu_model"
+            :taskkind="node.taskKind"
         />
     </div>
 </template>
@@ -35,7 +33,6 @@ import resourceSetting from './resource/';
 import paramsSetting from './params/';
 import customSetting from './custom/';
 import environmentSetting from './environment';
-import { mapState } from 'vuex';
 export default {
     name: 'ComponentSetting',
     props: {
@@ -63,10 +60,6 @@ export default {
         environmentSetting
     },
     computed: {
-        ...mapState({
-            quota: state => state.resource.quota,
-            total: state => state.resource.total
-        }),
         settingChange: {
             get() {
                 return this.isChangeSetting;

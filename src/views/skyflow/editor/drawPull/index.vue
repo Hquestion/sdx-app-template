@@ -891,7 +891,7 @@ export default {
     height: 100%;
     background: rgba(246, 248, 251, 1);
     /* cursor: -webkit-grab; */
-    .node:focus {
+    & /deep/ .node:focus {
       outline: none;
     }
   }

@@ -16,19 +16,6 @@ import febAlive from 'feb-alive';
 // skyflow
 import Editor from '../views/skyflow/editor/';
 
-// import RoleManage from '@sdx/view/lib/role-manage';
-// import AuthorizeManage from '@sdx/view/lib/authorize-manage';
-// import ProjectManage from '@sdx/view/lib/project-management';
-// import ModelManage from '@sdx/view/lib/model-manage';
-// import ImageManage from '@sdx/view/lib/image-management';
-// import SdxvPrivilege from '@sdx/view/lib/privilege';
-// import ResourceManageView from '@sdx/view/lib/resource-manage';
-// import UserManage from '@sdx/view/lib/user-manage';
-// import UserGroupManage from '@sdx/view/lib/user-group';
-// import TaskManagement from '@sdx/view/lib/task-management';
-// import ResourceStatistics from '@sdx/view/lib/resource-statistics';
-// import ComponentState from '@sdx/view/lib/component-state';
-
 import RoleManage from '@sdx/view/components/role-manage';
 import AuthorizeManage from '@sdx/view/components/authorize-manage';
 import ProjectManage from '@sdx/view/components/project-management';
@@ -210,7 +197,7 @@ SdxvPrivilege.viewRouter.register(router, '/home');
 UserManage.viewRouter.register(router, '/home');
 UserGroupManage.viewRouter.register(router, '/home');
 FileManage.viewRouter.register(router, '/assets');
-TaskManagement.viewRouter.register(router, '/home');
+TaskManagement.viewRouter.register(router, '/assets');
 ResourceStatistics.viewRouter.register(router, '/home');
 ComponentState.viewRouter.register(router, '/home');
 

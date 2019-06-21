@@ -200,7 +200,7 @@ export default {
     },
     computed: {
         ...mapState({
-            currentUser: state => state.user.user
+            currentUser: state => state.token.user
         }),
         modelJson() {
             return {
@@ -1210,7 +1210,7 @@ export default {
                 this.isCrontab = !!data.crontab;
                 this.flowState = data.state || nodeState.READY;
                 // 判断是否在别人画布中
-                this.isCurrentUser = this.currentUser._id === data.user._id;
+                this.isCurrentUser = this.currentUser.uuid === data.user._id;
                 this.zoom = (model && model.zoom) || 100;
                 this.updateNodes((model && model.nodes) || []);
                 this.updateLinks((model && model.links) || [], true);

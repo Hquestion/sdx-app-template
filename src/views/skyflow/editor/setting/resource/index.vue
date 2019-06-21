@@ -5,30 +5,46 @@
             <span>资源配置</span>
         </div>
         <div class="setting-options">
-            <div class="setting-options-item" v-if="executorCPU">
+            <div
+                class="setting-options-item"
+                v-if="executorCPU"
+            >
                 <ResourceConfig
                     v-model="executorCPU"
                     type="cpu"
+                    :required="true"
                 />
             </div>
-            <div class="setting-options-item" v-if="executorGPU">
+            <div
+                class="setting-options-item"
+                v-if="executorGPU"
+            >
                 <ResourceConfig
                     v-model="executorGPU"
                     type="gpu"
+                    :required="true"
                 />
             </div>
-            <div class="setting-options-item" v-if="sparkDriverCPU">
+            <div
+                class="setting-options-item"
+                v-if="sparkDriverCPU"
+            >
                 <ResourceConfig
                     v-model="sparkDriverCPU"
                     type="cpu"
                     cpulabel="Driver CPU/内存"
+                    :required="true"
                 />
             </div>
-            <div class="setting-options-item" v-if="sparkExecutorCPU">
+            <div
+                class="setting-options-item"
+                v-if="sparkExecutorCPU"
+            >
                 <ResourceConfig
                     v-model="sparkExecutorCPU"
                     type="cpu"
                     cpulabel="Executor CPU/内存"
+                    :required="true"
                 />
             </div>
         </div>
@@ -73,7 +89,7 @@ export default {
         },
         executorCPU: {
             get() {
-                return TASK_KIND[taskKind] === 'SPARK' ? null : {
+                return TASK_KIND[this.taskKind] === 'SPARK' ? null : {
                     cpu: this.microCoreToCore(this.resource.EXECUTOR_CPUS),
                     memory: this.byteToGB(this.resource.EXECUTOR_MEMORY),
                     uuid: this.microCoreToCore(this.resource.EXECUTOR_CPUS) + '-' + this.byteToGB(this.resource.EXECUTOR_MEMORY)
@@ -86,7 +102,7 @@ export default {
         },
         executorGPU: {
             get() {
-                return TASK_KIND[taskKind] === 'SPARK' ? null : {
+                return TASK_KIND[this.taskKind] === 'SPARK' ? null : {
                     count: this.resource.EXECUTOR_GPUS,
                     label: this._gpuModel,
                     uuid: this._gpuModel + '-' + this.resource.EXECUTOR_GPUS
@@ -99,7 +115,7 @@ export default {
         },
         sparkDriverCPU: {
             get() {
-                return TASK_KIND[taskKind] === 'SPARK' ? {
+                return TASK_KIND[this.taskKind] === 'SPARK' ? {
                     cpu: this.microCoreToCore(this.resource.SPARK_DRIVER_CPUS),
                     memory: this.byteToGB(this.resource.SPARK_DRIVER_MEMORY),
                     uuid: this.microCoreToCore(this.resource.SPARK_DRIVER_CPUS) + '-' + this.byteToGB(this.resource.SPARK_DRIVER_MEMORY)
@@ -112,7 +128,7 @@ export default {
         },
         sparkExecutorCPU: {
             get() {
-                return TASK_KIND[taskKind] === 'SPARK' ? {
+                return TASK_KIND[this.taskKind] === 'SPARK' ? {
                     cpu: this.microCoreToCore(this.resource.SPARK_EXECUTOR_CPUS),
                     memory: this.byteToGB(this.resource.SPARK_EXECUTOR_MEMORY),
                     uuid: this.microCoreToCore(this.resource.SPARK_EXECUTOR_CPUS) + '-' + this.byteToGB(this.resource.SPARK_EXECUTOR_MEMORY)
