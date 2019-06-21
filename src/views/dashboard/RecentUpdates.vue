@@ -1,5 +1,8 @@
 <template>
-    <div class="recent-updates">
+    <div
+        class="recent-updates"
+        v-loading="loading"
+    >
         <sdxu-content-panel
             :title="title"
             size="small"
@@ -8,7 +11,10 @@
                 class="morebtn"
                 @getMore="getTaskMore"
             />
-            <div class="content">
+            <div
+                class="content"
+                v-if="nameTimes && nameTimes.length"
+            >
                 <div
                     class="item"
                     v-for="(item, index) in nameTimes.slice(0, 5)"
@@ -18,6 +24,9 @@
                     <span>{{ getDateDiff(item.time) }}</span>
                 </div>
             </div>
+            <SdxuEmpty
+                v-if="nameTimes.length === 0 && !loading"
+            />
         </sdxu-content-panel>
     </div>
 </template>
@@ -27,11 +36,6 @@ import MoreBtn from './MoreBtn';
 import { getDateDiff } from '@sdx/utils/lib/helper/transform';
 export default {
     name: 'RecentUpdates',
-    data() {
-        return {
-
-        };
-    },
     props: {
         title: {
             type: String,
@@ -44,24 +48,21 @@ export default {
         path: {
             type: String,
             default: ''
+        },
+        loading: {
+            type: Boolean,
+            default: true
         }
     },
     components: {
         MoreBtn
     },
-    computed: {
-
-    },
-
     methods: {
         getTaskMore() {
             this.$router.push(this.path);
         },
         // 注册
         getDateDiff
-    },
-    watch: {
-
     }
 };
 </script>
