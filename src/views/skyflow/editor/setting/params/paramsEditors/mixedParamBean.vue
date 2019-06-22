@@ -14,7 +14,7 @@
                 :disabled="!isEditable || !param.trainEditable"
                 circle
             >
-                <i class="iconfont icon-jianhao" />
+                <i class="sf-icon sf-jianhao" />
             </el-button>
             <component
                 v-for="(item,index) in param.paramsConf"
@@ -37,7 +37,7 @@
             :disabled="!isEditable || !param.trainEditable"
             @click="handleAddGroup"
         >
-            <i class="iconfont icon-jiahao" />
+            <i class="sf-icon sf-jiahao" />
         </el-button>
     </div>
 </template>

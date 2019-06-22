@@ -40,7 +40,7 @@
                     >
                         <i
                             slot="prefix"
-                            class="iconfont icon-user form-ico"
+                            class="iconfont iconicon-user "
                         />
                     </el-input>
                 </el-form-item>
@@ -61,7 +61,7 @@
                     >
                         <i
                             slot="prefix"
-                            class="iconfont icon-pwd form-ico"
+                            class="iconfont iconicon-quanxianguanli form-ico"
                         />
                     </el-input>
                 </el-form-item>
@@ -199,12 +199,18 @@ export default {
             color: #000;
             height: 40px;
         }
+        .el-input__inner {
+            padding-left: 40px;
+        }
         .el-input {
             display: inline-block;
             // height: 40px;
             background: #fff;
             .form-ico {
                 font-size: 20px;
+            }
+            .iconicon-user {
+                font-size: 26px;
             }
         }
         input:-webkit-autofill {

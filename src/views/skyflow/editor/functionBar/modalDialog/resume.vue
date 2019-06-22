@@ -9,7 +9,7 @@
             <div class="content">
                 <table>
                     <tr>
-                        <td><i class="iconfont icon-gantanhaowenti icon-tips" /></td>
+                        <td><i class="sf-icon sf-gantanhaowenti sf-tips" /></td>
                         <td><span>恢复运行会从失败或被终止的组件开始执行</span></td>
                     </tr>
                     <tr>

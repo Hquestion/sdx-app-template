@@ -10,7 +10,7 @@
             :class="item.disabled ? &quot;disabled&quot; : &quot;&quot;"
         >
             <i
-                class="iconfont"
+                class="sf-icon"
                 :class="item.icon"
             />
             <span>{{ item.label }}</span>

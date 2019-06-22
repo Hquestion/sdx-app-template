@@ -67,5 +67,111 @@ export default {
                 color:#1999f703 !important;
             }
         }
+        .el-steps {
+    .el-step {
+        &.is-center {
+            .el-step__line {
+                height: 4px;
+                background: #1999F7;
+                left: calc(50% + 30px);
+                right: calc(-50% + 30px);
+                top: 19px;
+            }
+        }
+        &.is-vertical {
+            .el-step__head {
+                width: 28px;
+                .el-step__icon {
+                    width: 28px;
+                    height: 28px;
+                    font-size: 12px;
+                }
+                .el-step__line {
+                    left: 14px;
+                    top: 38px;
+                    bottom: 10px;
+                }
+                &.is-wait {
+                    .el-step__icon {
+                        background: #fff;
+                        border: 1px solid #c4c0cc;
+                    }
+                }
+                &.is-success {
+                    .el-step__icon {
+                        background: #fff;
+                        border: 2px solid #1999F7;
+                        color: #1999F7;
+                    }
+                }
+            }
+            .el-step__main {
+                margin-left: 10px;
+                .el-step__title {
+                    margin-top: 5px;
+                }
+            }
+        }
+        .el-step__head{
+            .el-step__icon {
+                width: 44px;
+                height: 44px;
+                background: #ECF6FF;
+                color: #fff;
+                border: none;
+                font-size:24px;
+                font-family:siyuan-rg;
+                line-height:31px;
+            }
+            &.is-process {
+                .el-step__icon {
+                    background: #1999F7;
+                    color: #fff;
+                }
+                .el-step__line {
+                    background: #F2F3F5;
+                }
+            }
+            &.is-wait {
+                .el-step__line {
+                    background: #F2F3F5;
+                }
+                .el-step__icon {
+                    background: #F2F3F5;
+                    color: #C0C4CC;
+                }
+            }
+            &.is-finish {
+                .el-step__icon {
+                    background: #1999F7;
+                    color: #fff;
+                }
+            }
+            &.is-success {
+                color: #1999F7;
+                border: none;
+                .el-step__icon {
+                    background: #1999F7;
+                    color: #fff;
+                }
+            }
+        }
+        .el-step__main {
+            .el-step__title{
+                color: #6E7074;
+                line-height: 19px;
+                margin-top: 18px;
+                font-size: 14px;
+                &.is-finish, &.is-success {
+                    color: #1999F7;
+                }
+                &.is-process {
+                    color: #1999F7;
+                    font-weight: bold !important;
+                }
+            }
+        }
+    }
+}
     }
 </style>

@@ -266,13 +266,13 @@ export default {
                 item => item.fieldName === column.label
             );
             if (!field) return <span />;
-            isNumber(field.fieldType) && (iconClass = 'icon-N');
-            isString(field.fieldType) && (iconClass = 'icon-S');
+            isNumber(field.fieldType) && (iconClass = 'sf-N');
+            isString(field.fieldType) && (iconClass = 'sf-S');
             if (this.readonly) {
                 return (
                     <span class="table-header_customize" title={column.label}>
                         {this.showDataTypeIcon && <i
-                            class={['iconfont', iconClass]}
+                            class={['sf-icon', iconClass]}
                             style="margin-right:5px"
                         />}
                         <span>{column.label}</span>
@@ -313,7 +313,7 @@ export default {
                 return (
                     <span class="table-header_customize" title={column.label} style="display:flex;justify-content:flex-start;align-items:center">
                         <i
-                            class={['iconfont', iconClass]}
+                            class={['sf-icon', iconClass]}
                             style="margin-right:5px"
                         />
                         <span style="overflow:hidden;text-overflow:ellipsis">{column.label}</span>

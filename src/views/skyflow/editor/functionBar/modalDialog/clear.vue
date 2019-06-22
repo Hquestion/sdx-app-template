@@ -9,7 +9,7 @@
             <div class="content">
                 <table>
                     <tr>
-                        <td><i class="iconfont icon-gantanhaowenti icon-tips" /></td>
+                        <td><i class="sf-icon sf-gantanhaowenti sf-tips" /></td>
                         <td><span>确认清除当前画布吗？</span></td>
                     </tr>
                 </table>
