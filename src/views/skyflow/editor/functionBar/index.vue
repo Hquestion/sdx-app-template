@@ -229,6 +229,9 @@ export default {
                         this.$emit('operate', { event: name });
                         break;
                     case 'model':
+                        this.modalName = 'deployModel';
+                        this.detailDialogVisible = true;
+                        break;
                     case 'save-as':
                     case 'clear':
                     case 'timing':
@@ -251,6 +254,7 @@ export default {
             switch (name) {
                     case 'model':
                         able = this.hasModelDeploy;
+                        able = true;
                         break;
                     case 'forward':
                         able =

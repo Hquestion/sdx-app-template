@@ -30,3 +30,7 @@ export {
     default as resume
 }
     from './resume';
+export {
+    default as deployModel
+}
+    from './deployModel';

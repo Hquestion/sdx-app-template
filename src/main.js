@@ -19,7 +19,7 @@ import EmitAsync from './plugins/asyncEmit';
 import directives from '@/directives';
 import i18n from './i18n';
 import SdxUI from '@sdx/ui';
-import { FileSelect, Breadcrumb } from '@sdx/widget';
+import { FileSelect, Breadcrumb, ResourceConfig } from '@sdx/widget';
 import Auth from '@sdx/widget/components/auth';
 import shareCenter from '@sdx/utils/src/helper/shareCenter';
 import febAlive from 'feb-alive';
@@ -35,6 +35,7 @@ Vue.use(ElementUI);
 Vue.use(SdxUI);
 Vue.use(FileSelect);
 Vue.use(Breadcrumb);
+Vue.use(ResourceConfig);
 Vue.use(Auth);
 // register global utility filters.
 Object.keys(filters).forEach(key => {
