@@ -155,7 +155,7 @@ export default {
         border: 1px solid #E6E9F1;
         .step-main-container {
             width: 100%;
-            min-height: calc(100vh - 320px - 97px);;
+            min-height: calc(100vh - 472px);;
             padding: 0;
             margin: 0 auto;
             background: #fff;
