@@ -208,7 +208,8 @@ export default {
             const typeRouterMap = {
                 source: '/#/sdxv-resource-manage',
                 user: '/#/sdxv-user-manage',
-                rights: '/#/authorize-manage'
+                rights: '/#/authorize-manage',
+                monitor: '/#/sdxv-resource-statistics'
             };
             window.open(typeRouterMap[type]);
         },
