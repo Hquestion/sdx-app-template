@@ -138,14 +138,14 @@ module.exports = {
                 ws: true,
                 changeOrigin: true
             },
-            '/mock': {
-                target: 'https://easy-mock.com',
-                ws: true,
-                changeOrigin: true,
-                pathRewrite: {
-                    '/mock': '/mock/5cd04685adb0973be6a3d969/'
-                }
-            },
+            // '/mock': {
+            //     target: 'https://easy-mock.com',
+            //     ws: true,
+            //     changeOrigin: true,
+            //     pathRewrite: {
+            //         '/mock': '/mock/5cd04685adb0973be6a3d969/'
+            //     }
+            // },
             '^/file-manager': {
                 target: 'http://10.115.1.130:30080',
                 ws: true,
@@ -163,6 +163,21 @@ module.exports = {
             },
             '^/skyflow-manager': {
                 target: 'http://10.115.1.130:30080',
+                ws: true,
+                changeOrigin: true
+            },
+            '^/storage-manager': {
+                target: 'http://10.115.1.130:30080',
+                ws: true,
+                changeOrigin: true
+            },
+            '^/api/v1/datasource': {
+                target: 'http://10.201.0.29:5000',
+                ws: true,
+                changeOrigin: true
+            },
+            '^/api/v1/dataset': {
+                target: 'http://10.201.0.29:5000',
                 ws: true,
                 changeOrigin: true
             }

@@ -82,6 +82,7 @@ export default {
     methods: {
         initTargetTypeOptions() {
             getDataSourceOptions().then(res => {
+                res = res.data;
                 let sourceOptions = _.cloneDeep(DATA_SOURCE_OPTIONS);
                 Object.entries(SOURCE_SYSTEM_MAP).forEach(([k, v]) => {
                     let options = res.options.filter(item => item.kind === k);

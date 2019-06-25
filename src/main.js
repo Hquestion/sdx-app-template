@@ -68,7 +68,8 @@ shareCenter.setup({
             { key: 'APPLICATION:DATA_MANAGER_MENU:ACCESS:""', tags: ['MENU'] },
             { key: 'PROJECT-MANAGER:PROJECT:CREATE:""', tags: ['BUTTON'] },
             { key: 'PROJECT-MANAGER:TEMPLATE_PROJECT:CREATE:""', tags: ['BUTTON'] },
-            { key: 'APPLICATION:GLOBAL_IMAGE_BUTTON:ACCESS:""', tags: ['BUTTON'] }
+            { key: 'APPLICATION:GLOBAL_IMAGE_BUTTON:ACCESS:""', tags: ['BUTTON'] },
+            { key: 'PROJECT-MANAGER:TASK:CREATE:""', tags: ['BUTTON'] }
         ]);
         user.user.userId = user.user.uuid;
         return user.user;

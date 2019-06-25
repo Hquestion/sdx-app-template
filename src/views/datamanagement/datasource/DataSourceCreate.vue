@@ -289,6 +289,7 @@ export default {
         getDataSourceDetail(): Promise<any> {
             return new Promise((resolve, reject) => {
                 dataSourceInfo(this.id).then(res => {
+                    res = res.data;
                     let model = {
                         name: res.name,
                         sourceType: res.kind,
@@ -394,7 +395,7 @@ export default {
         .data-source-panel {
             height: calc(100% - 50px);
             .data-source-create-form {
-                min-height: calc(100vh - 200px);;
+                min-height: calc(100vh - 300px);;
                 width: auto;
                 margin: 0 auto;
                 padding: 50px calc(50% - 320px) 62px;
