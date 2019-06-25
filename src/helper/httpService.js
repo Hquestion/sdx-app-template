@@ -19,8 +19,8 @@ httpService.register({
         tokenValue() {
             return store && store.state.user && store.state.user.token.accessToken || '';
         }
-    },
-    mock: MOCK_API_CONFIG
+    }
+    // mock: MOCK_API_CONFIG
 });
 
 export default httpService;

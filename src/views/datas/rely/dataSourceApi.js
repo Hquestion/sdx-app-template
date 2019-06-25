@@ -8,14 +8,9 @@ import httpService from '../../../helper/httpService';
  * @param Object params={}
  * @returns Array
  */
-// export function getSourceList(params) {
-//     return httpService
-//         .get('/v2/datasource/', {
-//             ...params
-//         });
-// }
+
 export function getSourceList(params = {}) {
-    return httpService.get('/v2/datasource/', { ...params });
+    return httpService.get('/api/v1/datasource/', { ...params });
 }
 /**
  * 添加数据源
@@ -24,7 +19,7 @@ export function getSourceList(params = {}) {
  * @returns
  */
 export function addDataSource(dataSource = {}) {
-    return httpService.post('/v2/datasource/create', dataSource);
+    return httpService.post('/api/v1/datasource/create', dataSource);
 }
 
 /**
@@ -34,7 +29,7 @@ export function addDataSource(dataSource = {}) {
  * @returns
  */
 export function updateDataSource(dataSource = {}) {
-    return httpService.post('/v2/datasource/update', dataSource);
+    return httpService.post('/api/v1/datasource/update', dataSource);
 }
 
 /**
@@ -44,11 +39,11 @@ export function updateDataSource(dataSource = {}) {
  * @returns
  */
 export function deleteDataSource(simpleParams) {
-    return httpService.post('/v2/datasource/rm', simpleParams);
+    return httpService.post('/api/v1/datasource/rm', simpleParams);
 }
 
 export function removeDataSource(simpleParams) {
-    return httpService.post('/v2/datasource/delete', simpleParams);
+    return httpService.post('/api/v1/datasource/delete', simpleParams);
 }
 /**
  * 查找数据源
@@ -57,87 +52,85 @@ export function removeDataSource(simpleParams) {
  * @returns
  */
 export function getDataSourceDetail(params = {}) {
-    return httpService.get('/v2/datasource/get', { params });
+    return httpService.get('/api/v1/datasource/get', { params });
 }
 
 /**
  * 查询数据源标签选项
  */
 export function getDataSourceOptions() {
-    return httpService.get('/v2/datasource/options');
+    return httpService.get('/api/v1/datasource/options');
 }
 
 /**
  * 数据集查询
  */
 export function getDataset(params = {}) {
-    return httpService.get('/v2/dataset/', { ...params });
+    return httpService.get('/api/v1/dataset/', { ...params });
 }
 
 /**
  * 数据元查询
  */
 export function getDatasetInfo(params = {}) {
-    return httpService.get('/v2/dataset/info', { params });
+    return httpService.get('/api/v1/dataset/info', { params });
 }
 /**
  * 数据下载
  */
 export function getDataPath(params = {}) {
-    return httpService.get('/v2/dataset/download', { params });
+    return httpService.get('/api/v1/dataset/download', { params });
 }
 /**
  * 数据集数据预览
  */
 export function getPreviewData(params = {}) {
-    return httpService.get('/v2/dataset/preview_data', { params });
+    return httpService.get('/api/v1/dataset/preview_data', { params });
 }
 /**
  * 数据集更新
  */
 export function updataDataset(params) {
-    return httpService.post('/v2/dataset/update', params);
+    return httpService.post('/api/v1/dataset/update', params);
 }
 
 /**
  * 数据元查询
  */
 export function removeDatasetItem(params) {
-    return httpService.post('/v2/dataset/rm', params);
+    return httpService.post('/api/v1/dataset/rm', params);
 }
 export function generateSchema(data) {
-    return httpService.post('/v2/dataset/schema', data);
+    return httpService.post('/api/v1/dataset/schema', data);
 }
 
 export function testDbConnection(data) {
-    return httpService.post('/v2/dataset/db_test', data);
+    return httpService.post('/api/v1/dataset/db_test', data);
 }
 
 export function createDatasetPreProcess(data) {
-    return httpService.post('/v2/dataset/create/preProcess', data);
+    return httpService.post('/api/v1/dataset/create/preProcess', data);
 }
 
 export function createDataset(data) {
-    return httpService.post('/v2/dataset/create', data);
+    return httpService.post('/api/v1/dataset/create', data);
 }
 
 export function fetchDBTables(data) {
-    return httpService.get('/v2/dataset/db_table/option', {
+    return httpService.get('/api/v1/dataset/db_table/option', {
         params: data
     });
 }
 
 export function uploadSchemaFile(path) {
-    return httpService.post('/v2/dataset/schema/upload', {
+    return httpService.post('/api/v1/dataset/schema/upload', {
         schema_file_path: path
     });
 }
 
 export function isDatasetNameExist(name) {
-    return httpService.get('/v2/dataset/exist', {
-        params: {
-            name
-        }
+    return httpService.get('/api/v1/dataset/exist', {
+        name
     });
 }
 
@@ -147,7 +140,7 @@ export function isDatasetNameExist(name) {
  * @returns {*}
  */
 export function createDataSource(params) {
-    return httpService.post('/v2/datasource/create', {
+    return httpService.post('/api/v1/datasource/create', {
         ...params
     });
 }
@@ -158,15 +151,13 @@ export function createDataSource(params) {
  * @returns {*}
  */
 export function dataSourceInfo(datasource) {
-    return httpService.get('/v2/datasource/info', {
-        params: {
-            datasource
-        }
+    return httpService.get('/api/v1/datasource/info', {
+        datasource
     });
 }
 
 export function dataSourceUpdate(params) {
-    return httpService.post('/v2/datasource/update', {
+    return httpService.post('/api/v1/datasource/update', {
         ...params
     });
 }
@@ -177,7 +168,7 @@ export function dataSourceUpdate(params) {
  * @returns {*}
  */
 export function testDataSourceConnection(params) {
-    return httpService.post('/v2/datasource/test', { ...params });
+    return httpService.post('/api/v1/datasource/test', { ...params });
 }
 
 /**
@@ -186,7 +177,7 @@ export function testDataSourceConnection(params) {
  * @returns {*}
  */
 export function getDataSourceList(params) {
-    return httpService.get('/v2/datasource', {
+    return httpService.get('/api/v1/datasource', {
         params: {
             name: params.name,
             kind: params.kind,
@@ -202,7 +193,7 @@ export function getDataSourceList(params) {
  * @returns {*}
  */
 export function getDataSourceOptionsNew(kind) {
-    return httpService.get('/v2/datasource/options', {
+    return httpService.get('/api/v1/datasource/options', {
         params: {
             kind
         }
@@ -210,7 +201,7 @@ export function getDataSourceOptionsNew(kind) {
 }
 
 export function fetchDbTablesBySource(datasource) {
-    return httpService.get('/v2/datasource/dbTables', {
+    return httpService.get('/api/v1/datasource/dbTables', {
         params: {
             datasource
         }
@@ -221,19 +212,19 @@ export function fetchDbTablesBySource(datasource) {
  * 数据集标签
  */
 export function getDataTag() {
-    return httpService.get('/v2/dataset/tag/options');
+    return httpService.get('/api/v1/dataset/tag/options');
 }
 
 /**
  * 数据集和数据文件预览
  */
 export function getDatasetPreview(params = {}) {
-    return httpService.post('/v2/dataset/preview', { ...params });
+    return httpService.post('/api/v1/dataset/preview', { ...params });
 }
 
 /**
  * jupyter 跳转地址
  */
 export function getJupyterUrl(params = {}) {
-    return httpService.post('/v2/dataset/jupyter', { ...params });
+    return httpService.post('/api/v1/dataset/jupyter', { ...params });
 }

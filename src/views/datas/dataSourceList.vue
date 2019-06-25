@@ -66,7 +66,7 @@
                             v-if="scope.row.all_operations.includes('detail')"
                         >
                             <i
-                                class="iconfont icon-Icon-eye"
+                                class="iconfont iconicon-yanjing"
                                 title="详情"
                             />
                         </el-button>
@@ -77,7 +77,7 @@
                             v-if="scope.row.all_operations.includes('test')"
                         >
                             <i
-                                class="iconfont icon-test"
+                                class="iconfont icontest"
                                 title="测试"
                             />
                         </el-button>
@@ -88,7 +88,7 @@
                             v-if="scope.row.all_operations.includes('edit')"
                         >
                             <i
-                                class="iconfont icon-ico_edite"
+                                class="iconfont iconicon-edit1"
                                 title="编辑"
                             />
                         </el-button>
@@ -99,7 +99,7 @@
                             v-if="scope.row.all_operations.includes('remove')"
                         >
                             <i
-                                class="iconfont icon-delete"
+                                class="iconfont iconicon-delete1"
                                 title="删除"
                             />
                         </el-button>
@@ -150,9 +150,9 @@ export default {
         // 数据源查询
         dataSourceList() {
             getSourceList(this.search)
-                .then(data => {
-                    this.tableData = data.items;
-                    this.total = data.total;
+                .then(res => {
+                    this.tableData = res.data.items;
+                    this.total = res.data.total;
                     // bugfix 修正当前页数,如果最后一页的最后一项被删除,会导致页面停留在一个空页上
                     if (
                         Math.ceil(this.total / this.search.page_size) <
