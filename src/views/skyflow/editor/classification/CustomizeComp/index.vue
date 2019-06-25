@@ -189,6 +189,7 @@ export default {
                     }
                 }
             }
+            return '';
         },
         isTrainComp() {
             if (this.compType) {

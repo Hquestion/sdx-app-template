@@ -19,7 +19,7 @@ import EmitAsync from './plugins/asyncEmit';
 import directives from '@/directives';
 import i18n from './i18n';
 import SdxUI from '@sdx/ui';
-import { FileSelect, Breadcrumb } from '@sdx/widget';
+import { FileSelect, Breadcrumb, ResourceConfig } from '@sdx/widget';
 import Auth from '@sdx/widget/components/auth';
 import shareCenter from '@sdx/utils/src/helper/shareCenter';
 import febAlive from 'feb-alive';
@@ -35,6 +35,7 @@ Vue.use(ElementUI);
 Vue.use(SdxUI);
 Vue.use(FileSelect);
 Vue.use(Breadcrumb);
+Vue.use(ResourceConfig);
 Vue.use(Auth);
 // register global utility filters.
 Object.keys(filters).forEach(key => {
@@ -54,6 +55,12 @@ shareCenter.setup({
             { key: 'APPLICATION:MODEL_MANAGER_MENU:ACCESS:""', tags: ['MENU'] },
             { key: 'RESOURCE-MANAGER:TEMPLATE:READ:""', tags: ['BUTTON'] },
             { key: 'RESOURCE-MANAGER:TEMPLATE:WRITE:""', tags: ['BUTTON'] },
+            { key: 'MODEL-MANAGER:MODEL_VERSION:CREATE:""', tags: ['BUTTON'] },
+            { key: 'MODEL-MANAGER:MODEL:CREATE:""', tags: ['BUTTON'] },
+            { key: 'MODEL-MANAGER:MODEL:SHARE:""', tags: ['BUTTON'] },
+            { key: 'IMAGE-MANAGER:IMAGE:SHARE:""', tags: ['BUTTON'] },
+            { key: 'SKYFLOW-MANAGER:FLOW:CREATE:""', tags: ['BUTTON'] },
+            { key: 'SKYFLOW-MANAGER:TEMPLATE_FLOW:CREATE:""', tags: ['BUTTON'] },
             { key: 'APPLICATION:IMAGE_MANAGER_MENU:ACCESS:""', tags: ['MENU'] },
             { key: 'IMAGE-MANAGER:IMAGE_BUILDER:BUILD_BASIC:""', tags: ['BUTTON'] },
             { key: 'IMAGE-MANAGER:IMAGE_BUILDER:BUILD_TAR:""', tags: ['BUTTON'] },
