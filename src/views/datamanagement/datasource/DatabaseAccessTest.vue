@@ -58,7 +58,7 @@ export default {
         }
     },
     methods: {
-        validateField(field: string): Promise<any> {
+        validateField(field) {
             return new Promise((resolve, reject) => {
                 this.parentForm.validateField(field, msg => {
                     if (msg) {
@@ -69,7 +69,7 @@ export default {
                 });
             });
         },
-        testConnection(): Promise<any> {
+        testConnection() {
             if (this.sourceId) {
                 return new Promise((resolve, reject) => {
                     this.isTesting = true;

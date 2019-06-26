@@ -2,9 +2,10 @@
     <sdxu-dialog
         :visible.sync="__visible"
         size="large"
-        :title="params._id !== '' ? '编辑数据服务' : '新建数据服务'"
+        :title="params.uuid !== '' ? '编辑数据服务' : '新建数据服务'"
         class="data-service"
         @open="open"
+        @confirm="confirm"
     >
         <el-form
             label-position="right"
@@ -90,7 +91,7 @@
 import { getImageList } from '@sdx/utils/src/api/image';
 import ResourceConfig from '@sdx/view/components/project-management/src/forms/ResourceConfig';
 import { createTask, updateTask } from '@sdx/utils/src/api/project';
-import { cNameValidate } from '@sdx/utils/src/helper/validate';
+import { nameWithChineseValidator } from '@sdx/utils/src/helper/validate';
 import ElSelect from 'element-ui/lib/select';
 export default {
     name: 'DataServiceForm',
@@ -120,7 +121,7 @@ export default {
                 projectId: this.$route.params.projectId,
                 name: '',
                 description: '',
-                type: 'SPARK',
+                type: 'DATA_SERVICE',
                 imageId: '',
                 resourceConfig: {
                     SPARK_DRIVER_CPUS: 0,
@@ -144,7 +145,7 @@ export default {
                             return value && ('' + value).trim();
                         }
                     },
-                    { validator: cNameValidate, trigger: 'blur' }
+                    { validator: nameWithChineseValidator, trigger: 'blur' }
                 ],
                 imageId: [
                     { required: true, message: '请选择运行环境', trigger: 'change' }
@@ -188,11 +189,31 @@ export default {
                     }
                     this.imageOptions = options;
                 });
+        },
+        confirm() {
+            this.$refs.dataService.validate().then(() => {
+                (this.params.uuid ? updateTask(this.params.uuid, this.params) : createTask(this.params))
+                    .then(() => {
+                        this.$router.go(-1);
+                    });
+            });
         }
-
     },
 
     watch: {
+        task(nval) {
+            this.params = { ...this.params, ...nval };
+            this.cpuDriver = {
+                cpu: this.params.resourceConfig.SPARK_DRIVER_CPUS / 1000,
+                memory: this.params.resourceConfig.SPARK_DRIVER_MEMORY / (1024 * 1024 * 1024),
+                uuid: `${this.params.resourceConfig.SPARK_DRIVER_CPUS / 1000}-${this.params.resourceConfig.SPARK_DRIVER_MEMORY / (1024 * 1024 * 1024)}`
+            };
+            this.cpuExecute = {
+                cpu: this.params.resourceConfig.SPARK_EXECUTOR_CPUS / 1000,
+                memory: this.params.resourceConfig.SPARK_EXECUTOR_MEMORY / (1024 * 1024 * 1024),
+                uuid: `${this.params.resourceConfig.SPARK_EXECUTOR_CPUS / 1000}-${this.params.resourceConfig.SPARK_EXECUTOR_MEMORY / (1024 * 1024 * 1024)}`
+            };
+        },
         cpuDriver(val) {
             this.params.resourceConfig = {
                 SPARK_DRIVER_CPUS: val.cpu * 1000,
