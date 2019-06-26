@@ -74,6 +74,12 @@ export const viewOperation = [{
     icon: 'sf-jiahao'
 }];
 
+export const deployOperation = [{
+    label: '模型部署',
+    name: 'model',
+    icon: 'iconbushu'
+}];
+
 export const componentNav = [{
     label: '数据集',
     name: 'dataset',

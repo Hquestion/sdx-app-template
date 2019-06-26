@@ -11,6 +11,11 @@ export const SOURCE_TYPES_OPTION = [
         dsiabled: false
     },
     {
+        label: 'Kafka',
+        value: 'KAFKA',
+        dsiabled: false
+    },
+    {
         label: 'Hive',
         value: 'HIVE',
         disabled: true

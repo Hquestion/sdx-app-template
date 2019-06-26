@@ -69,6 +69,7 @@ export default {
                         options(model) {
                             return new Promise((resolve, reject) => {
                                 getDataSourceOptions().then(res => {
+                                    res = res.data;
                                     let sourceOptions = _.cloneDeep(DATA_SOURCE_OPTIONS);
                                     Object.entries(SOURCE_SYSTEM_MAP).forEach(([k, v]) => {
                                         let options = res.options.filter(item => item.kind === k);
@@ -77,7 +78,7 @@ export default {
                                     if (self.$store.state.dataset.form.dataSource.sourceType) {
                                         this.value = self.$store.state.dataset.form.dataSource.sourceType;
                                     } else {
-                                        this.value = sourceOptions[0].value + '@' + sourceOptions[0].options[0].value;
+                                        this.value = sourceOptions[0].value + '@' + (sourceOptions[0].options.length ? sourceOptions[0].options[0].value : '');
                                     }
                                     this.options = sourceOptions;
                                     resolve(sourceOptions);

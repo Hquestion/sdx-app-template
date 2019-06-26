@@ -12,6 +12,7 @@
                 :is-ready="isReady"
                 :is-current-user="isCurrentUser"
                 :is-execute="!!executeId"
+                :hasModelDeploy="hasModelDeploy"
                 :zoom="zoom"
                 :forward-able="!!revokeQueue.length"
                 :back-able="!!operationQueue.length"
@@ -235,6 +236,9 @@ export default {
             return this.isCurrentUser
                 ? { width: 'calc(100% - 250px - 250px)' }
                 : { width: 'calc(100% - 250px)' };
+        },
+        hasModelDeploy() {
+            return [nodeState.SUCCESS].includes(this.flowState);
         }
     },
     methods: {

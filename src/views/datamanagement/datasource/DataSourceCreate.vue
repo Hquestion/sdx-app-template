@@ -62,8 +62,8 @@ export default {
                         options: SOURCE_TYPES_OPTION,
                         tooltip: '系统自带本地文件系统、平台ceph文件系统和HDFS数据源，此三种数据源无需手动创建。',
                         tooltipVisible: false,
-                        formatter(value): string {
-                            const opt: Object = SOURCE_TYPES_OPTION.find(item => item.value === value);
+                        formatter(value) {
+                            const opt = SOURCE_TYPES_OPTION.find(item => item.value === value);
                             return opt && opt.label;
                         }
                     }),
@@ -77,37 +77,10 @@ export default {
                             new Validator({ required: true, message: '请选择数据库种类', trigger: 'change' }, false)
                         ],
                         options: SQL_SERVER_OPTION,
-                        hide(model: Object): boolean {
+                        hide(model) {
                             return model.sourceType !== 'SQL_DATABASE';
                         }
                     }),
-                    // new SkyFormItem({
-                    //     label: 'Driver：',
-                    //     prop: 'driver',
-                    //     value: SQL_DATABASE_DRIVER_OPTION[0].value,
-                    //     inputType: 'SELECT',
-                    //     placeholder: '请选择数据库驱动',
-                    //     validator: [
-                    //         new Validator({ required: true, message: '请选择数据库驱动', trigger: 'change' }, false)
-                    //     ],
-                    //     options: SQL_DATABASE_DRIVER_OPTION,
-                    //     hide(model: Object) {
-                    //         return model.sourceType !== 'SQL_DATABASE';
-                    //     }
-                    // }),
-                    // new SkyFormItem({
-                    //     label: 'URL：',
-                    //     prop: 'url',
-                    //     value: '',
-                    //     inputType: 'INPUT',
-                    //     placeholder: '请输入数据库连接地址',
-                    //     validator: [
-                    //         new Validator({ required: true, message: '请输入数据库连接地址', trigger: 'blur' })
-                    //     ],
-                    //     hide(model: Object) {
-                    //         return model.sourceType !== 'SQL_DATABASE';
-                    //     }
-                    // }),
                     new SkyFormItem({
                         label: 'HOST：',
                         prop: 'host',
@@ -117,7 +90,7 @@ export default {
                         validator: [
                             new Validator({ required: true, message: '请输入host', trigger: 'blur' })
                         ],
-                        hide(model: Object) {
+                        hide(model) {
                             return model.sourceType !== 'SQL_DATABASE';
                         }
                     }),
@@ -130,7 +103,7 @@ export default {
                         validator: [
                             new Validator({ required: true, message: '请输入端口', trigger: 'blur' })
                         ],
-                        hide(model: Object) {
+                        hide(model) {
                             return model.sourceType !== 'SQL_DATABASE';
                         }
                     }),
@@ -143,7 +116,7 @@ export default {
                         validator: [
                             new Validator({ required: true, message: '请输入数据库名称', trigger: 'blur' })
                         ],
-                        hide(model: Object) {
+                        hide(model) {
                             return model.sourceType !== 'SQL_DATABASE';
                         }
                     }),
@@ -156,7 +129,7 @@ export default {
                         validator: [
                             new Validator({ required: true, message: '请输入数据库用户名', trigger: 'blur' })
                         ],
-                        hide(model: Object) {
+                        hide(model) {
                             return model.sourceType !== 'SQL_DATABASE';
                         }
                     }),
@@ -169,7 +142,7 @@ export default {
                         validator: [
                             new Validator({ required: true, message: '请输入数据库密码', trigger: 'blur' }, false)
                         ],
-                        hide(model: Object) {
+                        hide(model) {
                             return model.sourceType !== 'SQL_DATABASE';
                         },
                         formatter(value) {
@@ -185,7 +158,7 @@ export default {
                         validator: [
                             new Validator({ required: true, message: '请输入ip', trigger: 'blur' })
                         ],
-                        hide(model: Object) {
+                        hide(model) {
                             return model.sourceType !== 'HDFS';
                         }
                     }),
@@ -198,7 +171,7 @@ export default {
                         validator: [
                             new Validator({ required: true, message: '请输入端口', trigger: 'blur' })
                         ],
-                        hide(model: Object) {
+                        hide(model) {
                             return model.sourceType !== 'HDFS';
                         }
                     }),
@@ -211,8 +184,34 @@ export default {
                         validator: [
                             new Validator({ required: true, message: '请输入工作空间', trigger: 'blur' })
                         ],
-                        hide(model: Object) {
+                        hide(model) {
                             return model.sourceType !== 'HDFS';
+                        }
+                    }),
+                    new SkyFormItem({
+                        label: 'BOOTSTRAP_SERVERS：',
+                        prop: 'bootstrap_servers',
+                        value: '',
+                        inputType: 'INPUT',
+                        placeholder: '请输入BOOTSTRAP_SERVERS',
+                        validator: [
+                            new Validator({ required: true, message: '请输入BOOTSTRAP_SERVERS', trigger: 'blur' })
+                        ],
+                        hide(model) {
+                            return model.sourceType !== 'KAFKA';
+                        }
+                    }),
+                    new SkyFormItem({
+                        label: 'TOPIC：',
+                        prop: 'topic',
+                        value: '',
+                        inputType: 'INPUT',
+                        placeholder: '请输入TOPIC',
+                        validator: [
+                            new Validator({ required: true, message: '请输入TOPIC', trigger: 'blur' })
+                        ],
+                        hide(model) {
+                            return model.sourceType !== 'KAFKA';
                         }
                     }),
                     new SkyFormItem({
@@ -226,12 +225,12 @@ export default {
                                 <database-access-test {...{ attrs: { ...attr } }} />
                             );
                         },
-                        hide(model: Object) {
-                            return model.sourceType !== 'SQL_DATABASE';
+                        hide(model) {
+                            return model.sourceType === 'HDFS';
                         }
                     })
                 ],
-                labelWidth: '120px',
+                labelWidth: '150px',
                 readonly: false,
                 appendFooter: true
             })
@@ -286,9 +285,10 @@ export default {
                 // 创建时不需要做什么
             }
         },
-        getDataSourceDetail(): Promise<any> {
+        getDataSourceDetail() {
             return new Promise((resolve, reject) => {
                 dataSourceInfo(this.id).then(res => {
+                    res = res.data;
                     let model = {
                         name: res.name,
                         sourceType: res.kind,
@@ -302,19 +302,21 @@ export default {
                         path: res.params.path,
                         db: res.params.database,
                         db_port: res.params.port,
-                        host: res.params.host
+                        host: res.params.host,
+                        topic: res.params.topic,
+                        bootstrap_servers: res.params.bootstrap_servers
                     };
                     resolve(model);
                 }, reject);
             });
         },
-        submitForm(model: Object) {
+        submitForm(model) {
             // pass
             if (this.isRead) {
                 this.$router.go(-1);
                 return;
             }
-            const param: Object = {
+            const param = {
                 name: model.name,
                 kind: model.sourceType,
                 params: {
@@ -322,7 +324,7 @@ export default {
                     path: ''
                 }
             };
-            const SQL_PARAMS: Object = {
+            const SQL_PARAMS = {
                 kind_type: model.databaseType,
                 params: {
                     // driver: model.driver,
@@ -334,16 +336,23 @@ export default {
                     database: model.db
                 }
             };
-            const HDFS_PARAMS: Object = {
+            const HDFS_PARAMS = {
                 params: {
                     host: model.ip,
                     port: +model.port,
                     path: model.path
                 }
             };
-            const KIND_MAP: Object = {
+            const KAFKA_PARAMS = {
+                params: {
+                    bootstrap_servers: model.bootstrap_servers,
+                    topic: model.topic
+                }
+            };
+            const KIND_MAP = {
                 SQL_DATABASE: SQL_PARAMS,
-                HDFS: HDFS_PARAMS
+                HDFS: HDFS_PARAMS,
+                KAFKA: KAFKA_PARAMS
             };
             if (this.id) {
                 param.datasource = this.id;
@@ -360,11 +369,12 @@ export default {
                 });
             }
         },
-        onAccess(): Promise<any> {
+        onAccess() {
             return new Promise((resolve, reject) => {
                 const model = this.$refs.dataSourceForm.getModel();
-                this.$refs.dataSourceForm.validateFields(['username', 'password', 'host', 'db_port', 'db']).then(() => {
-                    testDataSourceConnection({
+                let [params, validatorParams] = [{}, []];
+                if (model.sourceType === 'SQL_DATABASE') {
+                    params = {
                         // datasource: '',
                         kind: model.sourceType,
                         kind_type: model.databaseType || null,
@@ -375,7 +385,18 @@ export default {
                         username: model.username,
                         password: model.password,
                         path: ''
-                    }).then(resolve, reject);
+                    };
+                    validatorParams = ['username', 'password', 'host', 'db_port', 'db'];
+                } else {
+                    params = {
+                        bootstrap_servers: model.bootstrap_servers,
+                        topic: model.topic
+                    };
+                    validatorParams = ['bootstrap_servers', 'topic'];
+                }
+
+                this.$refs.dataSourceForm.validateFields(validatorParams).then(() => {
+                    testDataSourceConnection(params).then(resolve, reject);
                 }, () => {
                     reject('VALIDATE_ERROR');
                 });
@@ -394,7 +415,7 @@ export default {
         .data-source-panel {
             height: calc(100% - 50px);
             .data-source-create-form {
-                min-height: calc(100vh - 200px);;
+                min-height: calc(100vh - 300px);;
                 width: auto;
                 margin: 0 auto;
                 padding: 50px calc(50% - 320px) 62px;

@@ -306,6 +306,7 @@ export default {
                     }
                 }
             }
+            return '';
         },
         runEnvType() {
             for (let i = 0, len = this.runtimeTypes.length; i < len; i++) {
@@ -319,6 +320,7 @@ export default {
                     }
                 }
             }
+            return '';
         },
         isTrainComp() {
             if (this.compType) {
