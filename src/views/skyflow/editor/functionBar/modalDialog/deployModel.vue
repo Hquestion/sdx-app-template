@@ -135,7 +135,7 @@
 </template>
 
 <script>
-import { getModelList, getFrameworks, getComponents } from '@sdx/utils/src/api/model';
+import { getModelList, getFrameworks, getComponents, deployModel } from '@sdx/utils/src/api/model';
 import { getImageList } from '@sdx/utils/src/api/image';
 export default {
     name: 'DeployModel',
@@ -259,6 +259,13 @@ export default {
                     this.modelInfoForm.runtimeResource.gpu = this.modelInfoForm.runtimeResource.gpuObj.count;
                     this.modelInfoForm.runtimeResource.gpuModel = this.modelInfoForm.runtimeResource.gpuObj.label;
                     this.modelInfoForm.modelId = this.nameOptions.find(item => item.uuid === this.modelInfoForm.modelName) ? this.modelInfoForm.modelName : '';
+                    deployModel(this.modelInfoForm).then(() => {
+                        this.$message({
+                            message: '操作成功',
+                            type: 'success'
+                        });
+                        this.detailDialogVisible = false;
+                    });
                 }
             });
         }

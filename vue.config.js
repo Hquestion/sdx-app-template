@@ -180,7 +180,15 @@ module.exports = {
                 target: 'http://10.201.0.29:5000',
                 ws: true,
                 changeOrigin: true
-            }
+            },
+            '^/api/v1': {
+                target: 'https://easy-mock.com',
+                ws: true,
+                changeOrigin: true,
+                pathRewrite: {
+                    '/api/v1': '/mock/5cd04685adb0973be6a3d969/api/v1'
+                }
+            },
         },
         overlay: true
     },
