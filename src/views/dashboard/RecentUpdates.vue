@@ -26,6 +26,7 @@
             </div>
             <SdxuEmpty
                 v-if="nameTimes.length === 0 && !loading"
+                size="small"
             />
         </sdxu-content-panel>
     </div>

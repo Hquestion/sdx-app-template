@@ -149,10 +149,12 @@ module.exports = {
             '^/file-manager': {
                 target: 'http://10.115.1.130:30080',
                 ws: true,
-                changeOrigin: true,
-                pathRewrite: {
-                    '/file-manager': '/file-manager'
-                }
+                changeOrigin: true
+            },
+            '^/resource-manager': {
+                target: 'http://10.115.1.130:30080',
+                ws: true,
+                changeOrigin: true
             },
             '^/model-manager': {
                 target: 'http://10.115.1.130:30080',
