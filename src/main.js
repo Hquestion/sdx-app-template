@@ -69,7 +69,13 @@ shareCenter.setup({
             { key: 'PROJECT-MANAGER:PROJECT:CREATE:""', tags: ['BUTTON'] },
             { key: 'PROJECT-MANAGER:TEMPLATE_PROJECT:CREATE:""', tags: ['BUTTON'] },
             { key: 'APPLICATION:GLOBAL_IMAGE_BUTTON:ACCESS:""', tags: ['BUTTON'] },
-            { key: 'PROJECT-MANAGER:TASK:CREATE:""', tags: ['BUTTON'] }
+            { key: 'PROJECT-MANAGER:TASK:CREATE:""', tags: ['BUTTON'] },
+            { key: 'USER-MANAGER:USER:READ:""', tags: ['BUTTON'] },
+            { key: 'USER-MANAGER:USER:WRITE:""', tags: ['BUTTON'] },
+            { key: 'USER-MANAGER:GROUP:READ:""', tags: ['BUTTON'] },
+            { key: 'USER-MANAGER:GROUP:WRITE:""', tags: ['BUTTON'] },
+            { key: 'USER-MANAGER:ROLE:READ:""', tags: ['BUTTON'] },
+            { key: 'USER-MANAGER:ROLE:WRITE:""', tags: ['BUTTON'] }
         ]);
         user.user.userId = user.user.uuid;
         return user.user;

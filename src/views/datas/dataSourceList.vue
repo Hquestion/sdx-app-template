@@ -54,7 +54,13 @@
                     prop="created_at"
                     label="创建时间"
                     sortable="custom"
-                />
+                >
+                    <template
+                        slot-scope="scope"
+                    >
+                        {{ dateFormatter(scope.row.created_at) }}
+                    </template>
+                </el-table-column>
                 <el-table-column
                     label="操作"
                 >
@@ -125,7 +131,7 @@
 <script>
 
 import { getSourceList, removeDataSource, testDataSourceConnection } from './rely/dataSourceApi';
-
+import { dateFormatter } from '@sdx/utils/src/helper/transform';
 export default {
     name: 'DataSourceList',
     data() {
@@ -147,6 +153,7 @@ export default {
         this.dataSourceList();
     },
     methods: {
+        dateFormatter,
         // 数据源查询
         dataSourceList() {
             getSourceList(this.search)
