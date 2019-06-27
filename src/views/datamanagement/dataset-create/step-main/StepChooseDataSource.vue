@@ -35,7 +35,7 @@ import StepChangeHooks from './mixins/StepChangeHooks';
 import SkyForm from '../../../datas/rely/SkyForm';
 import { SkyFormMain } from '../../../datas/rely/SkyFormJs/SkyFormMain';
 import { SkyFormItem } from '../../../datas/rely/SkyFormJs/SkyFormItem';
-import Validator from '../../../datas/rely//validator/Validator';
+import Validator from '../../../datas/rely/validator/Validator';
 import { DATA_SOURCE_OPTIONS, FILE_TYPES, CSV_FILE_SPLITOR, QUOTE, CHARSET, ESCAPE, SOURCE_SYSTEM_MAP } from '../config';
 import { FILE_SUFFIX_FORMAT_MAP } from '../../datasource/datasource.config';
 import { getDataSourceOptions, fetchDbTablesBySource } from '../../../datas/rely/dataSourceApi';
@@ -118,7 +118,15 @@ export default {
                         label: '选择文件：',
                         prop: 'file',
                         value: self.$store.state.dataset.form.dataSource.file || [],
-                        inputType: 'ALL_UPLOAD',
+                        // eslint-disable-next-line
+                        vNode(h: any, model: any) {
+                            const { sourceType } = model;
+                            const sourceKind = sourceType.split('@')[0];
+                            const sourceId = sourceType.split('@')[1];
+                            return (
+                                <SdxwFileSelect vModel={this.value} limit={-1}/>
+                            );
+                        },
                         validator: [
                             new Validator({ required: true, message: '请选择文件', trigger: 'blur' }),
                             { validator(rule, value, cb) {
@@ -129,17 +137,6 @@ export default {
                                 }
                             }, trigger: 'blur' }
                         ],
-                        widgetParams() {
-                            return {
-                                uploadBtnLabel: '选择文件',
-                                path: [self.$store.state.user.user.name, '.upload'],
-                                limit: Infinity,
-                                accept: '',
-                                cephParams: {
-                                    clickKind: 7
-                                }
-                            };
-                        },
                         renderIgnore(model) {
                             return model.sourceType.split('@')[0] !== '1';
                         },

@@ -2,7 +2,7 @@ import { mapState } from 'vuex';
 export default {
     computed: {
         ...mapState({
-            currentRole: state => state.user.user.role.name,
+            currentRole: '',
             isStruct: state => state.dataset.creatingType === 'STRUCT'
         })
     },

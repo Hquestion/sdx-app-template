@@ -155,7 +155,7 @@ export default {
         border: 1px solid #E6E9F1;
         .step-main-container {
             width: 100%;
-            min-height: calc(100vh - 472px);;
+            min-height: calc(100vh - 472px);
             padding: 0;
             margin: 0 auto;
             background: #fff;
@@ -177,7 +177,7 @@ export default {
             min-width: 542px;
             margin: 0 auto;
             padding: 20px 0;
-            min-height: calc(100% - 95px);
+            min-height: calc(100vh - 472px);;
             overflow: hidden;
             position: relative;
             .comp-item {

@@ -3,7 +3,7 @@
         <el-form
             :model="params"
             :rules="rules"
-            label-width="100px"
+            label-width="110px"
             ref="form"
             label-position="left"
         >
@@ -68,13 +68,7 @@
                 label="存储目录："
                 prop="savePath"
             >
-                <SkyFormWidgetUpload
-                    type="ceph"
-                    :limit="1"
-                    v-model="params.savePath"
-                    :path="[]"
-                    :ceph-params="{ clickKind: 7, richModel: false, btnLabel: '选择路径', canCheckFolder: true, onlyFolder: true, filter: (item) => item.is_dir}"
-                />
+                <SdxwFileSelect :limit="1" v-model="params.savePath" check-type="folder"></SdxwFileSelect>
             </el-form-item>
             <el-form-item
                 label="数据集共享："
@@ -109,14 +103,12 @@ import StepChangeHooks from './mixins/StepChangeHooks';
 import TargetFileTypeLimitMixin from './mixins/TargetFileTypeLimitMixin';
 import { mapActions } from 'vuex';
 import FormTip from '../../../datas/rely/SkyForm/FormTip';
-import SkyFormWidgetUpload from '../../../datas/rely/SkyForm/InputWidgets/SkyFormWidgetUpload';
 
 export default {
     name: 'DataTargetFileForm',
     mixins: [StepChangeHooks, TargetFileTypeLimitMixin],
     components: {
-        FormTip,
-        SkyFormWidgetUpload
+        FormTip
     },
     data() {
         return {

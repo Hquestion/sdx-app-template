@@ -15,7 +15,7 @@
         <!--</div>-->
         <ElForm
             :model="model"
-            label-width="100px"
+            label-width="110px"
             style="padding: 0 30px;"
             label-position="left"
         >
@@ -24,7 +24,7 @@
                 prop="targetType"
                 :required="true"
             >
-                <SdxwFileSelect
+                <SkyFormWidgetSelect
                     :options="availableDataSource"
                     :is-group="true"
                     v-model="targetType"
@@ -49,7 +49,7 @@ import DataTargetFileForm from './DataTargetFileForm';
 import DataTargetHDFSForm from './DataTargetHDFSForm';
 import DataTargetSQLForm from './DataTargetSQLForm';
 import StepChangeHooks from './mixins/StepChangeHooks';
-// import SkyFormWidgetSelect from '../../../../components/SkyForm/InputWidgets/SkyFormWidgetSelect';
+import SkyFormWidgetSelect from '../../../../components/SkyForm/InputWidgets/SkyFormWidgetSelect';
 const compMap = ['', 'DataTargetFileForm', 'DataTargetHDFSForm', 'DataTargetSQLForm'];
 import { DATA_SOURCE_OPTIONS, SOURCE_SYSTEM_MAP } from '../config';
 import { getDataSourceOptions } from '../../../datas/rely/dataSourceApi';
@@ -58,7 +58,7 @@ export default {
     name: 'StepDataSave',
     mixins: [StepChangeHooks],
     components: {
-        // SkyFormWidgetSelect,
+        SkyFormWidgetSelect,
         DataTargetFileForm,
         DataTargetHDFSForm,
         DataTargetSQLForm

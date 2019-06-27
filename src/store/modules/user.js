@@ -27,12 +27,12 @@ const user = {
             state.token = {};
             state.user = null;
             localStorage.removeItem('token');
-            VueCookie.remove('token');
+            VueCookie.remove('authorization-token');
             clearTimeout(expireTimer);
         },
         SET_TOKEN(state, token) {
             localStorage.setItem('token', JSON.stringify(token));
-            VueCookie.set('token', token.accessToken);
+            VueCookie.set('authorization-token', token.accessToken);
             state.token = token;
         }
     },
@@ -75,7 +75,7 @@ const user = {
         },
         auth({ commit, state }) {
             return new Promise((resolve, reject) => {
-                if (!VueCookie.get('token')) {
+                if (!VueCookie.get('authorization-token')) {
                     // 没有用户信息直接退出登陆
                     reject();
                 }
