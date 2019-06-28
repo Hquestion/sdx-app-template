@@ -10,7 +10,7 @@ import { Notification } from 'element-ui';
  */
 
 export function getSourceList(params = {}) {
-    return httpService.get('/api/v1/datasource/', { ...params }).then(res => new Promise((resolve, reject) => {
+    return httpService.get('/data-manager/api/v1/datasource/', { ...params }).then(res => new Promise((resolve, reject) => {
         if (res.success) {
             resolve(res);
         } else {
@@ -25,7 +25,7 @@ export function getSourceList(params = {}) {
  * @returns
  */
 export function addDataSource(dataSource = {}) {
-    return httpService.post('/api/v1/datasource/create', dataSource).then(res => new Promise((resolve, reject) => {
+    return httpService.post('/data-manager/api/v1/datasource/create', dataSource).then(res => new Promise((resolve, reject) => {
         if (res.success) {
             resolve(res);
         } else {
@@ -41,7 +41,7 @@ export function addDataSource(dataSource = {}) {
  * @returns
  */
 export function updateDataSource(dataSource = {}) {
-    return httpService.post('/api/v1/datasource/update', dataSource).then(res => new Promise((resolve, reject) => {
+    return httpService.post('/data-manager/api/v1/datasource/update', dataSource).then(res => new Promise((resolve, reject) => {
         if (res.success) {
             resolve(res);
         } else {
@@ -57,7 +57,7 @@ export function updateDataSource(dataSource = {}) {
  * @returns
  */
 export function deleteDataSource(simpleParams) {
-    return httpService.post('/api/v1/datasource/rm', simpleParams).then(res => new Promise((resolve, reject) => {
+    return httpService.post('/data-manager/api/v1/datasource/rm', simpleParams).then(res => new Promise((resolve, reject) => {
         if (res.success) {
             resolve(res);
         } else {
@@ -67,7 +67,7 @@ export function deleteDataSource(simpleParams) {
 }
 
 export function removeDataSource(simpleParams) {
-    return httpService.post('/api/v1/datasource/delete', simpleParams).then(res => new Promise((resolve, reject) => {
+    return httpService.post('/data-manager/api/v1/datasource/delete', simpleParams).then(res => new Promise((resolve, reject) => {
         if (res.success) {
             resolve(res);
         } else {
@@ -82,7 +82,7 @@ export function removeDataSource(simpleParams) {
  * @returns
  */
 export function getDataSourceDetail(params = {}) {
-    return httpService.get('/api/v1/datasource/get', { params }).then(res => new Promise((resolve, reject) => {
+    return httpService.get('/data-manager/api/v1/datasource/get', { params }).then(res => new Promise((resolve, reject) => {
         if (res.success) {
             resolve(res);
         } else {
@@ -95,7 +95,7 @@ export function getDataSourceDetail(params = {}) {
  * 查询数据源标签选项
  */
 export function getDataSourceOptions() {
-    return httpService.get('/api/v1/datasource/options').then(res => new Promise((resolve, reject) => {
+    return httpService.get('/data-manager/api/v1/datasource/options').then(res => new Promise((resolve, reject) => {
         if (res.success) {
             resolve(res);
         } else {
@@ -108,7 +108,7 @@ export function getDataSourceOptions() {
  * 数据集查询
  */
 export function getDataset(params = {}) {
-    return httpService.get('/api/v1/dataset/', { ...params }).then(res => new Promise((resolve, reject) => {
+    return httpService.get('/data-manager/api/v1/dataset/', { ...params }).then(res => new Promise((resolve, reject) => {
         if (res.success) {
             resolve(res);
         } else {
@@ -121,7 +121,7 @@ export function getDataset(params = {}) {
  * 数据元查询
  */
 export function getDatasetInfo(params = {}) {
-    return httpService.get('/api/v1/dataset/info', { params }).then(res => new Promise((resolve, reject) => {
+    return httpService.get('/data-manager/api/v1/dataset/info', { params }).then(res => new Promise((resolve, reject) => {
         if (res.success) {
             resolve(res);
         } else {
@@ -133,7 +133,7 @@ export function getDatasetInfo(params = {}) {
  * 数据下载
  */
 export function getDataPath(params = {}) {
-    return httpService.get('/api/v1/dataset/download', { params }).then(res => new Promise((resolve, reject) => {
+    return httpService.get('/data-manager/api/v1/dataset/download', { params }).then(res => new Promise((resolve, reject) => {
         if (res.success) {
             resolve(res);
         } else {
@@ -145,7 +145,7 @@ export function getDataPath(params = {}) {
  * 数据集数据预览
  */
 export function getPreviewData(params = {}) {
-    return httpService.get('/api/v1/dataset/preview_data', { params }).then(res => new Promise((resolve, reject) => {
+    return httpService.get('/data-manager/api/v1/dataset/preview_data', { params }).then(res => new Promise((resolve, reject) => {
         if (res.success) {
             resolve(res);
         } else {
@@ -157,7 +157,7 @@ export function getPreviewData(params = {}) {
  * 数据集更新
  */
 export function updataDataset(params) {
-    return httpService.post('/api/v1/dataset/update', params).then(res => new Promise((resolve, reject) => {
+    return httpService.post('/data-manager/api/v1/dataset/update', params).then(res => new Promise((resolve, reject) => {
         if (res.success) {
             resolve(res);
         } else {
@@ -170,7 +170,7 @@ export function updataDataset(params) {
  * 数据元查询
  */
 export function removeDatasetItem(params) {
-    return httpService.post('/api/v1/dataset/rm', params).then(res => new Promise((resolve, reject) => {
+    return httpService.post('/data-manager/api/v1/dataset/rm', params).then(res => new Promise((resolve, reject) => {
         if (res.success) {
             resolve(res);
         } else {
@@ -179,7 +179,7 @@ export function removeDatasetItem(params) {
     }));
 }
 export function generateSchema(data) {
-    return httpService.post('/api/v1/dataset/schema', data).then(res => new Promise((resolve, reject) => {
+    return httpService.post('/data-manager/api/v1/dataset/schema', data).then(res => new Promise((resolve, reject) => {
         if (res.success) {
             resolve(res);
         } else {
@@ -189,7 +189,7 @@ export function generateSchema(data) {
 }
 
 export function testDbConnection(data) {
-    return httpService.post('/api/v1/dataset/db_test', data).then(res => new Promise((resolve, reject) => {
+    return httpService.post('/data-manager/api/v1/dataset/db_test', data).then(res => new Promise((resolve, reject) => {
         if (res.success) {
             resolve(res);
         } else {
@@ -199,7 +199,7 @@ export function testDbConnection(data) {
 }
 
 export function createDatasetPreProcess(data) {
-    return httpService.post('/api/v1/dataset/create/preProcess', data).then(res => new Promise((resolve, reject) => {
+    return httpService.post('/data-manager/api/v1/dataset/create/preProcess', data).then(res => new Promise((resolve, reject) => {
         if (res.success) {
             resolve(res);
         } else {
@@ -209,7 +209,7 @@ export function createDatasetPreProcess(data) {
 }
 
 export function createDataset(data) {
-    return httpService.post('/api/v1/dataset/create', data).then(res => new Promise((resolve, reject) => {
+    return httpService.post('/data-manager/api/v1/dataset/create', data).then(res => new Promise((resolve, reject) => {
         if (res.success) {
             resolve(res);
         } else {
@@ -219,7 +219,7 @@ export function createDataset(data) {
 }
 
 export function fetchDBTables(data) {
-    return httpService.get('/api/v1/dataset/db_table/option', {
+    return httpService.get('/data-manager/api/v1/dataset/db_table/option', {
         params: data
     }).then(res => new Promise((resolve, reject) => {
         if (res.success) {
@@ -231,7 +231,7 @@ export function fetchDBTables(data) {
 }
 
 export function uploadSchemaFile(path) {
-    return httpService.post('/api/v1/dataset/schema/upload', {
+    return httpService.post('/data-manager/api/v1/dataset/schema/upload', {
         schema_file_path: path
     }).then(res => new Promise((resolve, reject) => {
         if (res.success) {
@@ -243,7 +243,7 @@ export function uploadSchemaFile(path) {
 }
 
 export function isDatasetNameExist(name) {
-    return httpService.get('/api/v1/dataset/exist', {
+    return httpService.get('/data-manager/api/v1/dataset/exist', {
         name
     }).then(res => new Promise((resolve, reject) => {
         if (res.success) {
@@ -260,7 +260,7 @@ export function isDatasetNameExist(name) {
  * @returns {*}
  */
 export function createDataSource(params) {
-    return httpService.post('/api/v1/datasource/create', {
+    return httpService.post('/data-manager/api/v1/datasource/create', {
         ...params
     }).then(res => new Promise((resolve, reject) => {
         if (res.success) {
@@ -277,7 +277,7 @@ export function createDataSource(params) {
  * @returns {*}
  */
 export function dataSourceInfo(datasource) {
-    return httpService.get('/api/v1/datasource/info', {
+    return httpService.get('/data-manager/api/v1/datasource/info', {
         datasource
     }).then(res => new Promise((resolve, reject) => {
         if (res.success) {
@@ -289,7 +289,7 @@ export function dataSourceInfo(datasource) {
 }
 
 export function dataSourceUpdate(params) {
-    return httpService.post('/api/v1/datasource/update', {
+    return httpService.post('/data-manager/api/v1/datasource/update', {
         ...params
     }).then(res => new Promise((resolve, reject) => {
         if (res.success) {
@@ -306,7 +306,7 @@ export function dataSourceUpdate(params) {
  * @returns {*}
  */
 export function testDataSourceConnection(params) {
-    return httpService.post('/api/v1/datasource/test', { ...params }).then(res => new Promise((resolve, reject) => {
+    return httpService.post('/data-manager/api/v1/datasource/test', { ...params }).then(res => new Promise((resolve, reject) => {
         if (res.success) {
             resolve(res);
         } else {
@@ -325,7 +325,7 @@ export function testDataSourceConnection(params) {
  * @returns {*}
  */
 export function getDataSourceList(params) {
-    return httpService.get('/api/v1/datasource', {
+    return httpService.get('/data-manager/api/v1/datasource', {
         params: {
             name: params.name,
             kind: params.kind,
@@ -347,7 +347,7 @@ export function getDataSourceList(params) {
  * @returns {*}
  */
 export function getDataSourceOptionsNew(kind) {
-    return httpService.get('/api/v1/datasource/options', {
+    return httpService.get('/data-manager/api/v1/datasource/options', {
         params: {
             kind
         }
@@ -361,7 +361,7 @@ export function getDataSourceOptionsNew(kind) {
 }
 
 export function fetchDbTablesBySource(datasource) {
-    return httpService.get('/api/v1/datasource/dbTables', {
+    return httpService.get('/data-manager/api/v1/datasource/dbTables', {
         params: {
             datasource
         }
@@ -378,7 +378,7 @@ export function fetchDbTablesBySource(datasource) {
  * 数据集标签
  */
 export function getDataTag() {
-    return httpService.get('/api/v1/dataset/tag/options').then(res => new Promise((resolve, reject) => {
+    return httpService.get('/data-manager/api/v1/dataset/tag/options').then(res => new Promise((resolve, reject) => {
         if (res.success) {
             resolve(res);
         } else {
@@ -391,7 +391,7 @@ export function getDataTag() {
  * 数据集和数据文件预览
  */
 export function getDatasetPreview(params = {}) {
-    return httpService.post('/api/v1/dataset/preview', { ...params }).then(res => new Promise((resolve, reject) => {
+    return httpService.post('/data-manager/api/v1/dataset/preview', { ...params }).then(res => new Promise((resolve, reject) => {
         if (res.success) {
             resolve(res);
         } else {
@@ -404,7 +404,7 @@ export function getDatasetPreview(params = {}) {
  * jupyter 跳转地址
  */
 export function getJupyterUrl(params = {}) {
-    return httpService.post('/api/v1/dataset/jupyter', { ...params }).then(res => new Promise((resolve, reject) => {
+    return httpService.post('/data-manager/api/v1/dataset/jupyter', { ...params }).then(res => new Promise((resolve, reject) => {
         if (res.success) {
             resolve(res);
         } else {

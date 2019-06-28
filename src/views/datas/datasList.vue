@@ -183,7 +183,7 @@
                                 @click="handleViewDataSource(scope.row.dataset)"
                             >
                                 <i
-                                    class="iconfont iconicon-detail"
+                                    class="iconfont iconicon-yanjing"
                                     title="详情"
                                 />
                             </el-button>
@@ -194,7 +194,7 @@
                                 @click="handleEditDataSource(scope.row)"
                             >
                                 <i
-                                    class="iconfont sdx-icon-edit"
+                                    class="iconfont iconicon-edit1"
                                     title="编辑"
                                 />
                             </el-button>
@@ -206,7 +206,7 @@
                                 @click="handleDeleteDataSource(scope.row)"
                             >
                                 <i
-                                    class="iconfont sdx-icon-delete"
+                                    class="iconfont iconicon-delete1"
                                     title="删除"
                                 />
                             </el-button>
@@ -218,7 +218,7 @@
                                 @click="rorceDeleteSource(scope.row)"
                             >
                                 <i
-                                    class="iconfont icon-qiangzhishanchu"
+                                    class="iconfont iconqiangzhishanchu"
                                     title="强制删除"
                                 />
                             </el-button>

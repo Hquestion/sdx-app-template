@@ -435,20 +435,20 @@ export default {
                 data_format: -1,
                 tag: -1
             };
-
-            this.datasetLoading = false;
-            // getDatasets(params)
-            //     .then(res => {
-            //         this.datasetLoading = false;
-            //         for (let i = 0; i < res.data.items.length; i++) {
-            //             this.datasetInfo.push(
-            //                 {
-            //                     name: res.data.items[i].name,
-            //                     time: res.data.items[i].updated_at
-            //                 }
-            //             );
-            //         }
-            //     });
+            getDatasets(params)
+                .then(res => {
+                    this.datasetLoading = false;
+                    for (let i = 0; i < res.data.items.length; i++) {
+                        this.datasetInfo.push(
+                            {
+                                name: res.data.items[i].name,
+                                time: res.data.items[i].updated_at
+                            }
+                        );
+                    }
+                }, () => {
+                    this.datasetLoading = false;
+                });
         },
         // skyflow 列表
         getSkyflowList() {

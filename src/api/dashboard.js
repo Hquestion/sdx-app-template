@@ -22,7 +22,7 @@ export function getModels(params) {
 }
 
 export function getDatasets(params) {
-    return httpService.get('/v2/dataset', params);
+    return httpService.get('/data-manager/api/v1/dataset', params);
 }
 
 export function getSkyflows(params) {

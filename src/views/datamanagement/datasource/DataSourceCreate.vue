@@ -230,7 +230,7 @@ export default {
                         }
                     })
                 ],
-                labelWidth: '150px',
+                labelWidth: '180px',
                 readonly: false,
                 appendFooter: true
             })

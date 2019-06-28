@@ -1,5 +1,6 @@
 <template>
     <div class="datas-view">
+        <sky-title-go-back />
         <el-button
             type="primary"
             size="small"
@@ -23,7 +24,7 @@
                         基本信息
                     </div>
                     <div class="bottom">
-                        <div><span>创建人: </span> <span>{{ viewData.creator }}</span></div>
+                        <div><span>创建人: </span> <span>{{ viewData.creator_name }}</span></div>
                         <div><span>数据集名称: </span> <span>{{ viewData.name }}</span></div>
                         <div><span>数据集大小: </span> <span>{{ viewData.data_size }}</span></div>
                         <div><span>数据集描述: </span> <span>{{ viewData.description }}</span></div>
@@ -117,7 +118,7 @@
                         </div>
                         <div>
                             <i
-                                class="iconfont icon-ico_download"
+                                class="iconfont iconicon--download"
                                 @click="allDownload(viewData.short_path)"
                                 v-if="viewData.store_type === 'FILESYSTEM'"
                             />
@@ -214,7 +215,7 @@
                         />
                     </el-popover>
                     <i
-                        class="iconfont icon-ico_download"
+                        class="iconfont iconicon--download"
                         v-if="previewData.path && !datalistHide"
                         @click="handleDownload(previewData.path)"
                     />
@@ -261,7 +262,7 @@
     </div>
 </template>
 <script>
-import { getDatasetInfo, getDatasetPreview, cephLs, checkDownload, getZipId, getZip, hdfsLs } from './rely/dataApi';
+import { getDatasetInfo, getDatasetPreview, checkDownload, getZipId, getZip, hdfsLs } from './rely/dataApi';
 import DataSetPreview from '../datamanagement/dataset-create/step-main/DataSetPreview';
 import { NUMBER_TYPES, STRING_TYPES } from '../datamanagement/dataset-create/config';
 
@@ -270,16 +271,19 @@ const isString = type => type && !!STRING_TYPES.find(item => item.toLowerCase() 
 import hasNothing from './rely/util/hasNothing';
 import poploadmore from './js/loadMore';
 import datasListView from './datasListView';
+import SkyTitleGoBack from './rely/skyTitleGoBack';
+import { getFilesList } from '@sdx/utils/src/api/file';
 // import { mapMutations } from 'vuex';
 export default {
     name: 'DatasView',
-    components: { DataSetPreview, hasNothing, datasListView },
+    components: { DataSetPreview, hasNothing, datasListView, SkyTitleGoBack },
     data() {
         return {
             id: '',
             fullscreen: false,
             viewData: {
                 creator: '',
+                creator_name: '',
                 name: '',
                 data_size: '',
                 description: '',
@@ -321,7 +325,7 @@ export default {
             showData: Object.freeze([]),
             isLoadingTableData: false,
             dataHeight: '650px',
-            currentName: this.$store.state.user.group.name,
+            // currentName: this.$store.state.user.group.name,
 
             pageIndexPop: 0,
             topCount: 0,
@@ -394,7 +398,8 @@ export default {
         getInfo(dataset) {
             // 获取数据元信息
             getDatasetInfo({ dataset })
-                .then(data => {
+                .then(res => {
+                    let data = res.data;
                     this.viewData = data;
                     this.store_type = data.store_type;
                     // 源类型
@@ -428,7 +433,8 @@ export default {
         // HDFS 列表
         getHdfsList(datasource, path, only_dir) {
             hdfsLs(datasource, path, only_dir)
-                .then(data => {
+                .then(res => {
+                    let data = res.data;
                     this.treeData = data.paths;
                     this.isTreeLoading = false;
                     if (data.paths.length > 0) {
@@ -478,8 +484,9 @@ export default {
         // 文件列表
         getFlieList(path) {
             this.isTreeLoading = true;
-            cephLs({ path })
-                .then(data => {
+            getFilesList({ path, userId: this.viewData.creator })
+                .then(res => {
+                    let data = res.data;
                     this.treeData = data.paths;
                     this.isTreeLoading = false;
                     if (data.paths.length > 0) {
@@ -556,7 +563,7 @@ export default {
                         this.datalistHide = false;
                     });
             } else {
-                return cephLs({ path })
+                return getFilesList({ path, userId: this.viewData.creator })
                     .then(data => {
                         if (resolve) {
                             resolve(data.paths);
@@ -798,7 +805,7 @@ export default {
         handleGetZip(_id) {
             getZip(_id).then(data => {
                 if (data.need_poll === 0) {
-                    this.setDownLoading(false);
+                    // this.setDownLoading(false);
                     window.location.href =
                         this.baseAPI + '/v2/ceph/get/zip/download?_id=' + _id;
                 } else if (data.need_poll === 1) {
@@ -806,7 +813,7 @@ export default {
                 }
             })
                 .catch(error => {
-                    this.setDownLoading(false);
+                    // this.setDownLoading(false);
                 });
         },
         // 下载轮询

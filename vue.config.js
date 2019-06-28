@@ -171,6 +171,11 @@ module.exports = {
                 ws: true,
                 changeOrigin: true
             },
+            '^/data-manager': {
+                target: 'http://10.115.1.130:30080',
+                ws: true,
+                changeOrigin: true
+            },
             '^/api/v1/datasource': {
                 target: 'http://10.201.0.29:5000',
                 ws: true,
@@ -181,14 +186,14 @@ module.exports = {
                 ws: true,
                 changeOrigin: true
             },
-            '^/api/v1': {
-                target: 'https://easy-mock.com',
-                ws: true,
-                changeOrigin: true,
-                pathRewrite: {
-                    '/api/v1': '/mock/5cd04685adb0973be6a3d969/api/v1'
-                }
-            },
+            // '^/api/v1': {
+            //     target: 'https://easy-mock.com',
+            //     ws: true,
+            //     changeOrigin: true,
+            //     pathRewrite: {
+            //         '/api/v1': '/mock/5cd04685adb0973be6a3d969/api/v1'
+            //     }
+            // },
         },
         overlay: true
     },
