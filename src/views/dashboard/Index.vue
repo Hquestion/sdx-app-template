@@ -123,12 +123,17 @@
             </div>
             <div class="left-bottom">
                 <el-row :gutter="20">
-                    <el-col :span="12">
+                    <el-col
+                        :span="12"
+                        v-loading="taskLoading"
+                    >
                         <sdxu-content-panel
                             title="任务资源使用Top 10"
                             size="small"
                         >
-                            <div v-if="taskNameList && taskNameList.length">
+                            <div
+                                v-if="taskNameList && taskNameList.length"
+                            >
                                 <el-select
                                     size="small"
                                     v-model="orderBy"
@@ -155,12 +160,15 @@
                                 <span class="xname">单位（{{ taskXname }}）</span>
                             </div>
                             <SdxuEmpty
-                                v-else
+                                v-if="taskNameList.length === 0 && !taskLoading"
                                 height="354px"
                             />
                         </sdxu-content-panel>
                     </el-col>
-                    <el-col :span="12">
+                    <el-col
+                        :span="12"
+                        v-loading="versionLoading"
+                    >
                         <sdxu-content-panel
                             title="模型版本调用次数Top 10"
                             size="small"
@@ -180,7 +188,7 @@
                                 <span class="xname">单位（次）</span>
                             </div>
                             <SdxuEmpty
-                                v-else
+                                v-if="modelNameList.length === 0 && !versionLoading"
                                 height="354px"
                             />
                         </sdxu-content-panel>
@@ -272,7 +280,9 @@ export default {
             projectLoading: true,
             skyflowLoading: true,
             modelLoading: true,
-            datasetLoading: true
+            datasetLoading: true,
+            taskLoading: true,
+            versionLoading: true
         };
     },
     components: {
@@ -342,9 +352,12 @@ export default {
             }
             return new Promise((resolve, reject) => {
                 getTaskList(params)
-                    .then(res =>
-                        resolve(res)
+                    .then(res => {
+                        this.taskLoading = false;
+                        resolve(res);
+                    }
                     ).catch(error => {
+                        this.taskLoading = true;
                         reject(error);
                     });
             });
@@ -382,6 +395,8 @@ export default {
                             }
                         );
                     }
+                }, () => {
+                    this.projectLoading = false;
                 });
         },
         // 模型列表
@@ -403,6 +418,8 @@ export default {
                             }
                         );
                     }
+                }, () => {
+                    this.modelLoading = false;
                 });
         },
         // 数据集列表
@@ -452,6 +469,8 @@ export default {
                             }
                         );
                     }
+                }, () => {
+                    this.skyflowLoading = false;
                 });
         },
         // 获取模型版本列表
@@ -476,6 +495,9 @@ export default {
                     }
                     this.modelData = data.reverse(),
                     this.modelNameList = name.reverse();
+                    this.versionLoading = false;
+                }, () => {
+                    this.versionLoading = false;
                 });
         }
     },
@@ -630,6 +652,9 @@ export default {
         .left-bottom {
             @extend .marginTop20;
             height: 430px;
+            .el-col-12 {
+                height: 430px;
+            }
             .el-input__inner {
                 padding: 0 10px 0 0;
                 border: none;

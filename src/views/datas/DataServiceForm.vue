@@ -6,6 +6,7 @@
         class="data-service"
         @open="open"
         @confirm="confirm"
+        :modalAppendToBody="false"
     >
         <el-form
             label-position="right"
@@ -42,10 +43,11 @@
                 prop="imageId"
                 label="运行环境:"
             >
-                <CusSelect
+                <ElSelect
                     v-model="params.imageId"
                     size="small"
                     placeholder="请输入运行环境"
+                    class="self-select"
                 >
                     <el-option
                         v-for="item in images"
@@ -53,7 +55,7 @@
                         :label="item.label"
                         :value="item.value"
                     />
-                </CusSelect>
+                </ElSelect>
             </el-form-item>
             <el-form-item
                 prop="resourceConfig"
@@ -97,7 +99,7 @@ export default {
     name: 'DataServiceForm',
     components: {
         ResourceConfig,
-        CusSelect: ElSelect
+        ElSelect
     },
     props: {
         visible: {
@@ -246,7 +248,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .data-service {
     .title {
         color: #909399;
@@ -261,4 +263,7 @@ export default {
         max-width: 560px;
     }
 }
+.el-select-dropdown {
+        z-index: 3000 !important;
+    }
 </style>

@@ -297,7 +297,6 @@ export default {
             });
         },
         handlerFileChange() {
-            console.log(arguments);
             this.makeFileList();
         },
         handlerDirectoryChange() {

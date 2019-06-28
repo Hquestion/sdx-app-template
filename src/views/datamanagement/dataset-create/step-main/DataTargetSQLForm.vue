@@ -3,7 +3,7 @@
         <el-form
             :model="params"
             :rules="rules"
-            label-width="100px"
+            label-width="110px"
             ref="form"
             label-position="left"
         >

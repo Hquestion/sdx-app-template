@@ -14,7 +14,7 @@ export function getSourceList(params = {}) {
         if (res.success) {
             resolve(res);
         } else {
-            reject(res);
+            Notification.error({ title: '错误', message: res.msg }); reject(res);
         }
     }));
 }

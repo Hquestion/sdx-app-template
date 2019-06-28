@@ -4,9 +4,9 @@
             <SdxwBreadcrumb />
         </div>
         <div class="app-main-view">
-            <feb-alive>
-                <router-view />
-            </feb-alive>
+            <!--            <feb-alive>-->
+            <router-view />
+            <!--            </feb-alive>-->
         </div>
     </section>
 </template>

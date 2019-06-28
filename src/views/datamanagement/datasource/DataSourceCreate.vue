@@ -389,6 +389,7 @@ export default {
                     validatorParams = ['username', 'password', 'host', 'db_port', 'db'];
                 } else {
                     params = {
+                        kind: model.sourceType,
                         bootstrap_servers: model.bootstrap_servers,
                         topic: model.topic
                     };
