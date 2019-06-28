@@ -14,7 +14,7 @@ import about from '../views/about/about';
 // feb-alive
 import febAlive from 'feb-alive';
 // skyflow
-// import Editor from '../views/skyflow/editor/';
+import Editor from '../views/skyflow/editor/';
 
 import RoleManage from '@sdx/view/components/role-manage';
 import AuthorizeManage from '@sdx/view/components/authorize-manage';
@@ -176,13 +176,13 @@ const router = new Router({
             hidden: true,
             children: [
             ]
+        },
+        {
+            path: '/editor/:id/:executeId?',
+            component: Editor,
+            name: 'Editor',
+            hidden: true
         }
-        // {
-        //     path: '/editor/:id/:executeId?',
-        //     component: Editor,
-        //     name: 'Editor',
-        //     hidden: true
-        // }
     ]
 });
 
