@@ -14,7 +14,7 @@ import about from '../views/about/about';
 // feb-alive
 import febAlive from 'feb-alive';
 // skyflow
-// import Editor from '../views/skyflow/editor/';
+import Editor from '../views/skyflow/editor/';
 
 import RoleManage from '@sdx/view/components/role-manage';
 import AuthorizeManage from '@sdx/view/components/authorize-manage';
@@ -22,7 +22,6 @@ import ProjectManage from '@sdx/view/components/project-management';
 import ModelManage from '@sdx/view/components/model-manage';
 import ImageManage from '@sdx/view/components/image-management';
 import SdxvPrivilege from '@sdx/view/lib/privilege';
-import Skyflow from '@sdx/view/components/skyflow';
 import ResourceManageView from '@sdx/view/components/resource-manage';
 import UserManage from '@sdx/view/components/user-manage';
 import UserGroupManage from '@sdx/view/components/user-group';
@@ -30,7 +29,7 @@ import TaskManagement from '@sdx/view/components/task-management';
 import ResourceStatistics from '@sdx/view/components/resource-statistics';
 import ComponentState from '@sdx/view/components/component-state';
 
-// import Skyflow from '@sdx/view/components/skyflow';
+import Skyflow from '@sdx/view/components/skyflow';
 import FileManage from '@sdx/view/components/file';
 
 // datas
@@ -177,13 +176,13 @@ const router = new Router({
             hidden: true,
             children: [
             ]
+        },
+        {
+            path: '/editor/:id/:executeId?',
+            component: Editor,
+            name: 'Editor',
+            hidden: true
         }
-        // {
-        //     path: '/editor/:id/:executeId?',
-        //     component: Editor,
-        //     name: 'Editor',
-        //     hidden: true
-        // }
     ]
 });
 
@@ -194,7 +193,7 @@ ProjectManage.viewRouter.register(router, '/home');
 ModelManage.viewRouter.register(router, '/home');
 ImageManage.viewRouter.register(router, '/home');
 
-// Skyflow.viewRouter.register(router, '/home');
+Skyflow.viewRouter.register(router, '/home');
 SdxvPrivilege.viewRouter.register(router, '/home');
 UserManage.viewRouter.register(router, '/home');
 UserGroupManage.viewRouter.register(router, '/home');

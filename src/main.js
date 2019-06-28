@@ -69,7 +69,25 @@ shareCenter.setup({
             { key: 'PROJECT-MANAGER:PROJECT:CREATE:""', tags: ['BUTTON'] },
             { key: 'PROJECT-MANAGER:TEMPLATE_PROJECT:CREATE:""', tags: ['BUTTON'] },
             { key: 'APPLICATION:GLOBAL_IMAGE_BUTTON:ACCESS:""', tags: ['BUTTON'] },
-            { key: 'PROJECT-MANAGER:TASK:CREATE:""', tags: ['BUTTON'] }
+            { key: 'PROJECT-MANAGER:TASK:CREATE:""', tags: ['BUTTON'] },
+            { key: 'SKYFLOW-MANAGER:FLOW:READ:""', tags: ['BUTTON'] },
+            { key: 'SKYFLOW-MANAGER:TEMPLATE_FLOW:READ:""', tags: ['BUTTON'] },
+            { key: 'SKYFLOW-MANAGER:TEMPLATE_FLOW:READ:""', tags: ['API'] },
+            { key: 'SKYFLOW-MANAGER:FLOW:READ:""', tags: ['API'] },
+            { key: 'SKYFLOW-MANAGER:FLOW_RECORD:READ:""', tags: ['API'] },
+            { key: 'MODEL-MANAGER:MODEL:READ:""', tags: ['API'] },
+            { key: 'MODEL-MANAGER:MODEL_VERSION:READ:""', tags: ['API'] },
+            { key: 'PROJECT-MANAGER:TASK:READ:""', tags: ['API'] },
+            { key: 'RESOURCE-MANAGER:TEMPLATE:READ:""', tags: ['API'] },
+            { key: 'RESOURCE-MANAGER:USER_STATE:READ:""', tags: ['BUTTON'] },
+            { key: 'RESOURCE-MANAGER:USER_STATE:READ:""', tags: ['API'] },
+            { key: 'RESOURCE-MANAGER:GLOBAL_STATE:READ:""', tags: ['BUTTON'] },
+            { key: 'RESOURCE-MANAGER:GLOBAL_STATE:READ:""', tags: ['API'] },
+            { key: 'SYSTEM-MANAGER:GLOBAL_RESOURCE:READ:""', tags: ['API'] },
+            { key: 'SYSTEM-MANAGER:POD_REAL_RESOURCE:READ:""', tags: ['API'] },
+            { key: 'SYSTEM-MANAGER:POD_LOG:READ:""', tags: ['API'] },
+            { key: 'SYSTEM-MANAGER:POD_STATE:READ:""', tags: ['API'] },
+            { key: 'USER-MANAGER:USER:READ:""', tags: ['API'] }
         ]);
         user.user.userId = user.user.uuid;
         return user.user;
