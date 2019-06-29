@@ -177,12 +177,12 @@ module.exports = {
                 changeOrigin: true
             },
             '^/api/v1/datasource': {
-                target: 'http://10.201.0.29:5000',
+                target: 'http://10.201.12.42:5000',
                 ws: true,
                 changeOrigin: true
             },
             '^/api/v1/dataset': {
-                target: 'http://10.201.0.29:5000',
+                target: 'http://10.201.12.42:5000',
                 ws: true,
                 changeOrigin: true
             },

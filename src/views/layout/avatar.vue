@@ -241,6 +241,7 @@ export default {
     @import "../../assets/styles/base/mixin.scss";
     @import "../../assets/styles/base/colors.scss";
     @import "../../assets/styles/base/constants.scss";
+
     .sdx-avatar {
         position: relative;
         height: 100%;
