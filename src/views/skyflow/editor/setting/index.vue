@@ -23,7 +23,7 @@
             :is-editable="isEditable"
             @updateResource="handleResourceUpdate"
             :gpuModel.sync="node.gpu_model"
-            :taskkind="node.taskKind"
+            :taskKind="node.taskKind"
         />
     </div>
 </template>

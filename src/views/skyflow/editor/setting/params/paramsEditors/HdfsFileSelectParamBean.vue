@@ -23,7 +23,7 @@
             </i> {{ param.label }}
         </span>
 
-        <file-select
+        <SdxwFileSelect
             :source="param.id"
             v-model="localVal"
             :limit="-1"
@@ -43,7 +43,7 @@ export default {
         };
     },
     components: {
-        FileSelect
+        [FileSelect.FileSelectMix.name]: FileSelect.FileSelectMix
     },
     methods: {
         checkFileValid() {

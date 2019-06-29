@@ -196,12 +196,13 @@ export default {
                 timeUnit: 'minute',
                 timeValue: 1
             },
-            executeStartTime: '' // 执行开始时间
+            executeStartTime: '', // 执行开始时间
+            processType: '' // 工作流类型
         };
     },
     computed: {
         ...mapState({
-            currentUser: state => state.token.user
+            currentUser: state => state.user && state.user.token && state.user.token.user || {}
         }),
         modelJson() {
             return {
@@ -480,7 +481,7 @@ export default {
         },
         handleModelSaveAs(params) {
             // 功能区-画布另存为
-            modelSaveas({ model_json: this.modelJson, ...params }).then(data => {
+            modelSaveas({ model_json: this.modelJson, processType: this.processType, ...params }).then(data => {
                 this.$notify({
                     title: '另存为成功',
                     type: 'success'
@@ -1213,8 +1214,9 @@ export default {
                 };
                 this.isCrontab = !!data.crontab;
                 this.flowState = data.state || nodeState.READY;
+                this.processType = data.processType;
                 // 判断是否在别人画布中
-                this.isCurrentUser = this.currentUser.uuid === data.user._id;
+                this.isCurrentUser = this.currentUser.uuid === data.user;
                 this.zoom = (model && model.zoom) || 100;
                 this.updateNodes((model && model.nodes) || []);
                 this.updateLinks((model && model.links) || [], true);
@@ -1260,15 +1262,6 @@ export default {
             }
         }
     }
-    // beforeRouteEnter(to, from, next) {
-    //     getResources()
-    //         .then(res => {
-    //             next(vm => {
-    //                 vm.$store.commit('UPDATE_ROLE', res);
-    //             });
-    //         })
-    //         .catch(next);
-    // }
 };
 </script>
 

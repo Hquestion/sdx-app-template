@@ -151,7 +151,7 @@
                         <!--@blur="$refs.customForm.validateField('run_file')"-->
                         <!--btn-label="选择文件"-->
                         <!--/>-->
-                        <FileSelect
+                        <SdxwFileSelect
                             v-model="form.run_file"
                             source="all"
                             :limit="1"
@@ -252,7 +252,7 @@ export default {
     name: 'CustomOptons',
     components: {
         ParamsPanel,
-        FileSelect,
+        [FileSelect.FileSelectMix.name]: FileSelect.FileSelectMix,
         RunParams,
         InputOutputArgs
     },
