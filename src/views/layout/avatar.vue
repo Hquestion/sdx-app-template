@@ -158,8 +158,8 @@
 import { mapState, mapActions } from 'vuex';
 import { version } from '../../../package';
 import permission from '../../config/permissions';
-import UserinfoDialog from '@sdx/widget/components/userinfo-dialog';
-import ChangePassword from '@sdx/widget/components/change-password';
+import UserinfoDialog from '@sdx/widget/lib/userinfo-dialog';
+import ChangePassword from '@sdx/widget/lib/change-password';
 export default {
     data() {
         return {

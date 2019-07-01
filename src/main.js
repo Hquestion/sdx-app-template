@@ -20,13 +20,14 @@ import directives from '@/directives';
 import i18n from './i18n';
 import SdxUI from '@sdx/ui';
 import { FileSelect, Breadcrumb, ResourceConfig } from '@sdx/widget';
-import Auth from '@sdx/widget/components/auth';
-import shareCenter from '@sdx/utils/src/helper/shareCenter';
-import shareCenterLib from '@sdx/utils/lib/helper/shareCenter';
+import Auth from '@sdx/widget/lib/auth';
+import shareCenter from '@sdx/utils/lib/helper/shareCenter';
 import febAlive from 'feb-alive';
 
 Vue.use(febAlive, { router, keyName: 'feb' });
 Vue.use(EmitAsync);
+
+console.log(SdxUI);
 
 // import directives by shaojs 2018年 2月22日 星期四 17时11分29秒 CST
 
@@ -95,47 +96,6 @@ shareCenter.setup({
             { key: 'SYSTEM-MANAGER:POD_LOG:READ:""', tags: ['API'] },
             { key: 'SYSTEM-MANAGER:POD_STATE:READ:""', tags: ['API'] },
             { key: 'USER-MANAGER:USER:READ:""', tags: ['API'] }
-        ]);
-        user.user.userId = user.user.uuid;
-        return user.user;
-    },
-    authSwitch: 'OFF'
-});
-
-shareCenterLib.setup({
-    user() {
-        const user = store.state.user.token;
-        user && (user.user.allPermissions = [
-            { key: 'APPLICATION:DASHBOARD_MENU:ACCESS:""', tags: ['MENU'] },
-            { key: 'APPLICATION:PROJECT_MANAGER_MENU:ACCESS:""', tags: ['MENU'] },
-            { key: 'APPLICATION:SKYFLOW_MANAGER_MENU:ACCESS:""', tags: ['MENU'] },
-            { key: 'APPLICATION:FILE_MANAGER_MENU:ACCESS:""', tags: ['MENU'] },
-            { key: 'APPLICATION:IMAGE_MANAGER_MENU:ACCESS:""', tags: ['MENU'] },
-            { key: 'APPLICATION:MANAEGR_PLATFORM_MENU:ACCESS:""', tags: ['MENU'] },
-            { key: 'APPLICATION:MODEL_MANAGER_MENU:ACCESS:""', tags: ['MENU'] },
-            { key: 'RESOURCE-MANAGER:TEMPLATE:READ:""', tags: ['BUTTON'] },
-            { key: 'RESOURCE-MANAGER:TEMPLATE:WRITE:""', tags: ['BUTTON'] },
-            { key: 'MODEL-MANAGER:MODEL_VERSION:CREATE:""', tags: ['BUTTON'] },
-            { key: 'MODEL-MANAGER:MODEL:CREATE:""', tags: ['BUTTON'] },
-            { key: 'MODEL-MANAGER:MODEL:SHARE:""', tags: ['BUTTON'] },
-            { key: 'IMAGE-MANAGER:IMAGE:SHARE:""', tags: ['BUTTON'] },
-            { key: 'SKYFLOW-MANAGER:FLOW:CREATE:""', tags: ['BUTTON'] },
-            { key: 'SKYFLOW-MANAGER:TEMPLATE_FLOW:CREATE:""', tags: ['BUTTON'] },
-            { key: 'APPLICATION:IMAGE_MANAGER_MENU:ACCESS:""', tags: ['MENU'] },
-            { key: 'IMAGE-MANAGER:IMAGE_BUILDER:BUILD_BASIC:""', tags: ['BUTTON'] },
-            { key: 'IMAGE-MANAGER:IMAGE_BUILDER:BUILD_TAR:""', tags: ['BUTTON'] },
-            { key: 'IMAGE-MANAGER:IMAGE_BUILDER:BUILD_IMAGE_FILE:""', tags: ['BUTTON'] },
-            { key: 'APPLICATION:DATA_MANAGER_MENU:ACCESS:""', tags: ['MENU'] },
-            { key: 'PROJECT-MANAGER:PROJECT:CREATE:""', tags: ['BUTTON'] },
-            { key: 'PROJECT-MANAGER:TEMPLATE_PROJECT:CREATE:""', tags: ['BUTTON'] },
-            { key: 'APPLICATION:GLOBAL_IMAGE_BUTTON:ACCESS:""', tags: ['BUTTON'] },
-            { key: 'PROJECT-MANAGER:TASK:CREATE:""', tags: ['BUTTON'] },
-            { key: 'USER-MANAGER:USER:READ:""', tags: ['BUTTON'] },
-            { key: 'USER-MANAGER:USER:WRITE:""', tags: ['BUTTON'] },
-            { key: 'USER-MANAGER:GROUP:READ:""', tags: ['BUTTON'] },
-            { key: 'USER-MANAGER:GROUP:WRITE:""', tags: ['BUTTON'] },
-            { key: 'USER-MANAGER:ROLE:READ:""', tags: ['BUTTON'] },
-            { key: 'USER-MANAGER:ROLE:WRITE:""', tags: ['BUTTON'] }
         ]);
         user.user.userId = user.user.uuid;
         return user.user;
