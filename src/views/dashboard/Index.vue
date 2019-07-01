@@ -535,6 +535,7 @@ export default {
 </script>
 <style lang="scss">
 .sdx-dashboard {
+    overflow: hidden;
     display:flex;/*设为伸缩容器*/
     flex-flow:row;/*伸缩项目单行排列*/
     & /deep/ {
