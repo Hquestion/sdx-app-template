@@ -43,7 +43,8 @@
     </div>
 </template>
 <script>
-import { cephLs, hdfsLs } from './rely/dataApi';
+import { hdfsLs } from './rely/dataApi';
+import { getFilesList } from '@sdx/utils/src/api/file';
 export default {
     name: 'DatasListView',
     data() {
@@ -107,8 +108,9 @@ export default {
         },
         // 文件列表
         getFlieList(path) {
-            cephLs({ path })
+            getFilesList({ path })
                 .then(data => {
+                    data.paths = data.children;
                     this.list = data.paths;
                 });
         },
