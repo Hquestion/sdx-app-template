@@ -62,12 +62,12 @@
                 label="资源配置:"
             >
                 <i class="icon">*</i>
-                <ResourceConfig
+                <SdxwResourceConfig
                     v-model="cpuDriver"
                     type="cpu"
                     cpulabel="驱动器CPU/内存"
                 />
-                <ResourceConfig
+                <SdxwResourceConfig
                     v-model="cpuExecute"
                     type="cpu"
                     cpulabel="执行器CPU/内存"
@@ -90,15 +90,13 @@
 <script>
 
 
-import { getImageList } from '@sdx/utils/src/api/image';
-import ResourceConfig from '@sdx/view/components/project-management/src/forms/ResourceConfig';
-import { createTask, updateTask } from '@sdx/utils/src/api/project';
-import { nameWithChineseValidator } from '@sdx/utils/src/helper/validate';
+import { getImageList } from '@sdx/utils/lib/api/image';
+import { createTask, updateTask } from '@sdx/utils/lib/api/project';
+import { nameWithChineseValidator } from '@sdx/utils/lib/helper/validate';
 import ElSelect from 'element-ui/lib/select';
 export default {
     name: 'DataServiceForm',
     components: {
-        ResourceConfig,
         ElSelect
     },
     props: {

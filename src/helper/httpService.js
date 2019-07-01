@@ -1,6 +1,6 @@
 // 开发环境，临时从src里面引用
-import httpService from '@sdx/utils/src/http-service';
-import errorHandler from '@sdx/utils/src/error-handler';
+import httpService from '@sdx/utils/lib/http-service';
+import errorHandler from '@sdx/utils/lib/error-handler';
 import specialCodeHandler from './specialCodeHandler';
 
 import errorMessageMap from '../assets/error-message/errorcode_map';

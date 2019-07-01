@@ -135,8 +135,8 @@
 </template>
 
 <script>
-import { getModelList, getFrameworks, getComponents, deployModel } from '@sdx/utils/src/api/model';
-import { getImageList } from '@sdx/utils/src/api/image';
+import { getModelList, getFrameworks, getComponents, deployModel } from '@sdx/utils/lib/api/model';
+import { getImageList } from '@sdx/utils/lib/api/image';
 export default {
     name: 'DeployModel',
     data() {

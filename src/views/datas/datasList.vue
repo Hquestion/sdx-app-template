@@ -386,7 +386,7 @@ import CreateDatasetOption from '../datamanagement/dataset-create/CreateDatasetO
 import stateLabel from './rely/stateLabel';
 import { dataTypes } from '../datamanagement/dataset-create/config';
 import FormTip from './rely/SkyForm/FormTip';
-import { dateFormatter } from '@sdx/utils/src/helper/transform';
+import { dateFormatter } from '@sdx/utils/lib/helper/transform';
 const datatype = dataTypes;
 export default {
     components: { CreateDatasetOption, stateLabel, FormTip },
