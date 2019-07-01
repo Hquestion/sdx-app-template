@@ -485,8 +485,15 @@ export default {
         getFlieList(path) {
             this.isTreeLoading = true;
             getFilesList({ path, userId: this.viewData.creator })
-                .then(res => {
-                    let data = res.data;
+                .then(data => {
+                    if (data.children) {
+                        for (let i = 0; i < data.children.length; i++) {
+                            data.children[i].is_dir = !data.children[i].isFile;
+                            data.children[i].fullpath = !data.children[i].path;
+                        }
+                    }
+                    data.paths = data.children;
+
                     this.treeData = data.paths;
                     this.isTreeLoading = false;
                     if (data.paths.length > 0) {
@@ -566,6 +573,7 @@ export default {
                 return getFilesList({ path, userId: this.viewData.creator })
                     .then(data => {
                         if (resolve) {
+                            data.paths = data.children;
                             resolve(data.paths);
                         }
 
@@ -595,6 +603,7 @@ export default {
         },
         // 处理"单文件选择"问题
         handleCheckChange(data, checked) {
+            window.console.log(data, 'gg');
             if (checked) {
                 this.data_file = data.fullpath;
                 // 调用预览接口
