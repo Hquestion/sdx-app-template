@@ -20,13 +20,14 @@ import directives from '@/directives';
 import i18n from './i18n';
 import SdxUI from '@sdx/ui';
 import { FileSelect, Breadcrumb, ResourceConfig } from '@sdx/widget';
-import Auth from '@sdx/widget/components/auth';
-import shareCenter from '@sdx/utils/src/helper/shareCenter';
-import shareCenterLib from '@sdx/utils/lib/helper/shareCenter';
+import Auth from '@sdx/widget/lib/auth';
+import shareCenter from '@sdx/utils/lib/helper/shareCenter';
 import febAlive from 'feb-alive';
 
 Vue.use(febAlive, { router, keyName: 'feb' });
 Vue.use(EmitAsync);
+
+console.log(SdxUI);
 
 // import directives by shaojs 2018年 2月22日 星期四 17时11分29秒 CST
 

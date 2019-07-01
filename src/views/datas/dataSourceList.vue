@@ -131,7 +131,7 @@
 <script>
 
 import { getSourceList, removeDataSource, testDataSourceConnection } from './rely/dataSourceApi';
-import { dateFormatter } from '@sdx/utils/src/helper/transform';
+import { dateFormatter } from '@sdx/utils/lib/helper/transform';
 export default {
     name: 'DataSourceList',
     data() {

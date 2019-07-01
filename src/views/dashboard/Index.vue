@@ -535,6 +535,7 @@ export default {
 </script>
 <style lang="scss">
 .sdx-dashboard {
+    overflow: hidden;
     display:flex;/*设为伸缩容器*/
     flex-flow:row;/*伸缩项目单行排列*/
     & /deep/ {
@@ -686,6 +687,11 @@ export default {
     .right {
         min-width: 282px;
         flex:1;
+        .recent-updates:last-child {
+            .sdxu-content-panel {
+                margin-bottom: 0;
+            }
+        }
     }
 }
 </style>
