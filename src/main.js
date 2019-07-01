@@ -94,7 +94,11 @@ shareCenter.setup({
             { key: 'SYSTEM-MANAGER:POD_REAL_RESOURCE:READ:""', tags: ['API'] },
             { key: 'SYSTEM-MANAGER:POD_LOG:READ:""', tags: ['API'] },
             { key: 'SYSTEM-MANAGER:POD_STATE:READ:""', tags: ['API'] },
-            { key: 'USER-MANAGER:USER:READ:""', tags: ['API'] }
+            { key: 'USER-MANAGER:USER:READ:""', tags: ['API'] },
+            { key: 'USER-MANAGER:GROUP:READ:""', tags: ['API'] },
+            { key: 'USER-MANAGER:ROLE:READ:""', tags: ['API'] },
+            { key: 'USER-MANAGER:PERMISSION:READ:""', tags: ['API'] },
+            { key: 'IMAGE-MANAGER:IMAGE:READ:""', tags: ['API'] }
         ]);
         user.user.userId = user.user.uuid;
         return user.user;
