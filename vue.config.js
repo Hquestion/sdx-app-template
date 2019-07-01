@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const FlowWebpackPlugin = require('flow-webpack-plugin');
 const isProduction = process.env.NODE_ENV === 'production';
+const componentDevEnv = !!require('./package.json').componentDevEnv;
 
 const resolve = dir => path.join(__dirname, dir);
 
@@ -19,6 +20,33 @@ const alias = {
     'utils': resolve('src/utils')
 };
 
+/**
+ * 开发环境下，为开发方便，将sdx组件库中的lib改为从src中引
+ * 配置说明：
+ * 将引用import '@sdx/ui' 改为从@sdx/ui/index.js中引入
+ * 将引用import '@sdx/widget' 改为从@sdx/ui/index.js中引入
+ * 将引用import '@sdx/ui/lib/**\/*','@sdx/widget/lib/**\/*','@sdx/view/lib/**\/*'改为从各自的components中引入,
+ * 将引用import '@sdx/utils/lib/**\/*'改为从@sdx/utils/src/**\/*中引入
+ * 这样做的目的：考虑开发场景：
+ * 1. 开发组件时，需在应用中使用/联调，需要先打包才能使用
+ * 2. 如果不打包，需要在应用中从源码中引，待开发完成组件库发布后再修改为从lib中引
+ * 以上两种场景给开发带来很大的障碍，通过alias及transpileDependencies来规避这中场景带来的开发/维护难度
+*/
+if (!isProduction && componentDevEnv) {
+    /**
+     * 一般使用如import SdxUI from '@sdx/ui'，已经将@sdx/ui$作为alias的key，
+     * 但由于项目中使用了babel-plugin-component-customize插件，该插件会默认将@sdx/ui改为从@sdx/ui/lib中引入，
+     * 因此这里需要改成@sdx/ui/lib。
+     * @type {string}
+     */
+    alias['@sdx/ui/lib$'] = '@sdx/ui/index.js';
+    alias['@sdx/widget/lib$'] = '@sdx/widget/index.js';
+    alias['@sdx/ui/lib'] = '@sdx/ui/components';
+    alias['@sdx/widget/lib'] = '@sdx/widget/components';
+    alias['@sdx/view/lib'] = '@sdx/view/components';
+    alias['@sdx/utils/lib'] = '@sdx/utils/src';
+}
+
 module.exports = {
     lintOnSave: !isProduction ? false : false,
     publicPath: isProduction ? '/' : '/',
@@ -26,12 +54,13 @@ module.exports = {
     productionSourceMap: false,
 
     transpileDependencies: isProduction ? [] :
+        componentDevEnv ?
         [
             './node_modules/@sdx/ui/components',
             './node_modules/@sdx/utils/src',
             './node_modules/@sdx/widget/components',
             './node_modules/@sdx/view/components'
-        ],
+        ] : [],
 
     css: {
         extract: isProduction,
@@ -103,22 +132,7 @@ module.exports = {
     devServer: {
         port: 3100,
         proxy: {
-            '^/user-manager': {
-                target: 'http://10.115.1.130:30080',
-                ws: true,
-                changeOrigin: true,
-            },
-            '^/resource-manager': {
-                target: 'http://10.115.1.130:30080',
-                ws: true,
-                changeOrigin: true,
-            },
-            '^/system-manager': {
-                target: 'http://10.115.1.130:30080',
-                ws: true,
-                changeOrigin: true,
-            },
-            '^/image-manager': {
+            '^/.*-manager': {
                 target: 'http://10.115.1.130:30080',
                 ws: true,
                 changeOrigin: true,
@@ -128,16 +142,6 @@ module.exports = {
                 ws: true,
                 changeOrigin: true,
             },
-            '/project-manager': {
-                target: 'http://10.115.1.130:30080',
-                ws: true,
-                changeOrigin: true
-            },
-            '/resource-manager': {
-                target: 'http://10.115.1.130:30080',
-                ws: true,
-                changeOrigin: true
-            },
             // '/mock': {
             //     target: 'https://easy-mock.com',
             //     ws: true,
@@ -146,54 +150,16 @@ module.exports = {
             //         '/mock': '/mock/5cd04685adb0973be6a3d969/'
             //     }
             // },
-            '^/file-manager': {
-                target: 'http://10.115.1.130:30080',
-                ws: true,
-                changeOrigin: true
-            },
-            '^/resource-manager': {
-                target: 'http://10.115.1.130:30080',
-                ws: true,
-                changeOrigin: true
-            },
-            '^/model-manager': {
-                target: 'http://10.115.1.130:30080',
-                ws: true,
-                changeOrigin: true
-            },
-            '^/skyflow-manager': {
-                target: 'http://10.115.1.130:30080',
-                ws: true,
-                changeOrigin: true
-            },
-            '^/storage-manager': {
-                target: 'http://10.115.1.130:30080',
-                ws: true,
-                changeOrigin: true
-            },
-            '^/data-manager': {
-                target: 'http://10.115.1.130:30080',
-                ws: true,
-                changeOrigin: true
-            },
             '^/api/v1/datasource': {
-                target: 'http://10.201.12.42:5000',
+                target: 'http://10.201.0.29:5000',
                 ws: true,
                 changeOrigin: true
             },
             '^/api/v1/dataset': {
-                target: 'http://10.201.12.42:5000',
+                target: 'http://10.201.0.29:5000',
                 ws: true,
                 changeOrigin: true
             },
-            // '^/api/v1': {
-            //     target: 'https://easy-mock.com',
-            //     ws: true,
-            //     changeOrigin: true,
-            //     pathRewrite: {
-            //         '/api/v1': '/mock/5cd04685adb0973be6a3d969/api/v1'
-            //     }
-            // },
         },
         overlay: true
     },

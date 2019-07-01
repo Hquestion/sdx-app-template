@@ -272,7 +272,7 @@ import hasNothing from './rely/util/hasNothing';
 import poploadmore from './js/loadMore';
 import datasListView from './datasListView';
 import SkyTitleGoBack from './rely/skyTitleGoBack';
-import { getFilesList } from '@sdx/utils/src/api/file';
+import { getFilesList } from '@sdx/utils/lib/api/file';
 // import { mapMutations } from 'vuex';
 export default {
     name: 'DatasView',

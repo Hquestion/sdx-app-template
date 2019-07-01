@@ -24,7 +24,7 @@
 </template>
 <script>
 import baseMixins from './editorBaseMixins';
-import { testDataSourceConnection } from '@sdx/utils/src/api/skyflow';
+import { testDataSourceConnection } from '@sdx/utils/lib/api/skyflow';
 export default {
     mixins: [baseMixins],
     data() {
