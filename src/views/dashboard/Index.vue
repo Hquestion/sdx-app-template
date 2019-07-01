@@ -687,6 +687,11 @@ export default {
     .right {
         min-width: 282px;
         flex:1;
+        .recent-updates:last-child {
+            .sdxu-content-panel {
+                margin-bottom: 0;
+            }
+        }
     }
 }
 </style>
