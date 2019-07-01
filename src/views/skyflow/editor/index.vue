@@ -31,6 +31,7 @@
                 <component-classification
                     :is-editable="isEditable"
                     ref="classification"
+                    :processType="processType"
                 />
             </div>
             <div
@@ -197,7 +198,7 @@ export default {
                 timeValue: 1
             },
             executeStartTime: '', // 执行开始时间
-            processType: '' // 工作流类型
+            processType: '' // 工作流类型: PATCH | STREAM
         };
     },
     computed: {

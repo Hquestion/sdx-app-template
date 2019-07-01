@@ -99,6 +99,10 @@ export default {
         isEditable: {
             type: Boolean,
             default: true
+        },
+        processType: {
+            type: String,
+            default: 'PATCH' // STREAM
         }
     },
     data() {
@@ -116,7 +120,7 @@ export default {
         fetchDataList(name, search) {
             this.dataList = [];
             this.loading = true;
-            const getList = search ? componentApi[name](search) : componentApi[name]();
+            const getList = search ? componentApi[name](this.processType, search) : componentApi[name](this.processType);
             getList.then(data => {
                 // 请求异步数据时，切换tab，如果获取的数据不是对应当前的tab，则抛弃
                 if (name === this.currentLabel) {
