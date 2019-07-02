@@ -48,59 +48,115 @@ shareCenter.setup({
     user() {
         const user = store.state.user.token;
         user && (user.user.allPermissions = [
-            { key: 'APPLICATION:DASHBOARD_MENU:ACCESS:""', tags: ['MENU'] },
-            { key: 'APPLICATION:PROJECT_MANAGER_MENU:ACCESS:""', tags: ['MENU'] },
-            { key: 'APPLICATION:SKYFLOW_MANAGER_MENU:ACCESS:""', tags: ['MENU'] },
-            { key: 'APPLICATION:FILE_MANAGER_MENU:ACCESS:""', tags: ['MENU'] },
-            { key: 'APPLICATION:IMAGE_MANAGER_MENU:ACCESS:""', tags: ['MENU'] },
-            { key: 'APPLICATION:MANAEGR_PLATFORM_MENU:ACCESS:""', tags: ['MENU'] },
-            { key: 'APPLICATION:MODEL_MANAGER_MENU:ACCESS:""', tags: ['MENU'] },
-            { key: 'RESOURCE-MANAGER:TEMPLATE:READ:""', tags: ['BUTTON'] },
-            { key: 'RESOURCE-MANAGER:TEMPLATE:WRITE:""', tags: ['BUTTON'] },
-            { key: 'MODEL-MANAGER:MODEL_VERSION:CREATE:""', tags: ['BUTTON'] },
-            { key: 'MODEL-MANAGER:MODEL:CREATE:""', tags: ['BUTTON'] },
-            { key: 'MODEL-MANAGER:MODEL:SHARE:""', tags: ['BUTTON'] },
-            { key: 'IMAGE-MANAGER:IMAGE:SHARE:""', tags: ['BUTTON'] },
-            { key: 'SKYFLOW-MANAGER:FLOW:CREATE:""', tags: ['BUTTON'] },
-            { key: 'SKYFLOW-MANAGER:TEMPLATE_FLOW:CREATE:""', tags: ['BUTTON'] },
-            { key: 'APPLICATION:IMAGE_MANAGER_MENU:ACCESS:""', tags: ['MENU'] },
-            { key: 'IMAGE-MANAGER:IMAGE_BUILDER:BUILD_BASIC:""', tags: ['BUTTON'] },
-            { key: 'IMAGE-MANAGER:IMAGE_BUILDER:BUILD_TAR:""', tags: ['BUTTON'] },
-            { key: 'IMAGE-MANAGER:IMAGE_BUILDER:BUILD_IMAGE_FILE:""', tags: ['BUTTON'] },
-            { key: 'APPLICATION:DATA_MANAGER_MENU:ACCESS:""', tags: ['MENU'] },
-            { key: 'PROJECT-MANAGER:PROJECT:CREATE:""', tags: ['BUTTON'] },
-            { key: 'PROJECT-MANAGER:TEMPLATE_PROJECT:CREATE:""', tags: ['BUTTON'] },
-            { key: 'APPLICATION:GLOBAL_IMAGE_BUTTON:ACCESS:""', tags: ['BUTTON'] },
-            { key: 'PROJECT-MANAGER:TASK:CREATE:""', tags: ['BUTTON'] },
-            { key: 'USER-MANAGER:USER:READ:""', tags: ['BUTTON'] },
-            { key: 'USER-MANAGER:USER:WRITE:""', tags: ['BUTTON'] },
-            { key: 'USER-MANAGER:GROUP:READ:""', tags: ['BUTTON'] },
-            { key: 'USER-MANAGER:GROUP:WRITE:""', tags: ['BUTTON'] },
-            { key: 'USER-MANAGER:ROLE:READ:""', tags: ['BUTTON'] },
-            { key: 'USER-MANAGER:ROLE:WRITE:""', tags: ['BUTTON'] },
-            { key: 'SKYFLOW-MANAGER:FLOW:READ:""', tags: ['BUTTON'] },
-            { key: 'SKYFLOW-MANAGER:TEMPLATE_FLOW:READ:""', tags: ['BUTTON'] },
-            { key: 'SKYFLOW-MANAGER:TEMPLATE_FLOW:READ:""', tags: ['API'] },
-            { key: 'SKYFLOW-MANAGER:FLOW:READ:""', tags: ['API'] },
-            { key: 'SKYFLOW-MANAGER:FLOW_RECORD:READ:""', tags: ['API'] },
-            { key: 'MODEL-MANAGER:MODEL:READ:""', tags: ['API'] },
-            { key: 'MODEL-MANAGER:MODEL_VERSION:READ:""', tags: ['API'] },
-            { key: 'PROJECT-MANAGER:TASK:READ:""', tags: ['API'] },
-            { key: 'RESOURCE-MANAGER:TEMPLATE:READ:""', tags: ['API'] },
-            { key: 'RESOURCE-MANAGER:USER_STATE:READ:""', tags: ['BUTTON'] },
-            { key: 'RESOURCE-MANAGER:USER_STATE:READ:""', tags: ['API'] },
-            { key: 'RESOURCE-MANAGER:GLOBAL_STATE:READ:""', tags: ['BUTTON'] },
-            { key: 'RESOURCE-MANAGER:GLOBAL_STATE:READ:""', tags: ['API'] },
-            { key: 'SYSTEM-MANAGER:GLOBAL_RESOURCE:READ:""', tags: ['API'] },
-            { key: 'SYSTEM-MANAGER:POD_REAL_RESOURCE:READ:""', tags: ['API'] },
-            { key: 'SYSTEM-MANAGER:POD_LOG:READ:""', tags: ['API'] },
-            { key: 'SYSTEM-MANAGER:POD_STATE:READ:""', tags: ['API'] },
-            { key: 'USER-MANAGER:USER:READ:""', tags: ['API'] }
+            // MENU
+            { key: 'APPLICATION:DASHBOARD_MENU:ACCESS:', tags: ['MENU'] },
+            { key: 'APPLICATION:DATA_MANAGER_MENU:ACCESS:', tags: ['MENU'] },
+            { key: 'APPLICATION:PROJECT_MANAGER_MENU:ACCESS:', tags: ['MENU'] },
+            { key: 'APPLICATION:SKYFLOW_MANAGER_MENU:ACCESS:', tags: ['MENU'] },
+            { key: 'APPLICATION:MODEL_MANAGER_MENU:ACCESS:', tags: ['MENU'] },
+            { key: 'APPLICATION:FILE_MANAGER_MENU:ACCESS:', tags: ['MENU'] },
+            { key: 'APPLICATION:IMAGE_MANAGER_MENU:ACCESS:', tags: ['MENU'] },
+
+            // MENU - MANAGER PLATFORM
+            { key: 'APPLICATION:MANAEGR_PLATFORM_MENU:ACCESS:', tags: ['MENU'] },
+            { key: 'APPLICATION:USER_MANAGER_MENU:ACCESS:', tags: ['MENU'] },
+            { key: 'APPLICATION:PERMISSION_MANAGER_MENU:ACCESS:', tags: ['MENU'] },
+            { key: 'APPLICATION:RESOURCE_MANAGER_MENU:ACCESS:', tags: ['MENU'] },
+            { key: 'APPLICATION:SYSTEM_MANAGER_MENU:ACCESS:', tags: ['MENU'] },
+
+            // APPLICATION
+            { key: 'APPLICATION:GLOBAL_IMAGE_BUTTON:ACCESS:', tags: ['BUTTON'] },
+
+
+            // RESOURCE MANAGER
+            { key: 'RESOURCE-MANAGER:TEMPLATE:READ:', tags: ['BUTTON'] },
+            { key: 'RESOURCE-MANAGER:TEMPLATE:READ:', tags: ['API'] },
+            { key: 'RESOURCE-MANAGER:TEMPLATE:WRITE:', tags: ['BUTTON'] },
+            // { key: 'RESOURCE-MANAGER:CONFIG:READ:', tags: ['BUTTON'] },   未用到
+            // { key: 'RESOURCE-MANAGER:CONFIG:READ:', tags: ['API'] },      未用到
+            { key: 'RESOURCE-MANAGER:CONFIG:WRITE:', tags: ['BUTTON'] },
+            { key: 'RESOURCE-MANAGER:USER_STATE:READ:', tags: ['BUTTON'] },
+            { key: 'RESOURCE-MANAGER:USER_STATE:READ:', tags: ['API'] },
+            { key: 'RESOURCE-MANAGER:GLOBAL_STATE:READ:', tags: ['BUTTON'] },
+            { key: 'RESOURCE-MANAGER:GLOBAL_STATE:READ:', tags: ['API'] },
+
+            // USER MANAGER
+            { key: 'USER-MANAGER:USER:READ:', tags: ['BUTTON'] },
+            { key: 'USER-MANAGER:USER:READ:', tags: ['API'] },
+            { key: 'USER-MANAGER:USER:WRITE:', tags: ['BUTTON'] },
+            { key: 'USER-MANAGER:USER:PASSWORD-RESET:', tags: ['BUTTON'] },
+            { key: 'USER-MANAGER:GROUP:READ:', tags: ['BUTTON'] },
+            { key: 'USER-MANAGER:GROUP:READ:', tags: ['API'] },
+            { key: 'USER-MANAGER:GROUP:WRITE:', tags: ['BUTTON'] },
+            { key: 'USER-MANAGER:ROLE:READ:', tags: ['BUTTON'] },
+            { key: 'USER-MANAGER:ROLE:READ:', tags: ['API'] },
+            { key: 'USER-MANAGER:ROLE:WRITE:', tags: ['BUTTON'] },
+            { key: 'USER-MANAGER:PERMISSION:READ:', tags: ['BUTTON'] },
+            { key: 'USER-MANAGER:PERMISSION:READ:', tags: ['API'] },
+            { key: 'USER-MANAGER:PERMISSION:WRITE:', tags: ['API'] },
+
+            // SYSTEM MANAGER
+            { key: 'SYSTEM-MANAGER:GLOBAL_RESOURCE:READ:', tags: ['BUTTON'] },
+            { key: 'SYSTEM-MANAGER:GLOBAL_RESOURCE:READ:', tags: ['API'] },
+            { key: 'SYSTEM-MANAGER:POD_REAL_RESOURCE:READ:', tags: ['BUTTON'] },
+            { key: 'SYSTEM-MANAGER:POD_REAL_RESOURCE:READ:', tags: ['API'] },
+            { key: 'SYSTEM-MANAGER:POD_LOG:READ:', tags: ['BUTTON'] },
+            { key: 'SYSTEM-MANAGER:POD_LOG:READ:', tags: ['API'] },
+            { key: 'SYSTEM-MANAGER:POD_STATE:READ:', tags: ['BUTTON'] },
+            { key: 'SYSTEM-MANAGER:POD_STATE:READ:', tags: ['API'] },
+
+            // PROJECT MANAGER
+            { key: 'PROJECT-MANAGER:PROJECT:CREATE:', tags: ['BUTTON'] },
+            // { key: 'PROJECT-MANAGER:PROJECT:READ:', tags: ['API'] },     等待页面调整
+            { key: 'PROJECT-MANAGER:TEMPLATE_PROJECT:CREATE:', tags: ['BUTTON'] },
+            // { key: 'PROJECT-MANAGER:TEMPLATE_PROJECT:READ:', tags: ['API'] },    等待页面调整
+            { key: 'PROJECT-MANAGER:TEMPLATE_PROJECT:WRITE:', tags: ['BUTTON'] },
+            { key: 'PROJECT-MANAGER:COOPERATE_PROJECT:CREATE:', tags: ['BUTTON'] },
+            // { key: 'PROJECT-MANAGER:COOPERATE_PROJECT:READ:', tags: ['API'] },     等待页面调整
+            { key: 'PROJECT-MANAGER:TASK:CREATE:', tags: ['BUTTON'] },
+            { key: 'PROJECT-MANAGER:TASK:READ:', tags: ['API'] },
+            { key: 'PROJECT-MANAGER:TASK:SAVE_IMAGE:', tags: ['BUTTON'] },
+
+            // IMAGE MANAGER
+            { key: 'IMAGE-MANAGER:IMAGE:READ:', tags: ['API'] },
+            { key: 'IMAGE-MANAGER:IMAGE:SHARE:', tags: ['BUTTON'] },
+            { key: 'IMAGE-MANAGER:IMAGE_PACKAGE:READ:', tags: ['API'] },
+            { key: 'IMAGE-MANAGER:IMAGE_BUILDER:READ:', tags: ['API'] },
+            { key: 'IMAGE-MANAGER:IMAGE_BUILDER:BUILD_BASIC:', tags: ['BUTTON'] },
+            { key: 'IMAGE-MANAGER:IMAGE_BUILDER:BUILD_TAR:', tags: ['BUTTON'] },
+            { key: 'IMAGE-MANAGER:IMAGE_BUILDER:BUILD_IMAGE_FILE:', tags: ['BUTTON'] },
+            { key: 'IMAGE-MANAGER:IMAGE_BUILDER:BUILD_CONTAINER_IMAGE:', tags: ['BUTTON'] },
+            { key: 'IMAGE-MANAGER:IMAGE_SOURCE_REPOS:READ:', tags: ['API'] },
+
+            // MODEL MANAGER
+            { key: 'MODEL-MANAGER:MODEL:CREATE:', tags: ['BUTTON'] },
+            { key: 'MODEL-MANAGER:MODEL:READ:', tags: ['API'] },
+            { key: 'MODEL-MANAGER:MODEL:SHARE:', tags: ['BUTTON'] },
+            { key: 'MODEL-MANAGER:MODEL_VERSION:CREATE:', tags: ['BUTTON'] },
+            { key: 'MODEL-MANAGER:MODEL_VERSION:READ:', tags: ['API'] },
+
+
+            // SKYFLOW MANAGER
+            { key: 'SKYFLOW-MANAGER:FLOW:CREATE:', tags: ['BUTTON'] },
+            { key: 'SKYFLOW-MANAGER:FLOW:READ:', tags: ['API'] },
+            { key: 'SKYFLOW-MANAGER:FLOW:READ:', tags: ['BUTTON'] },
+            { key: 'SKYFLOW-MANAGER:FLOW:SHARE:', tags: ['BUTTON'] },
+            { key: 'SKYFLOW-MANAGER:TEMPLATE_FLOW:CREATE:', tags: ['BUTTON'] },
+            { key: 'SKYFLOW-MANAGER:TEMPLATE_FLOW:READ:', tags: ['API'] },
+            { key: 'SKYFLOW-MANAGER:TEMPLATE_FLOW:READ:', tags: ['BUTTON'] },
+            { key: 'SKYFLOW-MANAGER:TEMPLATE_FLOW:WRITE:', tags: ['BUTTON'] },
+            { key: 'SKYFLOW-MANAGER:FLOW_RECORD:READ:', tags: ['API'] },
+
+            // FILE MANAGER
+            { key: 'FILE-MANAGER:FILE:READ:', tags: ['API'] },
+            { key: 'FILE-MANAGER:FILE:UPLOAD:', tags: ['BUTTON'] },
+            { key: 'FILE-MANAGER:FILE:DOWNLOAD:', tags: ['BUTTON'] },
+            { key: 'FILE-MANAGER:FILE:SHARE:', tags: ['BUTTON'] }
         ]);
         user.user.userId = user.user.uuid;
         return user.user;
     },
-    authSwitch: 'OFF'
+    authSwitch: 'ON'
 });
 
 new Vue({
