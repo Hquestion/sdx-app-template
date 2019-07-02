@@ -210,7 +210,7 @@
                             </el-button>
                         </div>
                         <i
-                            class="iconfont icon-shaicha"
+                            class="iconfont iconshaicha"
                             slot="reference"
                         />
                     </el-popover>
@@ -220,7 +220,7 @@
                         @click="handleDownload(previewData.path, previewData.ownerId)"
                     />
                     <i
-                        :class="['iconfont', fullscreen ? 'icon-zuixiaohua':'icon-zuidahua']"
+                        :class="['iconfont', fullscreen ? 'iconzuixiaohua':'iconzuidahua']"
                         @click="handleFullScreen"
                         v-if="showData.length > 0 || imageUrl"
                     />
@@ -526,7 +526,6 @@ export default {
                             paths: downloadPaths,
                             ownerId: data.ownerId
                         };
-                        window.console.log(this.allDownloadParams, 88);
                     }
                     if (data.paths.length === 0) {
                         this.noPreview = true;

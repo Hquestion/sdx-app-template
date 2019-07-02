@@ -12,9 +12,16 @@
                     <svg
                         class="alSvgIcon"
                         aria-hidden="true"
+                        v-if="v.mimeType.indexOf('image/')"
                     >
                         <use :xlink:href="getExt(v.name,v.is_dir)" />
                     </svg>
+                    <data-image
+                        v-else
+                        :image-url="getUrl(v.ownerId, v.path)"
+                        :is-icon="true"
+                        image-width="46px"
+                    />
                 </div>
                 <div class="content">
                     <el-tooltip
@@ -45,6 +52,7 @@
 <script>
 import { hdfsLs } from './rely/dataApi';
 import { getFilesList } from '@sdx/utils/src/api/file';
+import dataImage from './dataImage';
 export default {
     name: 'DatasListView',
     data() {
@@ -53,6 +61,7 @@ export default {
             fullpath: ''
         };
     },
+    components: { dataImage },
     props: {
         dataListPath: {
             type: String,
@@ -84,7 +93,7 @@ export default {
 
     methods: {
         // icon
-        getExt(name, is_dir) {
+        getExt(name, is_dir, type) {
             let [arr, ext] = [[], ''];
             if (name) {
                 arr = name.split('.');
@@ -92,17 +101,17 @@ export default {
             }
 
             if (ext === 'csv') {
-                ext = '#icon-CVS-caise';
+                ext = '#iconCSV';
             } else if (ext === 'txt') {
-                ext = '#icon-Txt-caise';
+                ext = '#iconTXT';
             } else if (ext === 'orc') {
-                ext = '#icon-ORC-caise';
+                ext = '#iconORC';
             } else if (ext === 'parquet') {
-                ext = '#icon-Parquet-caise';
+                ext = '#iconParquet';
             } else if (is_dir) {
-                ext = '#icon-file-dir';
+                ext = '#iconwenjianjia';
             } else if (ext !== 'csv' && ext !== 'txt' && ext !== 'orc' && ext !== 'parquet' && !is_dir) {
-                ext = '#icon-buzhichiyulan';
+                ext = '#iconwuyulan';
             }
             return ext;
         },
@@ -158,6 +167,9 @@ export default {
                 res = false;
             }
             return res;
+        },
+        getUrl(ownerId, path) {
+            return `${location.origin}/file-manager/api/v1/files/download?ownerId=${ownerId}&path=${path}&filesystem=cephfs`;
         }
     },
     created() {

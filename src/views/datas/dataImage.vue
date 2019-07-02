@@ -1,6 +1,7 @@
 <template>
     <div class="data-image">
         <img
+            :style="{'width': imageWidth, 'height': isIcon ? imageWidth : '100%', 'padding-top': isIcon ? '0px' : '20px'}"
             :src="imageUrl"
         >
     </div>
@@ -13,6 +14,14 @@ export default {
         imageUrl: {
             type: String,
             default: ''
+        },
+        imageWidth: {
+            type: String,
+            default: '22%'
+        },
+        isIcon: {
+            type: Boolean,
+            default: false
         }
     }
 };
@@ -20,10 +29,5 @@ export default {
 <style rel="stylesheet/scss" lang="scss" scoped>
 .data-image {
     text-align: center;
-    padding-top: 20px;
-    img {
-        width: 260px;
-    }
 }
-
 </style>
