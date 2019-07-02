@@ -54,6 +54,11 @@
                         class="inline wd140"
                     >
                         <el-option
+                            label="全部"
+                            :value="-1"
+                            key="all"
+                        />
+                        <el-option
                             v-for="item in dealOptions"
                             :key="item.value"
                             :label="item.label"
@@ -459,17 +464,14 @@ export default {
                 }
             ],
             dealOptions: [{
-                value: -1,
-                label: '全部'
-            }, {
-                value: 3,
-                label: '公共'
-            }, {
-                value: 1,
-                label: '组内'
-            }, {
-                value: 2,
+                value: 'PRIVATE',
                 label: '私有'
+            }, {
+                value: 'MY_SHARE',
+                label: '我的共享'
+            }, {
+                value: 'OTHER_SHARE',
+                label: '他人共享'
             }],
             tags: [],
             currentData: {
@@ -534,7 +536,8 @@ export default {
         // 数据集标签
         getTags() {
             getDataTag()
-                .then(data => {
+                .then(res => {
+                    let data = res.data;
                     this.datasetsOptions = data.options;
                     this.tags = data.options;
                 })
@@ -758,9 +761,8 @@ export default {
 };
 </script>
 <style rel="stylesheet/scss" lang="scss">
-    @import "../../assets/styles/base/colors";
-    @import "../../assets/styles/base/constants";
-    @import "../../assets/styles/base/mixin";
+
+
     .data-source-table {
         background: white;
         // padding: 0 20px 10px;
@@ -772,8 +774,8 @@ export default {
             color: #45474c;
             height: 61px;
             line-height: 60px;
-            border-bottom: 1px solid $c-split;
-            background-color: $white;
+            border-bottom: 1px solid #e6eaf2;
+            background-color: #fff;
             text-align: justify;
             display: flex;
             justify-content: space-between;

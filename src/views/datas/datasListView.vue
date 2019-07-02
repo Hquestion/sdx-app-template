@@ -5,7 +5,7 @@
             :key="k"
         >
             <div
-                @click="viewData(v.fullpath,v.is_dir, v.path)"
+                @click="viewData(v.fullpath,v.is_dir, v.path, v.mimeType, v.ownerId)"
                 :class="[viewDisabled(v) ?'disabledClick':'', 'card']"
             >
                 <div class="icon">
@@ -28,7 +28,7 @@
                         </div>
                     </el-tooltip>
                     <div class="size">
-                        文件大小 {{ v.st_size | bytesToSize }}
+                        文件大小 {{ v.size | bytesToSize }}
                     </div>
                 </div>
             </div>
@@ -110,6 +110,13 @@ export default {
         getFlieList(path) {
             getFilesList({ path })
                 .then(data => {
+                    if (data.children) {
+                        for (let i = 0; i < data.children.length; i++) {
+                            data.children[i].is_dir = !data.children[i].isFile;
+                            data.children[i].fullpath = data.children[i].path;
+                            data.children[i].ext = data.children[i].fileExtension;
+                        }
+                    }
                     data.paths = data.children;
                     this.list = data.paths;
                 });
@@ -130,7 +137,7 @@ export default {
             }
         },
         // 查看数据
-        viewData(fullpath, is_dir, path) {
+        viewData(fullpath, is_dir, path, type, ownerId) {
             let [arr, ext] = [[], ''];
             arr = fullpath.split('.');
             ext = arr[arr.length - 1];
@@ -141,6 +148,8 @@ export default {
                 this.$emit('expandNode', fullpath, path);
             } else if (ext === 'csv' || ext === 'txt' || ext === 'orc' || ext === 'parquet') {
                 this.$emit('viewData', fullpath, path);
+            } else if (type.indexOf('image/') === 0) {
+                this.$emit('viewData', fullpath, path, 'image', ownerId);
             }
         },
         viewDisabled(v) {
@@ -163,9 +172,7 @@ export default {
 };
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
-    @import "../../assets/styles/base/colors";
-    @import "../../assets/styles/base/constants";
-    @import "../../assets/styles/base/mixin";
+
 .data-list-view {
     padding: 0 20px;
     display: flex;
@@ -180,7 +187,7 @@ export default {
         display: block;
         height: 116px;
         width: 268px;
-        border: 1px solid $c-split;
+        border: 1px solid #e6eaf2;
         margin-top: 20px;
         padding-top: 6px;
         padding-bottom: 37px;
@@ -207,8 +214,6 @@ export default {
             padding: 23px 0;
             .name {
                 color:rgba(64,69,73,1);
-                // height: 58px;
-                // line-height: 70px;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
@@ -216,8 +221,6 @@ export default {
             }
             .size {
                 color:rgba(107,113,122,1);
-                // height: 58px;
-                // line-height: 24px;
             }
         }
     }

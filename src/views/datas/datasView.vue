@@ -119,7 +119,7 @@
                         <div>
                             <i
                                 class="iconfont iconicon--download"
-                                @click="allDownload(viewData.short_path)"
+                                @click="allDownload(allDownloadParams.paths, allDownloadParams.ownerId)"
                                 v-if="viewData.store_type === 'FILESYSTEM'"
                             />
                         </div>
@@ -143,13 +143,13 @@
                 数据预览
                 <span
                     class="colInfo"
-                    v-if="showData.length > 0 && !datalistHide && !isPreview"
+                    v-if="showData.length > 0 && !datalistHide && !isPreview && !imageUrl"
                 >
                     预览   {{ `${previewData.data_rows.length}*${previewData.sky_schema.length}` }}
                 </span>
                 <span
                     class="colInfo"
-                    v-if="showData.length > 0 && !datalistHide && !isPreview"
+                    v-if="showData.length > 0 && !datalistHide && !isPreview && !imageUrl"
                 >
                     实际   {{ previewData.shape }}
                 </span>
@@ -163,7 +163,7 @@
                         trigger="click"
                         v-model="visiblePopover"
                         @show="show"
-                        v-if="showData.length > 0 && !datalistHide"
+                        v-if="showData.length > 0 && !datalistHide && !imageUrl"
                     >
                         <div class="popover-header">
                             <el-checkbox
@@ -216,13 +216,13 @@
                     </el-popover>
                     <i
                         class="iconfont iconicon--download"
-                        v-if="previewData.path && !datalistHide"
-                        @click="handleDownload(previewData.path)"
+                        v-if="(previewData.path && !datalistHide) || imageUrl"
+                        @click="handleDownload(previewData.path, previewData.ownerId)"
                     />
                     <i
                         :class="['iconfont', fullscreen ? 'icon-zuixiaohua':'icon-zuidahua']"
                         @click="handleFullScreen"
-                        v-if="showData.length > 0"
+                        v-if="showData.length > 0 || imageUrl"
                     />
                 </div>
             </div>
@@ -246,7 +246,11 @@
                     @reach-bottom="loadMore"
                     v-loading="isLoadingTableData"
                     :readonly="true"
-                    v-if="showData.length > 0 && !datalistHide && !isPreview"
+                    v-if="showData.length > 0 && !datalistHide && !isPreview && !imageUrl"
+                />
+                <dataImage
+                    :image-url="imageUrl"
+                    v-if="imageUrl"
                 />
                 <has-nothing
                     v-if="isPreview"
@@ -272,11 +276,12 @@ import hasNothing from './rely/util/hasNothing';
 import poploadmore from './js/loadMore';
 import datasListView from './datasListView';
 import SkyTitleGoBack from './rely/skyTitleGoBack';
-import { getFilesList } from '@sdx/utils/lib/api/file';
+import { getFilesList, download, pack } from '@sdx/utils/lib/api/file';
+import dataImage from './dataImage';
 // import { mapMutations } from 'vuex';
 export default {
     name: 'DatasView',
-    components: { DataSetPreview, hasNothing, datasListView, SkyTitleGoBack },
+    components: { DataSetPreview, hasNothing, datasListView, SkyTitleGoBack, dataImage },
     data() {
         return {
             id: '',
@@ -312,7 +317,8 @@ export default {
                 data_rows: Object.freeze([]),
                 sky_schema: Object.freeze([]),
                 path: '',
-                shape: ''
+                shape: '',
+                ownerId: ''
             },
             checkAll: true,
             checkedCols: Object.freeze([]),
@@ -325,8 +331,6 @@ export default {
             showData: Object.freeze([]),
             isLoadingTableData: false,
             dataHeight: '650px',
-            // currentName: this.$store.state.user.group.name,
-
             pageIndexPop: 0,
             topCount: 0,
             searchSchema: [],
@@ -334,11 +338,8 @@ export default {
             // 文件列表
             treeData: [],
             isTreeLoading: false, // 文件树是否正在加载
-
             // 数据预览参数
             data_file: '',
-            viewColumns: [],
-            baseAPI: process.env.VUE_APP_BASE_API,
             datalistHide: false,
             dataListPath: '',
             store_type: '',
@@ -348,7 +349,12 @@ export default {
             firstExpand: false,
             // 不可预览
             isPreview: false,
-            noPreview: false
+            noPreview: false,
+            imageUrl: '',
+            allDownloadParams: {
+                paths: [],
+                ownerId: ''
+            }
         };
     },
     computed: {
@@ -489,13 +495,15 @@ export default {
                     if (data.children) {
                         for (let i = 0; i < data.children.length; i++) {
                             data.children[i].is_dir = !data.children[i].isFile;
-                            data.children[i].fullpath = !data.children[i].path;
+                            data.children[i].fullpath = data.children[i].path;
+                            data.children[i].ext = data.children[i].fileExtension;
                         }
                     }
                     data.paths = data.children;
-
+                    this.previewData.ownerId = data.paths[0].ownerId;
                     this.treeData = data.paths;
                     this.isTreeLoading = false;
+
                     if (data.paths.length > 0) {
                         this.nodeId = data.paths[0].path;
                         this.firstExpand = true;
@@ -503,13 +511,22 @@ export default {
                         if (data.paths[0].is_dir) {
                             this.expandedKey = [data.paths[0].path];
                         }
-
-
                         this.$nextTick(() => {
                             this.$refs.tree.setCurrentKey(data.paths[0].path);
                         });
 
                         this.data_file = data.paths[0].fullpath;
+
+                        // 下载
+                        let downloadPaths = [];
+                        for (let i = 0; i < data.paths.length; i++) {
+                            downloadPaths.push(data.paths[i].path);
+                        }
+                        this.allDownloadParams = {
+                            paths: downloadPaths,
+                            ownerId: data.ownerId
+                        };
+                        window.console.log(this.allDownloadParams, 88);
                     }
                     if (data.paths.length === 0) {
                         this.noPreview = true;
@@ -527,13 +544,24 @@ export default {
                         this.getPreview(params);
                         this.datalistHide = false;
                         this.isPreview = false;
+                        // 图片
+                        this.imageUrl = '';
                     } else if (data.paths[0].is_dir) {
                         this.datalistHide = true;
                         this.dataListPath = data.paths[0].path;
                         this.isPreview = false;
+                        // 图片
+                        this.imageUrl = '';
+                    } else if (data.paths[0].mimeType.indexOf('image/') === 0) {
+                        this.imageUrl = `${location.origin}/file-manager/api/v1/files/download?ownerId=${data.paths[0].ownerId}&path=${data.paths[0].path}&filesystem=cephfs`;
+                        this.isPreview = false;
+                        this.datalistHide = false;
+                        this.previewData.path = data.paths[0].path;
                     } else {
                         this.isPreview = true;
                         this.datalistHide = false;
+                        // 图片
+                        this.imageUrl = '';
                     }
                 })
                 .catch(error => {
@@ -541,6 +569,8 @@ export default {
                     this.isPreview = true;
                     this.datalistHide = false;
                     this.noPreview = false;
+                    // 图片
+                    this.imageUrl = '';
                 });
         },
 
@@ -573,6 +603,13 @@ export default {
                 return getFilesList({ path, userId: this.viewData.creator })
                     .then(data => {
                         if (resolve) {
+                            if (data.children) {
+                                for (let i = 0; i < data.children.length; i++) {
+                                    data.children[i].is_dir = !data.children[i].isFile;
+                                    data.children[i].fullpath = data.children[i].path;
+                                    data.children[i].ext = data.children[i].fileExtension;
+                                }
+                            }
                             data.paths = data.children;
                             resolve(data.paths);
                         }
@@ -603,9 +640,11 @@ export default {
         },
         // 处理"单文件选择"问题
         handleCheckChange(data, checked) {
-            window.console.log(data, 'gg');
             if (checked) {
                 this.data_file = data.fullpath;
+                this.previewData.ownerId = data.ownerId;
+                this.previewData.path = data.path;
+
                 // 调用预览接口
                 let params = {
                     dataset: this.id,
@@ -616,6 +655,7 @@ export default {
                     this.datalistHide = false;
                     this.isPreview = false;
                     this.getPreview(params);
+                    this.imageUrl = '';
                 } else if (data.is_dir) {
                     this.isPreview = false;
                     // 一直张开
@@ -628,11 +668,18 @@ export default {
                     } else if (this.viewData.store_type === 'FILESYSTEM') {
                         this.store_type === 'FILESYSTEM';
                     }
+                    this.imageUrl = '';
                 } else if (this.viewData.store_type === 'SQL_DATABASE') {
                     this.getPreview({ dataset: this.id });
+                    this.imageUrl = '';
+                } else if (data.mimeType.indexOf('image/') === 0) {
+                    this.imageUrl = `${location.origin}/file-manager/api/v1/files/download?ownerId=${data.ownerId}&path=${data.path}&filesystem=cephfs`;
+                    this.isPreview = false;
+                    this.datalistHide = false;
                 } else {
                     this.isPreview = true;
                     this.datalistHide = false;
+                    this.imageUrl = '';
                 }
             }
         },
@@ -649,28 +696,33 @@ export default {
             this.expandedKey.push(key);
             this.$refs.tree.setCurrentKey(path);
             this.dataListPath = path;
-            // console.log(key, this.expandedKey, fullpath, '张开')
         },
-        handleViewData(fullpath, path) {
-            // this.expandedKey = [this.nodeId]
+        handleViewData(fullpath, path, type, ownerId) {
             this.data_file = fullpath;
             this.$refs.tree.setCurrentKey(path);
             let params = {
                 dataset: this.id,
                 data_file: fullpath
             };
-            // 预览文件
-            this.getPreview(params);
             this.datalistHide = false;
+            if (type === 'image') {
+                // 预览图片
+                this.imageUrl = `${location.origin}/file-manager/api/v1/files/download?ownerId=${ownerId}&path=${path}&filesystem=cephfs`;
+                this.isPreview = false;
+            } else {
+                // 预览文件
+                this.getPreview(params);
+            }
         },
         getPreview(params) {
             // 获取数据集数据预览
             this.isLoadingTableData = true;
             getDatasetPreview(params)
-                .then(data => {
+                .then(res => {
+                    let data = res.data;
                     this.previewData.sky_schema = Object.freeze(data.sky_schema);
                     this.previewData.data_rows = Object.freeze(data.data_rows);
-                    this.previewData.path = data.path;
+
                     this.totalCols = data.all_cols;
 
                     this.previewData.shape = data.shape;
@@ -769,21 +821,9 @@ export default {
             this.isIndeterminate = this.totalCols.length !== this.checkedCols.length;
         },
         // 下载
-        handleDownload(path) {
+        handleDownload(path, ownerId) {
             if (path) {
-                // 处理得到搜索参数
-                let [str, queryStr] = [[], ''];
-                str.push(`path=${encodeURIComponent(path)}`);
-                queryStr = str.join('&');
-                checkDownload(queryStr);
-                // .then(data => {
-                //     this.setDownLoading(false);
-                //     window.location.href =
-                //         this.baseAPI + '/v2/ceph/get?' + queryStr;
-                // })
-                // .catch(error => {
-                //     this.setDownLoading(false);
-                // });
+                download(path, ownerId);
             }
         },
         show() {
@@ -799,38 +839,10 @@ export default {
                 `/projectManage/createTask/JUPYTER/undefined/undefined/${this.viewData._id}`
             );
         },
-        allDownload(path) {
-            let [str, queryStr] = [[], ''];
-            str.push(`path=${encodeURIComponent(path)}`);
-            queryStr = str.join('&');
-            checkDownload(queryStr)
-                .then(() => {
-                    getZipId(queryStr)
-                        .then(data => {
-                            this.handleGetZip(data._id);
-                        });
-                });
-        },
-        handleGetZip(_id) {
-            getZip(_id).then(data => {
-                if (data.need_poll === 0) {
-                    // this.setDownLoading(false);
-                    window.location.href =
-                        this.baseAPI + '/v2/ceph/get/zip/download?_id=' + _id;
-                } else if (data.need_poll === 1) {
-                    this.handleDownLoadLoop(_id);
-                }
-            })
-                .catch(error => {
-                    // this.setDownLoading(false);
-                });
-        },
-        // 下载轮询
-        handleDownLoadLoop(_id) {
-            clearTimeout(this.downLoadLoop);
-            this.downLoadLoop = setTimeout(() => {
-                this.handleGetZip(_id);
-            }, 1000);
+        allDownload(paths, ownerId) {
+            pack(paths, ownerId).then(res => {
+                download(res, ownerId);
+            });
         }
     },
     directives: {
@@ -849,6 +861,8 @@ export default {
 };
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
+
+
 .datas-view {
     position: relative;
     margin-bottom: 20px;
@@ -1086,6 +1100,7 @@ export default {
 }
 </style>
 <style rel="stylesheet/scss" lang="scss">
+
     .tree {
         .caret-right:before {
             content: "";
