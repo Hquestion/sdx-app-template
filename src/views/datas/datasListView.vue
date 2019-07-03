@@ -5,16 +5,23 @@
             :key="k"
         >
             <div
-                @click="viewData(v.fullpath,v.is_dir, v.path)"
+                @click="viewData(v.fullpath,v.is_dir, v.path, v.mimeType, v.ownerId)"
                 :class="[viewDisabled(v) ?'disabledClick':'', 'card']"
             >
                 <div class="icon">
                     <svg
                         class="alSvgIcon"
                         aria-hidden="true"
+                        v-if="v.mimeType.indexOf('image/')"
                     >
                         <use :xlink:href="getExt(v.name,v.is_dir)" />
                     </svg>
+                    <data-image
+                        v-else
+                        :image-url="getUrl(v.ownerId, v.path)"
+                        :is-icon="true"
+                        image-width="46px"
+                    />
                 </div>
                 <div class="content">
                     <el-tooltip
@@ -28,7 +35,7 @@
                         </div>
                     </el-tooltip>
                     <div class="size">
-                        文件大小 {{ v.st_size | bytesToSize }}
+                        文件大小 {{ v.size | bytesToSize }}
                     </div>
                 </div>
             </div>
@@ -45,6 +52,7 @@
 <script>
 import { hdfsLs } from './rely/dataApi';
 import { getFilesList } from '@sdx/utils/src/api/file';
+import dataImage from './dataImage';
 export default {
     name: 'DatasListView',
     data() {
@@ -53,6 +61,7 @@ export default {
             fullpath: ''
         };
     },
+    components: { dataImage },
     props: {
         dataListPath: {
             type: String,
@@ -84,7 +93,7 @@ export default {
 
     methods: {
         // icon
-        getExt(name, is_dir) {
+        getExt(name, is_dir, type) {
             let [arr, ext] = [[], ''];
             if (name) {
                 arr = name.split('.');
@@ -92,17 +101,17 @@ export default {
             }
 
             if (ext === 'csv') {
-                ext = '#icon-CVS-caise';
+                ext = '#iconCSV';
             } else if (ext === 'txt') {
-                ext = '#icon-Txt-caise';
+                ext = '#iconTXT';
             } else if (ext === 'orc') {
-                ext = '#icon-ORC-caise';
+                ext = '#iconORC';
             } else if (ext === 'parquet') {
-                ext = '#icon-Parquet-caise';
+                ext = '#iconParquet';
             } else if (is_dir) {
-                ext = '#icon-file-dir';
+                ext = '#iconwenjianjia';
             } else if (ext !== 'csv' && ext !== 'txt' && ext !== 'orc' && ext !== 'parquet' && !is_dir) {
-                ext = '#icon-buzhichiyulan';
+                ext = '#iconwuyulan';
             }
             return ext;
         },
@@ -110,6 +119,13 @@ export default {
         getFlieList(path) {
             getFilesList({ path })
                 .then(data => {
+                    if (data.children) {
+                        for (let i = 0; i < data.children.length; i++) {
+                            data.children[i].is_dir = !data.children[i].isFile;
+                            data.children[i].fullpath = data.children[i].path;
+                            data.children[i].ext = data.children[i].fileExtension;
+                        }
+                    }
                     data.paths = data.children;
                     this.list = data.paths;
                 });
@@ -130,7 +146,7 @@ export default {
             }
         },
         // 查看数据
-        viewData(fullpath, is_dir, path) {
+        viewData(fullpath, is_dir, path, type, ownerId) {
             let [arr, ext] = [[], ''];
             arr = fullpath.split('.');
             ext = arr[arr.length - 1];
@@ -141,6 +157,8 @@ export default {
                 this.$emit('expandNode', fullpath, path);
             } else if (ext === 'csv' || ext === 'txt' || ext === 'orc' || ext === 'parquet') {
                 this.$emit('viewData', fullpath, path);
+            } else if (type.indexOf('image/') === 0) {
+                this.$emit('viewData', fullpath, path, 'image', ownerId);
             }
         },
         viewDisabled(v) {
@@ -149,6 +167,9 @@ export default {
                 res = false;
             }
             return res;
+        },
+        getUrl(ownerId, path) {
+            return `${location.origin}/file-manager/api/v1/files/download?ownerId=${ownerId}&path=${path}&filesystem=cephfs`;
         }
     },
     created() {
@@ -164,10 +185,6 @@ export default {
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
 
-@import "../../assets/styles/base/colors";
-@import "../../assets/styles/base/constants";
-@import "../../assets/styles/base/mixin";
-
 .data-list-view {
     padding: 0 20px;
     display: flex;
@@ -182,7 +199,7 @@ export default {
         display: block;
         height: 116px;
         width: 268px;
-        border: 1px solid $c-split;
+        border: 1px solid #e6eaf2;
         margin-top: 20px;
         padding-top: 6px;
         padding-bottom: 37px;
@@ -209,8 +226,6 @@ export default {
             padding: 23px 0;
             .name {
                 color:rgba(64,69,73,1);
-                // height: 58px;
-                // line-height: 70px;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
@@ -218,8 +233,6 @@ export default {
             }
             .size {
                 color:rgba(107,113,122,1);
-                // height: 58px;
-                // line-height: 24px;
             }
         }
     }
