@@ -163,9 +163,11 @@ export default {
 };
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
-    @import "../../assets/styles/base/colors";
-    @import "../../assets/styles/base/constants";
-    @import "../../assets/styles/base/mixin";
+
+@import "../../assets/styles/base/colors";
+@import "../../assets/styles/base/constants";
+@import "../../assets/styles/base/mixin";
+
 .data-list-view {
     padding: 0 20px;
     display: flex;

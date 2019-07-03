@@ -247,6 +247,7 @@ export default {
 </script>
 
 <style lang="scss">
+
 .data-service {
     .title {
         color: #909399;

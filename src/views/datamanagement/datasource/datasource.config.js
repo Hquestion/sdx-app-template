@@ -5,11 +5,11 @@ export const SOURCE_TYPES_OPTION = [
         value: 'SQL_DATABASE',
         disabled: false
     },
-    {
-        label: 'HDFS',
-        value: 'HDFS',
-        dsiabled: false
-    },
+    // {
+    //     label: 'HDFS',
+    //     value: 'HDFS',
+    //     dsiabled: false
+    // },
     {
         label: 'Kafka',
         value: 'KAFKA',

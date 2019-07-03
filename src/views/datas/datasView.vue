@@ -849,6 +849,7 @@ export default {
 };
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
+
 .datas-view {
     position: relative;
     margin-bottom: 20px;
@@ -1086,26 +1087,27 @@ export default {
 }
 </style>
 <style rel="stylesheet/scss" lang="scss">
-    .tree {
-        .caret-right:before {
-            content: "";
-        }
-        .is_folder:before {
-            content: url("../../assets/images/file-dir.png");
-            position: relative;
-            top: 3px;
-            margin-right: 5px;
-            width: 6px;
-            height: 6px;
-        }
+
+.tree {
+    .caret-right:before {
+        content: "";
     }
-    .datas-view {
-        .caret-right {
-            // overflow: hidden;
-            // text-overflow: ellipsis;
-            // white-space: nowrap;
-            width: calc(100% - 20px);
-        }
+    .is_folder:before {
+        content: url("../../assets/images/file-dir.png");
+        position: relative;
+        top: 3px;
+        margin-right: 5px;
+        width: 6px;
+        height: 6px;
     }
+}
+.datas-view {
+    .caret-right {
+        // overflow: hidden;
+        // text-overflow: ellipsis;
+        // white-space: nowrap;
+        width: calc(100% - 20px);
+    }
+}
 </style>
 

@@ -100,9 +100,12 @@ export default {
                 path: '',
                 table: ''
             };
-            let shareKind = '1';
+            let shareUsers = [], shareGroups = [], isPublic = false;
             if (targetKind === '1') {
-                shareKind = shareKindMap[this.$store.state.dataset.form.structDataTarget.local.rights];
+                let { sharedUsers, sharedGroups, shareType } = this.$store.state.dataset.form.structDataTarget.local;
+                shareUsers = sharedUsers;
+                shareGroups = sharedGroups;
+                isPublic = shareType === 'PUBLIC';
                 sink_option = {
                     ...sink_option,
                     data_format: this.$store.state.dataset.form.structDataTarget.local.fileType,
@@ -112,9 +115,11 @@ export default {
                     save_mode: this.$store.state.dataset.form.structDataTarget.local.saveType
                 };
             } else if (targetKind === '2') {
-                const { fileType, savePath, partition, saveType, rights } = this.$store.state.dataset.form.structDataTarget.hdfs;
+                const { fileType, savePath, partition, saveType, sharedUsers, sharedGroups, shareType } = this.$store.state.dataset.form.structDataTarget.hdfs;
                 let hdfsPath = savePath;
-                shareKind = shareKindMap[rights];
+                shareUsers = sharedUsers;
+                shareGroups = sharedGroups;
+                isPublic = shareType === 'PUBLIC';
                 sink_option = {
                     ...sink_option,
                     data_format: fileType,
@@ -123,8 +128,10 @@ export default {
                     save_mode: saveType
                 };
             } else {
-                const { partition, saveType, tableName, rights } = this.$store.state.dataset.form.structDataTarget.sql;
-                shareKind = shareKindMap[rights];
+                const { partition, saveType, tableName, sharedUsers, sharedGroups, shareType } = this.$store.state.dataset.form.structDataTarget.sql;
+                shareUsers = sharedUsers;
+                shareGroups = sharedGroups;
+                isPublic = shareType === 'PUBLIC';
                 sink_option = {
                     ...sink_option,
                     partition,
@@ -134,7 +141,9 @@ export default {
                 };
             }
             params.sink_option = sink_option;
-            params.share_kind = shareKind;
+            params.users = shareUsers;
+            params.groups = shareGroups;
+            params.is_public = isPublic;
             return params;
         },
         createNonStructSaveParam() {
@@ -160,23 +169,30 @@ export default {
                 save_mode: '',
                 partition: []
             };
-            let shareKind = '';
+            let shareUsers = [], shareGroups = [], isPublic = false;
             if (targetKind === '1') {
-                shareKind = shareKindMap[this.$store.state.dataset.form.structDataTarget.local.rights];
+                let { sharedUsers, sharedGroups, shareType } = this.$store.state.dataset.form.structDataTarget.local;
+                shareUsers = sharedUsers;
+                shareGroups = sharedGroups;
+                isPublic = shareType === 'PUBLIC';
                 sink_option = {
                     ...sink_option,
                     path: this.$store.state.dataset.form.structDataTarget.local.savePath[0] && this.$store.state.dataset.form.structDataTarget.local.savePath[0].cephName
                 };
             } else if (targetKind === '2') {
-                const { savePath, rights } = this.$store.state.dataset.form.structDataTarget.hdfs;
-                shareKind = shareKindMap[rights];
+                const { savePath, sharedUsers, sharedGroups, shareType } = this.$store.state.dataset.form.structDataTarget.hdfs;
+                shareUsers = sharedUsers;
+                shareGroups = sharedGroups;
+                isPublic = shareType === 'PUBLIC';
                 sink_option = {
                     ...sink_option,
                     path: savePath
                 };
             }
             params.sink_option = sink_option;
-            params.share_kind = shareKind;
+            params.users = shareUsers;
+            params.groups = shareGroups;
+            params.is_public = isPublic;
             return params;
         }
     }

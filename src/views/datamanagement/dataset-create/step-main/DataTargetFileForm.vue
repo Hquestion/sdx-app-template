@@ -70,29 +70,13 @@
             >
                 <SdxwFileSelect :limit="1" v-model="params.savePath" check-type="folder"></SdxwFileSelect>
             </el-form-item>
-            <el-form-item
-                label="数据集共享："
-                prop="rights"
-                :required="true"
-            >
-                <el-radio-group v-model="params.rights">
-                    <el-radio label="1">
-                        私有
-                    </el-radio>
-                    <el-radio label="2">
-                        组内
-                    </el-radio>
-                    <el-radio
-                        label="3"
-                        v-if="currentRole === 'admin'"
-                    >
-                        公共
-                    </el-radio>
-                </el-radio-group>
-                <FormTip v-if="params.rights !== '1'">
-                    分享后，您的数据集可以被其他用户查看和使用
-                </FormTip>
-            </el-form-item>
+            <SdxwShareForm
+                :default-users.sync="params.sharedUsers"
+                :default-groups.sync="params.sharedGroups"
+                :default-share-type.sync="params.shareType"
+                :sync="true"
+                source-kind="dataset"
+            />
         </el-form>
     </div>
 </template>
@@ -103,12 +87,14 @@ import StepChangeHooks from './mixins/StepChangeHooks';
 import TargetFileTypeLimitMixin from './mixins/TargetFileTypeLimitMixin';
 import { mapActions } from 'vuex';
 import FormTip from '../../../datas/rely/SkyForm/FormTip';
+import SdxwShareForm from '@sdx/widget/lib/share-form';
 
 export default {
     name: 'DataTargetFileForm',
     mixins: [StepChangeHooks, TargetFileTypeLimitMixin],
     components: {
-        FormTip
+        FormTip,
+        SdxwShareForm
     },
     data() {
         return {
@@ -117,7 +103,10 @@ export default {
                 saveType: this.$store.state.dataset.form.structDataTarget.local.saveType || SAVE_TYPE_OPTIONS[0].value,
                 fileType: this.$store.state.dataset.form.structDataTarget.local.fileType || 'CSV',
                 savePath: this.$store.state.dataset.form.structDataTarget.local.savePath || [],
-                rights: this.$store.state.dataset.form.structDataTarget.local.rights || '1'
+                rights: this.$store.state.dataset.form.structDataTarget.local.rights || '1',
+                sharedUsers: this.$store.state.dataset.form.structDataTarget.local.sharedUsers || [],
+                sharedGroups: this.$store.state.dataset.form.structDataTarget.local.sharedGroups || [],
+                shareType: this.$store.state.dataset.form.structDataTarget.local.shareType || 'PRIVATE'
             },
             rules: {
                 partition: [

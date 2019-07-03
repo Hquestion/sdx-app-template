@@ -116,13 +116,19 @@ const initState = () => ({
                 saveType: SAVE_TYPE_OPTIONS[0].value,
                 fileType: 'CSV',
                 savePath: [],
-                rights: '1'
+                rights: '1',
+                sharedUsers: [],
+                sharedGroups: [],
+                shareType: 'PRIVATE'
             },
             hdfs: {
                 partition: [],
                 saveType: SAVE_TYPE_OPTIONS[0].value,
                 fileType: 'CSV',
-                savePath: ''
+                savePath: '',
+                sharedUsers: [],
+                sharedGroups: [],
+                shareType: 'PRIVATE'
             },
             sql: {
                 partition: [],
@@ -133,7 +139,10 @@ const initState = () => ({
                 driverFile: '',
                 tableName: '',
                 saveType: SAVE_TYPE_OPTIONS[0].value,
-                connectStatus: ''
+                connectStatus: '',
+                sharedUsers: [],
+                sharedGroups: [],
+                shareType: 'PRIVATE'
             }
         }
     }
