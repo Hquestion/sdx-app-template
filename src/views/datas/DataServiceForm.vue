@@ -2,10 +2,9 @@
     <sdxu-dialog
         :visible.sync="__visible"
         size="large"
-        :title="params.uuid !== '' ? '编辑数据服务' : '新建数据服务'"
+        :title="params.uuid ? '编辑数据服务' : '新建数据服务'"
         class="data-service"
         @open="open"
-        @confirm="confirm"
         :modalAppendToBody="false"
     >
         <el-form
@@ -84,6 +83,22 @@
                 />
             </el-form-item>
         </el-form>
+        <template slot="footer">
+            <SdxuButton
+                type="default"
+                size="small"
+                @click="dialogClose"
+            >
+                取消
+            </SdxuButton>
+            <SdxuButton
+                type="primary"
+                size="small"
+                @click="confirm"
+            >
+                确定
+            </SdxuButton>
+        </template>
     </sdxu-dialog>
 </template>
 
@@ -120,7 +135,7 @@ export default {
         return {
             InputNumberMax: 100,
             params: {
-                projectId: this.$route.params.projectId,
+                projectId: '',
                 name: '',
                 description: '',
                 type: 'DATA_SERVICE',
@@ -196,9 +211,12 @@ export default {
             this.$refs.dataService.validate().then(() => {
                 (this.params.uuid ? updateTask(this.params.uuid, this.params) : createTask(this.params))
                     .then(() => {
-                        this.$router.go(-1);
+                        this.$emit('update:visible', false);
                     });
             });
+        },
+        dialogClose() {
+            this.$emit('update:visible', false);
         }
     },
 
