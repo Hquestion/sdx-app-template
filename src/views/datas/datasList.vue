@@ -165,7 +165,7 @@
                     </el-table-column>
                     <el-table-column
                         label="创建人"
-                        prop="creator"
+                        prop="creator_name"
                     />
                     <el-table-column
                         label="创建时间"

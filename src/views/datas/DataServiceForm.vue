@@ -94,10 +94,12 @@ import { getImageList } from '@sdx/utils/lib/api/image';
 import { createTask, updateTask } from '@sdx/utils/lib/api/project';
 import { nameWithChineseValidator } from '@sdx/utils/lib/helper/validate';
 import ElSelect from 'element-ui/lib/select';
+import SdxwResourceConfig from '@sdx/widget/lib/resource-config';
 export default {
     name: 'DataServiceForm',
     components: {
-        ElSelect
+        ElSelect,
+        SdxwResourceConfig
     },
     props: {
         visible: {
@@ -247,6 +249,7 @@ export default {
 </script>
 
 <style lang="scss">
+
 .data-service {
     .title {
         color: #909399;
