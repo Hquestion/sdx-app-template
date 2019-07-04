@@ -3,7 +3,7 @@ import permissions from './permissions';
 const leftmenu = [
     {
         name: '首页',
-        icon: 'iconfont iconicon-home-selected',
+        icon: 'iconfont iconicon-home',
         path: '/dashboard',
         auth: permissions.DASHBOARD_MENU_ACCESS
     },
