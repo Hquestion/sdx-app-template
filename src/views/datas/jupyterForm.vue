@@ -101,7 +101,7 @@
                     </div>
                 </el-form-item>
                 <el-form-item
-                    v-if="!cooperation"
+                    v-if="!is_cooperate"
                     prop="datasources"
                     label="数据源:"
                 >
@@ -138,10 +138,10 @@ import Form from 'element-ui/lib/form';
 import FormItem from 'element-ui/lib/form-item';
 import Select from 'element-ui/lib/select';
 import SdxuInput from '@sdx/ui/lib/input';
-import { getImageList } from '@sdx/utils/src/api/image';
+import { getImageList } from '@sdx/utils/lib/api/image';
 import SdxwResourceConfig from '@sdx/widget/components/resource-config';
-import { createTask, updateTask, getProjectList, createProject } from '@sdx/utils/src/api/project';
-import { nameWithChineseValidator } from '@sdx/utils/src/helper/validate';
+import { createTask, updateTask, getProjectList, createProject, startTask } from '@sdx/utils/lib/api/project';
+import { nameWithChineseValidator } from '@sdx/utils/lib/helper/validate';
 import DataSourceSelect from '@sdx/view/lib/project-management/src/forms/DataSourceSelect';
 import SkyTitleGoBack from './rely/skyTitleGoBack';
 import { getDatasetInfo } from './rely/dataApi';
@@ -199,7 +199,6 @@ export default {
             imageOptions: [],
             cpuObj: {},
             gpuObj: {},
-            cooperation: true,
             datasetsOptions: [],
             projects: [],
             rules: {
@@ -239,6 +238,18 @@ export default {
                 }
             }
             return isGpuEnt;
+        },
+        // 判断选中的项目自建还是协助
+        is_cooperate() {
+            let [checkProject, is_coop] = [this.projects.filter(v => v.value === this.params.projectId), true];
+            if (checkProject.length === 0 && this.params.projectId) {
+                is_coop = false;
+            } else if (checkProject.length > 0) {
+                is_coop = checkProject[0].type === 'public';
+            } else if (this.params.projectId === '') {
+                is_coop = true;
+            }
+            return is_coop;
         }
     },
     created() {
@@ -266,9 +277,11 @@ export default {
         projectList(params) {
             getProjectList(params)
                 .then(res => {
+                    window.console.log(res, 90);
                     this.projects = res.data.items.map(item => ({
                         label: item.name,
-                        value: item.uuid
+                        value: item.uuid,
+                        type: item.type
                     }));
                 });
         },
@@ -278,12 +291,13 @@ export default {
                 createProject({ name: this.params.projectId })
                     .then(data => {
                         window.console.log(data, 888);
-                        let id = data._id;
+                        let id = data.uuid;
                         getProjectList({ type: 'private', start: 1, count: -1 })
                             .then(res => {
                                 this.projects = res.data.items.map(item => ({
                                     label: item.name,
-                                    value: item.uuid
+                                    value: item.uuid,
+                                    type: item.type
                                 }));
                                 this.$nextTick(() => {
                                     this.params.projectId = id;
@@ -319,9 +333,14 @@ export default {
         },
         commit() {
             this.$refs.jupyter.validate().then(() => {
-                (this.params.uuid ? updateTask(this.params.uuid, this.params) : createTask(this.params))
-                    .then(() => {
-                        this.$router.go(-1);
+                createTask(this.params)
+                    .then(res => {
+                        let id = res.uuid;
+                        startTask(id)
+                            .then(() => {
+                                this.$router.go(-1);
+                                window.open(`/#/jupyterurl/${id}/${this.$route.params.dataset}`);
+                            });
                     });
             });
         }

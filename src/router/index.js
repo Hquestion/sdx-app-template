@@ -39,6 +39,7 @@ import datasView from '../views/datas/datasView';
 import DataSourceCreate from '../views/datamanagement/datasource/DataSourceCreate';
 import CreateDataset from '../views/datamanagement/dataset-create/index';
 import JupyterForm from '../views/datas/jupyterForm';
+import jupyterloading from '../views/datas/jupyterloading';
 febAlive.resetHistory();
 Vue.use(Router);
 
@@ -65,6 +66,10 @@ const router = new Router({
         {
             path: '/',
             redirect: '/home'
+        },
+        {
+            path: '/jupyterurl/:id/:dataset',
+            component: jupyterloading
         },
         {
             path: '/home',

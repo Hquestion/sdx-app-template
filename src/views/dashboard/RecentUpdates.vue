@@ -73,7 +73,7 @@ export default {
             if (type === 'project') {
                 this.$router.push(`/sdxv-project-manage/project-detail/${uuid}`);
             } else if (type === 'skyflow') {
-                this.$router.push(`/editor/${uuid}`);
+                window.open(`/#/editor/${uuid}`);
             } else if (type === 'model') {
                 this.$router.push(`/sdxv-model-manage/versionList/${uuid}`);
             } else if (type === 'dataset') {
