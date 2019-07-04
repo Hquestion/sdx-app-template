@@ -36,7 +36,7 @@
 </template>
 <script>
 import baseMixins from './editorBaseMixins';
-import FileSelect from '@sdx/widget/components/file-select';
+import FileSelect from '@sdx/widget/lib/file-select';
 import Validator from 'async-validator';
 
 export default {

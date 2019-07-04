@@ -3,6 +3,6 @@
     "manage_plateform": "Management",
     "sourcemanage": "Resource",
     "usermanage": "User",
-    "rightsmanage": "Rights",
+    "rightsmanage": "Permissions",
     "monitormanage": "Monitor"
 }

@@ -51,7 +51,7 @@
 </template>
 <script>
 import { hdfsLs } from './rely/dataApi';
-import { getFilesList } from '@sdx/utils/src/api/file';
+import { getFilesList } from '@sdx/utils/lib/api/file';
 import dataImage from './dataImage';
 export default {
     name: 'DatasListView',

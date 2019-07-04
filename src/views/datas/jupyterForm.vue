@@ -133,29 +133,28 @@
 
 <script>
 
-import BaseForm from '@sdx/view/lib/project-management/src/forms/BaseForm';
+import ProjectManagemenet from '@sdx/view/lib/project-management';
 import Form from 'element-ui/lib/form';
 import FormItem from 'element-ui/lib/form-item';
 import Select from 'element-ui/lib/select';
 import SdxuInput from '@sdx/ui/lib/input';
-import { getImageList } from '@sdx/utils/src/api/image';
-import SdxwResourceConfig from '@sdx/widget/components/resource-config';
-import { createTask, updateTask, getProjectList, createProject } from '@sdx/utils/src/api/project';
-import { nameWithChineseValidator } from '@sdx/utils/src/helper/validate';
-import DataSourceSelect from '@sdx/view/lib/project-management/src/forms/DataSourceSelect';
+import { getImageList } from '@sdx/utils/lib/api/image';
+import SdxwResourceConfig from '@sdx/widget/lib/resource-config';
+import { createTask, updateTask, getProjectList, createProject } from '@sdx/utils/lib/api/project';
+import { nameWithChineseValidator } from '@sdx/utils/lib/helper/validate';
 import SkyTitleGoBack from './rely/skyTitleGoBack';
 import { getDatasetInfo } from './rely/dataApi';
 
 export default {
     name: 'JupyterForm',
     components: {
-        BaseForm,
+        BaseForm: ProjectManagemenet.BaseForm,
         [Form.name]: Form,
         [FormItem.name]: FormItem,
         [Select.name]: Select,
         SdxuInput,
         SdxwResourceConfig,
-        DataSourceSelect,
+        DataSourceSelect: ProjectManagemenet.DataSourceSelect,
         SkyTitleGoBack
     },
     props: {

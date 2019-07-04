@@ -81,8 +81,8 @@ const router = new Router({
                     component: Dashboard,
                     name: 'About',
                     meta: {
-                        name: '关于SkyDiscovery',
-                        breadcrumb: '关于SkyDiscovery',
+                        name: '',
+                        breadcrumb: '',
                         system: 'user'
                     }
                 },

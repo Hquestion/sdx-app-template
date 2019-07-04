@@ -90,7 +90,7 @@
 
 <script>
 import Dialog from '@sdx/ui/lib/dialog';
-import SdxwSelectGroupUser from '@sdx/widget/components/select-group-user';
+import SdxwSelectGroupUser from '@sdx/widget/lib/select-group-user';
 import SdxuInput from '@sdx/ui/lib/input';
 import SdxuButton from '@sdx/ui/lib/button';
 import ElForm from 'element-ui/lib/form';
