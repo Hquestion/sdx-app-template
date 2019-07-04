@@ -2,7 +2,7 @@
     <div class="data-form-jupyter">
         <sky-title-go-back />
         <BaseForm
-            :title="`${params.uuid ? '编辑':'新建'}Jupyter任务`"
+            title="新建Jupyter任务"
             class="form-jupyter"
             :label-width="100"
             icon="sdx-Jupter"
@@ -156,12 +156,6 @@ export default {
         SdxwResourceConfig,
         DataSourceSelect: ProjectManagemenet.DataSourceSelect,
         SkyTitleGoBack
-    },
-    props: {
-        task: {
-            type: Object,
-            default: null
-        }
     },
     data() {
         const resourceValidate = (rule, value, callback) => {
@@ -348,19 +342,6 @@ export default {
         }
     },
     watch: {
-        task(nval) {
-            this.params = { ...this.params, ...nval, ...{ imageId: nval.image.uuid } };
-            this.cpuObj = {
-                cpu: this.params.resourceConfig.EXECUTOR_CPUS / 1000,
-                memory: this.params.resourceConfig.EXECUTOR_MEMORY / (1024 * 1024 * 1024),
-                uuid: `${this.params.resourceConfig.EXECUTOR_CPUS / 1000}-${this.params.resourceConfig.EXECUTOR_MEMORY / (1024 * 1024 * 1024)}`
-            };
-            this.gpuObj = {
-                label: this.params.resourceConfig.GPU_MODEL,
-                count: this.params.resourceConfig.EXECUTOR_GPUS,
-                uuid: `${this.params.resourceConfig.GPU_MODEL}-${this.params.resourceConfig.EXECUTOR_GPUS}`
-            };
-        },
         cpuObj(val) {
             this.params.resourceConfig = {
                 EXECUTOR_INSTANCES: 1,
