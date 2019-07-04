@@ -152,7 +152,6 @@ export default {
                 .append('xhtml:div')
                 .attr('class', 'node-text')
                 .attr('title', node => node.label)
-            // .attr('title', node => node.label)
                 .style('font-size', '14px')
                 .style('color', node =>
                     [
@@ -166,21 +165,6 @@ export default {
                             ? '#0C3AFF'
                             : '#459CDF'
                 )
-            // .attr('dy', 6)
-            // .attr('text-anchor', 'start')
-            // 未运行 未选中: '#459CDF' 未运行选中: '#0C3AFF' 成功/失败: '#F1FEFE'
-            // .attr('fill', node =>
-            //     [
-            //         nodeState.FAILED,
-            //         nodeState.STOPED,
-            //         nodeState.FORCESTOPED,
-            //         nodeState.SUCCESS
-            //     ].includes(node.state)
-            //         ? '#F1FEFE'
-            //         : node.active
-            //             ? '#0C3AFF'
-            //             : '#459CDF'
-            // )
                 .text(node => node.label);
         },
         initPoint(nodeGroup) {
@@ -231,7 +215,7 @@ export default {
                 .append('use')
                 .attr('x', 10)
                 .attr('y', 9)
-            // 未运行 未选中: 'sf-formal' 选中: 'sf-active' 成功/失败: 'sf-finish'
+            // 未运行 未选中: 'node-formal' 选中: 'node-active' 成功/失败: 'node-finish'
                 .attr('class', node =>
                     [
                         nodeState.FAILED,
@@ -239,10 +223,10 @@ export default {
                         nodeState.FORCESTOPED,
                         nodeState.SUCCESS
                     ].includes(node.state)
-                        ? 'icon sf-finish'
+                        ? 'icon node-finish'
                         : node.active
-                            ? 'icon sf-active'
-                            : 'icon sf-formal'
+                            ? 'icon node-active'
+                            : 'icon node-formal'
                 )
                 .attr('width', 14)
                 .attr('height', 14)
@@ -303,7 +287,7 @@ export default {
             // 节点详情按钮
             nodeGroup
                 .append('use')
-            // 未运行 未选中: 'sf-formal' 选中: 'sf-active' 成功/失败: 'sf-finish'
+            // 未运行 未选中: 'node-formal' 选中: 'node-active' 成功/失败: 'node-finish'
                 .attr('class', node =>
                     [
                         nodeState.FAILED,
@@ -311,10 +295,10 @@ export default {
                         nodeState.FORCESTOPED,
                         nodeState.SUCCESS
                     ].includes(node.state)
-                        ? 'icon sf-finish'
+                        ? 'icon node-finish'
                         : node.active
-                            ? 'icon sf-active'
-                            : 'icon sf-formal'
+                            ? 'icon node-active'
+                            : 'icon node-formal'
                 )
                 .attr('x', config.nWidth - 25)
                 .attr('y', 6)
@@ -460,6 +444,12 @@ export default {
 
 <style lang='scss'>
 .node-area {
+  * {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
   .icon {
     width: 1em;
     height: 1em;
@@ -467,13 +457,13 @@ export default {
     fill: rgba(232, 239, 239, 1);
     overflow: hidden;
   }
-  .icon-finish {
+  .node-finish {
     fill: #f1fefe;
   }
-  .icon-active {
+  .node-active {
     fill: #0c3aff;
   }
-  .icon-formal {
+  .node-formal {
     fill: #459cdf;
   }
   .tip-btn {
@@ -484,12 +474,7 @@ export default {
   }
   .tip-btn-rect {
     cursor: default;
-  }
-  text {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    outline: none;
   }
   .node {
     cursor: move;

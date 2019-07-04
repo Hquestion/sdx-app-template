@@ -20,7 +20,10 @@
                     v-for="(item, index) in nameTimes.slice(0, 5)"
                     :key="index"
                 >
-                    <span :title="item.name">{{ item.name }}</span>
+                    <span
+                        :title="item.name"
+                        @click="getDetail(type, item.uuid)"
+                    >{{ item.name }}</span>
                     <span>{{ getDateDiff(item.time) }}</span>
                 </div>
             </div>
@@ -53,6 +56,10 @@ export default {
         loading: {
             type: Boolean,
             default: true
+        },
+        type: {
+            type: String,
+            default: ''
         }
     },
     components: {
@@ -61,6 +68,17 @@ export default {
     methods: {
         getTaskMore() {
             this.$router.push(this.path);
+        },
+        getDetail(type, uuid) {
+            if (type === 'project') {
+                this.$router.push(`/sdxv-project-manage/project-detail/${uuid}`);
+            } else if (type === 'skyflow') {
+                this.$router.push(`/editor/${uuid}`);
+            } else if (type === 'model') {
+                this.$router.push(`/sdxv-model-manage/versionList/${uuid}`);
+            } else if (type === 'dataset') {
+                this.$router.push(`/datasManage/dataView/?dataset=${uuid}`);
+            }
         },
         // 注册
         getDateDiff
@@ -92,7 +110,7 @@ export default {
                 justify-content: space-between;
                 span:first-child{
                     font-size:14px;
-                    color:rgba(96,98,102,1);
+                    color:#5C89FF;
                     font-family:SourceHanSansCN-Normal;
                     max-width: 78%;
                     overflow: hidden;

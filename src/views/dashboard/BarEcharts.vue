@@ -43,6 +43,12 @@ export default {
         xname: {
             type: String,
             default: ''
+        },
+        nameId: {
+            type: Array,
+            default() {
+                return [];
+            }
         }
     },
     data() {
@@ -117,9 +123,10 @@ export default {
                             show: false
                         },
                         axisLabel: {
-                            color: '#606266',
+                            color: '#5C89FF',
                             formatter: value => this.judgeCharacter(value)
-                        }
+                        },
+                        triggerEvent: true
                     }
                 ],
                 xAxis: [
@@ -163,9 +170,18 @@ export default {
                     }
                 ]
             });
+
+
+            this.chart.on('click', params => {
+                let arr = (this.nameId.filter(item => params.value === item.name));
+                if (arr[0] && arr[0].modelId) {
+                    this.$router.push(`/sdxv-model-manage/versionList/${arr[0].modelId}/${arr[0].uuid}`);
+                } else if (arr[0] && arr[0].type) {
+                    this.$router.push(`/sdxv-project-manage/taskInfo/${arr[0].type}/${arr[0].uuid}`);
+                }
+            });
         }
     },
-
     watch: {
         barData(nval, oval) {
             this.barData = nval;

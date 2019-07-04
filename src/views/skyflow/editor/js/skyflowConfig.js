@@ -615,41 +615,55 @@ export const componentsIcon = [{
 }];
 
 export const contextMenuIcon = [{
-    //     label: '运行到当前组件',
-    //     name: 'runtothis',
-    //     icon: 'sf-yunhangdaodangqianzujian'
-    // }, {
-    //     label: '从当前组件开始运行',
-    //     name: 'runfromthis',
-    //     icon: 'sf-congdangqianzujiankaishiyunxing'
-    // }, {
-    //     label: '终止运行',
-    //     name: 'stop',
-    //     icon: 'sf-zhongzhiyunxing'
-    // }, {
-    //     label: '强制终止',
-    //     name: 'forcestop',
-    //     icon: 'sf-zhongzhiyunxing'
-    // }, {
+//     label: '运行到当前组件',
+//     name: 'runtothis',
+//     icon: 'sf-yunhangdaodangqianzujian',
+//     group: 2
+// }, {
+//     label: '从当前组件开始运行',
+//     name: 'runfromthis',
+//     icon: 'sf-congdangqianzujiankaishiyunxing',
+//     group: 2
+// }, {
+//     label: '终止运行',
+//     name: 'stop',
+//     icon: 'sf-zhongzhiyunxing',
+//     group: 2
+// }, {
+//     label: '强制终止',
+//     name: 'forcestop',
+//     icon: 'sf-zhongzhiyunxing',
+//     group: 2
+// }, {
     label: '复制',
     name: 'copy',
-    icon: 'sf-fuzhi'
+    icon: 'sf-fuzhi',
+    group: 3
 }, {
     label: '重命名',
     name: 'rename',
-    icon: 'sf-zhongmingming'
+    icon: 'sf-zhongmingming',
+    group: 3
 }, {
     label: '删除',
     name: 'delete',
-    icon: 'sf-delete1'
+    icon: 'sf-delete1',
+    group: 3
 }, {
     label: '收藏',
     name: 'star',
-    icon: 'sf-wodeshoucang'
+    icon: 'sf-wodeshoucang',
+    group: 3
 }, {
     label: '结果导出',
     name: 'export',
-    icon: 'sf-daochujieguo'
+    icon: 'sf-daochujieguo',
+    group: 4
+}, {
+    label: '组件代码编辑',
+    name: 'edit-code',
+    icon: 'sf-daochujieguo',
+    group: 1
 }];
 
 // 左侧自定义组件右键菜单
@@ -657,22 +671,26 @@ export const contextMenuClassification = [{
     label: '编辑',
     name: 'edit',
     icon: 'sf-ico_edite',
-    disabled: false
+    disabled: false,
+    group: 1
 }, {
     label: '删除',
     name: 'del',
     icon: 'sf-delete1',
-    disabled: false
+    disabled: false,
+    group: 1
 }, {
     label: '分享',
     name: 'share',
     icon: 'sf-fenxiang2',
-    disabled: false
+    disabled: false,
+    group: 1
 }, {
     label: '取消分享',
     name: 'cancelshare',
     icon: 'sf-fenxiang1',
-    disabled: false
+    disabled: false,
+    group: 1
 }];
 
 export const resourceInfo = [{

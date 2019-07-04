@@ -156,6 +156,7 @@
                                     :barNameList="taskNameList"
                                     tipTitle="任务资源使用"
                                     :colorList="taskColorList"
+                                    :name-id="taskNameId"
                                 />
                                 <span class="xname">单位（{{ taskXname }}）</span>
                             </div>
@@ -184,6 +185,7 @@
                                     :barNameList="modelNameList"
                                     tipTitle="模型版本调用次数"
                                     :colorList="modelColorList"
+                                    :name-id="modelNameId"
                                 />
                                 <span class="xname">单位（次）</span>
                             </div>
@@ -202,24 +204,28 @@
                 :nameTimes="projectInfo"
                 path="/sdxv-project-manage"
                 :loading="projectLoading"
+                type="project"
             />
             <recent-updates
                 title="最近更新的SkyFlow"
                 :nameTimes="skyflowInfo"
                 path="/skyflow"
                 :loading="skyflowLoading"
+                type="skyflow"
             />
             <recent-updates
                 title="最近更新的模型"
                 :nameTimes="modelInfo"
                 path="/sdxv-model-manage"
                 :loading="modelLoading"
+                type="model"
             />
             <recent-updates
                 title="最近更新的数据集"
                 :nameTimes="datasetInfo"
                 path="/datasManage"
                 :loading="datasetLoading"
+                type="dataset"
             />
         </div>
     </div>
@@ -282,7 +288,9 @@ export default {
             modelLoading: true,
             datasetLoading: true,
             taskLoading: true,
-            versionLoading: true
+            versionLoading: true,
+            modelNameId: [],
+            taskNameId: []
         };
     },
     components: {
@@ -391,7 +399,8 @@ export default {
                         this.projectInfo.push(
                             {
                                 name: res.data.items[i].name,
-                                time: res.data.items[i].updatedAt
+                                time: res.data.items[i].updatedAt,
+                                uuid: res.data.items[i].uuid
                             }
                         );
                     }
@@ -414,7 +423,8 @@ export default {
                         this.modelInfo.push(
                             {
                                 name: res.items[i].name,
-                                time: res.items[i].updatedAt
+                                time: res.items[i].updatedAt,
+                                uuid: res.items[i].uuid
                             }
                         );
                     }
@@ -442,7 +452,8 @@ export default {
                         this.datasetInfo.push(
                             {
                                 name: res.data.items[i].name,
-                                time: res.data.items[i].updated_at
+                                time: res.data.items[i].updated_at,
+                                uuid: res.data.items[i].uuid
                             }
                         );
                     }
@@ -465,7 +476,8 @@ export default {
                         this.skyflowInfo.push(
                             {
                                 name: res.items[i].name,
-                                time: res.items[i].updatedAt
+                                time: res.items[i].updatedAt,
+                                uuid: res.items[i].uuid
                             }
                         );
                     }
@@ -483,7 +495,7 @@ export default {
             };
             getVersions('ALL', params)
                 .then(res => {
-                    let [name, data, items] = [[], [], []];
+                    let [name, data, items, nameId] = [[], [], [], []];
                     if (res.items.length > 10) {
                         items = res.items.slice(0, 10);
                     } else {
@@ -492,12 +504,17 @@ export default {
                     for (let i = 0; i < items.length; i++) {
                         name.push(items[i].name);
                         data.push(items[i].apiCallNum ? items[i].apiCallNum : 0);
+                        nameId.push({ name: items[i].name, uuid: items[i].uuid, modelId: items[i].modelId });
                     }
                     this.modelData = data.reverse(),
                     this.modelNameList = name.reverse();
+                    this.modelNameId = nameId;
                     this.versionLoading = false;
                 }, () => {
                     this.versionLoading = false;
+                    this.modelData = [],
+                    this.modelNameList = [];
+                    this.modelNameId = [];
                 });
         }
     },
@@ -505,7 +522,7 @@ export default {
         orderBy: {
             immediate: true,
             handler(nval) {
-                let [name, data, items] = [[], [], []];
+                let [name, data, items, nameId] = [[], [], [], []];
                 this.getTask('top', nval).then(res => {
                     if (res.items.length > 10) {
                         items = res.items.slice(0, 10);
@@ -514,6 +531,7 @@ export default {
                     }
                     for (let i = 0; i < items.length; i++) {
                         name.push(items[i].name);
+                        nameId.push({ name: items[i].name, type: items[i].type, uuid: items[i].uuid });
                         if (nval === 'CPU') {
                             this.taskXname = '核';
                             data.push(Math.ceil(items[i].quota.cpu / 1000));
@@ -525,6 +543,7 @@ export default {
                             data.push(Math.ceil(items[i].quota.memory / Math.pow(1024, 3)));
                         }
                     }
+                    this.taskNameId = nameId;
                     this.taskData = data.reverse(),
                     this.taskNameList = name.reverse();
                 });
@@ -534,16 +553,20 @@ export default {
 };
 </script>
 <style lang="scss">
+
 .sdx-dashboard {
     overflow: hidden;
     display:flex;/*设为伸缩容器*/
     flex-flow:row;/*伸缩项目单行排列*/
     & /deep/ {
         .sdxu-content-panel__main {
-            margin-top: 0 !important;
+            margin-top: 0px !important;
         }
         .sdxu-content-panel {
             padding: 20px;
+            .sdxu-content-panel__header {
+                align-items: start !important;
+            }
         }
         .sdxu-empty {
             height: 355px !important;

@@ -23,7 +23,7 @@ export default {
             }
         },
         compType: {
-            type: Object,
+            type: [Object, String],
             default() {
                 return {};
             }

@@ -181,6 +181,7 @@ export default {
                     label: '编辑',
                     name: 'edit',
                     icon: 'sf-ico_edite',
+                    group: 2,
                     disabled: false,
                     cb: this.editComp.bind(this)
                 },
@@ -188,6 +189,7 @@ export default {
                     label: '删除',
                     name: 'del',
                     icon: 'sf-delete1',
+                    group: 2,
                     disabled: false,
                     cb: this.delComp.bind(this)
                 },
@@ -195,12 +197,14 @@ export default {
                     label: '分享设置',
                     name: 'share',
                     icon: 'sf-fenxiang1',
+                    group: 1,
                     disabled: false,
                     cb: this.showShareDialog.bind(this)
                 },
                 {
                     label: '移除收藏',
                     name: 'cancelstar',
+                    group: 2,
                     icon: 'sf-yichushoucang1',
                     disabled: false,
                     cb: this.cancelStar.bind(this)

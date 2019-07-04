@@ -38,6 +38,7 @@ import datasList from '../views/datas/datasIndex';
 import datasView from '../views/datas/datasView';
 import DataSourceCreate from '../views/datamanagement/datasource/DataSourceCreate';
 import CreateDataset from '../views/datamanagement/dataset-create/index';
+import JupyterForm from '../views/datas/jupyterForm';
 febAlive.resetHistory();
 Vue.use(Router);
 
@@ -159,6 +160,13 @@ const router = new Router({
                         component: CreateDataset,
                         meta: {
                             name: '创建数据集'
+                        }
+                    },
+                    {
+                        path: 'jupyter/:dataset',
+                        component: JupyterForm,
+                        meta: {
+                            name: '新建Jupyter任务'
                         }
                     }
                     ]

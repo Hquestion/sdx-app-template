@@ -203,6 +203,7 @@ export default {
                         : this.genParamsObject(data.paramsConf), // 组件参数对象
                     paramsConf: data.paramsConf, // 组件参数配置
                     envValues: data.envValues, // 环境变量
+                    code: data.code || '', // 自定义组件: 自定义代码
                     points, // 组件连接点配置
                     validateResult: [], // 参数检查结果
                     resource: data.resource, // 资源配置

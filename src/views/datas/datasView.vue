@@ -5,7 +5,7 @@
             type="primary"
             size="small"
             class="btn-jupyter"
-            @click="toJupyter"
+            @click="toJupyter(id)"
             v-if="viewData.support_jupyter"
         >
             在Jupyter任务中使用
@@ -759,10 +759,11 @@ export default {
         },
         // 图标
         dealIcon(fieldType) {
+            window.console.log(fieldType, 'type');
             if (isNumber(fieldType)) {
-                return 'icon-N';
+                return 'iconN';
             } else if (isString(fieldType)) {
-                return 'icon-S';
+                return 'iconS';
             } else {
                 return '';
             }
@@ -833,9 +834,9 @@ export default {
             this.topCount = Math.floor(scrollDistance / 40);
         },
         // 跳转到jupyter
-        toJupyter() {
+        toJupyter(id) {
             this.$router.push(
-                `/projectManage/createTask/JUPYTER/undefined/undefined/${this.viewData._id}`
+                `/datasManage/jupyter/${id}`
             );
         },
         allDownload(paths, ownerId) {
@@ -973,9 +974,9 @@ export default {
             }
             .bottom {
                 padding: 20px;
-                div {
-                    display: flex;
-                }
+                // div {
+                //     display: flex;
+                // }
                 height: 211px;
                 overflow-y: auto;
                 .paths {
@@ -1061,6 +1062,7 @@ export default {
     height: 266px;
     overflow-y: auto;
     margin-bottom: 12px;
+    overflow-x: hidden;
     .el-checkbox {
         width: 100%;
         height: 40px;
@@ -1077,11 +1079,11 @@ export default {
     float: right;
     margin: 0 12px 12px 0;
 }
-.icon-N {
+.iconN {
     color: #FF9001;
     font-size: 12px;
 }
-.icon-S {
+.iconS {
     color: #02BE86;
     font-size: 12px;
 }
