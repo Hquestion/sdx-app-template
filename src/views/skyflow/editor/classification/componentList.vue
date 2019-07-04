@@ -263,6 +263,23 @@ export default {
                         ? (menuitem.disabled = true)
                         : '';
                 });
+                if (!this.$auth('SKYFLOW-MANAGER:FLOW_CUSTOMIZED_COMPONENT:STAR:', 'BUTTON')) {
+                    menuList.forEach(menuitem => {
+                        menuitem.name === 'cancelstar'
+                            ? (menuitem.disabled = true)
+                            : '';
+                        menuitem.name === 'star'
+                            ? (menuitem.disabled = true)
+                            : '';
+                    });
+                }
+                if (!this.$auth('SKYFLOW-MANAGER:FLOW_CUSTOMIZED_COMPONENT:SHARE:', 'BUTTON')) {
+                    menuList.forEach(menuitem => {
+                        menuitem.name === 'share'
+                            ? (menuitem.disabled = true)
+                            : '';
+                    });
+                }
             }
             if (item.isShare) {
                 menuList.forEach(menuitem => {
