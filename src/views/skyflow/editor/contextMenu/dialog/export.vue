@@ -71,14 +71,14 @@
                         label="导出目标路径:"
                         prop="path"
                     >
-                        <file-select
+                        <SdxwFileSelect
                             v-model="currentData.path"
                             checkType="folder"
                             source="ceph"
                             :string-model="true"
                         >
                             选择路径
-                        </file-select>
+                        </SdxwFileSelect>
                     </el-form-item>
                 </el-form>
             </div>
@@ -104,7 +104,7 @@
     </div>
 </template>
 <script>
-import fileSelect from '@sdx/widget/lib/file-select';
+import FileSelect from '@sdx/widget/lib/file-select';
 import { componentExport } from '@sdx/utils/lib/api/skyflow';
 
 export default {
@@ -124,7 +124,7 @@ export default {
         }
     },
     components: {
-        fileSelect
+        [FileSelect.FileSelectMix.name]: FileSelect.FileSelectMix
     },
     data() {
         return {

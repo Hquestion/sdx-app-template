@@ -1,100 +1,128 @@
 <template>
-    <div class="saveas-container skyflow-dialog">
-        <el-dialog
-            title="另存为"
-            :visible.sync="dialogVisible"
-            custom-class="selfStyle"
-            width="520px"
-            :close-on-click-modal="false"
+    <sdxu-dialog
+        title="另存为"
+        :visible.sync="dialogVisible"
+        @close="dialogClose"
+    >
+        <el-form
+            label-width="130px"
+            label-position="right"
+            :model="currentData"
+            :rules="rules"
+            ref="saveAsForm"
         >
-            <div>
-                <el-form
-                    label-position="right"
-                    label-width="110px"
-                    @submit.native.prevent
-                    :model="currentData"
-                    ref="currentData"
-                    :rules="rules"
-                >
-                    <el-form-item
-                        label="另存至:"
-                        prop="skyflow_project_id"
-                    >
-                        <el-select
-                            placeholder="请选择"
-                            style="width: 100%;"
-                            v-model="currentData.skyflow_project_id"
-                            size="small"
-                        >
-                            <el-option
-                                v-for="(item, i) in skyflowProjectList"
-                                :key="i"
-                                :label="item.label"
-                                :value="item.value"
-                            />
-                        </el-select>
-                    </el-form-item>
-                    <el-form-item
-                        label="工作流名称:"
-                        prop="name"
-                    >
-                        <el-input
-                            placeholder="请输入"
-                            style="width: 100%;"
-                            v-model="currentData.name"
-                            :disabled="!currentData.skyflow_project_id"
-                            size="small"
-                        />
-                    </el-form-item>
-                    <el-form-item
-                        label="工作流描述:"
-                        prop="description"
-                    >
-                        <el-input
-                            type="textarea"
-                            placeholder="请输入"
-                            style="width: 100%;"
-                            v-model="currentData.description"
-                            :disabled="!currentData.skyflow_project_id"
-                            size="small"
-                        />
-                    </el-form-item>
-                </el-form>
-            </div>
-            <span
-                slot="footer"
-                class="dialog-footer"
+            <el-form-item
+                label="工作流名称："
+                prop="name"
             >
-                <el-button
-                    @click="initForm"
-                    size="small"
+                <sdxu-input
+                    v-model="currentData.name"
+                    placeholder="请输入工作流名称"
+                />
+            </el-form-item>
+            <el-form-item
+                label="工作流描述："
+                prop="description"
+            >
+                <sdxu-input
+                    type="textarea"
+                    v-model="currentData.description"
+                    placeholder="请输入工作流描述"
+                />
+            </el-form-item>
+            <el-form-item
+                label="是否设置为模板："
+            >
+                <el-radio
+                    v-model="currentData.isTemplate"
+                    :label="true"
                 >
-                    取 消
-                </el-button>
-                <el-button
-                    type="primary"
-                    size="small"
-                    @click="handleSaveModel('currentData')"
+                    是
+                </el-radio>
+                <el-radio
+                    v-model="currentData.isTemplate"
+                    :label="false"
                 >
-                    确 认
-                </el-button>
-            </span>
-        </el-dialog>
-    </div>
+                    否
+                </el-radio>
+            </el-form-item>
+            <el-form-item
+                v-if="currentData.isTemplate"
+                label="模板种类："
+                prop="skyflowTemplate"
+            >
+                <el-select v-model="currentData.skyflowTemplate">
+                    <el-option
+                        v-for="(item, i) in templateList"
+                        :key="i"
+                        :value="item.name"
+                    />
+                </el-select>
+            </el-form-item>
+            <el-form-item
+                v-else
+                label="共享设置："
+            >
+                <sdxw-select-group-user
+                    :users.sync="currentData.users"
+                    :groups.sync="currentData.groups"
+                />
+            </el-form-item>
+        </el-form>
+        <template #footer>
+            <SdxuButton
+                type="default"
+                size="small"
+                @click="dialogClose"
+            >
+                取消
+            </SdxuButton>
+            <SdxuButton
+                type="primary"
+                size="small"
+                @click="handleConfirm"
+            >
+                确定
+            </SdxuButton>
+        </template>
+    </sdxu-dialog>
 </template>
+
 <script>
-import {
-    getSkyflowOptions,
-    testSkyflowNameExist
-} from '@sdx/utils/lib/api/skyflow';
-import { cNameValidate } from 'utils/validate';
+import Dialog from '@sdx/ui/lib/dialog';
+import SdxwSelectGroupUser from '@sdx/widget/components/select-group-user';
+import SdxuInput from '@sdx/ui/lib/input';
+import SdxuButton from '@sdx/ui/lib/button';
+import ElForm from 'element-ui/lib/form';
+import ElFormItem from 'element-ui/lib/form-item';
+import ElRadio from 'element-ui/lib/radio';
+import ElSelect from 'element-ui/lib/select';
+import ElOption from 'element-ui/lib/option';
+import auth from '@sdx/widget/lib/auth';
+
+import { getSkyflowTemplates } from '@sdx/utils/lib/api/skyflow';
+import { nameWithChineseValidator } from '@sdx/utils/lib/helper/validate';
 
 export default {
-    name: 'SavaAs',
+    name: 'SaveAs',
+    directives: {
+        auth
+    },
+    components: {
+        SdxwSelectGroupUser,
+        [Dialog.name]: Dialog,
+        SdxuButton,
+        ElForm,
+        ElFormItem,
+        ElRadio,
+        SdxuInput,
+        ElSelect,
+        ElOption
+    },
     props: {
         detailDialogVisible: {
             type: Boolean,
-            default: true
+            default: false
         }
     },
     data() {
@@ -102,39 +130,38 @@ export default {
             currentData: {
                 name: '',
                 description: '',
-                skyflow_project_id: ''
+                isTemplate: true,
+                skyflowTemplate: '',
+                users: [],
+                groups: []
             },
-            skyflowProjectList: [],
+            templateList: [],
             rules: {
-                name: [
-                    {
-                        required: true,
-                        message: '请填写工作流名称',
-                        trigger: 'blur',
-                        transform(value) {
-                            return value && ('' + value).trim();
-                        }
-                    },
-                    { validator: cNameValidate, trigger: 'blur' },
-                    { validator: this.nameExistVaildator, trigger: 'blur' }
-                ],
-                description: [
-                    {
-                        required: true,
-                        message: '请填写工作流描述',
-                        trigger: 'blur',
-                        transform(value) {
-                            return value && ('' + value).trim();
-                        }
+                name: [{
+                    required: true,
+                    message: '请填写工作流名称',
+                    trigger: 'blur',
+                    transform(value) {
+                        return value && ('' + value).trim();
                     }
-                ],
-                skyflow_project_id: [
-                    {
-                        required: true,
-                        message: '请选择需要保存到的项目',
-                        trigger: 'change'
+                }, {
+                    validator: nameWithChineseValidator, trigger: 'blur'
+                // }, {
+                //     validator: this.nameExistVaildator, trigger: 'blur'
+                }],
+                description: [{
+                    required: true,
+                    message: '请填写工作流描述',
+                    trigger: 'blur',
+                    transform(value) {
+                        return value && ('' + value).trim();
                     }
-                ]
+                }],
+                skyflowTemplate: [{
+                    required: true,
+                    message: '请选择模板',
+                    trigger: 'change'
+                }]
             }
         };
     },
@@ -149,20 +176,42 @@ export default {
         }
     },
     methods: {
-        handleSaveModel(formName) {
-            this.$refs[formName].validate(valid => {
+        dialogClose() {
+            this.currentData = {
+                name: '',
+                description: '',
+                isTemplate: false,
+                skyflowTemplate: '',
+                users: [],
+                groups: []
+            };
+            this.templateList = [];
+            this.dialogVisible = false;
+        },
+        handleConfirm() {
+            console.error('before validate');
+            this.$refs.saveAsForm.validate(valid => {
+                console.error('validate', valid);
                 if (valid) {
-                    this.$emit('confirm', { event: 'save-as', data: this.currentData });
+                    this.$emit('confirm', {
+                        event: 'save-as',
+                        data: this.currentData
+                    });
                     this.dialogVisible = false;
                 } else {
                     return false;
                 }
             });
         },
-        initForm() {
-            this.dialogVisible = false;
+        getTemplateList() {
+            getSkyflowTemplates().then(data => {
+                this.templateList = data.items;
+            }).catch(() => {
+                this.templateList = [];
+            });
         },
         nameExistVaildator(rule, value, callback) {
+            // todo: 是否需要
             testSkyflowNameExist({
                 skyflow_project_id: this.currentData.skyflow_project_id,
                 name: value
@@ -181,18 +230,12 @@ export default {
         }
     },
     created() {
-    // 请求另存至列表
-        getSkyflowOptions()
-            .then(data => {
-                console.log(data);
-                this.skyflowProjectList = data;
-            })
-            .catch(e => {
-                console.error(e);
-                this.skyflowProjectList = [];
-            });
+        this.getTemplateList();
+    },
+    watch: {
+        'currentData.isTemplate'() {
+            this.$refs.saveAsForm.clearValidate(['skyflowTemplate']);
+        }
     }
 };
 </script>
-<style rel="stylesheet/scss" lang="scss">
-</style>

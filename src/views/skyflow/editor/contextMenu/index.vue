@@ -1,21 +1,28 @@
 <template>
-    <ul
-        class="contextMenu"
+    <div
+        class="context-menu"
         :style="position"
     >
-        <li
-            v-for="item in menuList"
-            :key="item.name"
-            @click="menuClicked(item)"
-            :class="item.disabled ? &quot;disabled&quot; : &quot;&quot;"
+        <div
+            class="context-menu__group"
+            v-for="(value, key) in menuGroupMap"
+            :key="key"
         >
-            <i
-                class="sf-icon"
-                :class="item.icon"
-            />
-            <span>{{ item.label }}</span>
-        </li>
-    </ul>
+            <div
+                v-for="item in value"
+                :key="item.name"
+                @click="menuClicked(item)"
+                class="context-menu__group--item"
+                :class="item.disabled ? 'disabled' : ''"
+            >
+                <!-- <i
+                    class="sf-icon"
+                    :class="item.icon"
+                /> -->
+                <span>{{ item.label }}</span>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -46,6 +53,17 @@ export default {
                 top: this.contextY + 'px',
                 left: this.contextX + 'px'
             };
+        },
+        menuGroupMap() {
+            const groupMap = {};
+            this.menuList.forEach(item => {
+                if (groupMap.hasOwnProperty(item.group)) {
+                    groupMap[item.group].push(item);
+                } else {
+                    groupMap[item.group] = [item];
+                }
+            });
+            return groupMap;
         }
     },
     methods: {
@@ -63,53 +81,44 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-.contextMenu {
+.context-menu {
     margin: 0;
     padding: 0;
     position: absolute;
     z-index:9;
-    width: 174px;
-    background: rgba(253, 253, 253, 1);
-    box-shadow: 0px 2px 7px 0px rgba(63, 89, 115, 0.4);
-    & > li {
-        list-style: none;
-        width: 174px;
-        height: 30px;
-        border-top: 2px #ced6de solid;
-        color: rgba(206, 214, 222, 1);
-        line-height: 24px;
-        &:first-child {
-            border-top: none;
+    width: 208px;
+    background: #fff;
+    border:1px solid rgba(228,231,237,1);
+    box-shadow:0px 2px 12px 0px rgba(0,0,0,0.06);
+    font-size:14px;
+    .context-menu__group {
+        padding: 10px 0;
+        & + .context-menu__group {
+            box-shadow: 0px -1px 0px 0px rgba(228,231,237,1);
         }
-        &:hover {
-            background-color: rgb(237, 239, 244);
-            color: #459cdf;
-            >span{
-                color: #459cdf;
+        .context-menu__group--item {
+            padding: 0 14px;
+            width: 208px;
+            height: 36px;
+            line-height: 36px;
+            color:rgba(96,98,102,1);
+            &:hover {
+                background:rgba(242,246,252,0.6);
+                color: #4781F8;
+                font-weight: 500;
+                cursor: pointer;
             }
         }
-        & > i {
-            font-size: 12px;
-            margin-left: 16px;
-            margin-right: 6px;
-        }
-        & > span {
-            width: 118px;
-            height: 18px;
-            font-size: 12px;
-            font-family: siyuan-rg;
-            color: rgba(45, 69, 93, 1);
-            line-height: 17px;
-        }
-    }
-    & > .disabled {
-        cursor: not-allowed;
-        color: #a3b1bf;
-        &:hover {
+        & > .disabled {
+            cursor: not-allowed;
             color: #a3b1bf;
-        }
-        &>span{
-            color:#a3b1bf !important;
+            &:hover {
+                color: #a3b1bf;
+                cursor: not-allowed;
+            }
+            & > span{
+                color:#a3b1bf !important;
+            }
         }
     }
 }

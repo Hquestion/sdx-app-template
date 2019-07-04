@@ -70,23 +70,13 @@
                 prop="rights"
                 :required="true"
             >
-                <el-radio-group v-model="params.rights">
-                    <el-radio label="1">
-                        私有
-                    </el-radio>
-                    <el-radio label="2">
-                        组内
-                    </el-radio>
-                    <el-radio
-                        label="3"
-                        v-if="currentRole === 'admin'"
-                    >
-                        公共
-                    </el-radio>
-                </el-radio-group>
-                <FormTip v-if="params.rights !== '1'">
-                    分享后，您的数据集可以被其他用户查看，但如需使用则需要使用者拥有您的DataBase的权限
-                </FormTip>
+                <SdxwShareForm
+                    :default-users.sync="params.sharedUsers"
+                    :default-groups.sync="params.sharedGroups"
+                    :default-share-type.sync="params.shareType"
+                    :sync="true"
+                    source-kind="dataset"
+                />
             </el-form-item>
         </el-form>
     </div>
@@ -99,11 +89,12 @@ import { mapActions } from 'vuex';
 import { DRIVER_CLASSES, SAVE_TYPE_OPTIONS } from '../config';
 import FormTip from '../../../datas/rely/SkyForm/FormTip';
 import DatabaseAccessTest from '../../datasource/DatabaseAccessTest';
+import SdxwShareForm from '@sdx/widget/lib/share-form';
 
 export default {
     name: 'DataTargetSQLForm',
     mixins: [StepChangeHooks, SQLTestMixin],
-    components: { FormTip, DatabaseAccessTest },
+    components: { FormTip, DatabaseAccessTest, SdxwShareForm },
     props: {
         source: {
             type: String,
@@ -116,7 +107,10 @@ export default {
             params: {
                 tableName: this.$store.state.dataset.form.structDataTarget.sql.tableName || '',
                 saveType: this.$store.state.dataset.form.structDataTarget.sql.saveType || SAVE_TYPE_OPTIONS[0].value,
-                rights: this.$store.state.dataset.form.structDataTarget.sql.rights || '1'
+                rights: this.$store.state.dataset.form.structDataTarget.sql.rights || '1',
+                sharedUsers: this.$store.state.dataset.form.structDataTarget.sql.sharedUsers || [],
+                sharedGroups: this.$store.state.dataset.form.structDataTarget.sql.sharedGroups || [],
+                shareType: this.$store.state.dataset.form.structDataTarget.sql.shareType || 'PRIVATE'
             },
             rules: {
                 tableName: [

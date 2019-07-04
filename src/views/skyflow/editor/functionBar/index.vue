@@ -76,7 +76,7 @@
                     @click="judgeButtonOperationable (item.name) ? handleOperationClick(item.name) : false"
                 >
                     <i
-                        class="sf-icon"
+                        class="iconfont"
                         :class="item.icon"
                     />
                     <div>{{ item.label }}</div>

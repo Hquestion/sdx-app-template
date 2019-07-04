@@ -37,7 +37,7 @@
                 label="执行文件:"
                 prop="run_file"
             >
-                <FileSelect
+                <SdxwFileSelect
                     v-model="form.run_file"
                     source="all"
                     :limit="1"
@@ -65,7 +65,9 @@ import FileSelect from '@sdx/widget/lib/file-select';
 import { TASK_KIND_DICT } from '../../util/const';
 export default {
     name: 'CompEnv',
-    components: { FileSelect },
+    components: {
+        [FileSelect.FileSelectMix.name]: FileSelect.FileSelectMix
+    },
     mixins: [customizeCompMixin],
     data() {
         return {

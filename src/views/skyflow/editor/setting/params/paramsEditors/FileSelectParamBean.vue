@@ -22,21 +22,21 @@
                 *
             </i> {{ param.label }}
         </span>
-        <file-select
+        <SdxwFileSelect
             v-model="localVal"
             source="ceph"
-            :btn-disabled="!isEditable || !param.trainEditable"
+            :disabled="!isEditable || !param.trainEditable"
             :checkType="param.onlyFolder ? 'folder' : 'all'"
             :limit="param.limits || 1"
             :string-model="true"
         >
             {{ param.limits ?'选择文件' : '选择文件夹' }}
-        </file-select>
+        </SdxwFileSelect>
     </el-form-item>
 </template>
 <script>
 import baseMixins from './editorBaseMixins';
-import FileSelect from '@sdx/widget/lib/file-select';
+import FileSelect from '@sdx/widget/components/file-select';
 import Validator from 'async-validator';
 
 export default {
@@ -47,7 +47,7 @@ export default {
         };
     },
     components: {
-        FileSelect
+        [FileSelect.FileSelectMix.name]: FileSelect.FileSelectMix
     },
     methods: {
         checkFileValid() {
