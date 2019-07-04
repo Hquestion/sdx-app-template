@@ -249,146 +249,144 @@ export default {
     }
 };
 </script>
-<style lang="scss" scoped>
-    @import "../../assets/styles/base/mixin.scss";
-    @import "../../assets/styles/base/colors.scss";
-    @import "../../assets/styles/base/constants.scss";
+<style rel="stylesheet/scss" lang="scss">
+@import "../../assets/styles/base/mixin";
+@import "../../assets/styles/base/colors";
+@import "../../assets/styles/base/constants";
 
-    .sdx-avatar {
+.sdx-avatar {
+    position: relative;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    .split-line {
+        display: inline-block;;
+        width: 1px;
+        height: 20px;
+        background: #BBC4CF;;
+        vertical-align: middle;
+        margin-left: 14px;
+        margin-right: 14px;
+    }
+}
+.avatar-container {
+    .avatar-wrapper {
+        cursor: pointer;
         position: relative;
-        height: 100%;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        .split-line {
-            display: inline-block;;
-            width: 1px;
-            height: 20px;
-            background: #BBC4CF;;
-            vertical-align: middle;
-            margin-left: 14px;
-            margin-right: 14px;
-        }
-    }
-    .avatar-container {
-        .avatar-wrapper {
-            cursor: pointer;
+        .avatar-box {
             position: relative;
-            .avatar-box {
-                position: relative;
-                width: 45px;
-                height: 30px;
-                .user-avatar {
-                    width: 30px;
-                    height: 30px;
-                    border-radius: 30px;
-                    display: block;
-                }
-
-                .el-icon-caret-bottom {
-                    position: absolute;
-                    right: 0;
-                    top: 12px;
-                    font-size: 12px;
-                    color: #dedede;
-                }
-                .user-indicator-icon {
-                    position: absolute;
-                    right: 0px;
-                    bottom: 9px;
-                }
-            }
-        }
-    }
-    .account-container {
-        pointer-events: auto;
-        background: $sdx-color-primary;
-        padding-left: 20px;
-        display: inline-block;
-        border: none;
-        &:hover, &:active {
-            background-color: $sdx-color-primary !important;
-            color: #fff !important;
-        }
-        .account-dropdown-item {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            height: 60px;
-            line-height: 1.5;
-            .dropdown-avatar-box {
+            width: 45px;
+            height: 30px;
+            .user-avatar {
                 width: 30px;
                 height: 30px;
-                position: relative;
-                .user-indicator-icon {
-                    position: absolute;
-                    bottom: 0;
-                    right: 0;
-                }
+                border-radius: 30px;
+                display: block;
             }
 
-            .account-info {
-                margin-left: 10px;
-                .user-name {
-                    font-size: 14px;
-                    color: #fff;
-                }
-                .user-role {
-                    font-size: 12px;
-                    color: #fff;
-                    opacity: 0.8;
-                    font-family: siyuan-lt;
-                    margin-top: 3px;
-                }
+            .el-icon-caret-bottom {
+                position: absolute;
+                right: 0;
+                top: 12px;
+                font-size: 12px;
+                color: #dedede;
+            }
+            .user-indicator-icon {
+                position: absolute;
+                right: 0px;
+                bottom: 9px;
             }
         }
     }
-
-</style>
-<style lang="scss">
-    .user-dropdown {
-        border: none !important;
-        top: 60px !important;
-        margin-top: 0 !important;
-        border-radius: 0 !important;
-
-        .popper__arrow {
-            display: none !important;
+}
+.account-container {
+    pointer-events: auto;
+    background: $sdx-color-primary;
+    padding-left: 20px;
+    display: inline-block;
+    border: none;
+    &:hover, &:active {
+        background-color: $sdx-color-primary !important;
+        color: #fff !important;
+    }
+    .account-dropdown-item {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        height: 60px;
+        line-height: 1.5;
+        .dropdown-avatar-box {
+            width: 30px;
+            height: 30px;
+            position: relative;
+            .user-indicator-icon {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+            }
         }
 
-        &.el-dropdown-menu {
-            margin: 0;
-            padding: 0;
-        }
-
-        .el-dropdown-menu__item {
-            line-height: 36px;
-            min-width: 180px;
-        }
-
-        .el-dropdown-menu__item--divided {
-            margin-top: 0;
-        }
-
-        .el-dropdown-menu__item--divided:before {
-            height: 0;
+        .account-info {
+            margin-left: 10px;
+            .user-name {
+                font-size: 14px;
+                color: #fff;
+            }
+            .user-role {
+                font-size: 12px;
+                color: #fff;
+                opacity: 0.8;
+                font-family: siyuan-lt;
+                margin-top: 3px;
+            }
         }
     }
+}
+.user-dropdown {
+    border: none !important;
+    top: 60px !important;
+    margin-top: 0 !important;
+    border-radius: 0 !important;
 
-    .dashboard-version-content {
-        text-align: center;
-        div {
-            height: 32px;
-        }
-        div:first-child {
-            font-family:SourceHanSansCN-Medium;
-            font-weight:500;
-            color:rgba(48,49,51,1);
-        }
-        div:nth-child(n+1) {
-            font-family:SourceHanSansCN-Normal;
-            font-weight:400;
-            color:rgba(48,49,51,1);
-        }
+    .popper__arrow {
+        display: none !important;
     }
+
+    &.el-dropdown-menu {
+        margin: 0;
+        padding: 0;
+    }
+
+    .el-dropdown-menu__item {
+        line-height: 36px;
+        min-width: 180px;
+    }
+
+    .el-dropdown-menu__item--divided {
+        margin-top: 0;
+    }
+
+    .el-dropdown-menu__item--divided:before {
+        height: 0;
+    }
+}
+
+.dashboard-version-content {
+    text-align: center;
+    div {
+        height: 32px;
+    }
+    div:first-child {
+        font-family:SourceHanSansCN-Medium;
+        font-weight:500;
+        color:rgba(48,49,51,1);
+    }
+    div:nth-child(n+1) {
+        font-family:SourceHanSansCN-Normal;
+        font-weight:400;
+        color:rgba(48,49,51,1);
+    }
+}
+
 </style>

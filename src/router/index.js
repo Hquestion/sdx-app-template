@@ -169,6 +169,7 @@ const router = new Router({
             path: '/assets',
             component: Layout,
             name: 'Assets',
+            redirect: '/sdxv-task-management',
             meta: {
                 breadcrumb: '资产管理'
             },

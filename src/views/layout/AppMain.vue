@@ -36,7 +36,7 @@ export default {
     }
 };
 </script>
-<style lang="scss" scoped>
+<style rel="stylesheet/scss" lang="scss" scoped>
     @import "../../assets/styles/base/mixin.scss";
     @import "../../assets/styles/base/colors.scss";
     @import "../../assets/styles/base/constants.scss";
