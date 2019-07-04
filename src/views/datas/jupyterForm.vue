@@ -2,7 +2,7 @@
     <div class="data-form-jupyter">
         <sky-title-go-back />
         <BaseForm
-            title="新建Jupyter任务"
+            :title="`${params.uuid ? '编辑':'新建'}Jupyter任务`"
             class="form-jupyter"
             :label-width="100"
             icon="sdx-Jupter"
