@@ -152,11 +152,11 @@ export const DATA_SOURCE_OPTIONS = [
         value: '1',
         options: '/v2/datasource/options?kind=FILESYSTEM'
     },
-    {
-        label: 'HDFS',
-        value: '2',
-        options: '/v2/datasource/options?kind=HDFS'
-    },
+    // {
+    //     label: 'HDFS',
+    //     value: '2',
+    //     options: '/v2/datasource/options?kind=HDFS'
+    // },
     {
         label: 'SQL DataBase',
         value: '3',
@@ -176,7 +176,7 @@ export const DATA_SOURCE_OPTIONS = [
 
 export const SOURCE_SYSTEM_MAP = {
     FILESYSTEM: '1',
-    HDFS: '2',
+    // HDFS: '2',
     SQL_DATABASE: '3',
     HIVE: '4',
     NOSQL: '5'

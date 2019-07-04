@@ -13,6 +13,7 @@
                     type="text"
                     :block="true"
                     @click="goManage('source')"
+                    v-show="hasResrcMenuPermission"
                 >
                     {{ $t('sourcemanage') }}
                 </SdxuButton>
@@ -20,6 +21,7 @@
                     type="text"
                     :block="true"
                     @click="goManage('user')"
+                    v-show="hasUserMenuPermission"
                 >
                     {{ $t('usermanage') }}
                 </SdxuButton>
@@ -27,6 +29,7 @@
                     type="text"
                     :block="true"
                     @click="goManage('rights')"
+                    v-show="hasPermMenuPermission"
                 >
                     {{ $t('rightsmanage') }}
                 </SdxuButton>
@@ -34,6 +37,7 @@
                     type="text"
                     :block="true"
                     @click="goManage('monitor')"
+                    v-show="hasSysMenuPermission"
                 >
                     {{ $t('monitormanage') }}
                 </SdxuButton>
@@ -174,7 +178,11 @@ export default {
             modifyPwdVisible: false,
             versionVisible: false,
             permission,
-            hasPlatformPermission: false
+            hasPlatformPermission: false,
+            hasUserMenuPermission: false,
+            hasPermMenuPermission: false,
+            hasResrcMenuPermission: false,
+            hasSysMenuPermission: false
         };
     },
     components: {
@@ -234,6 +242,10 @@ export default {
     },
     mounted() {
         this.hasPlatformPermission = this.$auth(permission.MANAGE_PLATFORM_ACCESS, 'MENU');
+        this.hasUserMenuPermission = this.$auth(permission.USER_MENU_ACCESS, 'MENU');
+        this.hasPermMenuPermission = this.$auth(permission.PERMISSION_MENU_ACCESS, 'MENU');
+        this.hasResrcMenuPermission = this.$auth(permission.RESOURCE_MENU_ACCESS, 'MENU');
+        this.hasSysMenuPermission = this.$auth(permission.SYSTEM_MENU_ACCESS, 'MENU');
     }
 };
 </script>

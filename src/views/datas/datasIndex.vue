@@ -171,19 +171,17 @@ export default {
 };
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
-    @import "../../assets/styles/base/mixin.scss";
-    @import "../../assets/styles/base/colors.scss";
-    @import "../../assets/styles/base/constants.scss";
+
 .service-panel {
-    background-color: $white;
-    border: 1px solid $c-split;
+    background-color: #fff;
+    border: 1px solid #e6eaf2;
     overflow: hidden;
     .header-bar {
         padding: 0 20px;
         height: 61px;
         line-height: 60px;
-        border-bottom: 1px solid $c-split;
-        background-color: $white;
+        border-bottom: 1px solid #e6eaf2;
+        background-color: #fff;
         display: flex;
         justify-content: space-between;
         .title {

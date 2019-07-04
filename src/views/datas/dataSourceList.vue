@@ -259,9 +259,7 @@ export default {
 };
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
-    @import "../../assets/styles/base/colors";
-    @import "../../assets/styles/base/constants";
-    @import "../../assets/styles/base/mixin";
+
 .data-source-list {
     background: white;
     margin: 20px 0;
@@ -271,8 +269,8 @@ export default {
         color: #45474c;
         height: 61px;
         line-height: 60px;
-        border-bottom: 1px solid $c-split;
-        background-color: $white;
+        border-bottom: 1px solid #e6eaf2;;
+        background-color: #fff;
         text-align: right;
         display: flex;
         justify-content: space-between;

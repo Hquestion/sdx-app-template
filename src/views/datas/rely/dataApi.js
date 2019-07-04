@@ -51,7 +51,7 @@ export function getDataPath(params = {}) {
 }
 
 export function getPreviewData(params = {}) {
-    return httpService.get('/api/v1/dataset/preview_data', { params }).then(res => new Promise((resolve, reject) => { if (res.success) { resolve(res); } else { Notification.error({ title: '错误', message: res.msg }); reject(res); } }));
+    return httpService.get('/data-manager/api/v1/dataset/preview_data', { params }).then(res => new Promise((resolve, reject) => { if (res.success) { resolve(res); } else { Notification.error({ title: '错误', message: res.msg }); reject(res); } }));
 }
 
 export function updataDataset(params) {
@@ -161,7 +161,7 @@ export function getDataTag() {
 
 
 export function getDatasetPreview(params = {}) {
-    return httpService.post('/api/v1/dataset/preview', { ...params }).then(res => new Promise((resolve, reject) => { if (res.success) { resolve(res); } else { Notification.error({ title: '错误', message: res.msg }); reject(res); } }));
+    return httpService.post('/data-manager/api/v1/dataset/preview', { ...params }).then(res => new Promise((resolve, reject) => { if (res.success) { resolve(res); } else { Notification.error({ title: '错误', message: res.msg }); reject(res); } }));
 }
 
 

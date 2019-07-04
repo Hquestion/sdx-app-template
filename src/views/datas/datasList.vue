@@ -54,6 +54,11 @@
                         class="inline wd140"
                     >
                         <el-option
+                            label="全部"
+                            :value="-1"
+                            key="all"
+                        />
+                        <el-option
                             v-for="item in dealOptions"
                             :key="item.value"
                             :label="item.label"
@@ -292,26 +297,14 @@
                             />
                         </el-select>
                     </el-form-item>
-                    <el-form-item label="数据集共享">
-                        <el-radio-group v-model="currentData.share_kind">
-                            <el-radio :label="2">
-                                私有
-                            </el-radio>
-                            <el-radio :label="1">
-                                组内
-                            </el-radio>
-                            <!--   v-if="this.$store.state.user.role.name === 'admin'"-->
-                            <el-radio
-                                :label="3"
-                                v-if="false"
-                            >
-                                公共
-                            </el-radio>
-                        </el-radio-group>
-                        <FormTip v-if="currentData.type === 'DATABASE' && currentData.share_kind !== 2">
-                            分享后，您的数据集可以被其他用户查看和使用
-                        </FormTip>
-                    </el-form-item>
+                    <SdxwShareForm
+                        :default-users.sync="currentData.users"
+                        :default-groups.sync="currentData.groups"
+                        :default-share-type.sync="shareType"
+                        :sync="true"
+                        source-kind="dataset"
+                        label-width="100px"
+                    />
                 </el-form>
             </div>
             <span
@@ -387,9 +380,11 @@ import stateLabel from './rely/stateLabel';
 import { dataTypes } from '../datamanagement/dataset-create/config';
 import FormTip from './rely/SkyForm/FormTip';
 import { dateFormatter } from '@sdx/utils/lib/helper/transform';
+import SdxwShareForm from '@sdx/widget/lib/share-form';
+import { FileSelect } from '@sdx/widget';
 const datatype = dataTypes;
 export default {
-    components: { CreateDatasetOption, stateLabel, FormTip },
+    components: { CreateDatasetOption, stateLabel, FormTip, SdxwShareForm, SdxwFileSelectTree: FileSelect.FileSelectTree },
     data() {
         // 编辑模型规则
         const modelRules = {
@@ -459,17 +454,14 @@ export default {
                 }
             ],
             dealOptions: [{
-                value: -1,
-                label: '全部'
-            }, {
-                value: 3,
-                label: '公共'
-            }, {
-                value: 1,
-                label: '组内'
-            }, {
-                value: 2,
+                value: 'PRIVATE',
                 label: '私有'
+            }, {
+                value: 'MY_SHARE',
+                label: '我的共享'
+            }, {
+                value: 'OTHER_SHARE',
+                label: '他人共享'
             }],
             tags: [],
             currentData: {
@@ -527,6 +519,16 @@ export default {
         // 轮询查询列表
         needPullState() {
             return this.tableData.some(item => item.state.need_pull);
+        },
+        shareType: {
+            get() {
+                return this.currentData && (this.currentData.is_public ? 'PUBLIC' : 'PRIVATE') || 'PRIVATE';
+            },
+            set(val) {
+                if (this.currentData) {
+                    this.currentData.is_public = val === 'PUBLIC';
+                }
+            }
         }
     },
     methods: {
@@ -534,7 +536,8 @@ export default {
         // 数据集标签
         getTags() {
             getDataTag()
-                .then(data => {
+                .then(res => {
+                    let data = res.data;
                     this.datasetsOptions = data.options;
                     this.tags = data.options;
                 })
@@ -575,7 +578,10 @@ export default {
                 description: data.description,
                 share_kind: data.share_kind,
                 type: data.type,
-                tags: data.tags
+                tags: data.tags,
+                groups: data.groups,
+                users: data.users,
+                is_public: data.is_public
             };
         },
         rorceDeleteSource(row) {
@@ -669,7 +675,10 @@ export default {
                 description: '',
                 share_kind: 1,
                 type: '',
-                tags: []
+                tags: [],
+                users: [],
+                groups: [],
+                is_public: false
             };
         },
         // 排序
@@ -758,9 +767,8 @@ export default {
 };
 </script>
 <style rel="stylesheet/scss" lang="scss">
-    @import "../../assets/styles/base/colors";
-    @import "../../assets/styles/base/constants";
-    @import "../../assets/styles/base/mixin";
+
+
     .data-source-table {
         background: white;
         // padding: 0 20px 10px;
@@ -772,8 +780,8 @@ export default {
             color: #45474c;
             height: 61px;
             line-height: 60px;
-            border-bottom: 1px solid $c-split;
-            background-color: $white;
+            border-bottom: 1px solid #e6eaf2;
+            background-color: #fff;
             text-align: justify;
             display: flex;
             justify-content: space-between;
