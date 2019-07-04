@@ -73,11 +73,11 @@
                 />
             </el-form-item>
             <el-form-item
-                prop="instances.SPARK_EXECUTOR_INSTANCES"
+                prop="resourceConfig.SPARK_EXECUTOR_INSTANCES"
                 label="执行器实例数:"
             >
                 <el-input-number
-                    v-model="params.instances.SPARK_EXECUTOR_INSTANCES"
+                    v-model="params.resourceConfig.SPARK_EXECUTOR_INSTANCES"
                     :min="1"
                     :max="InputNumberMax"
                 />
@@ -177,7 +177,7 @@ export default {
                         trigger: 'change'
                     }
                 ],
-                'instances.SPARK_EXECUTOR_INSTANCES': [
+                'resourceConfig.SPARK_EXECUTOR_INSTANCES': [
                     { required: true, message: '请输入实例个数', trigger: 'change' }
                 ]
 
@@ -226,7 +226,17 @@ export default {
 
     watch: {
         task(nval) {
-            this.params = { ...this.params, ...nval, ...{ imageId: nval.image.uuid } };
+            window.console.log(nval, 99);
+            this.params = { ...this.params,
+                ...{
+                    projectId: nval.project && nval.project.uuid,
+                    name: nval.name,
+                    description: nval.description,
+                    type: 'DATA_SERVICE',
+                    imageId: nval.image.uuid,
+                    resourceConfig: nval.resourceConfig
+                }
+            };
             this.cpuDriver = {
                 cpu: this.params.resourceConfig.SPARK_DRIVER_CPUS / 1000,
                 memory: this.params.resourceConfig.SPARK_DRIVER_MEMORY / (1024 * 1024 * 1024),
@@ -241,7 +251,7 @@ export default {
         cpuDriver(val) {
             this.params.resourceConfig = {
                 SPARK_DRIVER_CPUS: val.cpu * 1000,
-                SPARK_EXECUTOR_INSTANCES: this.params.instances.SPARK_EXECUTOR_INSTANCES,
+                SPARK_EXECUTOR_INSTANCES: this.params.resourceConfig.SPARK_EXECUTOR_INSTANCES,
                 SPARK_EXECUTOR_CPUS: this.params.resourceConfig.SPARK_EXECUTOR_CPUS,
                 SPARK_DRIVER_MEMORY: val.memory * 1024 * 1024 * 1024,
                 SPARK_EXECUTOR_MEMORY: this.params.resourceConfig.SPARK_EXECUTOR_MEMORY
@@ -250,7 +260,7 @@ export default {
         cpuExecute(val) {
             this.params.resourceConfig = {
                 SPARK_DRIVER_CPUS: this.params.resourceConfig.SPARK_DRIVER_CPUS,
-                SPARK_EXECUTOR_INSTANCES: this.params.instances.SPARK_EXECUTOR_INSTANCES,
+                SPARK_EXECUTOR_INSTANCES: this.params.resourceConfig.SPARK_EXECUTOR_INSTANCES,
                 SPARK_EXECUTOR_CPUS: val.cpu * 1000,
                 SPARK_DRIVER_MEMORY: this.params.resourceConfig.SPARK_DRIVER_MEMORY,
                 SPARK_EXECUTOR_MEMORY: val.memory * 1024 * 1024 * 1024

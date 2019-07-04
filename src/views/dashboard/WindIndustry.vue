@@ -1,6 +1,6 @@
 <template>
     <div class="raintransit">
-        <div>
+        <div @click="gowind()">
             <el-row>
                 <el-col :span="12">
                     <img
@@ -12,7 +12,7 @@
                         风电模版
                     </div>
                     <div>
-                        120+风电模版
+                        风电模版
                     </div>
                 </el-col>
             </el-row>
@@ -30,7 +30,9 @@ export default {
     },
     computed: {},
     methods: {
-
+        gowind() {
+            this.$router.push('/sdxv-skyflow/skyflow-list?templateType=wind');
+        }
     }
 };
 </script>
@@ -43,6 +45,7 @@ export default {
     background-repeat: no-repeat;
     height: 155px;
     .el-row {
+        cursor: pointer;
         .el-col:first-child {
             text-align: center;
             img {
