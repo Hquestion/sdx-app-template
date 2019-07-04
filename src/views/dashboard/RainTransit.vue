@@ -1,6 +1,6 @@
 <template>
     <div class="raintransit">
-        <div>
+        <div @click="gotraffic()">
             <el-row>
                 <el-col :span="12">
                     <img
@@ -12,7 +12,7 @@
                         轨道交通模版
                     </div>
                     <div>
-                        100+轨道交通模版
+                        轨道交通模版
                     </div>
                 </el-col>
             </el-row>
@@ -30,7 +30,9 @@ export default {
     },
     computed: {},
     methods: {
-
+        gotraffic() {
+            this.$router.push('/sdxv-skyflow/skyflow-list?templateType=traffic');
+        }
     }
 };
 </script>
@@ -43,6 +45,7 @@ export default {
     background-repeat: no-repeat;
     height: 155px;
     .el-row {
+        cursor: pointer;
         .el-col:first-child {
             text-align: center;
             img {
