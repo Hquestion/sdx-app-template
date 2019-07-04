@@ -46,7 +46,6 @@ import Dialog from '@sdx/ui/lib/dialog';
 import SelectGroupUser from '@sdx/widget/lib/select-group-user';
 import ElForm from 'element-ui/lib/form';
 import ElFormItem from 'element-ui/lib/form-item';
-import ElSwitch from 'element-ui/lib/switch';
 import ElRadio from 'element-ui/lib/radio';
 import auth from '@sdx/widget/lib/auth';
 export default {
