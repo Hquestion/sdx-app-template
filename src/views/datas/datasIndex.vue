@@ -59,7 +59,8 @@
     </div>
 </template>
 <script>
-import { getServices } from './rely/dataApi';
+
+import { getTaskList } from '@sdx/utils/lib/api/project';
 import hasNothing from './rely/util/hasNothing';
 import dataServiceCard from './rely/dataServiceCard';
 import datasList from './datasList';
@@ -72,9 +73,11 @@ export default {
             search: {
                 // 查询参数
                 name: '',
-                page: 1,
-                page_size: 10,
-                show_all: true
+                start: 1,
+                count: -1,
+                order: 'desc',
+                orderBy: 'createdAt',
+                type: 'DATA_SERVICE'
             },
             searchName: '',
             services: [],
@@ -102,7 +105,7 @@ export default {
     },
     methods: {
         handleFetchList() {
-            getServices(this.search)
+            getTaskList(this.search)
                 .then(data => {
                     this.services = data.items;
                     if (data.items.length) {

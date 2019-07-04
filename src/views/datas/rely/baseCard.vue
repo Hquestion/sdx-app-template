@@ -10,7 +10,7 @@
                 {{ task.name || '没有标题' }}
             </p>
             <p class="creater">
-                创建人: {{ task.user.fullname }}
+                创建人: {{ task.owner && task.owner.fullName }}
             </p>
             <p class="task-state">
                 <state-label

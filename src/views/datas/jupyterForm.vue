@@ -140,7 +140,7 @@ import Select from 'element-ui/lib/select';
 import SdxuInput from '@sdx/ui/lib/input';
 import { getImageList } from '@sdx/utils/lib/api/image';
 import SdxwResourceConfig from '@sdx/widget/lib/resource-config';
-import { createTask, updateTask, getProjectList, createProject } from '@sdx/utils/lib/api/project';
+import { createTask, updateTask, getProjectList, createProject, startTask } from '@sdx/utils/lib/api/project';
 import { nameWithChineseValidator } from '@sdx/utils/lib/helper/validate';
 import SkyTitleGoBack from './rely/skyTitleGoBack';
 import { getDatasetInfo } from './rely/dataApi';

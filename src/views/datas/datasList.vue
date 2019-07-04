@@ -247,13 +247,13 @@
         <el-dialog
             title="编辑数据集"
             :visible.sync="detailDialogVisible"
-            width="30%"
+            width="680px"
             @close="currentDataSource = {};"
         >
             <div>
                 <el-form
                     label-position="right"
-                    label-width="100px"
+                    label-width="120px"
                     @submit.native.prevent
                     :model="currentData"
                     ref="currentData"
@@ -303,7 +303,7 @@
                         :default-share-type.sync="shareType"
                         :sync="true"
                         source-kind="dataset"
-                        label-width="100px"
+                        label-width="120px"
                     />
                 </el-form>
             </div>
@@ -909,6 +909,9 @@ export default {
         }
         .tags {
             width: 100%;
+        }
+        .el-form--label-left .el-form-item__label {
+            text-align: right;
         }
     }
 </style>

@@ -24,10 +24,11 @@ export default {
         getTaskUrl(id) {
             getTaskDetail(id)
                 .then(data => {
-                    this.external_url = data.external_url;
-                    if (data.external_url) {
+                    this.external_url = data.externalUrl;
+                    if (data.externalUrl) {
                         getJupyterUrl({ dataset: this.$route.params.from })
                             .then(data => {
+                                window.console.log(data, 'url');
                                 let url = `${this.external_url}/notebooks/${data.jupyterNobebook}`;
                                 window.location.href = url;
                             });
