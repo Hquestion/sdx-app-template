@@ -96,6 +96,7 @@
                         class="options"
                         icon="el-icon-plus"
                         @click="handleClickDataSource"
+                        v-auth.data.button="'DATA_SET:CREATE'"
                     >
                         新建数据集
                     </el-button>
@@ -382,6 +383,7 @@ import FormTip from './rely/SkyForm/FormTip';
 import { dateFormatter } from '@sdx/utils/lib/helper/transform';
 import SdxwShareForm from '@sdx/widget/lib/share-form';
 import { FileSelect } from '@sdx/widget';
+import auth from '@sdx/widget/lib/auth';
 const datatype = dataTypes;
 export default {
     components: { CreateDatasetOption, stateLabel, FormTip, SdxwShareForm, SdxwFileSelectTree: FileSelect.FileSelectTree },
@@ -492,6 +494,9 @@ export default {
             type: Array,
             default: () => []
         }
+    },
+    directives: {
+        auth
     },
     created() {
         this.datasetList();

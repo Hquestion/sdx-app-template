@@ -26,6 +26,7 @@
                         icon="el-icon-plus"
                         size="small"
                         @click="createService"
+                        v-auth.data.button="'DATA_SERVICE:CREATE'"
                     >
                         新建数据服务
                     </el-button>
@@ -66,6 +67,7 @@ import dataServiceCard from './rely/dataServiceCard';
 import datasList from './datasList';
 import dataSourceList from './dataSourceList';
 import dataServiceForm from './DataServiceForm';
+import auth from '@sdx/widget/lib/auth';
 export default {
     components: { hasNothing, dataServiceCard, datasList, dataSourceList, dataServiceForm },
     data() {
@@ -87,6 +89,9 @@ export default {
             nothing: false,
             dataServicevisible: false
         };
+    },
+    directives: {
+        auth
     },
     beforeCreate() {
         // this.$store.dispatch('currentUser').then(() => ({}));

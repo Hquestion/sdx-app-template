@@ -25,6 +25,7 @@
                     class="options"
                     icon="el-icon-plus"
                     @click="createDataSource"
+                    v-auth.data.button="'DATA_SOURCE:CREATE'"
                 >
                     新建数据源
                 </el-button>
@@ -132,6 +133,7 @@
 
 import { getSourceList, removeDataSource, testDataSourceConnection } from './rely/dataSourceApi';
 import { dateFormatter } from '@sdx/utils/lib/helper/transform';
+import auth from '@sdx/widget/lib/auth';
 export default {
     name: 'DataSourceList',
     data() {
@@ -151,6 +153,9 @@ export default {
     },
     created() {
         this.dataSourceList();
+    },
+    directives: {
+        auth
     },
     methods: {
         dateFormatter,
