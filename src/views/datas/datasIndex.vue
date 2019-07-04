@@ -46,6 +46,7 @@
                     :key="item._id"
                     :task="item"
                     @refresh="handleFetchList"
+                    @taskOperation="handleServiceOperation"
                 />
             </div>
         </div>
@@ -56,6 +57,7 @@
 
         <data-service-form
             :visible.sync="dataServicevisible"
+            :task="editTask"
         />
     </div>
 </template>
@@ -67,9 +69,10 @@ import dataServiceCard from './rely/dataServiceCard';
 import datasList from './datasList';
 import dataSourceList from './dataSourceList';
 import dataServiceForm from './DataServiceForm';
-import auth from '@sdx/widget/lib/auth';
+import taskMixin from '@sdx/utils/lib/mixins/task';
 export default {
     components: { hasNothing, dataServiceCard, datasList, dataSourceList, dataServiceForm },
+    mixins: [taskMixin],
     data() {
         return {
             search: {
@@ -87,17 +90,16 @@ export default {
             cardMarginRight: 0, // 卡片右边距,用户动态排版卡片,两边对齐
             pullSecuqence: 5000, // 状态拉取周期
             nothing: false,
-            dataServicevisible: false
+            dataServicevisible: false,
+            editTask: null
         };
-    },
-    directives: {
-        auth
     },
     beforeCreate() {
         // this.$store.dispatch('currentUser').then(() => ({}));
     },
     created() {
         this.handleFetchList();
+        this.fetchDataMinxin = this.handleFetchList;
     },
     beforeDestroy() {
         // 销毁前清理计时器
@@ -105,7 +107,7 @@ export default {
     },
     computed: {
         needPullState() {
-            return this.services.some(item => item.state.need_pull);
+            return this.services.some(item => item.state === 'LAUNCHING' || item.state === 'KILLING');
         }
     },
     methods: {
@@ -151,6 +153,7 @@ export default {
         },
         createService() {
             this.dataServicevisible = true;
+            this.editTask = null;
         },
         handleEnterSearch(event) {
             if (event.keyCode === 13) {
@@ -159,6 +162,21 @@ export default {
         },
         handleClickSearch() {
             this.search.name = this.searchName;
+        },
+        handleServiceOperation(btn, task) {
+            if (btn === 'start' || btn === 'remove' || btn === 'kill') {
+                this.handleOperation(btn, task);
+            }
+            if (btn === 'detail') {
+                // 跳转详情
+                task.type = 'DATASET_SERVICE';
+                this.handleOperation(btn, task);
+            }
+            if (btn === 'edit') {
+                // 编辑
+                this.dataServicevisible = true;
+                this.editTask = task;
+            }
         }
     },
     watch: {

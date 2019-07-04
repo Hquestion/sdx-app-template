@@ -7,6 +7,7 @@
  */
 
 import httpService from '../../../helper/httpService';
+import { getTaskList } from '@sdx/utils/src/api/project';
 
 /**
  * 查询服务列表
@@ -46,5 +47,12 @@ export function updateService(service) {
  * 获取所有的service作为下拉单选择项目
  */
 export function getServiceOptions() {
-    return httpService.get('/v2/task/skyflow_data_service/options');
+    return getTaskList({
+        start: 1,
+        count: -1,
+        type: 'DATA_SERVICE'
+    }).then(res => res.items.map(item => ({
+        value: item.uuid,
+        label: item.name
+    })));
 }

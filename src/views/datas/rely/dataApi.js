@@ -1,5 +1,6 @@
 import httpService from '../../../helper/httpService';
 import { Notification } from 'element-ui';
+import { getTaskList } from '@sdx/utils/lib/api/project';
 
 export function getSourceList(params = {}) {
     return httpService
@@ -174,8 +175,11 @@ export function getJupyterUrl(params = {}) {
  * @param {{name:string,page:number,page_size:number,order:string,order_by:string}} params 查询参数
  */
 export function getServices(params) {
-    return httpService
-        .get('/v2/task/skyflow_data_service/', { params }).then(res => new Promise((resolve, reject) => { if (res.success) { resolve(res); } else { Notification.error({ title: '错误', message: res.msg }); reject(res); } }));
+    return getTaskList({
+        type: 'DATA_SERVICE',
+        start: 1,
+        count: -1
+    });
 }
 
 /**

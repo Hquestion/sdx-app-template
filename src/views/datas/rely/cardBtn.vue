@@ -26,14 +26,14 @@
 
 <script>
 const TYPE_CONF = {
-    start: { icon: 'icon-play', label: '启动' },
-    kill: { icon: 'icon-stop', label: '停止' },
-    remove: { icon: 'icon-delete', label: '删除' },
+    start: { icon: 'iconicon-yunxing', label: '启动' },
+    kill: { icon: 'icontingzhi', label: '停止' },
+    remove: { icon: 'iconicon-delete1', label: '删除' },
     restart: { icon: 'icon-restart', label: '重启' },
-    detail: { icon: 'icon-Icon-eye', label: '详情' },
-    edit: { icon: 'icon-ico_edite', label: '编辑' },
-    copy: { icon: 'icon-ico_copy', label: '拷贝' },
-    canvas: { icon: 'icon-jinruhuabu', label: '画布' }
+    detail: { icon: 'iconicon-yanjing', label: '详情' },
+    edit: { icon: 'iconicon-edit1', label: '编辑' },
+    copy: { icon: 'iconkaobei', label: '拷贝' },
+    canvas: { icon: 'iconhuabu', label: '画布' }
 };
 export default {
     name: 'CardBtn',

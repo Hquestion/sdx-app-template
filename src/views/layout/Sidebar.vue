@@ -41,8 +41,10 @@ export default {
         }
     },
     mounted() {
+        let manageMenusBak = JSON.parse(JSON.stringify(manageMenus));
+        let leftmenuBak = JSON.parse(JSON.stringify(leftmenu));
         if (this.$route.meta.system === 'manage') {
-            this.permissionRoutes = manageMenus.filter(item => {
+            this.permissionRoutes = manageMenusBak.filter(item => {
                 if (item.auth) {
                     return this.$auth(item.auth, 'MENU');
                 } else {
@@ -60,7 +62,7 @@ export default {
                 }
             });
         } else {
-            this.permissionRoutes = leftmenu.filter(item => {
+            this.permissionRoutes = leftmenuBak.filter(item => {
                 if (item.auth) {
                     return this.$auth(item.auth, 'MENU');
                 } else {

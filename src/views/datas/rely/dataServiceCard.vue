@@ -2,7 +2,7 @@
     <base-card
         class="skyflow-service"
         :task="task"
-        @btnClick="handleBtnClick"
+        @btnClick="handleOperation"
     />
 </template>
 
@@ -10,7 +10,12 @@
 import baseCardMixin from './baseCardMixin';
 export default {
     name: 'SKYFLOWDATASERVICE',
-    mixins: [baseCardMixin]
+    mixins: [baseCardMixin],
+    methods: {
+        handleOperation(btn) {
+            this.$emit('taskOperation', btn, this.task);
+        }
+    }
 };
 </script>
 

@@ -14,12 +14,11 @@
             </p>
             <p class="task-state">
                 <state-label
-                    :label="task.state.label"
-                    :show-loading="task.state.need_pull"
-                    :type="task.state.name"
-                    :show-error="task.err_code && task.err_code !== 1000"
+                    :label="stateAdaptor.state.label"
+                    :show-loading="stateAdaptor.state.need_pull"
+                    :type="stateAdaptor.state.name"
+                    :show-error="false"
                     :show-bg="true"
-                    :error-msg="task.err_msg"
                 />
             </p>
         </div>
@@ -30,8 +29,8 @@
                 </p>
             </el-tooltip> -->
             <p class="time">
-                <span class="iconfont icon-clock" />
-                <span>{{ task.created_at || '无' }}</span>
+                <span class="iconfont iconicon-time" />
+                <span>{{ task.createdAt | dateFormatter }}</span>
             </p>
             <slot name="option">
                 <!-- 插入操作节点,入IDE中jupyter的Url等 -->
@@ -39,7 +38,7 @@
         </div>
         <div class="task-card-footer">
             <card-btn
-                v-for="item in task.state.allow_operations"
+                v-for="item in operationAdaptor"
                 :style="{width:`${btnWidth}%`}"
                 :key="item"
                 :type="item"
@@ -53,9 +52,12 @@
 <script>
 import cardBtn from './cardBtn';
 import stateLabel from './stateLabel';
+import { STATE_TYPE_OPERATION } from '@sdx/utils/lib/const/task';
+import transformFilter from '@sdx/utils/lib/mixins/transformFilter';
 export default {
     name: 'BaseCard',
     components: { cardBtn, stateLabel },
+    mixins: [transformFilter],
     data() {
         return {
             loadingAction: ''
@@ -73,9 +75,71 @@ export default {
     },
     computed: {
         btnWidth() {
-            return (1 / this.task.state.allow_operations.length * 100).toFixed(
-                2
-            );
+            return (1 / this.operationAdaptor.length * 100).toFixed(2);
+        },
+        stateAdaptor() {
+            const map = {
+                CREATED: {
+                    state: {
+                        label: '创建',
+                        name: 'created',
+                        need_pull: false
+                    }
+                },
+                LAUNCHING: {
+                    state: {
+                        label: '启动中',
+                        name: 'launching',
+                        need_pull: true
+                    }
+                },
+                LAUNCH_ABNORMAL: {
+                    state: {
+                        label: '启动异常',
+                        name: 'launch_abnormal',
+                        need_pull: false
+                    }
+                },
+                RUNNING: {
+                    state: {
+                        label: '运行中',
+                        name: 'running',
+                        need_pull: false
+                    }
+                },
+                FINISHED: {
+                    state: {
+                        label: '已完成',
+                        name: 'finished',
+                        need_pull: false
+                    }
+                },
+                KILLED: {
+                    state: {
+                        label: '已终止',
+                        name: 'killed',
+                        need_pull: false
+                    }
+                },
+                FAILED: {
+                    state: {
+                        label: '失败',
+                        name: 'failed',
+                        need_pull: false
+                    }
+                },
+                KILLING: {
+                    state: {
+                        label: '终止中',
+                        name: 'killing',
+                        need_pull: true
+                    }
+                }
+            };
+            return map[this.task.state];
+        },
+        operationAdaptor() {
+            return STATE_TYPE_OPERATION[this.task.state];
         }
     },
     methods: {
@@ -174,7 +238,8 @@ export default {
                 // color: $c-description;
                 line-height: 19px;
                 .iconfont {
-                    font-size: inherit;
+                    font-size: 16px;
+                    vertical-align: middle;
                     margin-right: 10px;
                 }
             }
