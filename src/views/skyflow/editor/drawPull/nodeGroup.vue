@@ -444,6 +444,12 @@ export default {
 
 <style lang='scss'>
 .node-area {
+  * {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
   .icon {
     width: 1em;
     height: 1em;
@@ -469,12 +475,6 @@ export default {
   .tip-btn-rect {
     cursor: default;
     outline: none;
-  }
-  text {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
   }
   .node {
     cursor: move;

@@ -96,6 +96,11 @@
             :context-dialog-visible.sync="contextDialogVisible"
             @confirm="handleContextDialog"
         />
+        <SdxwCodeEditor
+            :visible.sync="codeEditorVisible"
+            :code="currentCode"
+            @confirm="handleSaveCode"
+        />
     </div>
 </template>
 
@@ -117,6 +122,7 @@ import * as schemaFilterMethods from './js/schemaFilterMethods';
 import * as nodeCheckMethods from './js/nodeCheckMethods';
 import { contextMenuIcon, nodeState, resourceInfo } from './js/skyflowConfig';
 import emitter from 'element-ui/lib/mixins/emitter';
+import SdxwCodeEditor from '@sdx/widget/lib/code-editor';
 
 import {
     getflowInfo,
@@ -152,6 +158,7 @@ export default {
         componentSetting,
         contextMenu,
         Console,
+        SdxwCodeEditor,
         ...contextDialog,
         info
     },
@@ -197,6 +204,8 @@ export default {
                 timeUnit: 'minute',
                 timeValue: 1
             },
+            currentCode: '', // 当前组件自定义code
+            codeEditorVisible: false, // 代码编辑器弹框
             executeStartTime: '', // 执行开始时间
             processType: '' // 工作流类型: PATCH | STREAM
         };
@@ -240,6 +249,7 @@ export default {
                 : { width: 'calc(100% - 250px)' };
         },
         hasModelDeploy() {
+            // todo:
             return [nodeState.SUCCESS].includes(this.flowState);
         }
     },
@@ -575,15 +585,17 @@ export default {
             });
         },
         testIsExistMutiBranch() {
-            // 测试画布中是否存在多条分支
-            // 任意找一个数据源
-            const dataSourceComp = this.nodes.find(
-                node => !node.inputParams || node.inputParams.length === 0
-            );
-            // 根据这个数据源遍历出该数据源所在分支的所有组件
-            const compSet = this.getLinkedNode(new Set([dataSourceComp.id]));
-            // 判断是否有不在该Set中的组件，有: 表示存在多个分支
-            return this.nodes.some(node => !compSet.has(node.id));
+            // todo:
+            return false;
+            // // 测试画布中是否存在多条分支
+            // // 任意找一个数据源
+            // const dataSourceComp = this.nodes.find(
+            //     node => !node.inputParams || node.inputParams.length === 0
+            // );
+            // // 根据这个数据源遍历出该数据源所在分支的所有组件
+            // const compSet = this.getLinkedNode(new Set([dataSourceComp.id]));
+            // // 判断是否有不在该Set中的组件，有: 表示存在多个分支
+            // return this.nodes.some(node => !compSet.has(node.id));
         },
         getLinkedNode(compSet) {
             // 递归获取连线的节点id Set
@@ -774,15 +786,17 @@ export default {
             // 画布右键组件时 筛选展示的菜单
             const node = this.nodes.find(el => el.id === menu.id);
             const filterItem = new Set([]);
-            // 只能收藏用户自定义组件
+            // 用户自定义组件: 收藏、代码编辑
             if (!node.isCustom) {
                 filterItem.add('star');
+                filterItem.add('edit-code');
             }
             // 不可编辑：画布正在运行、在别人画布、失败、定时任务
             if (!this.isEditable) {
                 filterItem.add('copy');
                 filterItem.add('rename');
                 filterItem.add('delete');
+                filterItem.add('edit-code');
             }
             // 非(结果导出组件、数据集组件)，运行成功后都有导出选项
             if (
@@ -795,6 +809,14 @@ export default {
             this.contextX = menu.x;
             this.contextY = menu.y;
             this.contextMenuVisible = true;
+        },
+        handleSaveCode(code) {
+            this.nodes.forEach(node => {
+                if (node.id === this.activeNodeId) {
+                    node.code = code;
+                }
+            });
+            this.updateNodes(this.nodes);
         },
         handleComponentRename(params) {
             // 画布组件右键-重命名
@@ -1027,6 +1049,8 @@ export default {
                     node.state = state;
                 }
             });
+            // todo:
+            isReady = true;
             // 如果是初始化，这里不更新nodes状态，只要更新this.isReady值就行了
             !isInit && needUpdate && this.updateNodes(this.nodes);
             this.isReady = isReady;
@@ -1168,6 +1192,10 @@ export default {
                     case 'export':
                         this.contextName = operationName;
                         this.contextDialogVisible = true;
+                        break;
+                    case 'edit-code':
+                        this.codeEditorVisible = true;
+                        this.currentCode = this.activeNode && this.activeNode.code || '';
                         break;
             }
             this.contextMenuVisible = false;
