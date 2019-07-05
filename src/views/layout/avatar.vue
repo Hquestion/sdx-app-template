@@ -3,7 +3,7 @@
         <SdxuButton
             type="default"
             trigger="click"
-            :shadow="true"
+            :plain="true"
             icon="iconfont iconicon-jiankongzhongxin1"
             v-show="$route.meta.system !== 'manage' && hasPlatformPermission"
         >
@@ -48,7 +48,8 @@
             v-show="$route.meta.system !== 'manage' && hasPlatformPermission"
         />
         <SdxuButton
-            type="text"
+            type="default"
+            :plain="true"
             trigger="click"
             style="margin-right: 14px;min-width: 0;"
             dropdown-width="90px"
