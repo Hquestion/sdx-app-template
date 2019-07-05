@@ -40,6 +40,7 @@
                 <div
                     class="add-custom"
                     @click="createCustom"
+                    v-auth.skyflow.button="'FLOW_CUSTOMIZED_COMPONENT:CREATE'"
                 >
                     <i class="sf-icon sf-jiahao" />
                 </div>
@@ -79,6 +80,8 @@ import componentList from './componentList';
 import customOptions from './customOptions';
 import CustomizeComp from './CustomizeComp';
 
+import auth from '@sdx/widget/lib/auth';
+
 const componentApi = {
     dataset: getDatasetList,
     platform: getPlatformComponentList,
@@ -95,6 +98,7 @@ export default {
         customOptions,
         CustomizeComp
     },
+    directives: [auth],
     props: {
         isEditable: {
             type: Boolean,

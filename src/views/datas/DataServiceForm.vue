@@ -2,9 +2,11 @@
     <sdxu-dialog
         :visible.sync="__visible"
         size="large"
-        :title="params.uuid ? '编辑数据服务' : '新建数据服务'"
+        :title="task ? '编辑数据服务' : '新建数据服务'"
         class="data-service"
         @open="open"
+        @opened="$refs.dataService.clearValidate()"
+        @close="$refs.dataService.clearValidate()"
         :modalAppendToBody="false"
     >
         <el-form
@@ -124,6 +126,10 @@ export default {
         task: {
             type: Object,
             default: null
+        },
+        createData: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -150,9 +156,6 @@ export default {
                     SPARK_EXECUTOR_CPUS: 0,
                     SPARK_DRIVER_MEMORY: 0,
                     SPARK_EXECUTOR_MEMORY: 0
-                },
-                instances: {
-                    SPARK_EXECUTOR_INSTANCES: 1
                 }
             },
             images: [],
@@ -197,6 +200,25 @@ export default {
 
     methods: {
         open() {
+            this.$refs.dataService && this.$refs.dataService.clearValidate();
+            if (this.createData) {
+                this.params = {
+                    projectId: '',
+                    name: '',
+                    description: '',
+                    type: 'DATA_SERVICE',
+                    imageId: '',
+                    resourceConfig: {
+                        SPARK_DRIVER_CPUS: 0,
+                        SPARK_EXECUTOR_INSTANCES: 1,
+                        SPARK_EXECUTOR_CPUS: 0,
+                        SPARK_DRIVER_MEMORY: 0,
+                        SPARK_EXECUTOR_MEMORY: 0
+                    }
+                };
+                this.cpuDriver = {};
+                this.cpuExecute = {};
+            }
             const params = {
                 imageType: 'SPARK',
                 start: 1,
@@ -213,9 +235,10 @@ export default {
         },
         confirm() {
             this.$refs.dataService.validate().then(() => {
-                (this.params.uuid ? updateTask(this.params.uuid, this.params) : createTask(this.params))
+                (this.task ? updateTask(this.task.uuid, this.params) : createTask(this.params))
                     .then(() => {
                         this.$emit('update:visible', false);
+                        this.$emit('refresh');
                     });
             });
         },
@@ -226,27 +249,28 @@ export default {
 
     watch: {
         task(nval) {
-            window.console.log(nval, 99);
-            this.params = { ...this.params,
-                ...{
-                    projectId: nval.project && nval.project.uuid,
-                    name: nval.name,
-                    description: nval.description,
-                    type: 'DATA_SERVICE',
-                    imageId: nval.image.uuid,
-                    resourceConfig: nval.resourceConfig
-                }
-            };
-            this.cpuDriver = {
-                cpu: this.params.resourceConfig.SPARK_DRIVER_CPUS / 1000,
-                memory: this.params.resourceConfig.SPARK_DRIVER_MEMORY / (1024 * 1024 * 1024),
-                uuid: `${this.params.resourceConfig.SPARK_DRIVER_CPUS / 1000}-${this.params.resourceConfig.SPARK_DRIVER_MEMORY / (1024 * 1024 * 1024)}`
-            };
-            this.cpuExecute = {
-                cpu: this.params.resourceConfig.SPARK_EXECUTOR_CPUS / 1000,
-                memory: this.params.resourceConfig.SPARK_EXECUTOR_MEMORY / (1024 * 1024 * 1024),
-                uuid: `${this.params.resourceConfig.SPARK_EXECUTOR_CPUS / 1000}-${this.params.resourceConfig.SPARK_EXECUTOR_MEMORY / (1024 * 1024 * 1024)}`
-            };
+            if (nval) {
+                this.params = { ...this.params,
+                    ...{
+                        projectId: nval.project && nval.project.uuid,
+                        name: nval.name,
+                        description: nval.description,
+                        type: 'DATA_SERVICE',
+                        imageId: nval.image.uuid,
+                        resourceConfig: nval.resourceConfig
+                    }
+                };
+                this.cpuDriver = {
+                    cpu: this.params.resourceConfig.SPARK_DRIVER_CPUS / 1000,
+                    memory: this.params.resourceConfig.SPARK_DRIVER_MEMORY / (1024 * 1024 * 1024),
+                    uuid: `${this.params.resourceConfig.SPARK_DRIVER_CPUS / 1000}-${this.params.resourceConfig.SPARK_DRIVER_MEMORY / (1024 * 1024 * 1024)}`
+                };
+                this.cpuExecute = {
+                    cpu: this.params.resourceConfig.SPARK_EXECUTOR_CPUS / 1000,
+                    memory: this.params.resourceConfig.SPARK_EXECUTOR_MEMORY / (1024 * 1024 * 1024),
+                    uuid: `${this.params.resourceConfig.SPARK_EXECUTOR_CPUS / 1000}-${this.params.resourceConfig.SPARK_EXECUTOR_MEMORY / (1024 * 1024 * 1024)}`
+                };
+            }
         },
         cpuDriver(val) {
             this.params.resourceConfig = {
@@ -267,7 +291,7 @@ export default {
             };
         },
         'params.imageId'() {
-            this.$refs.dataService.clearValidate('resourceConfig');
+            this.$refs.dataService && this.$refs.dataService.clearValidate('resourceConfig');
         },
         imageOptions: {
             immediate: true,

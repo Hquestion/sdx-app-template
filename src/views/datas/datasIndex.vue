@@ -58,6 +58,8 @@
         <data-service-form
             :visible.sync="dataServicevisible"
             :task="editTask"
+            :create-data="createData"
+            @refresh="handleFetchList()"
         />
     </div>
 </template>
@@ -91,7 +93,8 @@ export default {
             pullSecuqence: 5000, // 状态拉取周期
             nothing: false,
             dataServicevisible: false,
-            editTask: null
+            editTask: null,
+            createData: true
         };
     },
     beforeCreate() {
@@ -154,6 +157,7 @@ export default {
         createService() {
             this.dataServicevisible = true;
             this.editTask = null;
+            this.createData = true;
         },
         handleEnterSearch(event) {
             if (event.keyCode === 13) {
@@ -176,6 +180,7 @@ export default {
                 // 编辑
                 this.dataServicevisible = true;
                 this.editTask = task;
+                this.createData = false;
             }
         }
     },

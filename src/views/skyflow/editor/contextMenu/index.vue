@@ -2,6 +2,7 @@
     <div
         class="context-menu"
         :style="position"
+        @contextmenu.prevent
     >
         <div
             class="context-menu__group"

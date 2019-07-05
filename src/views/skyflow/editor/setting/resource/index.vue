@@ -22,7 +22,6 @@
                 <ResourceConfig
                     v-model="executorGPU"
                     type="gpu"
-                    :required="true"
                 />
             </div>
             <div
