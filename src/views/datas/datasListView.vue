@@ -1,5 +1,8 @@
 <template>
-    <div class="data-list-view">
+    <div
+        class="data-list-view"
+        v-loading="loading"
+    >
         <div
             v-for="(v, k) in list"
             :key="k"
@@ -58,7 +61,8 @@ export default {
     data() {
         return {
             list: [],
-            fullpath: ''
+            fullpath: '',
+            loading: false
         };
     },
     components: { dataImage },
@@ -128,6 +132,8 @@ export default {
                     }
                     data.paths = data.children;
                     this.list = data.paths;
+                }).finally(() => {
+                    this.loading = false;
                 });
         },
         // HDFS 列表
@@ -135,10 +141,13 @@ export default {
             hdfsLs(datasource, path, only_dir)
                 .then(data => {
                     this.list = data.paths;
+                }).finally(() => {
+                    this.loading = false;
                 });
         },
         // hdfs 或者文件 列表
         getHdfsOrFile(path) {
+            this.loading = true;
             if (this.storeType === 'HDFS') {
                 this.getHdfsList(this.datasource, path, false);
             } else if (this.storeType === 'FILESYSTEM') {
