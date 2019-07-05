@@ -200,7 +200,6 @@ export default {
 
     methods: {
         open() {
-            this.$refs.dataService && this.$refs.dataService.clearValidate();
             if (this.createData) {
                 this.params = {
                     projectId: '',
@@ -215,7 +214,12 @@ export default {
                         SPARK_DRIVER_MEMORY: 0,
                         SPARK_EXECUTOR_MEMORY: 0
                     }
+
                 };
+                this.$nextTick(() => {
+                    this.$refs.dataService && this.$refs.dataService.clearValidate();
+                });
+
                 this.cpuDriver = {};
                 this.cpuExecute = {};
             }
