@@ -36,6 +36,7 @@ export default {
 @import "../../assets/styles/base/mixin.scss";
 @import "../../assets/styles/base/colors.scss";
 @import "../../assets/styles/base/constants.scss";
+
 .navbar {
     height: $ls-headerbar;
     line-height: $ls-headerbar;
@@ -49,6 +50,7 @@ export default {
     justify-content: space-between;
     padding-right: $ls-content-margin;
     width: 100%;
+    box-shadow: 0 2px 4px 0 rgba(206,213,221,0.45);
     .toggle-icon {
         color: $sdx-text-minor-color;
         font-size: 24px;

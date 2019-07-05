@@ -47,12 +47,17 @@ export function updateService(service) {
  * 获取所有的service作为下拉单选择项目
  */
 export function getServiceOptions() {
-    return getTaskList({
-        start: 1,
-        count: -1,
-        type: 'DATA_SERVICE'
-    }).then(res => res.items.map(item => ({
-        value: item.uuid,
-        label: item.name
-    })));
+    return new Promise((resolve, reject) => {
+        getTaskList({
+            start: 1,
+            count: -1,
+            type: 'DATA_SERVICE'
+        }).then(res => {
+            let data = res.items.map(item => ({
+                value: item.uuid,
+                label: item.name
+            }));
+            resolve({ options: data });
+        }, reject);
+    });
 }

@@ -1099,10 +1099,8 @@ export default {
         color:rgb(96, 98, 102);
     }
 }
-</style>
-<style rel="stylesheet/scss" lang="scss">
-
-    .tree {
+.tree {
+    & /deep/ {
         .caret-right:before {
             content: "";
         }
@@ -1115,7 +1113,9 @@ export default {
             height: 6px;
         }
     }
-    .datas-view {
+}
+.datas-view {
+    & /deep/ {
         .caret-right {
             // overflow: hidden;
             // text-overflow: ellipsis;
@@ -1123,5 +1123,6 @@ export default {
             width: calc(100% - 20px);
         }
     }
+}
 </style>
 

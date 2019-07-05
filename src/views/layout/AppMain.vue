@@ -40,6 +40,7 @@ export default {
     @import "../../assets/styles/base/mixin.scss";
     @import "../../assets/styles/base/colors.scss";
     @import "../../assets/styles/base/constants.scss";
+
 	.app-main {
         width: 100%;
 		height: calc(100% - 60px);
@@ -48,14 +49,13 @@ export default {
             line-height: 48px;
             height: 48px;
             padding:0 20px;
-            border: 1px solid $sdx-border-color;
             display: flex;
             align-items: center;
         }
         .app-main-view {
             overflow: auto;
             height: calc(100% - 48px);
-            padding: 20px;
+            padding: 10px 20px 20px;
         }
 	}
 </style>

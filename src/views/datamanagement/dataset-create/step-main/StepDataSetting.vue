@@ -101,8 +101,6 @@
                             accept=".csv"
                             upload-btn-label="选择文件"
                             v-model="params.schemaFile"
-                            :path="uploadPath"
-                            :ceph-params="{ clickKind: 5, richModel: false }"
                         />
                         <a
                             :href="STATIC_PATH + 'static/sample_schema.csv'"
@@ -252,8 +250,7 @@ export default {
             isLoadingSchema: false,
             topCount: 0,
             rowHeight: 48,
-            lazyShowData: [],
-            uploadPath: [this.$store.state.user.user.name, '.upload']
+            lazyShowData: []
         };
     },
     computed: {
