@@ -109,6 +109,7 @@
                     :stripe="true"
                     :default-sort="{prop: 'share_kind', order: 'descending'}"
                     @sort-change="handleSortChange"
+                    v-loading="datasetLoading"
                 >
                     <el-table-column
                         label="数据集名称"
@@ -486,7 +487,8 @@ export default {
             // 数据集标签
             datasetsOptions: [],
             searchName: '',
-            isInitPage: true
+            isInitPage: true,
+            datasetLoading: false
         };
     },
     props: {
@@ -551,9 +553,16 @@ export default {
                 });
         },
         // 数据集查询
-        datasetList() {
+        datasetList(polling) {
+            if (polling === 'polling') {
+                this.datasetLoading = false;
+            } else {
+                this.datasetLoading = true;
+            }
+
             getDataset(this.search)
                 .then(res => {
+                    this.datasetLoading = false;
                     this.tableData = res.data.items || [];
                     this.total = res.data.total;
                     // bugfix 修正当前页数,如果最后一页的最后一项被删除,会导致页面停留在一个空页上
@@ -566,6 +575,10 @@ export default {
                             this.total / this.search.page_size
                         );
                     }
+                }).catch(() => {
+                    this.datasetLoading = false;
+                    this.tableData = [];
+                    this.total = 0;
                 });
         },
         handleClickDataSource() {
@@ -737,7 +750,7 @@ export default {
         startPull() {
             if (!this.pull) {
                 this.pull = setInterval(() => {
-                    this.datasetList();
+                    this.datasetList('polling');
                 }, 5000);
             }
         },
