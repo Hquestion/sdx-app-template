@@ -249,6 +249,7 @@
         <el-dialog
             title="编辑数据集"
             :visible.sync="detailDialogVisible"
+            v-if="detailDialogVisible"
             width="680px"
             @close="currentDataSource = {};"
         >
