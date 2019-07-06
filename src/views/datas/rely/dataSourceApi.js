@@ -181,7 +181,7 @@ export function removeDatasetItem(params) {
 export function generateSchema(data) {
     return httpService.post('/data-manager/api/v1/dataset/schema', data).then(res => new Promise((resolve, reject) => {
         if (res.success) {
-            resolve(res);
+            resolve(res.data);
         } else {
             Notification.error({ title: '错误', message: res.msg }); reject(res);
         }
@@ -201,7 +201,7 @@ export function testDbConnection(data) {
 export function createDatasetPreProcess(data) {
     return httpService.post('/data-manager/api/v1/dataset/create/preProcess', data).then(res => new Promise((resolve, reject) => {
         if (res.success) {
-            resolve(res);
+            resolve(res.data);
         } else {
             Notification.error({ title: '错误', message: res.msg }); reject(res);
         }
