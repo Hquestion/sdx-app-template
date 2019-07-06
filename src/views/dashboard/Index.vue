@@ -453,7 +453,7 @@ export default {
                             {
                                 name: res.data.items[i].name,
                                 time: res.data.items[i].updated_at,
-                                uuid: res.data.items[i].uuid
+                                uuid: res.data.items[i].dataset
                             }
                         );
                     }
