@@ -1,8 +1,9 @@
 import store from '../store';
+import router from '../router';
 
 function unauthorizeHandler() {
     store.commit('REMOVE_ALL');
-    this.$router.replace('/login');
+    router.replace('/login');
 }
 
 export default {
