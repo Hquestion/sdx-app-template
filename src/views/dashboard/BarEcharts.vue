@@ -187,7 +187,7 @@ export default {
                     if (project.includes(arr[0].type)) {
                         this.$router.push(`/sdxv-project-manage/taskInfo/${arr[0].type}/${arr[0].uuid}`);
                     } else if (data.includes(arr[0].type)) {
-                        this.$router.push(`/datasManage/dataView/?dataset=${arr[0].uuid}`);
+                        this.$router.push(`/sdxv-project-manage/taskInfo/DATASET_SERVICE/${arr[0].uuid}`);
                     } else if (model.includes(arr[0].type)) {
                         this.$router.push(`/sdxv-model-manage/versionList/${arr[0].uuid}`);
                     } else if (skyflow.includes(arr[0].type)) {
