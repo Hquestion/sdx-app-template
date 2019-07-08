@@ -148,7 +148,7 @@
                                 </el-select>
                                 <MoreBtn
                                     class="morebtn"
-                                    @getMore="getTaskMore('/assets/taskManage')"
+                                    @getMore="getTaskMore('/sdxv-task-management')"
                                 />
                                 <bar-echarts
                                     height="354px"
@@ -328,7 +328,7 @@ export default {
     methods: {
         // 资源
         getResource() {
-            let userId = this.$store.state.user.token.userId;
+            let userId = this.$store.getters.userId;
             getUserResource(userId)
                 .then(data => {
                     this.resource = data;
@@ -373,7 +373,7 @@ export default {
         // disk 信息
         getDiskCount() {
             let params = {
-                ownerId: this.$store.state.user.token.userId
+                ownerId: this.$store.getters.userId
             };
             getDisk(params)
                 .then(res => {

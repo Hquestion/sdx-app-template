@@ -11,9 +11,6 @@
                     <div>
                         轨道交通模版
                     </div>
-                    <div>
-                        轨道交通模版
-                    </div>
                 </el-col>
             </el-row>
         </div>
@@ -62,12 +59,6 @@ export default {
                 font-weight: bold;
                 line-height: 30px;
                 font-size: 20px;
-            }
-            & div:last-child {
-                font-weight: 400;
-                color: rgba(255,255,255,1);
-                line-height: 21px;
-                font-size: 14px;
             }
         }
     }
