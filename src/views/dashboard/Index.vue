@@ -344,7 +344,7 @@ export default {
             let params = {};
             if (purpose === 'top') {
                 params = {
-                    ownerId: this.$store.state.user.token.userId,
+                    ownerId: this.$store.getters.userId,
                     start: 1,
                     count: 10,
                     order: 'desc',
@@ -352,7 +352,7 @@ export default {
                 };
             } else {
                 params = {
-                    ownerId: this.$store.state.user.token.userId,
+                    ownerId: this.$store.getters.userId,
                     start: 1,
                     count: -1,
                     states: 'RUNNING'

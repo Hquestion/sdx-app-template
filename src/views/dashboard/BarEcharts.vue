@@ -177,7 +177,22 @@ export default {
                 if (arr[0] && arr[0].modelId) {
                     this.$router.push(`/sdxv-model-manage/versionList/${arr[0].modelId}/${arr[0].uuid}`);
                 } else if (arr[0] && arr[0].type) {
-                    this.$router.push(`/sdxv-project-manage/taskInfo/${arr[0].type}/${arr[0].uuid}`);
+                    //  项目任务  数据服务  模型服务  skyflow
+                    const [project, data, model, skyflow] = [
+                        ['SPARK', 'PYTHON', 'TENSORFLOW', 'TENSORFLOW_DIST', 'TENSORBOARD', 'JUPYTER', 'TENSORFLOW_AUTO_DIST', 'CONTAINER_DEV'],
+                        ['DATA_SERVICE'],
+                        ['SPARK_SERVING', 'TENSORFLOW_SERVING', 'PMML_SERVING'],
+                        ['SKYFLOW', 'SKYFLOW_EXEC']
+                    ];
+                    if (project.includes(arr[0].type)) {
+                        this.$router.push(`/sdxv-project-manage/taskInfo/${arr[0].type}/${arr[0].uuid}`);
+                    } else if (data.includes(arr[0].type)) {
+                        this.$router.push(`/datasManage/dataView/?dataset=${arr[0].uuid}`);
+                    } else if (model.includes(arr[0].type)) {
+                        this.$router.push(`/sdxv-model-manage/versionList/${arr[0].uuid}`);
+                    } else if (skyflow.includes(arr[0].type)) {
+                        window.open(`/#/editor/${arr[0].uuid}`);
+                    }
                 }
             });
         }
