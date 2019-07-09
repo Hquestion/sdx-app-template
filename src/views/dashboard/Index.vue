@@ -138,6 +138,7 @@
                                     size="small"
                                     v-model="orderBy"
                                     placeholder="请选择"
+                                    :class="$t('dashboard.task_resources_utilization_Top10').includes('任务资源') ? 'chinese' : 'english'"
                                 >
                                     <el-option
                                         v-for="item in resourceType"
@@ -689,8 +690,13 @@ export default {
             .el-select {
                 position: absolute;
                 top: 15px;
-                right: 90px;
-                width: 140px;
+                right: 85px;
+            }
+            .chinese {
+                width: 92px;
+            }
+            .english {
+                width: 150px;
             }
             .sdxu-content-panel {
                 position: relative;
