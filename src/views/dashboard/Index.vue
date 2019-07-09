@@ -6,7 +6,7 @@
                     <el-row :gutter="20">
                         <el-col :span="16">
                             <sdxu-content-panel
-                                title="资源使用情况"
+                                :title="$t('dashboard.resource_usage')"
                                 size="small"
                             >
                                 <el-row
@@ -22,7 +22,7 @@
                                                 {{ Math.ceil(resource.cpu / 1000) }}
                                             </div>
                                             <div>
-                                                <span>CPU</span>（核）
+                                                <span>CPU</span>（{{ $t('dashboard.core') }}）
                                             </div>
                                         </div>
                                     </el-col>
@@ -46,7 +46,7 @@
                                                         :label="item.label"
                                                         :value="item.value"
                                                     />
-                                                </el-select>（块）
+                                                </el-select>（{{ $t('dashboard.piece') }}）
                                             </div>
                                         </div>
                                     </el-col>
@@ -64,7 +64,7 @@
                                                 {{ Math.ceil(resource.memory / Math.pow(1024, 3)) }}
                                             </div>
                                             <div>
-                                                <span>内存</span>（GB）
+                                                <span>{{ $t('dashboard.memory') }}</span>（GB）
                                             </div>
                                         </div>
                                     </el-col>
@@ -89,7 +89,7 @@
                             class="task"
                         >
                             <sdxu-content-panel
-                                title="运行任务总数"
+                                :title="$t('dashboard.total_number_of_running_tasks')"
                                 size="small"
                             >
                                 <CircleProgress
@@ -105,7 +105,7 @@
             </div>
             <div class="left-center">
                 <sdxu-content-panel
-                    title="行业模版"
+                    :title="$t('dashboard.industry_template')"
                     size="small"
                 >
                     <el-row
@@ -128,7 +128,7 @@
                         v-loading="taskLoading"
                     >
                         <sdxu-content-panel
-                            title="任务资源使用Top 10"
+                            :title="$t('dashboard.task_resources_utilization_Top10')"
                             size="small"
                         >
                             <div
@@ -142,7 +142,7 @@
                                     <el-option
                                         v-for="item in resourceType"
                                         :key="item.label"
-                                        :label="item.label"
+                                        :label="$t(`dashboard.${item.label}`)"
                                         :value="item.value"
                                     />
                                 </el-select>
@@ -154,11 +154,11 @@
                                     height="354px"
                                     :barData="taskData"
                                     :barNameList="taskNameList"
-                                    tipTitle="任务资源使用"
+                                    :tipTitle="$t('dashboard.task_resource_utilization')"
                                     :colorList="taskColorList"
                                     :name-id="taskNameId"
                                 />
-                                <span class="xname">单位（{{ taskXname }}）</span>
+                                <span class="xname">{{ $t('dashboard.unit') }}（{{ $t(`dashboard.${taskXname}`) }}）</span>
                             </div>
                             <SdxuEmpty
                                 v-if="taskNameList.length === 0 && !taskLoading"
@@ -171,7 +171,7 @@
                         v-loading="versionLoading"
                     >
                         <sdxu-content-panel
-                            title="模型版本调用次数Top 10"
+                            :title="$t('dashboard.number_of_model_version_calls_Top10')"
                             size="small"
                         >
                             <div v-if="modelNameList && modelNameList.length">
@@ -183,11 +183,11 @@
                                     height="354px"
                                     :barData="modelData"
                                     :barNameList="modelNameList"
-                                    tipTitle="模型版本调用次数"
+                                    :tipTitle="$t('dashboard.number_of_model_version_calls')"
                                     :colorList="modelColorList"
                                     :name-id="modelNameId"
                                 />
-                                <span class="xname">单位（次）</span>
+                                <span class="xname">{{ $t('dashboard.unit') }}（{{ $t('dashboard.times') }}）</span>
                             </div>
                             <SdxuEmpty
                                 v-if="modelNameList.length === 0 && !versionLoading"
@@ -200,28 +200,28 @@
         </div>
         <div class="right">
             <recent-updates
-                title="最近更新的项目"
+                :title="$t('dashboard.updated_project_recently')"
                 :nameTimes="projectInfo"
                 path="/sdxv-project-manage"
                 :loading="projectLoading"
                 type="project"
             />
             <recent-updates
-                title="最近更新的SkyFlow"
+                :title="$t('dashboard.updated_skyflow_recently')"
                 :nameTimes="skyflowInfo"
-                path="/skyflow"
+                path="/sdxv-skyflow/skyflow-list"
                 :loading="skyflowLoading"
                 type="skyflow"
             />
             <recent-updates
-                title="最近更新的模型"
+                :title="$t('dashboard.updated_model_recently')"
                 :nameTimes="modelInfo"
                 path="/sdxv-model-manage"
                 :loading="modelLoading"
                 type="model"
             />
             <recent-updates
-                title="最近更新的数据集"
+                :title="$t('dashboard.updated_dataset_recently')"
                 :nameTimes="datasetInfo"
                 path="/datasManage"
                 :loading="datasetLoading"
@@ -254,20 +254,20 @@ export default {
             orderBy: 'CPU',
             resourceType: [
                 {
-                    label: '按CPU降序',
+                    label: 'descending_by_CPU',
                     value: 'CPU'
                 },
                 {
-                    label: '按内存降序',
+                    label: 'descending_by_Memory',
                     value: 'MEMORY'
                 }, {
-                    label: '按GPU降序',
+                    label: 'descending_by_GPU',
                     value: 'GPU'
                 }
             ],
             taskData: [],
             taskNameList: [],
-            taskXname: '核',
+            taskXname: 'core',
             taskColorList: ['#5C89FF', 'rgba(92,137,255,0.9)', 'rgba(92,137,255,0.8)',
                 'rgba(92,137,255,0.7)', 'rgba(92,137,255,0.6)', 'rgba(92,137,255,0.5)',
                 'rgba(92,137,255,0.4)', 'rgba(92,137,255,0.3)', 'rgba(92,137,255,0.2)', 'rgba(92,137,255,0.1)'],
@@ -390,7 +390,8 @@ export default {
                 start: 1,
                 count: 5,
                 order: 'desc',
-                orderBy: 'updatedAt'
+                orderBy: 'updatedAt',
+                ownerId: this.$store.getters.userId
             };
             getProjects(params)
                 .then(res => {
@@ -467,7 +468,8 @@ export default {
                 order: 'desc',
                 orderBy: 'updatedAt',
                 start: 1,
-                count: 5
+                count: 5,
+                ownerId: this.$store.getters.userId
             };
             getSkyflows(params)
                 .then(res => {
@@ -533,10 +535,10 @@ export default {
                         name.push(items[i].name);
                         nameId.push({ name: items[i].name, type: items[i].type, uuid: items[i].uuid });
                         if (nval === 'CPU') {
-                            this.taskXname = '核';
+                            this.taskXname = 'core';
                             data.push(Math.ceil(items[i].quota.cpu / 1000));
                         } else if (nval === 'GPU') {
-                            this.taskXname = '块';
+                            this.taskXname = 'piece';
                             data.push(items[i].quota.gpu);
                         } else if (nval === 'MEMORY') {
                             this.taskXname = 'GB';
@@ -688,7 +690,7 @@ export default {
                 position: absolute;
                 top: 15px;
                 right: 90px;
-                width: 102px;
+                width: 140px;
             }
             .sdxu-content-panel {
                 position: relative;

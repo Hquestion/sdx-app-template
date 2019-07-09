@@ -9,7 +9,7 @@
                 </el-col>
                 <el-col :span="12">
                     <div>
-                        风电模版
+                        {{ $t('dashboard.wind_power_template') }}
                     </div>
                 </el-col>
             </el-row>

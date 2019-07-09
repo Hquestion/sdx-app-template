@@ -6,7 +6,7 @@
             :plain="true"
             @click="$emit('getMore')"
         >
-            更多
+            {{ $t('dashboard.more') }}
             <i class="iconfont iconicon-arrow-right" />
         </SdxuButton>
     </div>

@@ -9,7 +9,7 @@
                 </el-col>
                 <el-col :span="12">
                     <div>
-                        轨道交通模版
+                        {{ $t('dashboard.rail_transit_template') }}
                     </div>
                 </el-col>
             </el-row>
