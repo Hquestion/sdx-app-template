@@ -317,7 +317,13 @@ export default {
         this.getResource();
         this.getTask().then(res => {
             this.taskTotal = res.total;
-            this.taskCompleted = res && res.items.length;
+            let [count, items] = [0, res && res.items];
+            for (let i = 0; i < items.length; i++) {
+                if (items[i].state === 'RUNNING') {
+                    count++;
+                }
+            }
+            this.taskCompleted = count;
         });
         this.getDiskCount();
         this.getProjectList();
@@ -355,8 +361,7 @@ export default {
                 params = {
                     ownerId: this.$store.getters.userId,
                     start: 1,
-                    count: -1,
-                    states: 'RUNNING'
+                    count: -1
                 };
             }
             return new Promise((resolve, reject) => {
