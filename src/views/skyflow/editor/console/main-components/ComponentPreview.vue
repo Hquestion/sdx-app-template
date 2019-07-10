@@ -5,11 +5,6 @@
                 class="preview-file-tree tree"
                 v-loading="isTreeLoading"
             >
-                <!-- <sdxw-file-select-tree
-                :checkable="false"
-                @current-change="handleFileSelect"
-                root-path="/"
-            /> -->
                 <SdxuScroll style="height: 400px;">
                     <el-tree
                         v-bind="__treeOption"
@@ -58,11 +53,11 @@
 
 <script>
 import FileSelect from '@sdx/widget/lib/file-select';
-import { getDatasetPreview } from '../../datas/rely/dataApi';
-import datasListView from '../../datas/datasListView';
-import DataSetPreview from '../../datamanagement/dataset-create/step-main/DataSetPreview';
-import dataImage from '../../datas/dataImage';
-import hasNothing from '../../datas/rely/util/hasNothing';
+import { getDatasetPreview } from '../../../../datas/rely/dataApi';
+import datasListView from '../../../../datas/datasListView';
+import DataSetPreview from '../../../../datamanagement/dataset-create/step-main/DataSetPreview';
+import dataImage from '../../../../datas/dataImage';
+import hasNothing from '../../../../datas/rely/util/hasNothing';
 import { getPreviewPath } from '@sdx/utils/lib/api/skyflow';
 import { getFilesList } from '@sdx/utils/lib/api/file';
 import { getUser } from '@sdx/utils/lib/helper/shareCenter';
@@ -141,6 +136,10 @@ export default {
         nId: {
             type: String,
             default: ''
+        },
+        path: {
+            type: String,
+            default: ''
         }
     },
     computed: {
@@ -185,17 +184,18 @@ export default {
     },
     methods: {
         init() {
-            this.getFileList('/');
-            if (!this.executeId || !this.nId || true) return;
-            const params = {
-                execute_id: this.executeId,
-                nid: this.nId
-            };
-            getPreviewPath(params).then(res => {
-                console.log('res', res);
-                res.path = '/';
-                this.getFileList(res.path);
-            });
+            if (!this.path && (!this.executeId || !this.nId)) return;
+            if (this.path) {
+                this.getFileList(this.path);
+            } else {
+                const params = {
+                    execute_id: this.executeId,
+                    nid: this.nId
+                };
+                getPreviewPath(params).then(res => {
+                    this.getFileList(res.path);
+                });
+            }
         },
         loadMore() {
             if (this.pageIndex < this.totalPage - 1) {
@@ -328,7 +328,7 @@ export default {
                         this.imageUrl = '';
                     }
                 })
-                .catch(error => {
+                .catch(() => {
                     this.isTreeLoading = false;
                     this.isPreview = true;
                     this.datalistHide = false;
@@ -359,7 +359,7 @@ export default {
             console.log('checked', checked);
         },
         // 定制 tree 的渲染函数,为文件夹加上图标
-        renderContent(h, { node, data }) {
+        renderContent(h, { data }) {
             return (
                 <span
                     class={{
@@ -399,7 +399,7 @@ export default {
 
                     this.isTreeLoading = false;
                 })
-                .catch(err => {
+                .catch(() => {
                     this.isTreeLoading = false;
                     this.isPreview = true;
                     this.datalistHide = false;
