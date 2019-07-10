@@ -15,6 +15,13 @@
                 v-model="activeName"
                 v-if="hasPreview"
             >
+                <el-tab-pane
+                    label="输出预览"
+                    name="OUTPUT"
+                    v-if="path"
+                >
+                    <ComponentPreview :path="path" />
+                </el-tab-pane>
                 <template v-if="dataframe && dataframe.length > 0">
                     <el-tab-pane
                         lazy
@@ -56,20 +63,22 @@
 <script>
 import PreviewCharts from './PreviewCharts';
 import PreviewTable from './PreviewTable';
+import ComponentPreview from './ComponentPreview';
 import { nodeState as nodeStateConf } from '../../js/skyflowConfig';
 import { getCompOutputPreview } from '@sdx/utils/lib/api/skyflow';
 import FormTip from '../../../components/FormTip';
 
 export default {
     name: 'OutputPreview',
-    components: { FormTip, PreviewCharts, PreviewTable },
+    components: { FormTip, PreviewCharts, PreviewTable, ComponentPreview },
     data() {
         return {
             chartData: null,
             activeName: 'TABLE1',
             dataframe: [],
             performance: null,
-            isLoading: false
+            isLoading: false,
+            path: ''
         };
     },
     props: {
@@ -99,12 +108,13 @@ export default {
             return !!this.dataframe && this.dataframe.length > 0;
         },
         hasPreview() {
-            return !!this.hasDataframe || !!this.performance;
+            return !!this.hasDataframe || !!this.performance || !!this.path;
         }
     },
     activated() {
         this.dataframe = Object.freeze([]);
         this.performance = null;
+        this.path = '';
         if (this.state === nodeStateConf.SUCCESS) {
             this.getPreview();
         }
@@ -125,6 +135,7 @@ export default {
                 .then(data => {
                     this.dataframe = Object.freeze(data.dataframe);
                     this.performance = data.performance;
+                    this.path = data.path;
                     this.isLoading = false;
                     this.$nextTick(() => {
                         this.activeName = this.hasDataframe && 'TABLE1' || 'CHART';
@@ -143,6 +154,7 @@ export default {
                     this.isLoading = false;
                     this.dataframe = Object.freeze([]);
                     this.performance = null;
+                    this.path = '';
                 });
         }
     },
