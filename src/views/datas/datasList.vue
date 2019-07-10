@@ -65,15 +65,6 @@
                             :value="item.value"
                         />
                     </el-select>
-                    <!-- <span>数据大小</span>
-                <el-select v-model="search.data_size" placeholder="请选择" size="small" class="inline wd200">
-                    <el-option
-                    v-for="item in size"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
-                    </el-option>
-                </el-select> -->
                     <span class="font">
                         数据格式
                     </span>
@@ -249,6 +240,7 @@
         <el-dialog
             title="编辑数据集"
             :visible.sync="detailDialogVisible"
+            v-if="detailDialogVisible"
             width="680px"
             @close="currentDataSource = {};"
         >
@@ -714,19 +706,19 @@ export default {
         // 类型转换
         shareKind(kind, type) {
             if (type === 'value') {
-                if (kind === 1) {
-                    return '组内';
-                } else if (kind === 2) {
+                if (kind === 'PRIVATE') {
                     return '私有';
-                } else if (kind === 3) {
-                    return '公共';
+                } else if (kind === 'MY_SHARE') {
+                    return '我的共享';
+                } else if (kind === 'OTHER_SHARE') {
+                    return '他人共享';
                 }
             } else if (type === 'class') {
-                if (kind === 3) {
+                if (kind === 'OTHER_SHARE') {
                     return 'public';
-                } else if (kind === 1) {
+                } else if (kind === 'MY_SHARE') {
                     return 'team';
-                } else if (kind === 2) {
+                } else if (kind === 'PRIVATE') {
                     return 'private';
                 }
             }

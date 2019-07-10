@@ -3,7 +3,7 @@ const getters = {
     livenewsChannels: state => state.app.livenewsChannels,
     session: state => state.user && state.user.session,
     role: state => state.user && state.user.role,
-    userId: state => state.user && state.user.userId,
-    userName: state => state.user && state.user.userName
+    userId: state => state.user && state.user.token.user.uuid,
+    userName: state => state.user && state.user.token.user.fullName
 };
 export default getters;

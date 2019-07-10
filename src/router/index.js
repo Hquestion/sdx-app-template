@@ -76,9 +76,6 @@ const router = new Router({
             component: Layout,
             name: 'Home',
             redirect: '/dashboard',
-            meta: {
-                breadcrumb: '首页'
-            },
             hidden: true,
             children: [
                 {
@@ -87,7 +84,7 @@ const router = new Router({
                     name: 'About',
                     meta: {
                         name: '',
-                        breadcrumb: '',
+                        breadcrumb: '首页',
                         system: 'user'
                     }
                 },
@@ -97,13 +94,15 @@ const router = new Router({
                     component: datasManager,
                     redirect: '/datasManage/datasList',
                     meta: {
-                        name: '数据'
+                        name: '数据',
+                        breadcrumb: '数据'
                     },
                     children: [{
                         path: 'datasList',
                         component: datasList,
                         meta: {
-                            name: '数据列表'
+                            name: '数据列表',
+                            breadcrumb: '数据列表'
                         }
                     },
                     {
@@ -111,7 +110,8 @@ const router = new Router({
                         component: DataSourceCreate,
                         name: 'CreateDataSource',
                         meta: {
-                            name: '新建数据源'
+                            name: '新建数据源',
+                            breadcrumb: '新建数据源'
                         },
                         props: true
                     },
@@ -156,7 +156,8 @@ const router = new Router({
                         path: 'dataView/',
                         component: datasView,
                         meta: {
-                            name: '数据集预览'
+                            name: '数据集预览',
+                            breadcrumb: '数据集预览'
                         },
                         props: true
                     },
@@ -164,14 +165,16 @@ const router = new Router({
                         path: 'create-dataset/:type',
                         component: CreateDataset,
                         meta: {
-                            name: '创建数据集'
+                            name: '创建数据集',
+                            breadcrumb: '创建数据集'
                         }
                     },
                     {
                         path: 'jupyter/:dataset',
                         component: JupyterForm,
                         meta: {
-                            name: '新建Jupyter任务'
+                            name: '新建Jupyter任务',
+                            breadcrumb: '新建Jupyter任务'
                         }
                     }
                     ]

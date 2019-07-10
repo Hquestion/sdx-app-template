@@ -9,10 +9,7 @@
                 </el-col>
                 <el-col :span="12">
                     <div>
-                        风电模版
-                    </div>
-                    <div>
-                        风电模版
+                        {{ $t('dashboard.wind_power_template') }}
                     </div>
                 </el-col>
             </el-row>
@@ -62,12 +59,6 @@ export default {
                 font-weight: bold;
                 line-height: 30px;
                 font-size: 20px;
-            }
-            & div:last-child {
-                font-weight: 400;
-                color: rgba(255,255,255,1);
-                line-height: 21px;
-                font-size: 14px;
             }
         }
     }

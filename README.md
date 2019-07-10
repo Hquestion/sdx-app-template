@@ -27,3 +27,9 @@ yarn run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## Build
+```
+make build
+```
+`dist` should under repo root dir.

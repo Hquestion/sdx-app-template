@@ -174,6 +174,18 @@ export const DATA_SOURCE_OPTIONS = [
     }
 ];
 
+export const DATASET_SOURCE_OPTIONS = [
+    {
+        label: '平台文件系统',
+        value: '1',
+        options: '/v2/datasource/options?kind=FILESYSTEM'
+    }
+];
+
+export const DATASET_SOURCE_SYSTEM_MAP = {
+    FILESYSTEM: '1'
+};
+
 export const SOURCE_SYSTEM_MAP = {
     FILESYSTEM: '1',
     // HDFS: '2',

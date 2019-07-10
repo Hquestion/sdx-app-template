@@ -36,7 +36,7 @@ import SkyForm from '../../../datas/rely/SkyForm';
 import { SkyFormMain } from '../../../datas/rely/SkyFormJs/SkyFormMain';
 import { SkyFormItem } from '../../../datas/rely/SkyFormJs/SkyFormItem';
 import Validator from '../../../datas/rely/validator/Validator';
-import { DATA_SOURCE_OPTIONS, FILE_TYPES, CSV_FILE_SPLITOR, QUOTE, CHARSET, ESCAPE, SOURCE_SYSTEM_MAP } from '../config';
+import { DATASET_SOURCE_OPTIONS, FILE_TYPES, CSV_FILE_SPLITOR, QUOTE, CHARSET, ESCAPE, SOURCE_SYSTEM_MAP, DATASET_SOURCE_SYSTEM_MAP } from '../config';
 import { FILE_SUFFIX_FORMAT_MAP } from '../../datasource/datasource.config';
 import { getDataSourceOptions, fetchDbTablesBySource } from '../../../datas/rely/dataSourceApi';
 import { mapActions, mapMutations } from 'vuex';
@@ -70,8 +70,8 @@ export default {
                             return new Promise((resolve, reject) => {
                                 getDataSourceOptions().then(res => {
                                     res = res.data;
-                                    let sourceOptions = _.cloneDeep(DATA_SOURCE_OPTIONS);
-                                    Object.entries(SOURCE_SYSTEM_MAP).forEach(([k, v]) => {
+                                    let sourceOptions = _.cloneDeep(DATASET_SOURCE_OPTIONS);
+                                    Object.entries(DATASET_SOURCE_SYSTEM_MAP).forEach(([k, v]) => {
                                         let options = res.options.filter(item => item.kind === k);
                                         sourceOptions.find(item => item.value === v).options = options;
                                     });
