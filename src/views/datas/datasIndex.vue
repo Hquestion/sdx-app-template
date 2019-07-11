@@ -32,23 +32,26 @@
                     </el-button>
                 </div>
             </div>
-            <div
-                class="task-card-box"
-                ref="cardBox"
-            >
-                <has-nothing
-                    v-if="nothing"
-                    class="has-nothing"
-                />
-                <data-service-card
-                    class="task-card-box__item"
-                    v-for="item in services"
-                    :key="item._id"
-                    :task="item"
-                    @refresh="handleFetchList"
-                    @taskOperation="handleServiceOperation"
-                />
-            </div>
+            <sdxu-scroll style="height: 223px;">
+                <div
+                    class="task-card-box"
+                    ref="cardBox"
+                >
+                    <has-nothing
+                        v-if="nothing"
+                        class="has-nothing"
+                    />
+
+                    <data-service-card
+                        class="task-card-box__item"
+                        v-for="item in services"
+                        :key="item._id"
+                        :task="item"
+                        @refresh="handleFetchList"
+                        @taskOperation="handleServiceOperation"
+                    />
+                </div>
+            </sdxu-scroll>
         </div>
         <!-- 数据源列表 -->
         <data-source-list />
@@ -239,7 +242,6 @@ export default {
         }
     }
     .task-card-box {
-        overflow-y: auto;
         white-space: nowrap;
         padding-bottom: 18px;
         padding-left:20px;
