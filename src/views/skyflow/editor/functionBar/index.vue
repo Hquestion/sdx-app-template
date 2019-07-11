@@ -66,22 +66,6 @@
                     </div>
                 </span>
             </span>
-            <hr class="operate-line">
-            <span>
-                <span
-                    v-for="item in deployOperation"
-                    style="margin: 0 1px;align-self: flex-start"
-                    :key="item.name"
-                    :class="{'operation-prohibit': !judgeButtonOperationable (item.name)}"
-                    @click="judgeButtonOperationable (item.name) ? handleOperationClick(item.name) : false"
-                >
-                    <i
-                        class="iconfont"
-                        :class="item.icon"
-                    />
-                    <div>{{ item.label }}</div>
-                </span>
-            </span>
         </div>
         <div
             v-if="isExecute"
@@ -111,8 +95,7 @@ import {
     stepOperation,
     saveOperation,
     execOperation,
-    viewOperation,
-    deployOperation
+    viewOperation
 } from '../js/skyflowConfig';
 import * as modalDialog from './modalDialog';
 export default {
@@ -172,10 +155,6 @@ export default {
         executeStartTime: {
             type: String,
             default: ''
-        },
-        hasModelDeploy: {
-            type: Boolean,
-            default: false
         }
     },
     data() {
@@ -183,7 +162,6 @@ export default {
             stepOperation,
             saveOperation,
             viewOperation,
-            deployOperation,
             modalName: '',
             detailDialogVisible: false
         };
@@ -228,10 +206,6 @@ export default {
                     case 'zoomout':
                         this.$emit('operate', { event: name });
                         break;
-                    case 'model':
-                        this.modalName = 'deployModel';
-                        this.detailDialogVisible = true;
-                        break;
                     case 'save-as':
                     case 'clear':
                     case 'timing':
@@ -252,10 +226,6 @@ export default {
         judgeButtonOperationable(name) {
             let able = true;
             switch (name) {
-                    case 'model':
-                        able = this.hasModelDeploy;
-                        able = true;
-                        break;
                     case 'forward':
                         able =
             this.isCurrentUser &&

@@ -212,7 +212,8 @@ export default {
                     outputParams: data.outputParams, // 输出参数信息
                     showDetail: false,
                     executeDetails: {}, // 执行详细信息
-                    isCustom: data.isCustom || false,
+                    isCustom: data.isCustom || false, // 自定义组件
+                    isModel: data.isModel || false, // 模型组件
                     sinkOption: data.sinkOption, // 数据集存储路径信息
                     runFile: data.runFile || '', // 组件执行文件
                     rules: data.rules || {}, // 组件参数校验规则{inputRules:[], paramsRules: []}
