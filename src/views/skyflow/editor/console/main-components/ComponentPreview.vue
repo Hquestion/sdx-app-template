@@ -472,17 +472,17 @@ export default {
 
 <style rel="stylesheet/scss" lang="scss">
 
-    /* .tree {
+    .preview-file-tree {
         .caret-right:before {
             content: "";
         }
         .is_folder:before {
-            content: url("../../../assets/images/file-dir.png");
+            content: url("../../../../../assets/images/file-dir.png");
             position: relative;
             top: 3px;
             margin-right: 5px;
             width: 6px;
             height: 6px;
         }
-    } */
+    }
 </style>

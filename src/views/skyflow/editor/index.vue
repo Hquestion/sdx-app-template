@@ -1197,7 +1197,8 @@ export default {
                         this.currentCode = this.activeNode && this.activeNode.code || '';
                         break;
                     case 'model':
-                        // todo:
+                        this.contextName = 'deployModel';
+                        this.contextDialogVisible = true;
                         break;
             }
             this.contextMenuVisible = false;

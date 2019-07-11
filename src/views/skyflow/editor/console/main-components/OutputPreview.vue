@@ -7,48 +7,46 @@
             class="preview-container"
             :style="{'min-height': `${consoleMainHeight - 40}px`}"
         >
-            <div class="comp-name">
-                <span>{{ node.label }}</span>输出预览：
-            </div>
-            <el-tabs
-                class="tab-container"
-                v-model="activeName"
-                v-if="hasPreview"
-            >
-                <el-tab-pane
-                    label="输出预览"
-                    name="OUTPUT"
-                    v-if="path"
+            <div v-if="!path">
+                <div class="comp-name">
+                    <span>{{ node.label }}</span>输出预览：
+                </div>
+                <el-tabs
+                    class="tab-container"
+                    v-model="activeName"
+                    v-if="hasPreview"
                 >
-                    <ComponentPreview :path="path" />
-                </el-tab-pane>
-                <template v-if="dataframe && dataframe.length > 0">
+                    <template v-if="dataframe && dataframe.length > 0">
+                        <el-tab-pane
+                            lazy
+                            :label="`数据预览${index + 1}`"
+                            :name="`TABLE${index + 1}`"
+                            :style="{height: `${consoleMainHeight - 87}px`}"
+                            v-for="(item, index) in dataframe"
+                            :key="index"
+                        >
+                            <FormTip style="text-align: right;color: #999">
+                                最多支持预览输出文件夹中首个csv文件的前100行数据。
+                            </FormTip>
+                            <PreviewTable
+                                :data="item.data || []"
+                                :columns="item.schema || []"
+                                ref="dataPreview"
+                            />
+                        </el-tab-pane>
+                    </template>
                     <el-tab-pane
-                        lazy
-                        :label="`数据预览${index + 1}`"
-                        :name="`TABLE${index + 1}`"
-                        :style="{height: `${consoleMainHeight - 87}px`}"
-                        v-for="(item, index) in dataframe"
-                        :key="index"
+                        label="模型评估结果"
+                        name="CHART"
+                        v-if="performance"
                     >
-                        <FormTip style="text-align: right;color: #999">
-                            最多支持预览输出文件夹中首个csv文件的前100行数据。
-                        </FormTip>
-                        <PreviewTable
-                            :data="item.data || []"
-                            :columns="item.schema || []"
-                            ref="dataPreview"
-                        />
+                        <PreviewCharts :data="performance" />
                     </el-tab-pane>
-                </template>
-                <el-tab-pane
-                    label="模型评估结果"
-                    name="CHART"
-                    v-if="performance"
-                >
-                    <PreviewCharts :data="performance" />
-                </el-tab-pane>
-            </el-tabs>
+                </el-tabs>
+            </div>
+            <div v-if="path">
+                <ComponentPreview :path="path" />
+            </div>
             <div
                 class="empty-content"
                 v-if="!hasPreview && !isLoading"
@@ -108,7 +106,7 @@ export default {
             return !!this.dataframe && this.dataframe.length > 0;
         },
         hasPreview() {
-            return !!this.hasDataframe || !!this.performance || !!this.path;
+            return !!this.hasDataframe || !!this.performance;
         }
     },
     activated() {

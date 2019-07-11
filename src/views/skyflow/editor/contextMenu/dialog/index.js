@@ -14,4 +14,7 @@ export {
     default as export
 }
     from './export';
-
+export {
+    default as deployModel
+}
+    from './deployModel';

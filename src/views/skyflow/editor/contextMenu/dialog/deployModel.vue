@@ -12,22 +12,6 @@
             :rules="modelInfoFormRule"
         >
             <el-form-item
-                label="选择组件："
-                prop="modelPath"
-            >
-                <el-select
-                    v-model="modelInfoForm.modelPath"
-                    placeholder="请选择组件"
-                >
-                    <el-option
-                        v-for="item in componentOptions"
-                        :key="item.path"
-                        :label="item.name"
-                        :value="item.path"
-                    />
-                </el-select>
-            </el-form-item>
-            <el-form-item
                 label="模型名称："
                 prop="modelName"
             >
@@ -135,14 +119,14 @@
 </template>
 
 <script>
-import { getModelList, getFrameworks, getComponents, deployModel } from '@sdx/utils/lib/api/model';
+import { getModelList, getFrameworks, deployModel } from '@sdx/utils/lib/api/model';
 import { getImageList } from '@sdx/utils/lib/api/image';
+import { getCompOutputPreview } from '@sdx/utils/lib/api/skyflow';
 export default {
     name: 'DeployModel',
     data() {
         return {
-            dialogVisible: this.detailDialogVisible,
-            componentOptions: [],
+            dialogVisible: this.contextDialogVisible,
             nameOptions: [],
             frameworkOptions: [],
             runtimeImageOptions: [],
@@ -160,9 +144,6 @@ export default {
                 modelPath: ''
             },
             modelInfoFormRule: {
-                modelPath: [
-                    { required: true, message: '请选择组件', trigger: 'change' }
-                ],
                 modelName: [
                     { required: true, message: '请选择或输入模型', trigger: 'change' }
                 ],
@@ -190,13 +171,21 @@ export default {
         };
     },
     props: {
-        detailDialogVisible: {
+        contextDialogVisible: {
             type: Boolean,
             default: false
+        },
+        node: {
+            type: Object,
+            default: null
+        },
+        executeId: {
+            type: String,
+            default: ''
         }
     },
     watch: {
-        detailDialogVisible(nVal) {
+        contextDialogVisible(nVal) {
             this.dialogVisible = nVal;
         }
     },
@@ -214,10 +203,9 @@ export default {
             getFrameworks().then(res => {
                 this.frameworkOptions = res;
             });
-            getComponents({
-                skyflowId: this.$route.params.id
-            }).then(res => {
-                this.componentOptions = res.items;
+            if (!this.node.nodeState || !this.executeId) return;
+            getCompOutputPreview(this.node.nodeState.node_id, this.executeId).then(data => {
+                this.modelInfoForm.modelPath = data.path;
             });
         },
         frameworkChange(nVal) {
@@ -244,7 +232,7 @@ export default {
         dialogClose() {
             this.modelInfoForm = {};
             this.$refs.modelInfoForm.clearValidate();
-            this.$emit('update:detailDialogVisible', false);
+            this.$emit('update:contextDialogVisible', false);
         },
         cancel() {
             this.dialogVisible = false;
@@ -264,7 +252,7 @@ export default {
                             message: '操作成功',
                             type: 'success'
                         });
-                        this.detailDialogVisible = false;
+                        this.contextDialogVisible = false;
                     });
                 }
             });
