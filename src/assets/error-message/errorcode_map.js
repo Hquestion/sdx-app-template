@@ -410,7 +410,7 @@ module.exports = {
             {
                 httpCode: '',
                 code: '190203',
-                msg: '没有权限读取镜像构建任务日志！'
+                msg: '无日志！'
             },
             {
                 httpCode: '',
