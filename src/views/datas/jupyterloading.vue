@@ -28,7 +28,6 @@ export default {
                     if (data.externalUrl) {
                         getJupyterUrl({ dataset: this.$route.params.from })
                             .then(data => {
-                                window.console.log(data, 'url');
                                 let url = `${this.external_url}/notebooks/${data.jupyterNobebook}`;
                                 window.location.href = url;
                             });

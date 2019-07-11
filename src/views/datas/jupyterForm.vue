@@ -274,7 +274,6 @@ export default {
         projectList(params) {
             getProjectList(params)
                 .then(res => {
-                    window.console.log(res, 90);
                     this.projects = res.data.items.map(item => ({
                         label: item.name,
                         value: item.uuid,
@@ -287,7 +286,6 @@ export default {
             if (!arr.length && this.params.projectId) {
                 createProject({ name: this.params.projectId })
                     .then(data => {
-                        window.console.log(data, 888);
                         let id = data.uuid;
                         getProjectList({ type: 'private', start: 1, count: -1 })
                             .then(res => {

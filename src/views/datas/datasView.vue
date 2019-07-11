@@ -759,7 +759,6 @@ export default {
         },
         // 图标
         dealIcon(fieldType) {
-            window.console.log(fieldType, 'type');
             if (isNumber(fieldType)) {
                 return 'iconN';
             } else if (isString(fieldType)) {
