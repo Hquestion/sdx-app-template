@@ -12,7 +12,6 @@
                 :is-ready="isReady"
                 :is-current-user="isCurrentUser"
                 :is-execute="!!executeId"
-                :hasModelDeploy="hasModelDeploy"
                 :zoom="zoom"
                 :forward-able="!!revokeQueue.length"
                 :back-able="!!operationQueue.length"
@@ -247,10 +246,6 @@ export default {
             return this.isCurrentUser
                 ? { width: 'calc(100% - 250px - 250px)' }
                 : { width: 'calc(100% - 250px)' };
-        },
-        hasModelDeploy() {
-            // todo:
-            return [nodeState.SUCCESS].includes(this.flowState);
         }
     },
     methods: {
@@ -805,6 +800,10 @@ export default {
             ) {
                 filterItem.add('export');
             }
+            // 组件运行完成且是模型组件
+            if (!(node.isModel && node.nodeState && node.nodeState.state === nodeState.SUCCESS)) {
+                filterItem.add('model');
+            }
             this.menuList = contextMenuIcon.filter(el => !filterItem.has(el.name));
             this.contextX = menu.x;
             this.contextY = menu.y;
@@ -1196,6 +1195,9 @@ export default {
                     case 'edit-code':
                         this.codeEditorVisible = true;
                         this.currentCode = this.activeNode && this.activeNode.code || '';
+                        break;
+                    case 'model':
+                        // todo:
                         break;
             }
             this.contextMenuVisible = false;
