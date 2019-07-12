@@ -1217,6 +1217,31 @@ export default {
                         break;
                     default:
             }
+        },
+        transformParams(nodeId) {
+            const node = this.nodes.find(node => node.id === nodeId);
+            console.log(node);
+            function parse(val, type) {
+                const parseMethods = {
+                    Float: parseFloat,
+                    Integer: parseInt,
+                    Double: parseFloat,
+                    Number: val => +val,
+                    String: val => val + ''
+                };
+                if (!parseMethods[type]) {
+                    return val;
+                }
+                return parseMethods[type](val);
+            }
+            let params = node.params;
+            let confs = node.paramsConf;
+            let parsedParam = {};
+            Object.keys(params).forEach(item => {
+                const conf = confs.find(c => c.name === item);
+                parsedParam[item] = parse(params[item], conf.ptype);
+            });
+            node.params = parsedParam;
         }
     },
     created() {
@@ -1275,9 +1300,13 @@ export default {
             });
     },
     watch: {
-        activeNodeId() {
+        activeNodeId(val, oldval) {
             // 切换节点，触发schema推导
+            if (oldval) {
+                this.transformParams(oldval);
+            }
             if (this.isChangeSetting && this.activeNodeId && this.isEditable) {
+                // 切换节点时，对数据做类型转换
                 this.handleSchemaDerivation();
                 this.isChangeSetting = false;
             }
