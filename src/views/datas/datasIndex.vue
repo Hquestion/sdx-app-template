@@ -32,7 +32,7 @@
                     </el-button>
                 </div>
             </div>
-            <sdxu-scroll style="height: 223px;">
+            <sdxu-scroll style="height: 230px;">
                 <div
                     class="task-card-box"
                     ref="cardBox"
