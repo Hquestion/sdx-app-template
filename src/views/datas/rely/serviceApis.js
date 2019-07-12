@@ -51,7 +51,8 @@ export function getServiceOptions() {
         getTaskList({
             start: 1,
             count: -1,
-            type: 'DATA_SERVICE'
+            type: 'DATA_SERVICE',
+            states: 'RUNNING'
         }).then(res => {
             let data = res.items.map(item => ({
                 value: item.uuid,
