@@ -49,7 +49,7 @@
             </div>
             <div
                 class="empty-content"
-                v-if="!hasPreview && !isLoading"
+                v-if="!hasPreview && !isLoading && !path"
             >
                 <img src="../../../../../assets/images/state/empty-no-text2.png">
                 <p>当前组件暂无预览数据</p>
