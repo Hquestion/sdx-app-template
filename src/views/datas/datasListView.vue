@@ -120,8 +120,8 @@ export default {
             return ext;
         },
         // 文件列表
-        getFlieList(path) {
-            getFilesList({ path })
+        getFlieList(path, ownerId) {
+            getFilesList({ path, ownerId })
                 .then(data => {
                     if (data.children) {
                         for (let i = 0; i < data.children.length; i++) {
@@ -146,12 +146,12 @@ export default {
                 });
         },
         // hdfs 或者文件 列表
-        getHdfsOrFile(path) {
+        getHdfsOrFile(path, ownerId) {
             this.loading = true;
             if (this.storeType === 'HDFS') {
                 this.getHdfsList(this.datasource, path, false);
             } else if (this.storeType === 'FILESYSTEM') {
-                this.getFlieList(path);
+                this.getFlieList(path, ownerId);
             }
         },
         // 查看数据
@@ -161,7 +161,7 @@ export default {
             ext = arr[arr.length - 1];
             //  文件夹
             if (is_dir) {
-                this.getHdfsOrFile(fullpath);
+                this.getHdfsOrFile(fullpath, ownerId);
 
                 this.$emit('expandNode', fullpath, path);
             } else if (ext === 'csv' || ext === 'txt' || ext === 'orc' || ext === 'parquet') {
