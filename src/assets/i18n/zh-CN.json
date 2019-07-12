@@ -41,6 +41,8 @@
         "year_ago": "年前",
         "years_ago": "年前",
         "hours_ago": "小时前",
-        "hour_ago": "小时前"
+        "hour_ago": "小时前",
+        "operating_tasks": "运行中任务",
+        "number": "个"
     }
 }

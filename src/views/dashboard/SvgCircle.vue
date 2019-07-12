@@ -13,7 +13,7 @@
             {{ completedSteps }}
         </p>
         <p class="content">
-            <span>运行中任务</span>（个）
+            <span>{{ $t('dashboard.operating_tasks') }}</span>（{{ $t('dashboard.number') }}）
         </p>
     </sdxu-radial-progress>
 </template>
