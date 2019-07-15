@@ -102,10 +102,6 @@ export default {
         sourceKind: {
             type: String,
             default: ''
-        },
-        node: {
-            type: Object,
-            required: true
         }
     },
     methods: {
@@ -126,6 +122,7 @@ export default {
                     shareType: this.shareForm.shareType
                 }
             });
+            this.$emit('update:visible', false);
         }
     }
 };

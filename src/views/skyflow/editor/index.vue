@@ -842,7 +842,8 @@ export default {
                 inputParams: node.inputParams,
                 outputParams: node.outputParams,
                 isCustom: node.isCustom,
-                runFile: node.runFile
+                runFile: node.runFile,
+                user: node.user
             };
             addFavorite({
                 component_json: starNodeInfo,
@@ -862,32 +863,6 @@ export default {
                     this.$refs.classification.fetchFavorite();
                 }
             });
-        },
-        handleComponentShare(params) {
-            // 画布组件右键-分享 画布中组件右键已经去掉
-            const newNode = _.cloneDeep(this.activeNode);
-            const shareNodeInfo = {
-                label: params.name,
-                name: newNode.name,
-                type: newNode.type,
-                taskKind: newNode.taskKind,
-                paramsConf: newNode.paramsConf,
-                envValues: newNode.envValues,
-                resource: newNode.resource,
-                dockerImageId: newNode.dockerImage.id,
-                inputParams: newNode.inputParams,
-                outputParams: newNode.outputParams,
-                isCustom: newNode.isCustom,
-                runFile: newNode.runFile
-            };
-            shareComponent({ component_json: shareNodeInfo, ...params }).then(
-                data => {
-                    this.$notify({
-                        title: '分享成功',
-                        type: 'success'
-                    });
-                }
-            );
         },
         handleEditorContextMenu() {
             // 监听整个画布的右键事件，用于隐藏画布右键菜单
@@ -1208,9 +1183,6 @@ export default {
             switch (operation.event) {
                     case 'rename':
                         this.handleComponentRename(operation.data);
-                        break;
-                    case 'share':
-                        this.handleComponentShare(operation.data);
                         break;
                     case 'star':
                         this.handleComponentStar(operation.data);

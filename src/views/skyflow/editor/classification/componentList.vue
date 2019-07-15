@@ -105,7 +105,9 @@
         <share
             :visible.sync="contextDialogVisible"
             v-if="contextDialogVisible"
-            :node="currentNode"
+            :defaultUsers="users"
+            :defaultGroups="groups"
+            :defaultShareType="shareType"
             @confirm="handleComponentShare"
         />
     </ul>
@@ -175,6 +177,9 @@ export default {
                 return {};
             })(),
             contextDialogVisible: false,
+            users: [],
+            groups: [],
+            shareType: '',
             currentNode: null,
             menuList: [
                 {
@@ -294,46 +299,36 @@ export default {
         showShareDialog(item) {
             this.currentNode = item;
             this.contextDialogVisible = true;
+            this.users = item.users || [];
+            this.groups = item.groups || [];
+            this.shareType = item.shareType || '';
+            window.console.error(item);
         },
         // 自定义组件分享
         handleComponentShare(params) {
             const node = _.cloneDeep(this.currentNode);
-            const shareNodeInfo = {
-                label: params.data.name,
-                name: node.name,
-                type: node.type,
-                taskKind: node.taskKind,
-                paramsConf: node.paramsConf,
-                envValues: node.envValues,
-                resource: node.resource,
-                dockerImageId: node.dockerImage && node.dockerImage._id,
-                inputParams: node.inputParams,
-                outputParams: node.outputParams,
-                isCustom: node.isCustom,
-                runFile: node.runFile
-            };
             shareComponent({
-                component_json: shareNodeInfo,
                 ...params.data,
                 component_id: node._id
-            })
-                .then(data => {
-                    if (data) {
-                        this.$notify({
-                            title: '成功',
-                            message: '分享设置成功',
-                            type: 'success'
-                        });
-                        let currentComponent = this.componentList.find(
-                            item => item._id === node._id
-                        );
-                        if (currentComponent) {
-                            currentComponent.isShare = data.share_kind !== 2;
-                            currentComponent.shareKind = data.share_kind;
-                            currentComponent.runFile = data.run_file;
-                        }
+            }).then(data => {
+                if (data) {
+                    this.$notify({
+                        title: '成功',
+                        message: '分享设置成功',
+                        type: 'success'
+                    });
+                    let currentComponent = this.componentList.find(
+                        item => item._id === node._id
+                    );
+                    if (currentComponent) {
+                        currentComponent.users = data.users || [];
+                        currentComponent.groups = data.groups || [];
+                        currentComponent.shareType = data.share_type || '';
+                        currentComponent.isShare = data.is_share || true;
                     }
-                });
+                    console.error(currentComponent);
+                }
+            });
         },
         // 自定义组件编辑
         editComp(item) {
