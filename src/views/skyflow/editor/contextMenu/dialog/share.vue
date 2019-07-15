@@ -102,6 +102,10 @@ export default {
         sourceKind: {
             type: String,
             default: ''
+        },
+        node: {
+            type: Object,
+            required: true
         }
     },
     methods: {
