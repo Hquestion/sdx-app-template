@@ -217,7 +217,9 @@ export default {
                     sinkOption: data.sinkOption, // 数据集存储路径信息
                     runFile: data.runFile || '', // 组件执行文件
                     rules: data.rules || {}, // 组件参数校验规则{inputRules:[], paramsRules: []}
-                    mainClass: data.mainClass || '' // spark组件的主类
+                    mainClass: data.mainClass || '', // spark组件的主类
+                    user: data.user || '', // 组件用户uuid
+                    runFileHostPath: data.runFileHostPath || '' // 运行文件完整地址
                 };
                 // 清除当前激活节点
                 this.activeNode = null;

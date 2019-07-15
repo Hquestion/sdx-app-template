@@ -103,7 +103,7 @@
             </li>
         </template>
         <share
-            :context-dialog-visible.sync="contextDialogVisible"
+            :visible.sync="contextDialogVisible"
             v-if="contextDialogVisible"
             :node="currentNode"
             @confirm="handleComponentShare"
