@@ -226,7 +226,8 @@ export default {
             const params = {
                 imageType: 'SPARK',
                 start: 1,
-                count: -1
+                count: -1,
+                ownerId: this.$store.getters.userId
             };
             let options = [];
             getImageList(params)

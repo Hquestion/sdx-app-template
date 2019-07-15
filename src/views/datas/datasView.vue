@@ -490,7 +490,7 @@ export default {
         // 文件列表
         getFlieList(path) {
             this.isTreeLoading = true;
-            getFilesList({ path, userId: this.viewData.creator })
+            getFilesList({ path, ownerId: this.viewData.creator })
                 .then(data => {
                     if (data.children) {
                         for (let i = 0; i < data.children.length; i++) {
@@ -545,6 +545,7 @@ export default {
                         this.isPreview = false;
                         // 图片
                         this.imageUrl = '';
+                        this.previewData.path = data.paths[0].path;
                     } else if (data.paths[0].is_dir) {
                         this.datalistHide = true;
                         this.dataListPath = data.paths[0].path;
@@ -599,7 +600,7 @@ export default {
                         this.datalistHide = false;
                     });
             } else {
-                return getFilesList({ path, userId: this.viewData.creator })
+                return getFilesList({ path, ownerId: this.viewData.creator })
                     .then(data => {
                         if (resolve) {
                             if (data.children) {
@@ -655,6 +656,8 @@ export default {
                     this.isPreview = false;
                     this.getPreview(params);
                     this.imageUrl = '';
+                    window.console.log(data, 'o');
+                    this.previewData.path = data.path;
                 } else if (data.is_dir) {
                     this.isPreview = false;
                     // 一直张开
@@ -697,6 +700,8 @@ export default {
             this.dataListPath = path;
         },
         handleViewData(fullpath, path, type, ownerId) {
+            this.previewData.path = path;
+            this.previewData.ownerId = ownerId;
             this.data_file = fullpath;
             this.$refs.tree.setCurrentKey(path);
             let params = {
@@ -820,11 +825,14 @@ export default {
             this.isIndeterminate = this.totalCols.length !== this.checkedCols.length;
         },
         // 下载
-        handleDownload(path, ownerId) {
+        handleDownload: _.throttle((path, ownerId) => {
             if (path) {
                 download(path, ownerId);
             }
-        },
+        }, 5000, {
+            leading: true,
+            trailing: false
+        }),
         show() {
             this.topCount = 0;
             this.checkedCols = Object.freeze(this.previewData.sky_schema.map(item => item.fieldName));
@@ -838,11 +846,14 @@ export default {
                 `/datasManage/jupyter/${id}`
             );
         },
-        allDownload(paths, ownerId) {
+        allDownload: _.throttle((paths, ownerId) => {
             pack(paths, ownerId).then(res => {
                 download(res, ownerId);
             });
-        }
+        }, 5000, {
+            leading: true,
+            trailing: false
+        })
     },
     directives: {
         poploadmore
