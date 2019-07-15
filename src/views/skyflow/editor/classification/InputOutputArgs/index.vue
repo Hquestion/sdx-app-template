@@ -9,7 +9,7 @@
         <el-form
             ref="inputOutputForm"
             :model="params"
-            label-width="90px"
+            label-width="100px"
             label-position="left"
             :rules="rules"
             :validate-on-rule-change="false"
