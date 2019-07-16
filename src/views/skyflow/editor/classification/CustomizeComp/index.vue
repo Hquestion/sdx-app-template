@@ -78,6 +78,7 @@ import CompBaseInfo from './CompBaseInfo';
 import CompInputOutput from './CompInputOutput';
 import CompEnv from './CompEnv';
 import CompRunParam from './CompRunParam';
+import ElDialog from 'element-ui/lib/dialog';
 
 import { InputOutputArgsBean } from '../InputOutputArgs/InputOutputArgsBean';
 import { RunParamBean } from '../RunParams/RunParamBean';
@@ -90,7 +91,8 @@ export default {
         CompBaseInfo,
         CompInputOutput,
         CompEnv,
-        CompRunParam
+        CompRunParam,
+        ElDialog
     },
     props: {
         dialogVisible: {
