@@ -48,7 +48,7 @@
                                                         :label="item.label"
                                                         :value="item.value"
                                                     />
-                                                </el-select>（{{ $t('dashboard.piece') }}）
+                                                </el-select>({{ $t('dashboard.piece') }}）
                                             </div>
                                         </div>
                                     </el-col>
@@ -661,7 +661,7 @@ export default {
                             height: 30px !important;
                         }
                         .el-select {
-                            width: 98px;
+                            width: 94px;
                         }
                         .el-input__inner {
                             padding: 0 10px 0 0;
