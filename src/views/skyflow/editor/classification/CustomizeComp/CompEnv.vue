@@ -41,8 +41,9 @@
                     v-model="form.run_file"
                     source="all"
                     :limit="1"
-                    :accept="(runEnvType && runEnvType.parent.name) === 'spark' ? '.jar' : '.py'"
+                    :accept="(runEnvType && runEnvType.parent.name) === 'spark' ? '.jar' : '.py,.zip'"
                     :string-model="true"
+                    check-type="file"
                 />
             </el-form-item>
             <el-form-item

@@ -156,8 +156,8 @@
                             source="all"
                             :limit="1"
                             :string-model="true"
-                            :accept="(runEnvType && runEnvType.parent.name) === 'spark' ? '.jar' : '.py'"
-                            :ceph-params="{filter:(runEnvType && runEnvType.parent.name) === 'spark' ? ['.jar'] : ['.py'],clickKind:7,canCheckFolder: false}"
+                            :accept="(runEnvType && runEnvType.parent.name) === 'spark' ? '.jar' : '.py,.zip'"
+                            check-type="file"
                         />
                     </el-form-item>
                     <el-form-item
@@ -247,6 +247,7 @@ import RunParams from './RunParams';
 import { RunParamBean } from './RunParams/RunParamBean';
 import { InputOutputArgsBean } from './InputOutputArgs/InputOutputArgsBean';
 import ParamsPanel from './ParamsPanel';
+import ElDialog from 'element-ui/lib/dialog';
 
 export default {
     name: 'CustomOptons',
@@ -254,7 +255,8 @@ export default {
         ParamsPanel,
         [FileSelect.FileSelectMix.name]: FileSelect.FileSelectMix,
         RunParams,
-        InputOutputArgs
+        InputOutputArgs,
+        ElDialog
     },
     props: {
         dialogVisible: {
