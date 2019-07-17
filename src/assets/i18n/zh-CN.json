@@ -5,6 +5,11 @@
     "usermanage": "用户管理",
     "rightsmanage": "权限管理",
     "monitormanage": "监控中心",
+    "changePassword": "修改密码",
+    "versionInformation": "版本信息",
+    "logout": "退出登录",
+    "version": "版本号：",
+    "corporateName": "南京天数智芯科技有限公司",
     "dashboard": {
         "resource_usage": "资源使用情况",
         "total_number_of_running_tasks": "运行任务总数",
