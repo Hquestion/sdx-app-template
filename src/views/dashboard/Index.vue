@@ -320,6 +320,9 @@ export default {
                     count = this.options[i].count;
                 }
             }
+            if (this.options.length === 0) {
+                count = 0;
+            }
             return count;
         }
     },
