@@ -144,6 +144,7 @@
         <SdxwChangePassword
             :visible.sync="modifyPwdVisible"
             :user-info-data="userMeta"
+            v-if="modifyPwdVisible"
         />
         <sdxu-dialog
             :visible.sync="versionVisible"
