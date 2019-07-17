@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
+import { setLang } from '@sdx/utils/lib/locale';
 
 Vue.use(VueI18n);
 
@@ -24,8 +25,16 @@ const cnErrorMessages = require('./assets/error-message/message.zh-CN');
 const enComponentLibMessages = require('@sdx/utils/lib/locale/lang/en').default;
 const cnComponentLibMessages = require('@sdx/utils/lib/locale/lang/zh-CN').default;
 
+let cachedLang = localStorage.getItem('lang');
+if (!cachedLang) {
+    cachedLang = 'zh-CN';
+    localStorage.setItem('lang', cachedLang);
+}
+
+setLang(cachedLang);
+
 const i18n = new VueI18n({
-    locale: process.env.VUE_APP_I18N_LOCALE || 'zh-CN',
+    locale: cachedLang,
     fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'zh-CN',
     messages: loadLocaleMessages()
 });

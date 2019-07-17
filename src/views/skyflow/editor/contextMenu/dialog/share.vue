@@ -13,7 +13,7 @@
         >
             <el-form-item
                 label="共享至全局："
-                v-auth.button="authMap[sourceKind]"
+                v-auth.button="'APPLICATION:GLOBAL_SKYFLOW_BUTTON:ACCESS:'"
             >
                 <el-radio
                     v-model="shareForm.shareType"
@@ -122,6 +122,7 @@ export default {
                     shareType: this.shareForm.shareType
                 }
             });
+            this.$emit('update:visible', false);
         }
     }
 };

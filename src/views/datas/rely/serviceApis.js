@@ -7,7 +7,7 @@
  */
 
 import httpService from '../../../helper/httpService';
-import { getTaskList } from '@sdx/utils/src/api/project';
+import { getTaskList } from '@sdx/utils/lib/api/project';
 
 /**
  * 查询服务列表

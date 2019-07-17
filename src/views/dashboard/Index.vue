@@ -2,12 +2,17 @@
     <div class="sdx-dashboard">
         <div class="left">
             <div class="left-top">
-                <div class="resource">
-                    <el-row :gutter="20">
+                <div
+                    class="resource"
+                >
+                    <el-row
+                        :gutter="20"
+                    >
                         <el-col :span="16">
                             <sdxu-content-panel
                                 :title="$t('dashboard.resource_usage')"
                                 size="small"
+                                v-loading="resourceLoading || diskLoading"
                             >
                                 <el-row
                                     :gutter="20"
@@ -17,9 +22,11 @@
                                         <div>
                                             <i class="iconfont iconicon-cpu-dashboard" />
                                         </div>
-                                        <div class="resource-items-content">
+                                        <div
+                                            class="resource-items-content"
+                                        >
                                             <div>
-                                                {{ Math.ceil(resource.cpu / 1000) }}
+                                                {{ resource.cpu > -1 ? Math.ceil(resource.cpu / 1000) : '-' }}
                                             </div>
                                             <div>
                                                 <span>CPU</span>（{{ $t('dashboard.core') }}）
@@ -32,7 +39,7 @@
                                         </div>
                                         <div class="resource-items-content">
                                             <div>
-                                                {{ gpuCount }}
+                                                {{ gpuCount > -1 ? gpuCount : '-' }}
                                             </div>
                                             <div class="gpu-resource">
                                                 <el-select
@@ -42,11 +49,11 @@
                                                 >
                                                     <el-option
                                                         v-for="item in options"
-                                                        :key="item.label"
-                                                        :label="item.label"
-                                                        :value="item.value"
+                                                        :key="item && item.label"
+                                                        :label="item && item.label"
+                                                        :value="item && item.value"
                                                     />
-                                                </el-select>（{{ $t('dashboard.piece') }}）
+                                                </el-select>({{ $t('dashboard.piece') }}）
                                             </div>
                                         </div>
                                     </el-col>
@@ -61,7 +68,7 @@
                                         </div>
                                         <div class="resource-items-content">
                                             <div>
-                                                {{ Math.ceil(resource.memory / Math.pow(1024, 3)) }}
+                                                {{ resource.memory > -1 ? Math.ceil(resource.memory / Math.pow(1024, 3)) : '-' }}
                                             </div>
                                             <div>
                                                 <span>{{ $t('dashboard.memory') }}</span>（GB）
@@ -74,7 +81,7 @@
                                         </div>
                                         <div class="resource-items-content">
                                             <div>
-                                                {{ diskCount }}
+                                                {{ diskCount > -1 ? diskCount : '-' }}
                                             </div>
                                             <div>
                                                 <span>DISK</span>（GB）
@@ -251,7 +258,7 @@ export default {
             gpuValue: '',
             taskCompleted: 0,
             taskTotal: 0,
-            diskCount: 0,
+            diskCount: -1,
             orderBy: 'CPU',
             resourceType: [
                 {
@@ -291,7 +298,10 @@ export default {
             taskLoading: true,
             versionLoading: true,
             modelNameId: [],
-            taskNameId: []
+            taskNameId: [],
+            // resource loading
+            resourceLoading: true,
+            diskLoading: true
         };
     },
     components: {
@@ -304,7 +314,7 @@ export default {
     },
     computed: {
         gpuCount() {
-            let count = 0;
+            let count = -1;
             for (let i = 0; i < this.options.length; i++) {
                 if (this.options[i].value === this.gpuValue) {
                     count = this.options[i].count;
@@ -338,12 +348,15 @@ export default {
             let userId = this.$store.getters.userId;
             getUserResource(userId)
                 .then(data => {
+                    this.resourceLoading = false;
                     this.resource = data;
                     this.options = data.gpus.map(item => {
-                        item.value = item.label;
+                        item.value = item && item.label;
                         return item;
                     });
-                    this.gpuValue = data.gpus[0].label;
+                    this.gpuValue = data.gpus[0] && data.gpus[0].label;
+                }, () => {
+                    this.resourceLoading = false;
                 });
         },
         // 任务列表
@@ -383,7 +396,10 @@ export default {
             };
             getDisk(params)
                 .then(res => {
+                    this.diskLoading = false;
                     this.diskCount = Math.ceil(res.usedBytes / Math.pow(1024, 3));
+                }, () => {
+                    this.diskLoading = false;
                 });
         },
         // 获取更多任务
@@ -650,7 +666,7 @@ export default {
                             height: 30px !important;
                         }
                         .el-select {
-                            width: 98px;
+                            width: 94px;
                         }
                         .el-input__inner {
                             padding: 0 10px 0 0;

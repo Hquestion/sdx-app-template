@@ -33,7 +33,7 @@ export default {
 <style lang='scss' scoped>
 .has_nothing {
     width: 100%;
-    height: 360px;
+    height: 200px;
     font-size: 0;
     text-align: center;
     &.small {
@@ -54,7 +54,7 @@ export default {
         vertical-align: middle;
         position: relative;
         width: 328px;
-        height: 300px;
+        height: 230px;
         text-align: center;
         color: #95a6af;
         // &::before {
@@ -66,6 +66,7 @@ export default {
     }
     .inner-box {
         background: url(../../../../assets/images/state/empty.png)  center no-repeat;
+        background-size: 70% !important;
     }
     .dataframe-box {
         background-size: 90% !important;

@@ -59,14 +59,14 @@
                 <SdxuButton
                     type="text"
                     :block="true"
-                    @click="currentLang='zh-CN'"
+                    @click="toggleLang('zh-CN')"
                 >
                     {{ langTextMap['zh-CN'] }}
                 </SdxuButton>
                 <SdxuButton
                     type="text"
                     :block="true"
-                    @click="currentLang='en'"
+                    @click="toggleLang('en')"
                 >
                     {{ langTextMap['en'] }}
                 </SdxuButton>
@@ -171,7 +171,7 @@ export default {
         return {
             dialogVisible: false,
             version,
-            currentLang: 'zh-CN',
+            currentLang: localStorage.getItem('lang') || 'zh-CN',
             langTextMap: {
                 'zh-CN': '中文',
                 en: 'English'
@@ -235,11 +235,11 @@ export default {
         // 组件传过来的值更新vuex里面的用户信息
         confirmUser(data) {
             this.$store.commit('SET_USER', data);
-        }
-    },
-    watch: {
-        currentLang(val) {
-            this.$i18n.locale = val;
+        },
+        toggleLang(val) {
+            // 因为配置文件中的一些资源无法刷新，这里直接刷新页面
+            localStorage.setItem('lang', val);
+            location.reload();
         }
     },
     mounted() {

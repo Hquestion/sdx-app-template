@@ -3,6 +3,7 @@
         title="另存为"
         :visible.sync="dialogVisible"
         @close="dialogClose"
+        :append-to-body="false"
     >
         <el-form
             label-width="130px"
