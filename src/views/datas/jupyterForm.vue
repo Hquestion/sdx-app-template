@@ -331,7 +331,7 @@ export default {
                 createTask(this.params)
                     .then(res => {
                         let id = res.uuid;
-                        startTask(id)
+                        startTask(id, { isAuto: false })
                             .then(() => {
                                 this.$router.go(-1);
                                 window.open(`/#/jupyterurl/${id}/${this.$route.params.dataset}`);
