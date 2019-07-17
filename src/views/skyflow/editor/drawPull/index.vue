@@ -341,7 +341,8 @@ export default {
                 .on('click', null)
                 .on('contextmenu', null)
                 .on('blur', null)
-                .on('.drag', null);
+                .on('.drag', null)
+                .on('keyup', null);
             // 绑定事件
             nodeGroup
                 .selectAll('.node')
@@ -373,6 +374,12 @@ export default {
                     _this.$emit('changeActiveNode', node.id);
                     _this.$emit('changeNodeActiveStatus', node.id);
                     _this.$emit('showContextMenu', menuInfo);
+                })
+                .on('keyup', node => {
+                    let event = d3.event;
+                    if (event.code === 'Delete' && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey) {
+                        _this.$emit('deleteNode', node);
+                    }
                 });
             if (this.isEditable) {
                 nodeGroup.selectAll('.node').call(this.nodeDrag());
@@ -860,6 +867,12 @@ export default {
         const drawPullSvg = document.getElementById('drawPull');
         this.svgWidth = (drawPullSvg && drawPullSvg.clientWidth) || 0;
         this.svgHeight = (drawPullSvg && drawPullSvg.clientHeight) || 0;
+
+        // 设置当前焦点节点
+        this.activeNode = this.nodes.find(node => node.active);
+        if (this.activeNode) {
+            document.getElementById(this.activeNode.id).focus();
+        }
     },
     updated() {
         if (this.isEditable && flowGlobal.updateNode) {
@@ -870,6 +883,12 @@ export default {
         this.bindNodesEvent();
         this.bindNodeChildElementEvent();
         flowGlobal.pointsHasHighLight = false;
+
+        // 设置当前焦点节点
+        this.activeNode = this.nodes.find(node => node.active);
+        if (this.activeNode) {
+            document.getElementById(this.activeNode.id).focus();
+        }
     },
     watch: {
         nodes() {

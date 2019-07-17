@@ -52,6 +52,7 @@
                     @toggleDetail="toggleDetail"
                     @showContextMenu="showContextMenu"
                     @addOperation="handleAddOperationQueue"
+                    @deleteNode="removeNodeAndLink"
                 />
                 <Console
                     :node-id="activeNodeId"
@@ -1206,14 +1207,16 @@ export default {
                 }
                 return parseMethods[type](val);
             }
-            let params = node.params;
-            let confs = node.paramsConf;
-            let parsedParam = {};
-            Object.keys(params).forEach(item => {
-                const conf = confs.find(c => c.name === item);
-                parsedParam[item] = parse(params[item], conf.ptype);
-            });
-            node.params = parsedParam;
+            if (node) {
+                let params = node.params;
+                let confs = node.paramsConf;
+                let parsedParam = {};
+                Object.keys(params).forEach(item => {
+                    const conf = confs.find(c => c.name === item);
+                    parsedParam[item] = parse(params[item], conf.ptype);
+                });
+                node.params = parsedParam;
+            }
         }
     },
     created() {
