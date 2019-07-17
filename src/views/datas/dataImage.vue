@@ -1,7 +1,7 @@
 <template>
     <div class="data-image">
         <img
-            :style="{'width': imageWidth, 'height': isIcon ? imageWidth : '100%', 'padding-top': isIcon ? '0px' : '20px'}"
+            :style="{ 'padding-top': isIcon ? '0px' : '20px'}"
             :src="imageUrl"
         >
     </div>
@@ -14,10 +14,6 @@ export default {
         imageUrl: {
             type: String,
             default: ''
-        },
-        imageWidth: {
-            type: String,
-            default: '22%'
         },
         isIcon: {
             type: Boolean,
