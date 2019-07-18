@@ -1,7 +1,7 @@
 <template>
     <ul
         v-if="componentList.length"
-        :class="[&quot;level&quot; + level, &quot;clearfix&quot;]"
+        :class="['level' + level, 'clearfix']"
     >
         <template v-for="(item, i) in componentList">
             <li
@@ -41,11 +41,11 @@
                 class="component-cards"
                 @contextmenu="handleEditorContextMenu(item,$event)"
                 @mouseover="hoverComponentName = (item.name + i)"
-                @mouseleave="hoverComponentName = &quot;&quot;"
+                @mouseleave="hoverComponentName = ''"
             >
                 <div
                     class="component-card"
-                    :class="{&quot;drag-prohibition&quot;: !isEditable}"
+                    :class="{'drag-prohibition': !isEditable}"
                     v-draggable="getComponentInfo(item)"
                     :draggable="isEditable"
                 >
@@ -60,7 +60,7 @@
                     />
                     <el-tooltip
                         placement="bottom"
-                        :popper-class="item.description && item.description.length > 55 ? &quot;component-tips tips-width-custom&quot; : &quot;component-tips&quot;"
+                        :popper-class="item.description && item.description.length > 55 ? 'component-tips tips-width-custom' : 'component-tips'"
                     >
                         <div
                             slot="content"
@@ -112,7 +112,7 @@
         />
     </ul>
     <div
-        v-else-if="type === &quot;search&quot;"
+        v-else-if="type === 'search'"
         class="no-result not-find"
     >
         <div />

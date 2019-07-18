@@ -94,6 +94,7 @@
                 <ResourceConfig
                     v-model="modelInfoForm.runtimeResource.gpuObj"
                     type="gpu"
+                    v-if="isGpuEnt"
                 />
             </el-form-item>
         </el-form>
@@ -192,6 +193,13 @@ export default {
     created() {
         this.init();
     },
+    computed: {
+        isGpuEnt() {
+            if (!this.runtimeImageOptions.length) return false;
+            let item = this.runtimeImageOptions.find(item => item.value === this.modelInfoForm.runtimeImage);
+            return item && item.label.includes('gpu');
+        }
+    },
     methods: {
         init() {
             getModelList({
@@ -223,7 +231,7 @@ export default {
             });
         },
         validateResource(rule, value, callback) {
-            if (value && (!Object.keys(value.cpuObj).length || !Object.keys(value.gpuObj).length)) {
+            if (value && (!Object.keys(value.cpuObj).length || (this.isGpuEnt && !Object.keys(value.gpuObj).length))) {
                 callback(new Error('请选择资源环境'));
             } else {
                 callback();
@@ -244,8 +252,10 @@ export default {
                 } else {
                     this.modelInfoForm.runtimeResource.cpu = this.modelInfoForm.runtimeResource.cpuObj.cpu * 1000;
                     this.modelInfoForm.runtimeResource.memory = this.modelInfoForm.runtimeResource.cpuObj.memory * 1024 * 1024 * 1024;
-                    this.modelInfoForm.runtimeResource.gpu = this.modelInfoForm.runtimeResource.gpuObj.count;
-                    this.modelInfoForm.runtimeResource.gpuModel = this.modelInfoForm.runtimeResource.gpuObj.label;
+                    if (this.isGpuEnt) {
+                        this.modelInfoForm.runtimeResource.gpu = this.modelInfoForm.runtimeResource.gpuObj.count;
+                        this.modelInfoForm.runtimeResource.gpuModel = this.modelInfoForm.runtimeResource.gpuObj.label;
+                    }
                     this.modelInfoForm.modelId = this.nameOptions.find(item => item.uuid === this.modelInfoForm.modelName) ? this.modelInfoForm.modelName : '';
                     deployModel(this.modelInfoForm).then(() => {
                         this.$message({
