@@ -317,7 +317,8 @@ export default {
             const params = {
                 imageType: 'JUPYTER',
                 start: 1,
-                count: -1
+                count: -1,
+                ownerId: this.$store.getters.userId || ''
             };
             getImageList(params)
                 .then(data => {
