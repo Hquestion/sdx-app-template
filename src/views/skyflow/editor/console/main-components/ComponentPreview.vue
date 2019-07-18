@@ -1,6 +1,6 @@
 <template>
     <sdxu-content-panel title="数据预处理">
-        <div class="preview-container">
+        <div class="preview-container-comp">
             <div
                 class="preview-file-tree tree"
                 v-loading="isTreeLoading"
@@ -14,14 +14,10 @@
                 </SdxuScroll>
             </div>
             <div class="preview-content">
-                <SdxuScroll style="height: 400px;">
-                    <datasListView
-                        v-if="datalistHide"
-                        :dataListPath="dataListPath"
-                        storeType="FILESYSTEM"
-                        @viewData="handleViewData"
-                        @expandNode="expandNode"
-                    />
+                <div
+                    class="dataset-preview"
+                    v-if="showData.length > 0 && !datalistHide && !isPreview && !imageUrl"
+                >
                     <DataSetPreview
                         :data="showData"
                         :columns="previewData.sky_schema"
@@ -30,7 +26,18 @@
                         @reach-bottom="loadMore"
                         v-loading="isLoadingTableData"
                         readonly
-                        v-if="showData.length > 0 && !datalistHide && !isPreview && !imageUrl"
+                    />
+                </div>
+                <SdxuScroll
+                    style="height: 400px;"
+                    v-else
+                >
+                    <datasListView
+                        v-if="datalistHide"
+                        :dataListPath="dataListPath"
+                        storeType="FILESYSTEM"
+                        @viewData="handleViewData"
+                        @expandNode="expandNode"
                     />
                     <dataImage
                         :image-url="imageUrl"
@@ -108,7 +115,7 @@ export default {
             pageSize: 50,
             showData: Object.freeze([]),
             isLoadingTableData: false,
-            dataHeight: '650px',
+            dataHeight: '390px',
             totalCols: [],
             // 文件列表
             treeData: [],
@@ -455,7 +462,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.preview-container {
+.preview-container-comp {
     width: 100%;
     display: flex;
     .preview-file-tree {
@@ -466,6 +473,10 @@ export default {
     .preview-content {
         overflow: auto;
         flex: 7;
+        .dataset-preview {
+            overflow: hidden;
+            height: 400px;
+        }
     }
 }
 </style>
