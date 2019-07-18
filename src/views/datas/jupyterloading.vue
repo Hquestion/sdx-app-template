@@ -26,9 +26,9 @@ export default {
                 .then(data => {
                     this.external_url = data.external_url;
                     if (data.external_url) {
-                        getJupyterUrl({ dataset: this.$route.params.from })
-                            .then(data => {
-                                let url = `${this.external_url}/notebooks/${data.jupyterNobebook}`;
+                        getJupyterUrl({ dataset: this.$route.params.dataset })
+                            .then(res => {
+                                let url = `${this.external_url}/notebooks/${res.data.jupyterNobebook}`;
                                 window.location.href = url;
                             });
                     }
