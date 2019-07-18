@@ -117,20 +117,20 @@
                     divided
                     command="modifyPassword"
                 >
-                    修改密码
+                    {{ $t('changePassword') }}
                 </el-dropdown-item>
                 <el-dropdown-item
                     divided
                     command="versioninfo"
                 >
-                    版本信息
+                    {{ $t('versionInformation') }}
                 </el-dropdown-item>
                 <el-dropdown-item
                     divided
                     command="logout"
                 >
                     <span>
-                        退出登录
+                        {{ $t('logout') }}
                     </span>
                 </el-dropdown-item>
             </el-dropdown-menu>
@@ -150,12 +150,12 @@
             :visible.sync="versionVisible"
             no-footer
             title-icon="iconicon-banbenxinxi"
-            title="版本信息"
+            :title="$t('versionInformation')"
         >
             <div class="dashboard-version-content">
                 <div>SkyDiscovery</div>
-                <div>版本号： X</div>
-                <div>南京天数智芯科技有限公司</div>
+                <div> {{ $t('version') }} X</div>
+                <div>{{ $t('corporateName') }}</div>
             </div>
         </sdxu-dialog>
     </div>
