@@ -24,8 +24,8 @@ export default {
         getTaskUrl(id) {
             getTaskDetail(id)
                 .then(data => {
-                    this.external_url = data.externalUrl;
-                    if (data.externalUrl) {
+                    this.external_url = data.external_url;
+                    if (data.external_url) {
                         getJupyterUrl({ dataset: this.$route.params.from })
                             .then(data => {
                                 let url = `${this.external_url}/notebooks/${data.jupyterNobebook}`;
