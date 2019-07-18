@@ -148,6 +148,10 @@ export default {
             type: Boolean,
             default: false
         },
+        isStream: {
+            type: Boolean,
+            default: false
+        },
         executeSetting: {
             type: Object,
             default: null
@@ -168,28 +172,28 @@ export default {
     },
     computed: {
         execOperation() {
-            const filterSet = new Set([
-                'run',
-                'stop',
-                'resume',
-                'warning',
-                'record',
-                'edit',
-                'timing',
-                'muti-instance'
-            ]);
+            const filterSet = new Set(['warning', 'record']);
             if (this.isResume) {
-                filterSet.delete('resume');
-                filterSet.delete('edit');
+                filterSet.add('run');
+                filterSet.add('stop');
             } else if (this.isRunning) {
-                filterSet.delete('stop');
+                filterSet.add('resume');
+                filterSet.add('edit');
+                filterSet.add('run');
             } else {
-                filterSet.delete('run');
+                filterSet.add('stop');
+                filterSet.add('resume');
+                filterSet.add('edit');
             }
-            if (!this.isExecute) {
+            if (this.isExecute) {
                 // 执行记录不显示定时设置、多实例设置
-                filterSet.delete('timing');
-                filterSet.delete('muti-instance');
+                filterSet.add('timing');
+                filterSet.add('muti-instance');
+            }
+            if (this.isStream) {
+                filterSet.add('timing');
+                filterSet.add('muti-instance');
+                filterSet.add('exec-setting');
             }
             return execOperation.filter(el => !filterSet.has(el.name));
         }

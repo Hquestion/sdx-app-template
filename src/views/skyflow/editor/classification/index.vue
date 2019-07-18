@@ -2,7 +2,6 @@
     <div class="component">
         <ul
             id="component-nav"
-            class="clearfix"
         >
             <li
                 v-for="(item, i) in componentNav"
@@ -234,16 +233,16 @@ export default {
     float: left;
     #component-nav {
         margin-bottom: 15px;
-        /*list-style: none;*/
+        display: flex;
+
         & > li {
-            width: calc(250px / 6);
+            flex: auto;
             height: 40px;
             color: #3f5973;
             background: rgba(232, 237, 242, 0.91);
             list-style: none;
             line-height: 40px;
             text-align: center;
-            float: left;
             cursor: pointer;
             & > i {
                 font-size: 18px;

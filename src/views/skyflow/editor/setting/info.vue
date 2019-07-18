@@ -21,22 +21,29 @@
         </div>
         <div>
             <span>创建时间</span>
-            <span>{{ result.created_at }}</span>
+            <span>{{ dateFormatter(result.created_at) }}</span>
         </div>
         <div>
             <span>修改时间</span>
-            <span>{{ result.modified_at || '未修改' }}</span>
+            <span>{{ result.modified_at ? dateFormatter(result.modified_at) : '未修改' }}</span>
         </div>
     </div>
 </template>
 
 <script>
+import { dateFormatter } from '@sdx/utils/lib/helper/transform';
+
 export default {
     name: 'Info',
     props: {
         result: {
             type: Object,
             default: null
+        }
+    },
+    methods: {
+        dateFormatter(time) {
+            return dateFormatter(time);
         }
     }
 };

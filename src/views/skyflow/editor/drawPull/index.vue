@@ -374,15 +374,16 @@ export default {
                     _this.$emit('changeActiveNode', node.id);
                     _this.$emit('changeNodeActiveStatus', node.id);
                     _this.$emit('showContextMenu', menuInfo);
-                })
-                .on('keyup', node => {
-                    let event = d3.event;
-                    if (event.code === 'Delete' && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey) {
-                        _this.$emit('deleteNode', node);
-                    }
                 });
             if (this.isEditable) {
-                nodeGroup.selectAll('.node').call(this.nodeDrag());
+                nodeGroup.selectAll('.node')
+                    .on('keyup', node => {
+                        let event = d3.event;
+                        if (event.code === 'Delete' && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey) {
+                            _this.$emit('deleteNode', node);
+                        }
+                    })
+                    .call(this.nodeDrag());
             }
         },
         bindNodeChildElementEvent() {

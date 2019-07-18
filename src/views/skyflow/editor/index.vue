@@ -12,6 +12,7 @@
                 :is-ready="isReady"
                 :is-current-user="isCurrentUser"
                 :is-execute="!!executeId"
+                :is-stream="isStream"
                 :zoom="zoom"
                 :forward-able="!!revokeQueue.length"
                 :back-able="!!operationQueue.length"
@@ -145,6 +146,7 @@ import {
 } from '@sdx/utils/lib/api/skyflow';
 // import { getResources } from '@sdx/utils/src/api/skyflow';
 import { mapState, mapActions } from 'vuex';
+import { dateFormatter } from '@sdx/utils/lib/helper/transform';
 
 let nodeStatusInterval = null;
 
@@ -242,6 +244,9 @@ export default {
         !this.isResume &&
         !this.isCrontab
             );
+        },
+        isStream() {
+            return this.processType === 'STREAM';
         },
         svgWidth() {
             return this.isCurrentUser
@@ -625,7 +630,7 @@ export default {
                         this.executeStartTime =
               (executeInfo &&
                 executeInfo.execution_state &&
-                executeInfo.execution_state.startTime) ||
+                dateFormatter(executeInfo.execution_state.startTime)) ||
               '';
                         this.stateNodeList = executeInfo.nodes_state;
                         if (this.activeNode) {
@@ -1257,7 +1262,7 @@ export default {
                     // 更新上次的运行状态
                     this.handleNodesStatusUpdate(this.stateNodeList);
                 }
-                this.executeStartTime = data.running_at || '';
+                this.executeStartTime = dateFormatter(data.running_at) || '';
                 this.activeNode =
           (this.nodes && this.nodes.find(node => node.active)) || null;
                 this.activeNodeId = (this.activeNode && this.activeNode.id) || '';
