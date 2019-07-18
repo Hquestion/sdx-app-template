@@ -81,7 +81,7 @@ export default {
             const map = {
                 CREATED: {
                     state: {
-                        label: '已创建',
+                        label: '创建成功',
                         name: 'created',
                         need_pull: false
                     }

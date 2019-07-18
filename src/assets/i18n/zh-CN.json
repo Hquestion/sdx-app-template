@@ -5,6 +5,11 @@
     "usermanage": "用户管理",
     "rightsmanage": "权限管理",
     "monitormanage": "监控中心",
+    "changePassword": "修改密码",
+    "versionInformation": "版本信息",
+    "logout": "退出登录",
+    "version": "版本号：",
+    "corporateName": "南京天数智芯科技有限公司",
     "dashboard": {
         "resource_usage": "资源使用情况",
         "total_number_of_running_tasks": "运行任务总数",
@@ -44,5 +49,27 @@
         "hour_ago": "小时前",
         "operating_tasks": "运行中任务",
         "number": "个"
+    },
+    "menu": {
+        "Home": "首页",
+        "Data": "数据",
+        "Project": "项目",
+        "SkyFlow": "SkyFlow",
+        "Model": "模型",
+        "AssetsManage": "资产管理",
+        "TaskManage": "任务管理",
+        "FileManage": "文件管理",
+        "ImageManage": "镜像管理",
+        "ResourceManage": "资源管理",
+        "UserManage": "用户管理",
+        "User": "用户",
+        "UserGroup": "用户组",
+        "PermissionManage": "权限管理",
+        "Permission": "权限",
+        "Authorization": "授权",
+        "Role": "角色",
+        "MonitoringCenter": "监控中心",
+        "ResourceStatics": "资源统计",
+        "ComponentState": "组件状态"
     }
 }

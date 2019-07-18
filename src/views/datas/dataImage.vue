@@ -1,7 +1,13 @@
 <template>
     <div class="data-image">
         <img
-            :style="{'width': imageWidth, 'height': isIcon ? imageWidth : '100%', 'padding-top': isIcon ? '0px' : '20px'}"
+            v-if="isIcon"
+            :style="{'width': imageWidth, 'height': imageWidth , 'padding-top': '0px' }"
+            :src="imageUrl"
+        >
+        <img
+            v-else
+            :style="{ 'padding-top': '20px'}"
             :src="imageUrl"
         >
     </div>

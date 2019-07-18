@@ -5,6 +5,11 @@
     "usermanage": "User",
     "rightsmanage": "Permissions",
     "monitormanage": "Monitor",
+    "changePassword": "Change Password",
+    "versionInformation": "Version information",
+    "logout": "Log out",
+    "version": "Version:",
+    "corporateName": "Iluvatar CoreX",
     "dashboard": {
         "resource_usage": "Resource usage",
         "total_number_of_running_tasks": "Total number of running tasks",
@@ -44,5 +49,27 @@
         "hour_ago": "Hour ago",
         "operating_tasks": "Operating tasks",
         "number": "Number"
+    },
+    "menu": {
+        "Home": "Home",
+        "Data": "Data",
+        "Project": "Project",
+        "SkyFlow": "SkyFlow",
+        "Model": "Model",
+        "AssetsManage": "Assets Management",
+        "TaskManage": "Task Management",
+        "FileManage": "File Management",
+        "ImageManage": "Image Management",
+        "ResourceManage": "Resource Management",
+        "UserManage": "User Management",
+        "User": "User",
+        "UserGroup": "User Group",
+        "PermissionManage": "Permission Management",
+        "Permission": "Permission",
+        "Authorization": "Authorization",
+        "Role": "Role",
+        "MonitoringCenter": "Monitoring Center",
+        "ResourceStatics": "Resource Statics",
+        "ComponentState": "Component State"
     }
 }

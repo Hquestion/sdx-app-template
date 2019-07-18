@@ -2,12 +2,17 @@
     <div class="sdx-dashboard">
         <div class="left">
             <div class="left-top">
-                <div class="resource">
-                    <el-row :gutter="20">
+                <div
+                    class="resource"
+                >
+                    <el-row
+                        :gutter="20"
+                    >
                         <el-col :span="16">
                             <sdxu-content-panel
                                 :title="$t('dashboard.resource_usage')"
                                 size="small"
+                                v-loading="resourceLoading || diskLoading"
                             >
                                 <el-row
                                     :gutter="20"
@@ -20,7 +25,7 @@
                                         <div
                                             class="resource-items-content"
                                         >
-                                            <div v-loading="resourceLoading">
+                                            <div>
                                                 {{ resource.cpu > -1 ? Math.ceil(resource.cpu / 1000) : '-' }}
                                             </div>
                                             <div>
@@ -33,7 +38,7 @@
                                             <i class="iconfont iconicon-GPU-dashboard" />
                                         </div>
                                         <div class="resource-items-content">
-                                            <div v-loading="resourceLoading">
+                                            <div>
                                                 {{ gpuCount > -1 ? gpuCount : '-' }}
                                             </div>
                                             <div class="gpu-resource">
@@ -44,9 +49,9 @@
                                                 >
                                                     <el-option
                                                         v-for="item in options"
-                                                        :key="item.label"
-                                                        :label="item.label"
-                                                        :value="item.value"
+                                                        :key="item && item.label"
+                                                        :label="item && item.label"
+                                                        :value="item && item.value"
                                                     />
                                                 </el-select>({{ $t('dashboard.piece') }}）
                                             </div>
@@ -62,7 +67,7 @@
                                             <i class="iconfont iconicon-neicun" />
                                         </div>
                                         <div class="resource-items-content">
-                                            <div v-loading="resourceLoading">
+                                            <div>
                                                 {{ resource.memory > -1 ? Math.ceil(resource.memory / Math.pow(1024, 3)) : '-' }}
                                             </div>
                                             <div>
@@ -75,7 +80,7 @@
                                             <i class="iconfont iconicon-disk" />
                                         </div>
                                         <div class="resource-items-content">
-                                            <div v-loading="diskLoading">
+                                            <div>
                                                 {{ diskCount > -1 ? diskCount : '-' }}
                                             </div>
                                             <div>
@@ -315,6 +320,9 @@ export default {
                     count = this.options[i].count;
                 }
             }
+            if (this.options.length === 0) {
+                count = 0;
+            }
             return count;
         }
     },
@@ -346,10 +354,10 @@ export default {
                     this.resourceLoading = false;
                     this.resource = data;
                     this.options = data.gpus.map(item => {
-                        item.value = item.label;
+                        item.value = item && item.label;
                         return item;
                     });
-                    this.gpuValue = data.gpus[0].label;
+                    this.gpuValue = data.gpus[0] && data.gpus[0].label;
                 }, () => {
                     this.resourceLoading = false;
                 });
