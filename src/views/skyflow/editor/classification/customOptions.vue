@@ -1,12 +1,12 @@
 <template>
     <div class="custom-dialog skyflow-dialog">
-        <el-dialog
+        <MyDialog
             :visible="visible"
             custom-class="selfStyle"
             width="520px"
             :title="title"
             :close-on-click-modal="false"
-            @close="closeDialog(&quot;customForm&quot;)"
+            @close="closeDialog('customForm')"
             v-loading="showLoading"
         >
             <el-form
@@ -230,7 +230,7 @@
                     确 定
                 </el-button>
             </div>
-        </el-dialog>
+        </MyDialog>
     </div>
 </template>
 
@@ -256,7 +256,7 @@ export default {
         [FileSelect.FileSelectMix.name]: FileSelect.FileSelectMix,
         RunParams,
         InputOutputArgs,
-        ElDialog
+        MyDialog: ElDialog
     },
     props: {
         dialogVisible: {

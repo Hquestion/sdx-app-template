@@ -1,52 +1,53 @@
 import permissions from './permissions';
+import i18n from '../i18n';
 // 首页 数据 项目 模型 服务 文件 镜像 用户 系统管理
 const leftmenu = [
     {
-        name: '首页',
+        name: i18n.t('menu.Home'),
         icon: 'iconfont iconicon-home',
         path: '/dashboard',
         auth: permissions.DASHBOARD_MENU_ACCESS
     },
     {
-        name: '数据',
+        name: i18n.t('menu.Data'),
         icon: 'iconfont iconicon-data',
         path: '/datasManage',
         auth: permissions.DATA_MENU_ACCESS
     },
     {
-        name: '项目',
+        name: i18n.t('menu.Project'),
         icon: 'iconfont iconicon-project',
         path: '/sdxv-project-manage',
         auth: permissions.PROJECT_MENU_ACCESS
     },
     {
-        name: 'SkyFlow',
+        name: i18n.t('menu.SkyFlow'),
         icon: 'iconfont iconicon-Skyflow',
         path: '/sdxv-skyflow',
         auth: permissions.SKYFLOW_MENU_ACCESS
     },
     {
-        name: '模型',
+        name: i18n.t('menu.Model'),
         icon: 'iconfont iconicon-model',
         path: '/sdxv-model-manage',
         auth: permissions.MODEL_MENU_ACCESS
     },
     {
-        name: '资产管理',
+        name: i18n.t('menu.AssetsManage'),
         icon: 'iconfont iconicon-zichanguanli',
         children: [
             {
-                name: '任务管理',
+                name: i18n.t('menu.TaskManage'),
                 path: '/sdxv-task-management',
                 auth: permissions.PROJECT_MENU_ACCESS
             },
             {
-                name: '文件管理',
+                name: i18n.t('menu.FileManage'),
                 path: '/sdxv-file-manage',
                 auth: permissions.FILE_MENU_ACCESS
             },
             {
-                name: '镜像管理',
+                name: i18n.t('menu.ImageManage'),
                 path: '/sdxv-image-manage',
                 auth: permissions.IMAGE_MENU_ACCESS
             }
@@ -56,59 +57,59 @@ const leftmenu = [
 
 const manageMenus = [
     {
-        name: '资源管理',
+        name: i18n.t('menu.ResourceManage'),
         icon: 'iconfont iconicon-ziyuanguanli1',
         path: '/sdxv-resource-manage',
         auth: permissions.RESOURCE_MENU_ACCESS
     },
     {
-        name: '用户管理',
+        name: i18n.t('menu.UserManage'),
         icon: 'iconfont iconicon-yonghuguanli1',
         path: '/user',
         auth: permissions.USER_MENU_ACCESS,
         children: [
             {
-                name: '用户',
+                name: i18n.t('menu.User'),
                 path: '/sdxv-user-manage'
             },
             {
-                name: '用户组',
+                name: i18n.t('menu.UserGroup'),
                 path: '/sdxv-user-group'
             }
         ]
     },
     {
-        name: '权限管理',
+        name: i18n.t('menu.Permission'),
         icon: 'iconfont iconicon-quanxianguanli',
         path: '/rights',
         auth: permissions.PERMISSION_MENU_ACCESS,
         children: [
             {
-                name: '授权',
+                name: i18n.t('menu.Authorization'),
                 path: '/sdxv-authorize-manage'
             },
             {
-                name: '权限',
+                name: i18n.t('menu.Permission'),
                 path: '/sdxv-privilege'
             },
             {
-                name: '角色',
+                name: i18n.t('menu.Role'),
                 path: '/sdxv-role-manage',
             }
         ]
     },
     {
-        name: '监控中心',
+        name: i18n.t('menu.MonitoringCenter'),
         icon: 'iconfont iconicon-jiankongzhongxin1',
         auth: permissions.SYSTEM_MENU_ACCESS,
         path: '/monitor',
         children: [
             {
-                name: '资源统计',
+                name: i18n.t('menu.ResourceStatics'),
                 path: '/sdxv-resource-statistics'
             },
             {
-                name: '组件状态',
+                name: i18n.t('menu.ComponentState'),
                 path: '/sdxv-component-state'
             }
         ]
