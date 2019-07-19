@@ -3,7 +3,7 @@
         <div class="login-container">
             <div class="logoTop">
                 <i class="icon iconfont icon-Discovery1" />
-                <span>大数据机器学习平台</span>
+                <span>{{ $t('login.Large_Data_Machine_Learning_Platform') }}</span>
             </div>
             <el-form
                 auto-complete="on"
@@ -14,7 +14,7 @@
                 class="card-box login-form"
             >
                 <p class="wtitle">
-                    欢迎来到
+                    {{ $t('login.Welcome') }}
                 </p>
                 <div class="login-logo">
                     <img
@@ -24,7 +24,7 @@
                     <!-- <wscn-icon-svg icon-class="Discovery1"></wscn-icon-svg> -->
                 </div>
                 <p class="wtitle">
-                    用户名
+                    {{ $t('login.User_name') }}
                 </p>
                 <el-form-item
                     prop="username"
@@ -36,7 +36,7 @@
                         v-model="loginForm.username"
                         tabindex="1"
                         :autofocus="true"
-                        placeholder="请输入用户名"
+                        :placeholder="$t('login.Please_enter_a_user_name')"
                     >
                         <i
                             slot="prefix"
@@ -45,7 +45,7 @@
                     </el-input>
                 </el-form-item>
                 <p class="wtitle">
-                    密码
+                    {{ $t('login.Password') }}
                 </p>
                 <el-form-item
                     prop="passwd"
@@ -57,7 +57,7 @@
                         tabindex="2"
                         @keyup.enter.native="handleLogin"
                         v-model="loginForm.passwd"
-                        placeholder="请输入密码"
+                        :placeholder="$t('login.Please_enter_the_password')"
                     >
                         <i
                             slot="prefix"
@@ -73,12 +73,12 @@
                         :loading="loading"
                         @click.native.prevent="handleLogin"
                     >
-                        登录
+                        {{ $t('login.Login') }}
                     </el-button>
                 </el-form-item>
             </el-form>
             <div class="copy-right">
-                Copyright © 2018 南京天数智芯科技有限公司. 版权所有 <br> 备案号：苏ICP备16013291号
+                Copyright © 2019 {{ $t('corporateName') }}  {{ $t('login.Copyright') }} <br> {{ $t('login.Record_No') }} 苏ICP备16013291号
             </div>
         </div>
     </div>

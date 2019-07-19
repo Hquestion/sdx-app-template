@@ -71,5 +71,16 @@
         "MonitoringCenter": "监控中心",
         "ResourceStatics": "资源统计",
         "ComponentState": "组件状态"
+    },
+    "login": {
+        "Large_Data_Machine_Learning_Platform": "大数据机器学习平台",
+        "Welcome": "欢迎来到",
+        "User_name": "用户名",
+        "Password": "密码",
+        "Please_enter_the_password": "请输入密码",
+        "Login": "登录",
+        "Copyright": "版权所有",
+        "Record_No": "备案号：",
+        "Please_enter_a_user_name": "请输入用户名"
     }
 }
