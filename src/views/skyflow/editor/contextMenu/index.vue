@@ -42,11 +42,7 @@ export default {
             type: Number,
             default: 0
         },
-        owner: {},
-        executeId: {
-            type: String,
-            default: ''
-        }
+        owner: {}
     },
     computed: {
         position() {

@@ -85,14 +85,13 @@
             :menu-list="menuList"
             :context-x="contextX"
             :context-y="contextY"
-            :execute-id="executeId"
             @clickmenu="handleMenuclick"
         />
         <!-- 点击右键选项 弹框 -->
         <component
             v-if="contextName && contextDialogVisible"
             :is="contextName"
-            :node="activeNode"
+            :node="currentOperationalNode"
             :execute-id="executeId"
             :context-dialog-visible.sync="contextDialogVisible"
             @confirm="handleContextDialog"
@@ -132,7 +131,6 @@ import {
     saveExecuteModelJson,
     createExecution,
     stopExecuteWorkflow,
-    shareComponent,
     addFavorite,
     setExecuteType,
     setInstance,
@@ -170,6 +168,7 @@ export default {
             executeId: this.$route.params.executeId || '',
             flowState: nodeState.READY,
             contextMenuVisible: false,
+            currentOperationalNode: null,
             activeNodeId: '',
             activeNode: null,
             zoom: 100,
@@ -586,17 +585,15 @@ export default {
             });
         },
         testIsExistMutiBranch() {
-            // todo:
-            return false;
-            // // 测试画布中是否存在多条分支
-            // // 任意找一个数据源
-            // const dataSourceComp = this.nodes.find(
-            //     node => !node.inputParams || node.inputParams.length === 0
-            // );
-            // // 根据这个数据源遍历出该数据源所在分支的所有组件
-            // const compSet = this.getLinkedNode(new Set([dataSourceComp.id]));
-            // // 判断是否有不在该Set中的组件，有: 表示存在多个分支
-            // return this.nodes.some(node => !compSet.has(node.id));
+            // 测试画布中是否存在多条分支
+            // 任意找一个数据源
+            const dataSourceComp = this.nodes.find(
+                node => !node.inputParams || node.inputParams.length === 0
+            );
+            // 根据这个数据源遍历出该数据源所在分支的所有组件
+            const compSet = this.getLinkedNode(new Set([dataSourceComp.id]));
+            // 判断是否有不在该Set中的组件，有: 表示存在多个分支
+            return this.nodes.some(node => !compSet.has(node.id));
         },
         getLinkedNode(compSet) {
             // 递归获取连线的节点id Set
@@ -810,6 +807,7 @@ export default {
             if (!(node.isModel && node.nodeState && node.nodeState.state === nodeState.SUCCESS)) {
                 filterItem.add('model');
             }
+            this.currentOperationalNode = node;
             this.menuList = contextMenuIcon.filter(el => !filterItem.has(el.name));
             this.contextX = menu.x;
             this.contextY = menu.y;
@@ -817,7 +815,7 @@ export default {
         },
         handleSaveCode(code) {
             this.nodes.forEach(node => {
-                if (node.id === this.activeNodeId) {
+                if (node.id === this.currentOperationalNode.id) {
                     node.code = code;
                 }
             });
@@ -826,7 +824,7 @@ export default {
         handleComponentRename(params) {
             // 画布组件右键-重命名
             this.nodes.forEach(node => {
-                if (node.id === this.activeNodeId) {
+                if (node.id === this.currentOperationalNode.id) {
                     node.label = params.name;
                 }
             });
@@ -834,7 +832,7 @@ export default {
         },
         handleComponentStar(params) {
             // 画布组件右键-收藏
-            const node = _.cloneDeep(this.activeNode);
+            const node = _.cloneDeep(this.currentOperationalNode);
             const starNodeInfo = {
                 label: params.name,
                 name: node.name,
@@ -1029,8 +1027,6 @@ export default {
                     node.state = state;
                 }
             });
-            // todo:
-            isReady = true;
             // 如果是初始化，这里不更新nodes状态，只要更新this.isReady值就行了
             !isInit && needUpdate && this.updateNodes(this.nodes);
             this.isReady = isReady;
@@ -1124,7 +1120,7 @@ export default {
         },
         handleMenuclick(operationName) {
             // 画布中组件右键点击
-            const node = this.activeNode;
+            const node = this.currentOperationalNode;
             switch (operationName) {
                     case 'copy':
                         {
@@ -1174,8 +1170,15 @@ export default {
                         this.contextDialogVisible = true;
                         break;
                     case 'edit-code':
-                        this.codeEditorVisible = true;
-                        this.currentCode = this.activeNode && this.activeNode.code || '';
+                        if (node.canEdit) {
+                            this.codeEditorVisible = true;
+                            this.currentCode = node && node.code || '';
+                        } else {
+                            this.$sdxuMessageBox.warning({
+                                title: '警告',
+                                content: '当前组件的代码文件的格式不支持代码编辑。您可以在组件的编辑操作中上传新的代码文件。'
+                            });
+                        }
                         break;
                     case 'model':
                         this.contextName = 'deployModel';
@@ -1300,6 +1303,11 @@ export default {
             ) {
                 this.handleClearOperationQueue();
                 this.handleGetRunningStateInterval(this.executeId);
+            }
+        },
+        contextDialogVisible(val) {
+            if (!val && this.currentOperationalNode) {
+                this.currentOperationalNode = null;
             }
         }
     }

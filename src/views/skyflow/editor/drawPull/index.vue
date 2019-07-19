@@ -101,6 +101,7 @@ export default {
     data() {
         return {
             activeNode: null,
+            contextMenuNodeId: '',
             svgWidth: 0,
             svgHeight: 0,
             translate: {
@@ -219,7 +220,8 @@ export default {
                     rules: data.rules || {}, // 组件参数校验规则{inputRules:[], paramsRules: []}
                     mainClass: data.mainClass || '', // spark组件的主类
                     user: data.user || '', // 组件用户uuid
-                    runFileHostPath: data.runFileHostPath || '' // 运行文件完整地址
+                    runFileHostPath: data.runFileHostPath || '', // 运行文件完整地址
+                    canEdit: data.canEdit || false // 是否可以编辑执行代码
                 };
                 // 清除当前激活节点
                 this.activeNode = null;
@@ -317,6 +319,7 @@ export default {
                         _this.$emit('zoomChange', transform.k);
                         return transform;
                     });
+                    _this.updateContextMenuVisible(false);
                 });
             drawPull.call(flowGlobal.zoom).on('dblclick.zoom', null); // 禁用双击放大
             // .on('wheel.zoom', null) // 禁用滚轮放大
@@ -346,8 +349,10 @@ export default {
             // 绑定事件
             nodeGroup
                 .selectAll('.node')
-                .on('focus, mousedown', node => {
-                    _this.activeNode = node;
+                .on('mousedown', node => {
+                    if (d3.event.which !== 3) {
+                        _this.activeNode = node;
+                    }
                 })
                 .on('click', node => {
                     d3.event.stopPropagation();
@@ -358,7 +363,7 @@ export default {
                     _this.$emit('changeNodeActiveStatus', node.id);
                 })
                 .on('blur', node => {
-                    if (_this.contextMenuVisible && !node.active) {
+                    if (_this.contextMenuVisible && node.id !== _this.contextMenuNodeId) {
                         _this.updateContextMenuVisible(false);
                     }
                 })
@@ -370,9 +375,9 @@ export default {
                         y: d3.event.pageY,
                         id: node.id
                     };
-                    // _this.updateContextMenuVisible(true)
-                    _this.$emit('changeActiveNode', node.id);
-                    _this.$emit('changeNodeActiveStatus', node.id);
+                    this.contextMenuNodeId = node.id;
+                    // _this.$emit('changeActiveNode', node.id);
+                    // _this.$emit('changeNodeActiveStatus', node.id);
                     _this.$emit('showContextMenu', menuInfo);
                 });
             if (this.isEditable) {
@@ -465,6 +470,7 @@ export default {
                 startX = d3.event.x;
                 startY = d3.event.y;
                 g = d3.select(this);
+                _this.updateContextMenuVisible(false);
             }
             function dragMove() {
                 let eventX = d3.event.x;
@@ -548,75 +554,79 @@ export default {
             d3.select('#nodeGroup')
                 .selectAll('circle.node-point')
                 .on('mousedown', null)
-                .on('mouseup', null);
+                .on('mouseup', null)
+                .on('contextmenu', null);
             // 绑定事件
             d3.select('#nodeGroup')
                 .selectAll('circle.node-point')
                 .on('mousedown', function(point) {
                     d3.event.stopPropagation();
                     d3.event.preventDefault();
-                    // 判断连接点类型
-                    if (point.isSource) {
-                        // 判断是否已经连线
-                        // if (_this.links.find(link => link.source.id === point.id)) {
-                        //     return;
-                        // }
-                        flowGlobal.sourcePoint = point;
-                        flowGlobal.dragLine
-                            .attr('stroke', '#BEC8D2')
-                            .attr('stroke-width', config.strokeWidth)
-                            .attr('marker-mid', 'url(#arrow-marker-weaken)')
-                            .attr('stroke-dasharray', '2,2')
-                            .attr('d', () => {
-                                let x1 = point.x;
-                                let y1 = point.y;
-                                let x2 = x1;
-                                let y2 = y1;
-                                return utils.generateBézierControlPoints2(x1, y1, x2, y2);
-                            })
-                            .attr('fill', 'none');
-                    } else {
-                        // 判断是否已经存在连线了
-                        let oldLink = _this.links.find(link => link.target.id === point.id);
-                        if (oldLink) {
-                            // 获取targetNode
-                            let targetNode = _this.nodeMap[point.nodeId];
-                            let [x, y] = d3.mouse(this);
-                            flowGlobal.sourcePoint = oldLink.source;
-                            // 删除显示原连线
-                            d3.select(
-                                '#link_' + oldLink.source.id + '_' + oldLink.target.id
-                            ).remove();
+                    if (d3.event.which === 1) { // 鼠标左键
+                        _this.updateContextMenuVisible(false);
+                        // 判断连接点类型
+                        if (point.isSource) {
+                            // 判断是否已经连线
+                            // if (_this.links.find(link => link.source.id === point.id)) {
+                            //     return;
+                            // }
+                            flowGlobal.sourcePoint = point;
                             flowGlobal.dragLine
                                 .attr('stroke', '#BEC8D2')
                                 .attr('stroke-width', config.strokeWidth)
                                 .attr('marker-mid', 'url(#arrow-marker-weaken)')
                                 .attr('stroke-dasharray', '2,2')
                                 .attr('d', () => {
-                                    let sourceNode = _this.nodeMap[flowGlobal.sourcePoint.nodeId];
-                                    let x1 = utils.getPointXAxis(
-                                        sourceNode.x,
-                                        flowGlobal.sourcePoint.index,
-                                        flowGlobal.sourcePoint.total
-                                    );
-                                    let y1 = utils.getPointYAxis(
-                                        sourceNode.y,
-                                        flowGlobal.sourcePoint.isSource,
-                                        sourceNode.showDetail
-                                    );
-                                    let x2 = x + targetNode.x;
-                                    let y2 = y + targetNode.y;
+                                    let x1 = point.x;
+                                    let y1 = point.y;
+                                    let x2 = x1;
+                                    let y2 = y1;
                                     return utils.generateBézierControlPoints2(x1, y1, x2, y2);
                                 })
                                 .attr('fill', 'none');
-                            // note: 操作可撤销
-                            _this.$emit('addOperation', {
-                                operate: 'removeLink',
-                                revoke: 'addLink',
-                                value: oldLink,
-                                revokeValue: oldLink
-                            });
-                            _this.$emit('removeLink', oldLink);
+                        } else {
+                            // 判断是否已经存在连线了
+                            let oldLink = _this.links.find(link => link.target.id === point.id);
+                            if (oldLink) {
+                                // 获取targetNode
+                                let targetNode = _this.nodeMap[point.nodeId];
+                                let [x, y] = d3.mouse(this);
+                                flowGlobal.sourcePoint = oldLink.source;
+                                // 删除显示原连线
+                                d3.select(
+                                    '#link_' + oldLink.source.id + '_' + oldLink.target.id
+                                ).remove();
+                                flowGlobal.dragLine
+                                    .attr('stroke', '#BEC8D2')
+                                    .attr('stroke-width', config.strokeWidth)
+                                    .attr('marker-mid', 'url(#arrow-marker-weaken)')
+                                    .attr('stroke-dasharray', '2,2')
+                                    .attr('d', () => {
+                                        let sourceNode = _this.nodeMap[flowGlobal.sourcePoint.nodeId];
+                                        let x1 = utils.getPointXAxis(
+                                            sourceNode.x,
+                                            flowGlobal.sourcePoint.index,
+                                            flowGlobal.sourcePoint.total
+                                        );
+                                        let y1 = utils.getPointYAxis(
+                                            sourceNode.y,
+                                            flowGlobal.sourcePoint.isSource,
+                                            sourceNode.showDetail
+                                        );
+                                        let x2 = x + targetNode.x;
+                                        let y2 = y + targetNode.y;
+                                        return utils.generateBézierControlPoints2(x1, y1, x2, y2);
+                                    })
+                                    .attr('fill', 'none');
+                                // note: 操作可撤销
+                                _this.$emit('addOperation', {
+                                    operate: 'removeLink',
+                                    revoke: 'addLink',
+                                    value: oldLink,
+                                    revokeValue: oldLink
+                                });
+                                _this.$emit('removeLink', oldLink);
+                            }
                         }
                     }
                 })
@@ -860,7 +870,10 @@ export default {
             this.bindNodeChildElementEvent();
         },
         updateContextMenuVisible(val) {
-            this.$emit('update:contextMenuVisible', val);
+            if (this.contextMenuNodeId) {
+                this.$emit('update:contextMenuVisible', val);
+                this.contextMenuNodeId = '';
+            }
         }
     },
     mounted() {
