@@ -10,7 +10,8 @@ const app = {
             visible: false,
             neverShow: !!JSON.parse(localStorage.getItem('guideNeverShow')) || false
         },
-        isExplicitLogin: false
+        isExplicitLogin: false,
+        breadcrumbHistory: []
     },
     mutations: {
         TOGGLE_SIDEBAR: state => {
@@ -45,6 +46,35 @@ const app = {
         },
         SET_EXPLICIT_LOGIN(state) {
             state.isExplicitLogin = true;
+        },
+        pushBreadcrumbHistory(state, to) {
+            let cachedHis = localStorage.getItem('history');
+            if (cachedHis) {
+                cachedHis = JSON.parse(cachedHis);
+            }
+            let breadcrumbHistory = cachedHis || [];
+            const route = {
+                name: to.name,
+                path: to.path,
+                query: to.query,
+                params: to.params,
+                meta: to.meta
+            };
+            if (route.meta.isRoot) {
+                breadcrumbHistory = [];
+                breadcrumbHistory.push(route);
+            } else {
+                // 如果路由在历史记录中
+                let historyIndex = breadcrumbHistory.findIndex(item => item.name === route.name);
+                if (historyIndex >= 0) {
+                    breadcrumbHistory = breadcrumbHistory.slice(0, historyIndex + 1);
+                } else {
+                    breadcrumbHistory.push(route);
+                }
+            }
+            // deleteOb(state.breadcrumbHistory)
+            localStorage.setItem('history', JSON.stringify(breadcrumbHistory));
+            state.breadcrumbHistory = breadcrumbHistory;
         }
     },
     actions: {
@@ -65,5 +95,26 @@ const app = {
         }
     }
 };
+
+function deleteOb(obj) {
+    if (!obj) return;
+    delete obj.matched;
+    if (obj.__ob__) {
+        delete obj.__ob__;
+    }
+    if (typeof obj !== 'object') {
+        return;
+    }
+    if (!Array.isArray(obj)) {
+        obj = [obj];
+    }
+    obj.forEach(o => {
+        if (o) {
+            Object.getOwnPropertyNames(o).forEach((item, index) => {
+                deleteOb(o[item]);
+            });
+        }
+    });
+}
 
 export default app;

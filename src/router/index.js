@@ -12,7 +12,7 @@ import Dashboard from '../views/dashboard/Index';
 // about
 import about from '../views/about/about';
 // feb-alive
-import febAlive from 'feb-alive';
+// import febAlive from 'feb-alive';
 // skyflow
 import Editor from '../views/skyflow/editor/';
 
@@ -40,7 +40,7 @@ import DataSourceCreate from '../views/datamanagement/datasource/DataSourceCreat
 import CreateDataset from '../views/datamanagement/dataset-create/index';
 import JupyterForm from '../views/datas/jupyterForm';
 import jupyterloading from '../views/datas/jupyterloading';
-febAlive.resetHistory();
+// febAlive.resetHistory();
 Vue.use(Router);
 
 /**
@@ -81,28 +81,35 @@ const router = new Router({
                 {
                     path: '/dashboard',
                     component: Dashboard,
-                    name: 'About',
+                    name: 'Dashboard',
                     meta: {
                         name: '',
                         breadcrumb: '首页',
-                        system: 'user'
+                        system: 'user',
+                        isRoot: true
                     }
                 },
                 // 新的数据集
                 {
                     path: '/datasManage',
+                    name: 'DataManage',
                     component: datasManager,
                     redirect: '/datasManage/datasList',
                     meta: {
                         name: '数据',
-                        breadcrumb: '数据'
+                        breadcrumb: '数据',
+                        isRoot: true,
+                        system: 'user'
                     },
                     children: [{
                         path: 'datasList',
+                        name: 'DataList',
                         component: datasList,
                         meta: {
                             name: '数据列表',
-                            breadcrumb: '数据列表'
+                            breadcrumb: '数据列表',
+                            system: 'user',
+                            isRoot: true
                         }
                     },
                     {
@@ -111,7 +118,8 @@ const router = new Router({
                         name: 'CreateDataSource',
                         meta: {
                             name: '新建数据源',
-                            breadcrumb: '新建数据源'
+                            breadcrumb: '新建数据源',
+                            system: 'user'
                         },
                         props: true
                     },
@@ -155,6 +163,7 @@ const router = new Router({
                     {
                         path: 'dataView/',
                         component: datasView,
+                        name: 'DataPreview',
                         meta: {
                             name: '数据集预览',
                             breadcrumb: '数据集预览'
@@ -164,6 +173,7 @@ const router = new Router({
                     {
                         path: 'create-dataset/:type',
                         component: CreateDataset,
+                        name: 'CreateDataset',
                         meta: {
                             name: '创建数据集',
                             breadcrumb: '创建数据集'
@@ -172,6 +182,7 @@ const router = new Router({
                     {
                         path: 'jupyter/:dataset',
                         component: JupyterForm,
+                        name: 'JupyterForm',
                         meta: {
                             name: '新建Jupyter任务',
                             breadcrumb: '新建Jupyter任务'

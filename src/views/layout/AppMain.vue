@@ -1,7 +1,7 @@
 <template>
     <section class="app-main">
         <div class="app-main-breadcrumb">
-            <SdxwBreadcrumb />
+            <SdxwBreadcrumb :breadcrumbs="breadcrumbHistory"/>
         </div>
         <div class="app-main-view">
             <!--            <feb-alive>-->
@@ -19,7 +19,8 @@ export default {
     computed: {
         ...mapState({
             guideVisible: state => state.app.guide.visible,
-            guideShown: state => state.app.guide.neverShow
+            guideShown: state => state.app.guide.neverShow,
+            breadcrumbHistory: state => state.app.breadcrumbHistory
         }),
         key() {
             return this.$route.name !== undefined
