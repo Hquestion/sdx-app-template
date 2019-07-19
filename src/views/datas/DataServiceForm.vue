@@ -134,9 +134,9 @@ export default {
     },
     data() {
         const resourceValidate = (rule, value, callback) => {
-            if (value.SPARK_DRIVER_CPUS === 0) {
+            if (value.SPARK_DRIVER_CPUS === 0 || Number.isNaN(value.SPARK_DRIVER_CPUS)) {
                 callback(new Error('需要配置驱动器CPU/内存'));
-            } else if (value.SPARK_EXECUTOR_CPUS === 0) {
+            } else if (value.SPARK_EXECUTOR_CPUS === 0 || Number.isNaN(value.SPARK_EXECUTOR_CPUS)) {
                 callback(new Error('需要配置执行器CPU/内存'));
             } else {
                 callback();
