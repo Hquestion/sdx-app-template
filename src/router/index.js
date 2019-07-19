@@ -40,6 +40,7 @@ import DataSourceCreate from '../views/datamanagement/datasource/DataSourceCreat
 import CreateDataset from '../views/datamanagement/dataset-create/index';
 import JupyterForm from '../views/datas/jupyterForm';
 import jupyterloading from '../views/datas/jupyterloading';
+import i18n from '../i18n';
 // febAlive.resetHistory();
 Vue.use(Router);
 
@@ -84,7 +85,7 @@ const router = new Router({
                     name: 'Dashboard',
                     meta: {
                         name: '',
-                        breadcrumb: '首页',
+                        breadcrumb: i18n.t('menu.Home'),
                         system: 'user',
                         isRoot: true
                     }
@@ -97,7 +98,7 @@ const router = new Router({
                     redirect: '/datasManage/datasList',
                     meta: {
                         name: '数据',
-                        breadcrumb: '数据',
+                        breadcrumb: i18n.t('menu.Data'),
                         isRoot: true,
                         system: 'user'
                     },
@@ -107,7 +108,7 @@ const router = new Router({
                         component: datasList,
                         meta: {
                             name: '数据列表',
-                            breadcrumb: '数据列表',
+                            breadcrumb: i18n.t('menu.Data'),
                             system: 'user',
                             isRoot: true
                         }
@@ -118,7 +119,7 @@ const router = new Router({
                         name: 'CreateDataSource',
                         meta: {
                             name: '新建数据源',
-                            breadcrumb: '新建数据源',
+                            breadcrumb: i18n.t('data.New_Data_Source'),
                             system: 'user'
                         },
                         props: true
@@ -166,7 +167,7 @@ const router = new Router({
                         name: 'DataPreview',
                         meta: {
                             name: '数据集预览',
-                            breadcrumb: '数据集预览'
+                            breadcrumb: i18n.t('data.Dataset_Preview')
                         },
                         props: true
                     },
@@ -176,7 +177,7 @@ const router = new Router({
                         name: 'CreateDataset',
                         meta: {
                             name: '创建数据集',
-                            breadcrumb: '创建数据集'
+                            breadcrumb: i18n.t('data.Create_dataset')
                         }
                     },
                     {
@@ -185,7 +186,7 @@ const router = new Router({
                         name: 'JupyterForm',
                         meta: {
                             name: '新建Jupyter任务',
-                            breadcrumb: '新建Jupyter任务'
+                            breadcrumb: i18n.t('data.New_Jupyter_Task')
                         }
                     }
                     ]

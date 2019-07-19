@@ -82,5 +82,11 @@
         "Copyright": "版权所有",
         "Record_No": "备案号：",
         "Please_enter_a_user_name": "请输入用户名"
+    },
+    "data": {
+        "New_Data_Source": "新建数据源",
+        "Dataset_Preview": "数据集预览",
+        "Create_dataset": "创建数据集",
+        "New_Jupyter_Task": "新建Jupyter任务"
     }
 }
