@@ -302,7 +302,6 @@ export default {
             this.users = item.users || [];
             this.groups = item.groups || [];
             this.shareType = item.shareType || '';
-            window.console.error(item);
         },
         // 自定义组件分享
         handleComponentShare(params) {

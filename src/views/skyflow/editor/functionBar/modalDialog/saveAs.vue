@@ -102,7 +102,7 @@ import ElOption from 'element-ui/lib/option';
 import auth from '@sdx/widget/lib/auth';
 
 import { getSkyflowTemplates } from '@sdx/utils/lib/api/skyflow';
-import { nameWithChineseValidator } from '@sdx/utils/lib/helper/validate';
+import { cNameValidate } from '@sdx/utils/lib/helper/validate';
 
 export default {
     name: 'SaveAs',
@@ -146,9 +146,7 @@ export default {
                         return value && ('' + value).trim();
                     }
                 }, {
-                    validator: nameWithChineseValidator, trigger: 'blur'
-                // }, {
-                //     validator: this.nameExistVaildator, trigger: 'blur'
+                    validator: cNameValidate, trigger: 'blur'
                 }],
                 description: [{
                     required: true,

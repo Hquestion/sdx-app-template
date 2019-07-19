@@ -56,7 +56,7 @@ export default {
             shareForm: {
                 selectedUsers: [...this.defaultUsers],
                 selectedGroups: [...this.defaultGroups],
-                shareType: this.defaultShareType
+                shareType: this.defaultShareType || 'PRIVATE'
             },
             authMap: {
                 image: 'APPLICATION:GLOBAL_IMAGE_BUTTON:ACCESS',
