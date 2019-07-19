@@ -69,9 +69,6 @@ store.dispatch('auth').then(() => {
 
     router.afterEach(to => {
         NProgress.done();
-        // if (to.name) {
-        //     store.commit('pushBreadcrumbHistory', to);
-        // }
     });
 
     // 生产环境错误日志
