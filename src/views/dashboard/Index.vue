@@ -45,7 +45,7 @@
                                                 <el-select
                                                     size="small"
                                                     v-model="gpuValue"
-                                                    placeholder="请选择"
+                                                    :placeholder="$t('dashboard.Please_select')"
                                                 >
                                                     <el-option
                                                         v-for="item in options"

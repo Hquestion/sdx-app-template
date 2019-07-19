@@ -48,7 +48,8 @@
         "hours_ago": "小时前",
         "hour_ago": "小时前",
         "operating_tasks": "运行中任务",
-        "number": "个"
+        "number": "个",
+        "Please_select": "请选择"
     },
     "menu": {
         "Home": "首页",

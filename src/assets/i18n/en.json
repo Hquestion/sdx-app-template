@@ -48,7 +48,8 @@
         "hours_ago": "Hours ago",
         "hour_ago": "Hour ago",
         "operating_tasks": "Operating tasks",
-        "number": "Number"
+        "number": "Number",
+        "Please_select": "Please select"
     },
     "menu": {
         "Home": "Home",
