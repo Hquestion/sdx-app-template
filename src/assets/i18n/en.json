@@ -71,5 +71,16 @@
         "MonitoringCenter": "Monitoring Center",
         "ResourceStatics": "Resource Statics",
         "ComponentState": "Component State"
+    },
+    "login": {
+        "Large_Data_Machine_Learning_Platform": "Large Data Machine Learning Platform",
+        "Welcome": "Welcome to",
+        "User_name": "User name",
+        "Password": "Password",
+        "Please_enter_the_password": "Please enter the password",
+        "Login": "Login",
+        "Copyright": "Copyright",
+        "Record_No": "Record No:",
+        "Please_enter_a_user_name": "Please enter a user name"
     }
 }
