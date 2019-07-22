@@ -125,7 +125,6 @@ export default {
         },
         // 文件列表
         getFlieList(path, ownerId) {
-            window.console.log(ownerId, 888);
             getFilesList({ path, ownerId })
                 .then(data => {
                     if (data.children) {

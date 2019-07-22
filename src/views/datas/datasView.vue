@@ -657,7 +657,7 @@ export default {
                     this.isPreview = false;
                     this.getPreview(params);
                     this.imageUrl = '';
-                    window.console.log(data, 'o');
+
                     this.previewData.path = data.path;
                 } else if (data.is_dir) {
                     this.isPreview = false;
