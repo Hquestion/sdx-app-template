@@ -908,7 +908,7 @@ export default {
         }
 
         .wd140 {
-            width: 140px;
+            width: 120px;
             margin-right: 10px;
             margin-left: 5px;
         }

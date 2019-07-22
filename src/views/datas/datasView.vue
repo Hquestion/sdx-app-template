@@ -237,6 +237,7 @@
                     :datasource="datasource"
                     @viewData="handleViewData"
                     @expandNode="expandNode"
+                    :ownerId="viewData.creator"
                 />
                 <DataSetPreview
                     :data="showData"
