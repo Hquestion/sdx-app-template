@@ -516,7 +516,7 @@ export default {
         getVersionList() {
             let params = {
                 order: 'desc',
-                orderBy: 'updatedAt',
+                orderBy: 'apiCallNum',
                 start: 1,
                 count: 10
             };
