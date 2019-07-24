@@ -3,7 +3,6 @@ import Vue from 'vue';
 import App from './App';
 import router from './router';
 import store from './store';
-import ElementUI from 'element-ui';
 import NProgress from 'nprogress'; // Progress 进度条
 import 'nprogress/nprogress.css'; // Progress 进度条 样式
 import 'normalize.css/normalize.css'; // normalize.css 样式格式化
@@ -18,6 +17,7 @@ import 'assets/fonts/skyflow/iconfont.css'; // 引入自己下载的iconfont
 import EmitAsync from './plugins/asyncEmit';
 import directives from '@/directives';
 import i18n from './i18n';
+import ElementUI from 'element-ui';
 import SdxUI from '@sdx/ui';
 import SdxWidget from '@sdx/widget';
 import shareCenter from '@sdx/utils/lib/helper/shareCenter';
