@@ -235,7 +235,7 @@ export function uploadSchemaFile(path) {
         schema_file_path: path
     }).then(res => new Promise((resolve, reject) => {
         if (res.success) {
-            resolve(res);
+            resolve(res.data);
         } else {
             Notification.error({ title: '错误', message: res.msg }); reject(res);
         }
