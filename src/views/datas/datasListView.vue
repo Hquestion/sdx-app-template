@@ -15,7 +15,7 @@
                     <svg
                         class="alSvgIcon"
                         aria-hidden="true"
-                        v-if="v.mimeType.indexOf('image/')"
+                        v-if="v.mimeType && v.mimeType.indexOf('image/')"
                     >
                         <use :xlink:href="getExt(v.name,v.is_dir)" />
                     </svg>
