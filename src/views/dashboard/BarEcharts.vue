@@ -189,7 +189,7 @@ export default {
                     } else if (model.includes(arr[0].type)) {
                         this.$router.push(`/sdxv-model-manage/versionList/${arr[0].uuid}`);
                     } else if (skyflow.includes(arr[0].type)) {
-                        window.open(`/#/editor/${arr[0].uuid}`);
+                        window.open(`/#/editor/${arr[0].projectId}/${arr[0].uuid}`);
                     }
                 }
             });
