@@ -65,7 +65,6 @@ export default {
                                 click(e) {
                                     e.preventDefault();
                                     e.stopPropagation();
-                                    debugger;
                                     if (!isChild) {
                                         self.activeMenus = [];
                                     }
@@ -113,7 +112,6 @@ export default {
                             }
                         }) && item.cancelable;
                         const menuClass = isMenuActive ? 'active' : '';
-                        debugger;
                         return (
                             <li { ...event } class={['cascade-dropdown-item', `${menuClass}`]} key={index}>
                                 <span class="menu-label">
