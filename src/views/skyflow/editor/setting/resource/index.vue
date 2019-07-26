@@ -88,8 +88,8 @@ export default {
                 };
             },
             set(nval) {
-                this.resource.EXECUTOR_CPUS = this.coreToMicroCore(nval.cpu);
-                this.resource.EXECUTOR_MEMORY = this.GBToByte(nval.memory);
+                this.resource.EXECUTOR_CPUS = this.coreToMicroCore(nval.cpu || 0);
+                this.resource.EXECUTOR_MEMORY = this.GBToByte(nval.memory || 0);
             }
         },
         executorGPU: {
@@ -101,8 +101,8 @@ export default {
                 };
             },
             set(nval) {
-                this.resource.EXECUTOR_GPUS = nval.count;
-                this.resource.GPU_MODEL = nval.label;
+                this.resource.EXECUTOR_GPUS = nval.count || 0;
+                this.resource.GPU_MODEL = nval.label || '';
             }
         },
         sparkDriverCPU: {
@@ -114,8 +114,8 @@ export default {
                 } : null;
             },
             set(nval) {
-                this.resource.SPARK_DRIVER_CPUS = this.coreToMicroCore(nval.cpu);
-                this.resource.SPARK_DRIVER_MEMORY = this.GBToByte(nval.memory);
+                this.resource.SPARK_DRIVER_CPUS = this.coreToMicroCore(nval.cpu || 0);
+                this.resource.SPARK_DRIVER_MEMORY = this.GBToByte(nval.memory || 0);
             }
         },
         sparkExecutorCPU: {
@@ -127,8 +127,8 @@ export default {
                 } : null;
             },
             set(nval) {
-                this.resource.SPARK_EXECUTOR_CPUS = this.coreToMicroCore(nval.cpu);
-                this.resource.SPARK_EXECUTOR_MEMORY = this.GBToByte(nval.memory);
+                this.resource.SPARK_EXECUTOR_CPUS = this.coreToMicroCore(nval.cpu || 0);
+                this.resource.SPARK_EXECUTOR_MEMORY = this.GBToByte(nval.memory || 0);
             }
         }
     },
