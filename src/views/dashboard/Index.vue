@@ -669,7 +669,9 @@ export default {
                             height: 30px !important;
                         }
                         .el-select {
-                            width: 94px;
+                            // width: 94px;
+                            width: 64%;
+                            min-width: 94px;
                         }
                         .el-input__inner {
                             padding: 0 10px 0 0;
