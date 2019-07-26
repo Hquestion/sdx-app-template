@@ -558,7 +558,7 @@ export default {
                     }
                     for (let i = 0; i < items.length; i++) {
                         name.push(items[i].name);
-                        nameId.push({ name: items[i].name, type: items[i].type, uuid: items[i].uuid });
+                        nameId.push({ name: items[i].name, type: items[i].type, uuid: items[i].uuid, projectId: items[i].projectId });
                         if (nval === 'CPU') {
                             this.taskXname = 'core';
                             data.push(Math.ceil(items[i].quota.cpu / 1000));

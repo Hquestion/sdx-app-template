@@ -18,6 +18,7 @@ import {
     nodeResultStateIconConf
 } from '../js/skyflowConfig';
 import { TASK_KIND } from '../util/const';
+import { dateFormatter } from '@sdx/utils/src/helper/transform';
 
 const TYPES = {
     MAIN: 'main',
@@ -381,12 +382,12 @@ export default {
                     </tr><tr>
                         <td class='detail-item-label'>开始时间：</td>
                         <td class='detail-item-value'>${(node.executeDetails &&
-                          node.executeDetails.startTime) ||
+                          node.executeDetails.startTime && dateFormatter(node.executeDetails.startTime)) ||
                           '--:--:--'}</td>
                     </tr><tr>
                         <td class='detail-item-label'>结束时间：</td>
                         <td class='detail-item-value'>${(node.executeDetails &&
-                          node.executeDetails.stopTime) ||
+                          node.executeDetails.stopTime && dateFormatter(node.executeDetails.stopTime)) ||
                           '--:--:--'}</td>
                     </tr><tr>
                         <td class='detail-item-label'>运行时长：</td>

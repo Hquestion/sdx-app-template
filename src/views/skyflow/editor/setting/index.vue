@@ -22,7 +22,6 @@
             :resource="node.resource"
             :is-editable="isEditable"
             @updateResource="handleResourceUpdate"
-            :gpuModel.sync="node.gpu_model"
             :taskKind="node.taskKind"
         />
     </div>
@@ -87,10 +86,6 @@ export default {
 .component-setting input {
     border-radius: 0;
     width: 210px;
-}
-.component-setting .el-form-item {
-    /* margin: 0 18px 0 20px; */
-    /* margin-bottom: 0; */
 }
 .component-setting .el-input-number__decrease {
     border-radius: 0;

@@ -13,6 +13,7 @@
                     v-model="executorCPU"
                     type="cpu"
                     :required="true"
+                    :read-only="!isEditable"
                 />
             </div>
             <div
@@ -22,6 +23,8 @@
                 <ResourceConfig
                     v-model="executorGPU"
                     type="gpu"
+                    :show-error="false"
+                    :read-only="!isEditable"
                 />
             </div>
             <div
@@ -33,6 +36,7 @@
                     type="cpu"
                     cpulabel="Driver CPU/内存"
                     :required="true"
+                    :read-only="!isEditable"
                 />
             </div>
             <div
@@ -44,6 +48,7 @@
                     type="cpu"
                     cpulabel="Executor CPU/内存"
                     :required="true"
+                    :read-only="!isEditable"
                 />
             </div>
         </div>
@@ -65,10 +70,6 @@ export default {
             type: Boolean,
             default: true
         },
-        gpuModel: {
-            type: String,
-            default: ''
-        },
         taskKind: {
             type: Number,
             default: 1
@@ -78,14 +79,6 @@ export default {
         ResourceConfig
     },
     computed: {
-        _gpuModel: {
-            get() {
-                return this.gpuModel;
-            },
-            set(nval) {
-                this.$emit('update:gpuModel', nval);
-            }
-        },
         executorCPU: {
             get() {
                 return TASK_KIND[this.taskKind] === 'SPARK' ? null : {
@@ -95,21 +88,21 @@ export default {
                 };
             },
             set(nval) {
-                this.resource.EXECUTOR_CPUS = this.coreToMicroCore(nval.cpu);
-                this.resource.EXECUTOR_MEMORY = this.GBToByte(nval.memory);
+                this.resource.EXECUTOR_CPUS = this.coreToMicroCore(nval.cpu || 0);
+                this.resource.EXECUTOR_MEMORY = this.GBToByte(nval.memory || 0);
             }
         },
         executorGPU: {
             get() {
                 return TASK_KIND[this.taskKind] === 'SPARK' ? null : {
                     count: this.resource.EXECUTOR_GPUS,
-                    label: this._gpuModel,
-                    uuid: this._gpuModel + '-' + this.resource.EXECUTOR_GPUS
+                    label: this.resource.GPU_MODEL,
+                    uuid: this.resource.GPU_MODEL + '-' + this.resource.EXECUTOR_GPUS
                 };
             },
             set(nval) {
-                this.resource.EXECUTOR_GPUS = nval.count;
-                this._gpuModel = nval.label;
+                this.resource.EXECUTOR_GPUS = nval.count || 0;
+                this.resource.GPU_MODEL = nval.label || '';
             }
         },
         sparkDriverCPU: {
@@ -121,8 +114,8 @@ export default {
                 } : null;
             },
             set(nval) {
-                this.resource.SPARK_DRIVER_CPUS = this.coreToMicroCore(nval.cpu);
-                this.resource.SPARK_DRIVER_MEMORY = this.GBToByte(nval.memory);
+                this.resource.SPARK_DRIVER_CPUS = this.coreToMicroCore(nval.cpu || 0);
+                this.resource.SPARK_DRIVER_MEMORY = this.GBToByte(nval.memory || 0);
             }
         },
         sparkExecutorCPU: {
@@ -134,8 +127,8 @@ export default {
                 } : null;
             },
             set(nval) {
-                this.resource.SPARK_EXECUTOR_CPUS = this.coreToMicroCore(nval.cpu);
-                this.resource.SPARK_EXECUTOR_MEMORY = this.GBToByte(nval.memory);
+                this.resource.SPARK_EXECUTOR_CPUS = this.coreToMicroCore(nval.cpu || 0);
+                this.resource.SPARK_EXECUTOR_MEMORY = this.GBToByte(nval.memory || 0);
             }
         }
     },

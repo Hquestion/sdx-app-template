@@ -110,13 +110,16 @@ export default {
                 justify-content: space-between;
                 span:first-child{
                     font-size:14px;
-                    color:#5C89FF;
+                    color:#606266;
                     font-family:SourceHanSansCN-Normal;
                     max-width: 78%;
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;
                     cursor: pointer;
+                }
+                span:first-child:hover{
+                    color:#5C89FF;
                 }
                 span:last-child{
                     font-size:12px;

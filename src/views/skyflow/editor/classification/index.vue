@@ -196,8 +196,15 @@ export default {
             this.fetchDataList('favorite');
         }
     },
-    created() {
-        this.fetchDataList(this.currentLabel);
+    watch: {
+        processType: {
+            immediate: true,
+            handler(nval) {
+                if (nval) {
+                    this.fetchDataList(this.currentLabel);
+                }
+            }
+        }
     }
 };
 </script>

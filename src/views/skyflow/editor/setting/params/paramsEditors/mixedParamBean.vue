@@ -176,6 +176,7 @@ export default {
         border: 1px dashed rgba(222, 228, 236, 1);
         color: rgba(206, 214, 222, 1);
         margin-top: 20px;
+        padding: 0;
         .icon-jiahao {
             color: #D2DEEA;
             font-size: 36px;

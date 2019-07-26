@@ -32,6 +32,7 @@
                     :is-editable="isEditable"
                     ref="classification"
                     :processType="processType"
+                    v-loading="!processType"
                 />
             </div>
             <div
@@ -1221,7 +1222,9 @@ export default {
                 let parsedParam = {};
                 Object.keys(params).forEach(item => {
                     const conf = confs.find(c => c.name === item);
-                    parsedParam[item] = parse(params[item], conf.ptype);
+                    if (conf) {
+                        parsedParam[item] = parse(params[item], conf.ptype);
+                    }
                 });
                 node.params = parsedParam;
             }
@@ -1254,9 +1257,9 @@ export default {
                 };
                 this.isCrontab = !!data.crontab;
                 this.flowState = data.state || nodeState.READY;
-                this.processType = data.processType;
+                this.processType = data.processType || 'PATCH';
                 // 判断是否在别人画布中
-                this.isCurrentUser = this.currentUser.uuid === data.user;
+                this.isCurrentUser = this.currentUser.uuid === data.userId;
                 this.zoom = (model && model.zoom) || 100;
                 this.updateNodes((model && model.nodes) || []);
                 this.updateLinks((model && model.links) || [], true);
@@ -1284,12 +1287,12 @@ export default {
     },
     watch: {
         activeNodeId(val, oldval) {
-            // 切换节点，触发schema推导
+            // 切换节点时，对数据做类型转换
             if (oldval) {
                 this.transformParams(oldval);
             }
+            // 切换节点，触发schema推导
             if (this.isChangeSetting && this.activeNodeId && this.isEditable) {
-                // 切换节点时，对数据做类型转换
                 this.handleSchemaDerivation();
                 this.isChangeSetting = false;
             }
