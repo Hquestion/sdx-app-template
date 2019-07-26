@@ -149,9 +149,7 @@ export function getDataSourceOptionsNew(kind) {
 
 export function fetchDbTablesBySource(datasource) {
     return httpService.get('/api/v1/datasource/dbTables', {
-        params: {
-            datasource
-        }
+        datasource
     }).then(res => new Promise((resolve, reject) => { if (res.success) { resolve(res); } else { Notification.error({ title: '错误', message: res.msg }); reject(res); } }));
 }
 
