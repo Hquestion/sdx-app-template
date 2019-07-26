@@ -101,6 +101,7 @@
                             accept=".csv"
                             upload-btn-label="选择文件"
                             v-model="params.schemaFile"
+                            :string-model="true"
                         />
                         <a
                             :href="STATIC_PATH + 'static/sample_schema.csv'"
@@ -222,7 +223,7 @@ export default {
             params: {
                 samplingNum: this.$store.state.dataset.form.structDataSetting.samplingNum || 1000,
                 sampling: this.$store.state.dataset.form.structDataSetting.sampling || 'topN',
-                schemaFile: this.$store.state.dataset.form.structDataSetting.schemaFile || [],
+                schemaFile: this.$store.state.dataset.form.structDataSetting.schemaFile || '',
                 schema: this.$store.state.dataset.form.structDataSetting.schema || 'auto',
                 schemaList: this.$store.state.dataset.form.structDataSetting.schemaList || [],
                 schemaChanged: this.$store.state.dataset.form.structDataSetting.schemaChanged || false

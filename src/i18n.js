@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
 import { setLang } from '@sdx/utils/lib/locale';
+import locale from 'element-ui/lib/locale';
 
 Vue.use(VueI18n);
 
@@ -33,11 +34,17 @@ if (!cachedLang) {
 
 setLang(cachedLang);
 
+// 根据当前语言加载element-ui的国际化资源
+const elementLocale = require(`element-ui/lib/locale/lang/${cachedLang}`).default;
+locale.use(elementLocale);
+
 const i18n = new VueI18n({
     locale: cachedLang,
     fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'zh-CN',
     messages: loadLocaleMessages()
 });
+
+i18n.mergeLocaleMessage(cachedLang, elementLocale);
 
 i18n.mergeLocaleMessage('en', enErrorMessages);
 i18n.mergeLocaleMessage('zh-CN', cnErrorMessages);

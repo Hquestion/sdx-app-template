@@ -81,10 +81,12 @@
                 <div
                     class="avatar-box"
                 >
-                    <img
-                        class="user-avatar"
-                        src="../../assets/images/user-s.png"
+                    <svg
+                        class="user-icon"
+                        aria-hidden="true"
                     >
+                        <use xlink:href="#iconicon-UserInfo" />
+                    </svg>
                     <i class="el-icon-caret-bottom" />
                 </div>
             </div>
@@ -98,10 +100,12 @@
                 >
                     <div class="account-dropdown-item">
                         <div class="dropdown-avatar-box">
-                            <img
-                                class="user-avatar"
-                                src="../../assets/images/user-s.png"
+                            <svg
+                                class="user-icon"
+                                aria-hidden="true"
                             >
+                                <use xlink:href="#iconicon-UserInfo" />
+                            </svg>
                         </div>
                         <div class="account-info">
                             <div class="user-name">
@@ -273,13 +277,21 @@ export default {
     }
 }
 .avatar-container {
+    .user-icon {
+        width: 30px;
+        height: 30px;
+        fill: currentColor;
+        overflow: hidden;
+    }
     .avatar-wrapper {
         cursor: pointer;
         position: relative;
         .avatar-box {
             position: relative;
+            display: flex;
             width: 45px;
             height: 30px;
+            align-items: center;
             .user-avatar {
                 width: 30px;
                 height: 30px;
@@ -326,6 +338,12 @@ export default {
                 position: absolute;
                 bottom: 0;
                 right: 0;
+            }
+            .user-icon {
+                width: 30px;
+                height: 30px;
+                fill: currentColor;
+                overflow: hidden;
             }
         }
 

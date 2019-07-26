@@ -18,7 +18,8 @@ export default {
                                 let value = this.value || '';
                                 const event = {
                                     on: {
-                                        click: () => {
+                                        click: e => {
+                                            e.stopPropagation();
                                             self.menu.excuteAction('FILTER', 'GT', value);
                                         }
                                     }
@@ -26,14 +27,22 @@ export default {
                                 const inputEvent = {
                                     on: {
                                         input(e) {
-                                            value = e;
+                                            value = e.target.value;
+                                        },
+                                        click(e) {
+                                            e.stopPropagation();
                                         }
+                                    }
+                                };
+                                const stopPropagation = {
+                                    on: {
+                                        click: e => e.stopPropagation()
                                     }
                                 };
                                 return (
                                     <div
-                                        style="display: flex;width:200px;align-items: center;justify-content: space-between;">
-                                        <el-input type="text" {...inputEvent} style="width:130px"/>
+                                        style="display: flex;width:200px;align-items: center;justify-content: space-between;" {...stopPropagation}>
+                                        <input type="text" {...inputEvent} style="width:130px;height: 32px;border: 1px solid #dedede;padding:0 10px;"/>
                                         <el-button type="primary" size="small" {...event}
                                             style="margin-left: 10px;">确定
                                         </el-button>
@@ -62,14 +71,14 @@ export default {
                                 const inputEvent = {
                                     on: {
                                         input(e) {
-                                            value = e;
+                                            value = e.target.value;
                                         }
                                     }
                                 };
                                 return (
                                     <div
                                         style="display: flex;width:200px;align-items: center;justify-content: space-between;">
-                                        <el-input type="text" {...inputEvent} style="width:130px"/>
+                                        <input type="text" {...inputEvent} style="width:130px;height: 32px;border: 1px solid #dedede;padding:0 10px;"/>
                                         <el-button type="primary" size="small" {...event}
                                             style="margin-left: 10px;">确定
                                         </el-button>
@@ -98,14 +107,14 @@ export default {
                                 const inputEvent = {
                                     on: {
                                         input(e) {
-                                            value = e;
+                                            value = e.target.value;
                                         }
                                     }
                                 };
                                 return (
                                     <div
                                         style="display: flex;width:200px;align-items: center;justify-content: space-between;">
-                                        <el-input type="text" {...inputEvent} style="width:130px"/>
+                                        <input type="text" {...inputEvent} style="width:130px;height: 32px;border: 1px solid #dedede;padding:0 10px;"/>
                                         <el-button type="primary" size="small" {...event}
                                             style="margin-left: 10px;">确定
                                         </el-button>
@@ -159,14 +168,14 @@ export default {
                                 const inputEvent = {
                                     on: {
                                         input(e) {
-                                            value = e;
+                                            value = e.target.value;
                                         }
                                     }
                                 };
                                 return (
                                     <div
                                         style="display: flex;width:200px;align-items: center;justify-content: space-between;">
-                                        <el-input type="text" {...inputEvent} style="width:130px"/>
+                                        <input type="text" {...inputEvent} style="width:130px;height: 32px;border: 1px solid #dedede;padding:0 10px;"/>
                                         <el-button type="primary" size="small" {...event}
                                             style="margin-left: 10px;">确定
                                         </el-button>
@@ -206,14 +215,14 @@ export default {
                                         const inputEvent = {
                                             on: {
                                                 input(e) {
-                                                    value = e;
+                                                    value = e.target.value;
                                                 }
                                             }
                                         };
                                         return (
                                             <div
                                                 style="display: flex;width:200px;align-items: center;justify-content: space-between;">
-                                                <el-input type="text" {...inputEvent} style="width:130px"/>
+                                                <input type="text" {...inputEvent} style="width:130px;height: 32px;border: 1px solid #dedede;padding:0 10px;"/>
                                                 <el-button type="primary" size="small" {...event}
                                                     style="margin-left: 10px;">确定
                                                 </el-button>
@@ -287,14 +296,14 @@ export default {
                                 const inputEvent = {
                                     on: {
                                         input(e) {
-                                            value = e;
+                                            value = e.target.value;
                                         }
                                     }
                                 };
                                 return (
                                     <div
                                         style="display: flex;width:200px;align-items: center;justify-content: space-between;">
-                                        <el-input type="text" {...inputEvent} style="width:130px"/>
+                                        <input type="text" {...inputEvent} style="width:130px;height: 32px;border: 1px solid #dedede;padding:0 10px;"/>
                                         <el-button type="primary" size="small" {...event}
                                             style="margin-left: 10px;">确定
                                         </el-button>
@@ -323,7 +332,7 @@ export default {
                                 const inputEvent = {
                                     on: {
                                         input(e) {
-                                            value = e;
+                                            value = e.target.value;
                                         }
                                     }
                                 };
@@ -331,7 +340,7 @@ export default {
                                     <div
                                         style="display: flex;width:240px;align-items: center;justify-content: space-between;">
                                         <span>包含</span>
-                                        <el-input type="text" {...inputEvent} style="width:130px"/>
+                                        <input type="text" {...inputEvent} style="width:130px;height: 32px;border: 1px solid #dedede;padding:0 10px;"/>
                                         <el-button type="primary" size="small" {...event}
                                             style="margin-left: 10px;">确定
                                         </el-button>
@@ -376,14 +385,14 @@ export default {
                                         const inputEvent = {
                                             on: {
                                                 input(e) {
-                                                    value = e;
+                                                    value = e.target.value;
                                                 }
                                             }
                                         };
                                         return (
                                             <div
                                                 style="display: flex;width:200px;align-items: center;justify-content: space-between;">
-                                                <el-input type="text" {...inputEvent} style="width:130px"/>
+                                                <input type="text" {...inputEvent} style="width:130px;height: 32px;border: 1px solid #dedede;padding:0 10px;"/>
                                                 <el-button type="primary" size="small" {...event}
                                                     style="margin-left: 10px;">确定
                                                 </el-button>
