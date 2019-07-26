@@ -57,8 +57,9 @@ export default {
             immediate: true,
             handler(val) {
                 if (this.param.name === 'get_table_name') {
-                    fetchDbTablesBySource(this.param.id).then(res => {
+                    fetchDbTablesBySource(this.param.id).then(data => {
                         let arr = [];
+                        let res = data.data;
                         for (let i = 0; i < res.table_name.length; i++) {
                             arr.push({ value: res.table_name[i], label: res.table_name[i] });
                         }
