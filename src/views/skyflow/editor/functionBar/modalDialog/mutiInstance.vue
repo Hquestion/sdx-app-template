@@ -112,7 +112,7 @@ export default {
 <style rel="stylesheet/scss" lang="scss" >
 .mutil-container {
     .el-input-number {
-        line-height: 30px;
+        line-height: 34px;
     }
     .el-input-number__decrease {
         border-radius: 0;

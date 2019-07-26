@@ -693,7 +693,7 @@ export const contextMenuClassification = [{
 }];
 
 export const resourceInfo = [{
-    name: 'SPARK_DRIVER_CORES',
+    name: 'SPARK_DRIVER_CPUS',
     label: 'Driver CPU',
     unit: '核',
     type: 'cpu',
@@ -707,7 +707,7 @@ export const resourceInfo = [{
     step: 1,
     min: 0
 }, {
-    name: 'SPARK_EXECUTOR_CORES',
+    name: 'SPARK_EXECUTOR_CPUS',
     label: 'Executor CPU',
     unit: '核',
     type: 'cpu',
@@ -728,52 +728,31 @@ export const resourceInfo = [{
     step: 1,
     min: 1
 }, {
-    name: 'SPARK_MAX_GPUS',
-    label: 'GPU',
-    unit: '块',
-    type: 'gpu',
-    step: 1,
-    min: 0
-}, {
-    name: 'TF_MASTER_CPU_CORES',
+    name: 'TF_MASTER_CPUS',
     label: '主节点 CPU',
     unit: '核',
     type: 'cpu',
     step: 1,
     min: 0
 }, {
-    name: 'TF_MASTER_MEMORY_GB',
+    name: 'TF_MASTER_MEMORY',
     label: '主节点 内存',
     unit: 'GB',
     type: 'mem',
     step: 1,
     min: 0
 }, {
-    name: 'TF_MASTER_GPU',
-    label: '主节点 GPU',
-    unit: '块',
-    type: 'gpu',
-    step: 1,
-    min: 0
-}, {
-    name: 'TF_PS_CPU_CORES',
+    name: 'TF_PS_CPUS',
     label: '参数服务器 CPU',
     unit: '核',
     type: 'cpu',
     step: 1,
     min: 0
 }, {
-    name: 'TF_PS_MEMORY_GB',
+    name: 'TF_PS_MEMORY',
     label: '参数服务器 内存',
     unit: 'GB',
     type: 'mem',
-    step: 1,
-    min: 0
-}, {
-    name: 'TF_PS_GPU',
-    label: '参数服务器 GPU',
-    unit: '块',
-    type: 'gpu',
     step: 1,
     min: 0
 }, {
@@ -784,14 +763,14 @@ export const resourceInfo = [{
     step: 1,
     min: 0
 }, {
-    name: 'TF_WORKER_CPU_CORES',
+    name: 'TF_WORKER_CPUS',
     label: '计算节点 CPU',
     unit: '核',
     type: 'cpu',
     step: 1,
     min: 0
 }, {
-    name: 'TF_WORKER_MEMORY_GB',
+    name: 'TF_WORKER_MEMORY',
     label: '计算节点 内存',
     unit: 'GB',
     type: 'mem',
@@ -819,7 +798,7 @@ export const resourceInfo = [{
     step: 1,
     min: 1
 }, {
-    name: 'EXECUTOR_CPU_CORES',
+    name: 'EXECUTOR_CPUS',
     label: 'CPU',
     unit: '核',
     type: 'cpu',
@@ -833,7 +812,7 @@ export const resourceInfo = [{
     step: 1,
     min: 0
 }, {
-    name: 'EXECUTOR_MEMORY_GB',
+    name: 'EXECUTOR_MEMORY',
     label: '内存',
     unit: 'GB',
     type: 'mem',

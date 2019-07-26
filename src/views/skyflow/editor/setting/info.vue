@@ -17,7 +17,7 @@
         </div>
         <div>
             <span>创建人</span>
-            <span>{{ result.user.fullname }}</span>
+            <span>{{ result.user.fullName }}</span>
         </div>
         <div>
             <span>创建时间</span>

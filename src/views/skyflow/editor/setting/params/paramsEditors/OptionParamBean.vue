@@ -39,7 +39,7 @@
 import baseMixins from './editorBaseMixins';
 import fetch from 'utils/fetch';
 // import { mapState } from 'vuex';
-import { fetchDbTablesBySource } from '@sdx/utils/lib/api/skyflow';
+import { fetchDbTablesBySource } from '../../../../../datas/rely/dataSourceApi';
 export default {
     mixins: [baseMixins],
     data() {
