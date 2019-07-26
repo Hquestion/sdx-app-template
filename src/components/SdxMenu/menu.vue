@@ -30,7 +30,7 @@
             >
                 <span
                     class="main-menu-icon"
-                    :class="item.icon"
+                    :class="menu_is_active(item) ? item.activeIcon : item.icon"
                 />{{ item.name }}
             </el-menu-item>
         </router-link>
@@ -83,8 +83,9 @@ export default {
 }
 
 .el-menu .el-menu-item {
-    &:hover, &:active {
+    &:hover, &:active, &:focus {
         background: linear-gradient(-90deg, #6B69F8 0%, #4781F8 98%);
+        border-radius: $border-radius;
     }
 }
 .el-menu,
@@ -99,8 +100,9 @@ export default {
         .el-menu-item {
             padding-left: 62px !important;
         }
-        &:hover, &:active {
+        &:hover, &:active, &:focus {
             background: linear-gradient(-90deg, #6B69F8 0%, #4781F8 98%);
+            border-radius: $border-radius;
         }
     }
 

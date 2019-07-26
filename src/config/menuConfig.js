@@ -5,36 +5,42 @@ const leftmenu = [
     {
         name: i18n.t('menu.Home'),
         icon: 'iconfont iconicon-home',
+        activeIcon: 'iconfont iconicon-home-selected',
         path: '/dashboard',
         auth: permissions.DASHBOARD_MENU_ACCESS
     },
     {
         name: i18n.t('menu.Data'),
         icon: 'iconfont iconicon-data',
+        activeIcon: 'iconfont iconicon-data-selected',
         path: '/datasManage',
         auth: permissions.DATA_MENU_ACCESS
     },
     {
         name: i18n.t('menu.Project'),
         icon: 'iconfont iconicon-project',
+        activeIcon: 'iconfont iconicon-project-selected',
         path: '/sdxv-project-manage',
         auth: permissions.PROJECT_MENU_ACCESS
     },
     {
         name: i18n.t('menu.SkyFlow'),
         icon: 'iconfont iconicon-Skyflow',
+        activeIcon: 'iconfont iconicon-Skyflow-selected',
         path: '/sdxv-skyflow',
         auth: permissions.SKYFLOW_MENU_ACCESS
     },
     {
         name: i18n.t('menu.Model'),
         icon: 'iconfont iconicon-model',
+        activeIcon: 'iconfont iconicon-model-selected',
         path: '/sdxv-model-manage',
         auth: permissions.MODEL_MENU_ACCESS
     },
     {
         name: i18n.t('menu.AssetsManage'),
         icon: 'iconfont iconicon-zichanguanli',
+        activeIcon: 'iconfont iconicon-zichanguanli-selected',
         children: [
             {
                 name: i18n.t('menu.TaskManage'),
@@ -59,12 +65,14 @@ const manageMenus = [
     {
         name: i18n.t('menu.ResourceManage'),
         icon: 'iconfont iconicon-ziyuanguanli1',
+        activeIcon: 'iconfont iconicon-ziyuanguanli-selected1',
         path: '/sdxv-resource-manage',
         auth: permissions.RESOURCE_MENU_ACCESS
     },
     {
         name: i18n.t('menu.UserManage'),
         icon: 'iconfont iconicon-yonghuguanli1',
+        activeIcon: 'iconfont iconicon-yonghuguanli1-selected',
         path: '/user',
         auth: permissions.USER_MENU_ACCESS,
         children: [
@@ -81,6 +89,7 @@ const manageMenus = [
     {
         name: i18n.t('menu.Permission'),
         icon: 'iconfont iconicon-quanxianguanli',
+        activeIcon: 'iconfont iconicon-quanxianguanli-selected',
         path: '/rights',
         auth: permissions.PERMISSION_MENU_ACCESS,
         children: [
@@ -101,6 +110,7 @@ const manageMenus = [
     {
         name: i18n.t('menu.MonitoringCenter'),
         icon: 'iconfont iconicon-jiankongzhongxin1',
+        activeIcon: 'iconfont iconicon-jiankongzhongxin1-selected',
         auth: permissions.SYSTEM_MENU_ACCESS,
         path: '/monitor',
         children: [
