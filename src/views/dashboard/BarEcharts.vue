@@ -123,7 +123,7 @@ export default {
                             show: false
                         },
                         axisLabel: {
-                            color: '#5C89FF',
+                            color: '#606266',
                             formatter: value => this.judgeCharacter(value)
                         },
                         triggerEvent: true
