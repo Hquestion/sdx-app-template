@@ -14,6 +14,7 @@
                     type="cpu"
                     :required="true"
                     :read-only="!isEditable"
+                    :data-ready="true"
                 />
             </div>
             <div
@@ -25,6 +26,7 @@
                     type="gpu"
                     :show-error="false"
                     :read-only="!isEditable"
+                    :data-ready="true"
                 />
             </div>
             <div
@@ -37,6 +39,7 @@
                     cpulabel="Driver CPU/内存"
                     :required="true"
                     :read-only="!isEditable"
+                    :data-ready="true"
                 />
             </div>
             <div
@@ -49,6 +52,7 @@
                     cpulabel="Executor CPU/内存"
                     :required="true"
                     :read-only="!isEditable"
+                    :data-ready="true"
                 />
             </div>
         </div>
