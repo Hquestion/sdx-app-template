@@ -1222,7 +1222,9 @@ export default {
                 let parsedParam = {};
                 Object.keys(params).forEach(item => {
                     const conf = confs.find(c => c.name === item);
-                    parsedParam[item] = parse(params[item], conf.ptype);
+                    if (conf) {
+                        parsedParam[item] = parse(params[item], conf.ptype);
+                    }
                 });
                 node.params = parsedParam;
             }

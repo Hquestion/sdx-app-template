@@ -37,7 +37,7 @@
 <script>
 import baseMixins from './editorBaseMixins';
 import Validator from 'async-validator';
-import { isDatasetNameExist } from '@sdx/utils/lib/api/skyflow';
+import { isDatasetNameExist } from '../../../../../datas/rely/dataSourceApi';
 export default {
     mixins: [baseMixins],
     data() {
