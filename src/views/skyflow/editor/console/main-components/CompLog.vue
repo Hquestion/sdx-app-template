@@ -10,9 +10,9 @@
             <div class="item">
                 <pre>
                 <div
-v-for="(item, index) in compLog"
-:key="index"
->{{ item }}</div>
+                    v-for="(item, index) in compLog"
+                    :key="index"
+                >{{ item }}</div>
             </pre>
             </div>
         </div>
@@ -22,6 +22,7 @@ v-for="(item, index) in compLog"
 <script>
 import { getCompLog } from '@sdx/utils/lib/api/skyflow';
 import { nodeState as nodeStateConf } from '../../js/skyflowConfig';
+
 export default {
     name: 'CompLog',
     componentName: 'CompLog',
@@ -115,38 +116,44 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.comp-log {
-    font-size: 14px;
-    color: #3f5973;
-    min-height: 100%;
-    padding: 20px;
-    .log-container {
-        background: #F8F9FA;
-        height: 100%
-    }
-    .comp-name {
-        padding: 0 20px;
-        height: 47px;
-        line-height: 47px;
-        border-bottom: 1px solid #dedede;
-        span {
-            color: #459cdf;
-            margin-right: 6px;
-        }
-    }
-    .item {
-        color: #3F5973;
-        padding: 0 20px;
+    .comp-log {
+        font-size: 14px;
+        color: #3f5973;
         min-height: 100%;
-        &>div{
-            margin-bottom:5px;
+        padding: 20px;
+
+        .log-container {
+            background: #F8F9FA;
+            height: 100%
+        }
+
+        .comp-name {
+            padding: 0 20px;
+            height: 47px;
+            line-height: 47px;
+            border-bottom: 1px solid #dedede;
+
+            span {
+                color: #459cdf;
+                margin-right: 6px;
+            }
+        }
+
+        .item {
+            color: #3F5973;
+            padding: 0 20px;
+            min-height: 100%;
+
+            & > div {
+                margin-bottom: 5px;
+            }
+        }
+
+        pre {
+            font-size: 16px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin: 0;
         }
     }
-    pre {
-        font-size: 16px;
-        white-space:pre-wrap;
-        word-wrap:break-word;
-        margin: 0;
-    }
-}
 </style>
