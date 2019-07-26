@@ -362,9 +362,7 @@ export function getDataSourceOptionsNew(kind) {
 
 export function fetchDbTablesBySource(datasource) {
     return httpService.get('/data-manager/api/v1/datasource/dbTables', {
-        params: {
-            datasource
-        }
+        datasource
     }).then(res => new Promise((resolve, reject) => {
         if (res.success) {
             resolve(res);
