@@ -55,7 +55,7 @@
                                                     <el-dropdown-menu slot="dropdown">
                                                         <el-dropdown-item
                                                             v-for="item in options"
-                                                            :key="item"
+                                                            :key="item.value"
                                                             :command="item.value"
                                                         >
                                                             {{ item.value }}
