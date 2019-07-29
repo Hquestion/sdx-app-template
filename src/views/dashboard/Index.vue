@@ -383,7 +383,8 @@ export default {
                     start: 1,
                     count: 10,
                     order: 'desc',
-                    orderBy: resourcetype
+                    orderBy: resourcetype,
+                    states: 'LAUNCHING,RUNNING,KILLING'
                 };
             } else {
                 params = {
