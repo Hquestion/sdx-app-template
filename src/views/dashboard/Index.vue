@@ -361,7 +361,11 @@ export default {
         // 资源
         getResource() {
             let userId = this.$store.getters.userId;
-            getUserResource(userId)
+            let params = {
+                userId,
+                states: 'LAUNCHING,RUNNING,KILLING'
+            };
+            getUserResource(params)
                 .then(data => {
                     this.resourceLoading = false;
                     this.resource = data;
@@ -683,10 +687,17 @@ export default {
                             display: flex;
                             .el-dropdown-link {
                                 cursor: pointer;
+                                i {
+                                    position: absolute;
+                                    right: 0px;
+                                    top: 6px;
+                                }
                             }
                             .el-dropdown {
                                 height: 30px;
                                 overflow: hidden;
+                                position: relative;
+                                padding-right: 14px;
                             }
                             .gpu-unit{
                                 font-weight: 400;
