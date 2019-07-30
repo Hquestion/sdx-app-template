@@ -42,18 +42,27 @@
                                                 {{ gpuCount > -1 ? gpuCount : '-' }}
                                             </div>
                                             <div class="gpu-resource">
-                                                <el-select
-                                                    size="small"
-                                                    v-model="gpuValue"
-                                                    :placeholder="$t('dashboard.Please_select')"
+                                                <el-dropdown
+                                                    @command="handleChangeType"
+                                                    trigger="click"
                                                 >
-                                                    <el-option
-                                                        v-for="item in options"
-                                                        :key="item && item.label"
-                                                        :label="item && item.label"
-                                                        :value="item && item.value"
-                                                    />
-                                                </el-select>({{ $t('dashboard.piece') }}）
+                                                    <span
+                                                        class="el-dropdown-link"
+                                                        :title="gpuValue"
+                                                    >
+                                                        {{ gpuValue }}<i class="el-icon-arrow-down el-icon--right" />
+                                                    </span>
+                                                    <el-dropdown-menu slot="dropdown">
+                                                        <el-dropdown-item
+                                                            v-for="item in options"
+                                                            :key="item.value"
+                                                            :command="item.value"
+                                                        >
+                                                            {{ item.value }}
+                                                        </el-dropdown-item>
+                                                    </el-dropdown-menu>
+                                                </el-dropdown>
+                                                <span class="gpu-unit"> ({{ $t('dashboard.piece') }})</span>
                                             </div>
                                         </div>
                                     </el-col>
@@ -352,10 +361,17 @@ export default {
         this.getVersionList();
     },
     methods: {
+        handleChangeType(command) {
+            this.gpuValue = command;
+        },
         // 资源
         getResource() {
             let userId = this.$store.getters.userId;
-            getUserResource(userId)
+            let params = {
+                userId,
+                states: 'LAUNCHING,RUNNING,KILLING'
+            };
+            getUserResource(params)
                 .then(data => {
                     this.resourceLoading = false;
                     this.resource = data;
@@ -377,7 +393,8 @@ export default {
                     start: 1,
                     count: 10,
                     order: 'desc',
-                    orderBy: resourcetype
+                    orderBy: resourcetype,
+                    states: 'LAUNCHING,RUNNING,KILLING'
                 };
             } else {
                 params = {
@@ -674,6 +691,24 @@ export default {
                         .gpu-resource {
                             line-height: 26px !important;
                             height: 30px !important;
+                            display: flex;
+                            .el-dropdown-link {
+                                cursor: pointer;
+                                i {
+                                    position: absolute;
+                                    right: 0px;
+                                    top: 6px;
+                                }
+                            }
+                            .el-dropdown {
+                                height: 30px;
+                                overflow: hidden;
+                                position: relative;
+                                padding-right: 14px;
+                            }
+                            .gpu-unit{
+                                font-weight: 400;
+                            }
                         }
                         .el-select {
                             width: auto;
