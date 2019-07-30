@@ -299,6 +299,11 @@ module.exports = {
             },
             {
                 httpCode: '',
+                code: '180103',
+                msg: 'Project_name_exist'
+            },
+            {
+                httpCode: '',
                 code: '180204',
                 msg: 'Unsupported_task_types'
             },
@@ -336,6 +341,31 @@ module.exports = {
                 httpCode: '',
                 code: '180211',
                 msg: 'Tasks_occupied_by_GPU_exceeds_the_platform_limit'
+            },
+            {
+                httpCode: '',
+                code: '180212',
+                msg: 'Task_name_exist'
+            },
+            {
+                httpCode: '',
+                code: '180301',
+                msg: 'server_internal_error'
+            },
+            {
+                httpCode: '',
+                code: '180304',
+                msg: 'server_internal_error'
+            },
+            {
+                httpCode: '',
+                code: '180303',
+                msg: 'server_internal_error'
+            },
+            {
+                httpCode: '',
+                code: '180306',
+                msg: 'server_internal_error'
             },
             {
                 httpCode: '',

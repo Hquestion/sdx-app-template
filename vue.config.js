@@ -133,12 +133,12 @@ module.exports = {
         port: 3100,
         proxy: {
             '^/.*-manager': {
-                target: 'http://10.115.1.130:30080',
+                target: 'http://10.115.1.130',
                 ws: true,
                 changeOrigin: true,
             },
             '/fe-compose': {
-                target: 'http://10.115.1.130:30080',
+                target: 'http://10.115.1.130',
                 ws: true,
                 changeOrigin: true,
             },

@@ -80,7 +80,7 @@ module.exports = {
     Node_IP_incorrect: 'Node IP is incorrect, please modify and try again!',
     Image_name_already_exists: 'Image name already exists, please modify it and try again!',
     Unlawful_operation_of_package_change: 'Package change operation is illegal, please confirm and try again!',
-    Storage_area_not_found: 'Storage area not found!',
+    Storage_area_not_found: 'Storage area disable!',
     Storage_space_settings_below_used_capacity: 'Storage space settings are lower than used capacity!',
     Unsupported_operations: 'Operations not supported!',
     Documents_or_directories_do_not_exist:'Files or directories do not exist, please confirm retry!',
@@ -98,5 +98,7 @@ module.exports = {
     Model_version_is_not_offline: 'Model version is not offline!',
     Model_version_cannot_be_deleted: 'Model version cannot be deleted!',
     Predict_request_exceptions: 'Prediction request exception, please try again later!',
-    Tasks_of_the_same_name_already_exist: 'The task of the same name already exists. Please revise it and try again!'
+    Tasks_of_the_same_name_already_exist: 'The task of the same name already exists. Please revise it and try again!',
+    Project_name_exist: 'Project name exist！',
+    Task_name_exist: 'Task name exist！'
 };

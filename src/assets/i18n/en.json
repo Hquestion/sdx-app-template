@@ -10,6 +10,7 @@
     "logout": "Log out",
     "version": "Version:",
     "corporateName": "Iluvatar CoreX",
+    "NoData": "No Data",
     "dashboard": {
         "resource_usage": "Resource usage",
         "total_number_of_running_tasks": "Total number of running tasks",

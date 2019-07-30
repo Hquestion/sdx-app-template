@@ -10,6 +10,7 @@
     "logout": "退出登录",
     "version": "版本号：",
     "corporateName": "南京天数智芯科技有限公司",
+    "NoData": "暂无数据",
     "dashboard": {
         "resource_usage": "资源使用情况",
         "total_number_of_running_tasks": "运行任务总数",

@@ -80,7 +80,7 @@ module.exports = {
     Node_IP_incorrect: '节点IP不正确，请修改后重试！',
     Image_name_already_exists: '镜像名称已存在，请修改后重试！',
     Unlawful_operation_of_package_change: '包变更操作不合法，请确认后重试！',
-    Storage_area_not_found: '未找到存储区域！',
+    Storage_area_not_found: '存储空间不可用！',
     Storage_space_settings_below_used_capacity: '存储空间设置值低于已使用容量！',
     Unsupported_operations: '不支持的操作！',
     Documents_or_directories_do_not_exist:'文件或目录不存在，请确认重试！',
@@ -98,5 +98,7 @@ module.exports = {
     Model_version_is_not_offline: '模型版本不可下线！',
     Model_version_cannot_be_deleted: '模型版本不可删除！',
     Predict_request_exceptions: '预测请求异常，请稍后重试！',
-    Tasks_of_the_same_name_already_exist: '同名任务已存在，请修改后重试！'
+    Tasks_of_the_same_name_already_exist: '同名任务已存在，请修改后重试！',
+    Project_name_exist: '项目名称已存在！',
+    Task_name_exist: '任务名称已存在！'
 };

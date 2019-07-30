@@ -29,6 +29,8 @@
             </div>
             <SdxuEmpty
                 v-if="nameTimes.length === 0 && !loading"
+                empty-type=""
+                :empty-content="$t('NoData')"
                 size="small"
             />
         </sdxu-content-panel>

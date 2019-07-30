@@ -171,6 +171,9 @@
                             <SdxuEmpty
                                 v-if="taskNameList.length === 0 && !taskLoading"
                                 height="354px"
+                                empty-type=""
+                                :empty-content="$t('NoData')"
+                                style="padding-top: 160px;"
                             />
                         </sdxu-content-panel>
                     </el-col>
@@ -200,6 +203,9 @@
                             <SdxuEmpty
                                 v-if="modelNameList.length === 0 && !versionLoading"
                                 height="354px"
+                                empty-type=""
+                                :empty-content="$t('NoData')"
+                                style="padding-top: 160px;"
                             />
                         </sdxu-content-panel>
                     </el-col>
@@ -597,6 +603,7 @@ export default {
         }
         .sdxu-empty {
             height: 355px !important;
+            padding-top: 80px;
         }
     }
     .marginTop20 {
