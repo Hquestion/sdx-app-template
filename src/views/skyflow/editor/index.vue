@@ -1280,6 +1280,7 @@ export default {
             })
             .catch(e => {
                 console.error(e);
+                this.processType = 'PATCH';
                 this.$notify.error({
                     title: '获取画布信息失败'
                 });
