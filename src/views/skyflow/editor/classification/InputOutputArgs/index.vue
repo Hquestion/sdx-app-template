@@ -77,7 +77,7 @@
 import { InputOutputArgsBean } from './InputOutputArgsBean';
 import TogglePanel from '../TogglePanel';
 
-const pTypeEnum = ['DATAFRAME-FILE', 'LABEL-FILE', 'FEATURE-FILE', 'PREDICTION-FILE', 'MODEL-FILE', 'IMAGE-FILE', 'VOICE-FILE', 'LOG-FILE', 'OTHER-FILE'];
+const pTypeEnum = ['DATAFRAME-FILE', 'LABEL-FILE', 'FEATURE-FILE', 'PREDICTION-FILE', 'MODEL-FILE', 'IMAGE-FILE', 'VOICE-FILE', 'LOG-FILE', 'STREAM', 'OTHER-FILE'];
 const sTypeEnum = ['CSV', 'PARQUET', 'TEXT', 'JSON', 'XML', 'MASK', 'HTML', 'WAV', 'MP3', 'FLAC', 'ORC', 'REGRESSION', 'CLASSIFICATION', 'UNSPUERVISED', 'OTHER'];
 export default {
     name: 'Index',
