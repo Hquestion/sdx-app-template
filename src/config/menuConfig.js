@@ -72,7 +72,7 @@ const manageMenus = [
     {
         name: i18n.t('menu.UserManage'),
         icon: 'iconfont iconicon-yonghuguanli1',
-        activeIcon: 'iconfont iconicon-yonghuguanli1-selected',
+        activeIcon: 'iconfont iconicon-yonghuguanli-selected',
         path: '/user',
         auth: permissions.USER_MENU_ACCESS,
         children: [
@@ -89,7 +89,7 @@ const manageMenus = [
     {
         name: i18n.t('menu.Permission'),
         icon: 'iconfont iconicon-quanxianguanli',
-        activeIcon: 'iconfont iconicon-quanxianguanli-selected',
+        activeIcon: 'iconfont iconicon-quanxianguanli-selected1',
         path: '/rights',
         auth: permissions.PERMISSION_MENU_ACCESS,
         children: [
@@ -110,7 +110,7 @@ const manageMenus = [
     {
         name: i18n.t('menu.MonitoringCenter'),
         icon: 'iconfont iconicon-jiankongzhongxin1',
-        activeIcon: 'iconfont iconicon-jiankongzhongxin1-selected',
+        activeIcon: 'iconfont iconicon-jiankongzhongxin-selected1',
         auth: permissions.SYSTEM_MENU_ACCESS,
         path: '/monitor',
         children: [

@@ -13,7 +13,7 @@
                 <template slot="title">
                     <span
                         class="main-menu-icon"
-                        :class="item.icon"
+                        :class="menu_is_active(item) ? item.activeIcon : item.icon"
                     />{{ item.name }}
                 </template>
                 <childMenu
