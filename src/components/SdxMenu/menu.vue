@@ -90,6 +90,8 @@ export default {
 }
 .el-menu,
 .el-submenu {
+    margin-top: 7px;
+    margin-bottom: 7px;
     position: relative;
     & /deep/ .el-menu-item, & /deep/ .el-submenu__title {
         width: 100%;

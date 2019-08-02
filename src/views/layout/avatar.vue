@@ -155,6 +155,7 @@
             no-footer
             title-icon="iconicon-banbenxinxi"
             :title="$t('versionInformation')"
+            size="small"
         >
             <div class="dashboard-version-content">
                 <div>SkyDiscovery</div>
@@ -393,16 +394,17 @@ export default {
 }
 
 .dashboard-version-content {
-    text-align: center;
+    text-align: left;
+    padding: 20px 0 20px 106px;
     div {
-        height: 32px;
+        padding-bottom: 20px;
     }
     div:first-child {
         font-family:SourceHanSansCN-Medium;
         font-weight:500;
         color:rgba(48,49,51,1);
     }
-    div:nth-child(n+1) {
+    div:nth-child(n+2) {
         font-family:SourceHanSansCN-Normal;
         font-weight:400;
         color:rgba(48,49,51,1);
