@@ -43,7 +43,7 @@ module.exports = {
     invalid_password: 'Invalid password, please login again!',
     Error_querying_service_status: 'Error inquiring service status, please try again',
     Parameter_error: 'Error parameters, please confirm and try again!',
-    Query_result_is_empty: 'When the query result is empty, please try again!',
+    Query_result_is_empty: 'The query result is empty, please try again!',
     Template_type_error: 'The template type is wrong, please confirm and try again!',
     Resources_do_not_exist: 'Resources do not exist!',
     Misallocation_of_resources: 'Error in resource allocation, please confirm and try again!',
@@ -100,5 +100,6 @@ module.exports = {
     Predict_request_exceptions: 'Prediction request exception, please try again later!',
     Tasks_of_the_same_name_already_exist: 'The task of the same name already exists. Please revise it and try again!',
     Project_name_exist: 'Project name exist！',
-    Task_name_exist: 'Task name exist！'
+    Task_name_exist: 'Task name exist！',
+    Template_exist: 'Resource template exist！'
 };

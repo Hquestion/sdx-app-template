@@ -43,7 +43,7 @@ module.exports = {
     invalid_password: '无效的口令，请重新登录！',
     Error_querying_service_status: '查询服务状态出错，请稍后重试！',
     Parameter_error: '参数错误，请确认后重试！',
-    Query_result_is_empty: '当查询结果为空，请重试！',
+    Query_result_is_empty: '当前查询结果为空，请重试！',
     Template_type_error: '模板类型错误，请确认后重试！',
     Misallocation_of_resources: '资源配置错误，请确认后重试！',
     Global_resource_unallocation: '全局资源未配置，请配置后重试！',
@@ -100,5 +100,6 @@ module.exports = {
     Predict_request_exceptions: '预测请求异常，请稍后重试！',
     Tasks_of_the_same_name_already_exist: '同名任务已存在，请修改后重试！',
     Project_name_exist: '项目名称已存在！',
-    Task_name_exist: '任务名称已存在！'
+    Task_name_exist: '任务名称已存在！',
+    Template_exist: '资源模板已存在！'
 };

@@ -12,6 +12,11 @@ module.exports = {
                 msg: 'server_internal_error'
             },
             {
+                httpCode: '400',
+                code: '',
+                msg: 'Parameter_error'
+            },
+            {
                 httpCode: '401',
                 code: '',
                 msg: 'unauthorize'
@@ -286,6 +291,11 @@ module.exports = {
                 httpCode: '',
                 code: '160209',
                 msg: 'Current_user_resource_allocation_already_exists'
+            },
+            {
+                httpCode: '',
+                code: '160210',
+                msg: 'Template_exist'
             },
             {
                 httpCode: '',
