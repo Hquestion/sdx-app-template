@@ -187,7 +187,7 @@ export default {
                     if (project.includes(arr[0].type) || data.includes(arr[0].type)) {
                         this.$router.push(`/sdxv-task-management/sdxv-task-detail/${arr[0].uuid}`);
                     } else if (model.includes(arr[0].type)) {
-                        this.$router.push(`/sdxv-model-manage/versionList/${arr[0].uuid}`);
+                        this.$router.push(`/sdxv-task-management/sdxv-task-detail/${arr[0].uuid}`);
                     } else if (skyflow.includes(arr[0].type)) {
                         window.open(`/#/editor/${arr[0].projectId}/${arr[0].uuid}`);
                     }

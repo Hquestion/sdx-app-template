@@ -41,10 +41,13 @@
                                             <div>
                                                 {{ gpuCount > -1 ? gpuCount : '-' }}
                                             </div>
-                                            <div class="gpu-resource">
+                                            <div
+                                                class="gpu-resource"
+                                            >
                                                 <el-dropdown
                                                     @command="handleChangeType"
                                                     trigger="click"
+                                                    v-if="options.length"
                                                 >
                                                     <span
                                                         class="el-dropdown-link"
@@ -62,6 +65,10 @@
                                                         </el-dropdown-item>
                                                     </el-dropdown-menu>
                                                 </el-dropdown>
+                                                <span
+                                                    v-else
+                                                    class="gpu-label"
+                                                >GPU</span>
                                                 <span class="gpu-unit"> ({{ $t('dashboard.piece') }})</span>
                                             </div>
                                         </div>
@@ -708,6 +715,9 @@ export default {
                             }
                             .gpu-unit{
                                 font-weight: 400;
+                            }
+                            .gpu-label {
+                                padding-right: 8px;
                             }
                         }
                         .el-select {
