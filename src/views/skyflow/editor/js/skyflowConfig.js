@@ -606,6 +606,70 @@ export const componentsIcon = [{
     label: '数据库数据源',
     name: 'DatabaseDataSource',
     icon: 'sf-shujukushujuyuan'
+}, {
+    label: '滤波',
+    name: 'blurComp',
+    icon: 'sf-lvbo'
+}, {
+    label: '通道转换',
+    name: 'channel_conversionComp',
+    icon: 'sf-tongdaozhuanhuan'
+}, {
+    label: '色彩调整',
+    name: 'colorAdjustComp',
+    icon: 'sf-yansetiaozheng'
+}, {
+    label: '格式转换',
+    name: 'cvtColorComp',
+    icon: 'sf-geshizhuanhuan'
+}, {
+    label: '边缘提取',
+    name: 'edgeDetectionComp',
+    icon: 'sf-bianyuantiqu'
+}, {
+    label: '图像翻转',
+    name: 'flipComp',
+    icon: 'sf-tuxiangfanzhuan'
+}, {
+    label: '直方图',
+    name: 'histComp',
+    icon: 'sf-zhifangtu'
+}, {
+    label: '裁剪和填充',
+    name: 'makeBorderComp',
+    icon: 'sf-jiancaihetianchong'
+}, {
+    label: '形态学',
+    name: 'morphologyComp',
+    icon: 'sf-xingtaixue'
+}, {
+    label: '图像输出',
+    name: 'output_imgComp',
+    icon: 'sf-tuxiangshuchu'
+}, {
+    label: '图像读取',
+    name: 'read_imgComp',
+    icon: 'sf-tuxiangduqu'
+}, {
+    label: '缩放',
+    name: 'resizeComp',
+    icon: 'sf-suofang'
+}, {
+    label: '阈值化',
+    name: 'thresholdComp',
+    icon: 'sf-yuzhihua'
+}, {
+    label: '旋转',
+    name: 'warpAffineComp',
+    icon: 'sf-xuanzhuan'
+}, {
+    label: '规整化',
+    name: 'normalizeComp',
+    icon: 'sf-guizhenghua'
+}, {
+    label: 'Kafka数据源',
+    name: 'KafkaFileDataSource',
+    icon: 'sf-Kafkashujuyuan'
 }];
 
 export const contextMenuIcon = [{
