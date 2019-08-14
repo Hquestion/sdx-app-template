@@ -7,15 +7,20 @@
             <div class="comp-name">
                 <span>当前画布</span>工作流日志：
             </div>
-            <div class="item">
-                <pre>
-                    <div
+            <div
+                class="item"
+                v-loading="workFlowLogLoading"
+            >
+                <pre><div
                         v-for="(item, index) in workFlowLog"
                         :key="index"
-                    >
-                        {{ item }}
-                    </div>
-                </pre>
+                >{{ item }}</div></pre>
+                <SdxuEmpty
+                    v-if="workFlowLog.length === 0 && !workFlowLogLoading"
+                    height="354px"
+                    empty-type="noData"
+                    :empty-content="$t('NoData')"
+                />
             </div>
         </div>
     </div>
@@ -31,7 +36,8 @@ export default {
         return {
             offset: 0,
             workFlowLog: [],
-            getWorkFlowLogInterval: null
+            getWorkFlowLogInterval: null,
+            workFlowLogLoading: true
         };
     },
     props: {
@@ -53,6 +59,7 @@ export default {
     },
     activated() {
         this.workFlowLog = [];
+        this.workFlowLogLoading = true;
         this.offset = 0;
         this.stopPull();
         // console.log(11111111, this.executeId, this.flowState)
@@ -67,6 +74,7 @@ export default {
                 this.$emit('update:isReachBottom', true);
                 this.startPull();
             } else {
+                this.workFlowLogLoading = false;
                 this.stopPull();
             }
         });
@@ -85,6 +93,7 @@ export default {
                 .then(data => {
                     this.offset = data.offset;
                     if (data.content) this.workFlowLog.push(data.content);
+                    this.workFlowLogLoading = false;
                     this.$emit('scrollToBottom');
                     this.stopPull();
                     this.startPull();
@@ -108,9 +117,11 @@ export default {
         }
     },
     beforeDestroy() {
+        this.workFlowLogLoading = false;
         this.stopPull();
     },
     deactivated() {
+        this.workFlowLogLoading = false;
         if (this.unWatch) {
             this.unWatch();
         }
@@ -142,7 +153,8 @@ export default {
     .item {
         color: #3F5973;
         padding: 0 20px;
-        min-height: 100%;
+        min-height: 200px;
+        background: #F8F9FA;
         &>div{
             margin-bottom:5px;
         }
