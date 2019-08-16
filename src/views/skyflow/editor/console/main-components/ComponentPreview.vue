@@ -43,10 +43,15 @@
                         :image-url="imageUrl"
                         v-if="imageUrl"
                     />
-                    <has-nothing
+                    <!-- <has-nothing
                         v-if="isPreview"
                         class="has-nothing"
                         pic-type="dataframe"
+                    /> -->
+                    <SdxuEmpty
+                        v-if="isPreview"
+                        empty-type="sdx-wushuju"
+                        empty-content="无法预览"
                     />
                     <!-- <has-nothing
                         v-if="noPreview"
