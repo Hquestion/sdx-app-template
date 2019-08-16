@@ -124,7 +124,7 @@ export default {
                             const sourceKind = sourceType.split('@')[0];
                             const sourceId = sourceType.split('@')[1];
                             return (
-                                <SdxwFileSelect vModel={this.value} limit={-1}/>
+                                <SdxwFileSelect vModel={this.value} limit={-1} projectEnable={true} shareEnable={true} />
                             );
                         },
                         validator: [
