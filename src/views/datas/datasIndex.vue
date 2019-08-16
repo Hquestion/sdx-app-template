@@ -32,16 +32,20 @@
                     </el-button>
                 </div>
             </div>
-            <sdxu-scroll style="height: 230px;">
+            <sdxu-scroll style="height: 240px;">
                 <div
                     class="task-card-box"
                     ref="cardBox"
                 >
-                    <has-nothing
+                    <!-- <has-nothing
                         v-if="nothing"
                         class="has-nothing"
+                    /> -->
+                    <SdxuEmpty
+                        v-if="nothing"
+                        empty-type="noData"
+                        :empty-content="$t('NoData')"
                     />
-
                     <data-service-card
                         class="task-card-box__item"
                         v-for="item in services"
@@ -69,14 +73,13 @@
 <script>
 
 import { getTaskList } from '@sdx/utils/lib/api/project';
-import hasNothing from './rely/util/hasNothing';
 import dataServiceCard from './rely/dataServiceCard';
 import datasList from './datasList';
 import dataSourceList from './dataSourceList';
 import dataServiceForm from './DataServiceForm';
 import taskMixin from '@sdx/utils/lib/mixins/task';
 export default {
-    components: { hasNothing, dataServiceCard, datasList, dataSourceList, dataServiceForm },
+    components: { dataServiceCard, datasList, dataSourceList, dataServiceForm },
     mixins: [taskMixin],
     data() {
         return {
@@ -249,6 +252,9 @@ export default {
         .task-card-box__item {
             display: inline-block;
             margin-right: 20px;
+        }
+        .sdxu-empty {
+            padding-top: 0;
         }
     }
     .task-page-box {

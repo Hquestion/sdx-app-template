@@ -258,9 +258,14 @@
                     class="has-nothing"
                     pic-type="dataframe"
                 />
-                <has-nothing
+                <!-- <has-nothing
                     v-if="noPreview"
                     class="has-nothing"
+                /> -->
+                <SdxuEmpty
+                    v-if="noPreview"
+                    empty-type="noData"
+                    :empty-content="$t('NoData')"
                 />
             </div>
         </div>
