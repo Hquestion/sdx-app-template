@@ -21,7 +21,7 @@ yarn-error.log*
 *.sw*
 
 #.zip files
-*.zip
+dist.zip
 *.rar
 
 # unit test coverage folder

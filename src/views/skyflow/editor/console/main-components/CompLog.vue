@@ -7,13 +7,20 @@
             <div class="comp-name">
                 <span>{{ node.label }}</span>组件运行日志：
             </div>
-            <div class="item">
-                <pre>
-                <div
+            <div
+                class="item"
+                v-loading="compLogLoading"
+            >
+                <pre><div
                     v-for="(item, index) in compLog"
                     :key="index"
-                >{{ item }}</div>
-            </pre>
+                >{{ item }}</div></pre>
+                <SdxuEmpty
+                    v-if="compLog.length === 0 && !compLogLoading"
+                    height="354px"
+                    empty-type="noData"
+                    :empty-content="$t('NoData')"
+                />
             </div>
         </div>
     </div>
@@ -30,7 +37,8 @@ export default {
         return {
             offset: 0,
             compLog: [],
-            getCompLogInterval: null
+            getCompLogInterval: null,
+            compLogLoading: true
         };
     },
     props: {
@@ -66,6 +74,7 @@ export default {
                     this.$emit('scrollToBottom');
                     this.stopPull();
                     this.startPull();
+                    this.compLogLoading = false;
                 });
         },
         startPull() {
@@ -86,6 +95,7 @@ export default {
         }
     },
     activated() {
+        this.compLogLoading = true;
         this.compLog = [];
         this.offset = 0;
         this.stopPull();
@@ -98,14 +108,17 @@ export default {
                 // 启定时器
                 this.startPull();
             } else {
+                this.compLogLoading = false;
                 this.stopPull();
             }
         }, { deep: true });
     },
     beforeDestroy() {
         this.stopPull();
+        this.compLogLoading = false;
     },
     deactivated() {
+        this.compLogLoading = false;
         if (this.unWatch) {
             this.unWatch();
         }
@@ -142,11 +155,12 @@ export default {
         .item {
             color: #3F5973;
             padding: 0 20px;
-            min-height: 100%;
+            min-height: 200px;
 
             & > div {
                 margin-bottom: 5px;
             }
+
         }
 
         pre {

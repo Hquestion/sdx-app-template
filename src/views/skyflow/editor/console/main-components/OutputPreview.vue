@@ -47,13 +47,19 @@
             <div v-if="path">
                 <ComponentPreview :path="path" />
             </div>
-            <div
+            <!-- <div
                 class="empty-content"
                 v-if="!hasPreview && !isLoading && !path"
             >
                 <img src="../../../../../assets/images/state/empty-no-text2.png">
                 <p>当前组件暂无预览数据</p>
-            </div>
+            </div> -->
+            <SdxuEmpty
+                v-if="!hasPreview && !isLoading && !path"
+                height="354px"
+                empty-type="noData"
+                :empty-content="$t('NoData')"
+            />
         </div>
     </div>
 </template>

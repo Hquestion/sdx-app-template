@@ -44,6 +44,10 @@
                     :accept="(runEnvType && runEnvType.parent.name) === 'spark' ? '.jar' : '.py,.zip'"
                     :string-model="true"
                     check-type="file"
+                    :prefix-owner="false"
+                    :project-enable="false"
+                    :private-enable="true"
+                    :share-enable="false"
                 />
             </el-form-item>
             <el-form-item
