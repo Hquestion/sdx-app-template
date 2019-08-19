@@ -100,7 +100,7 @@ module.exports = {
                 }
             ]),
         ],
-
+        optimization: {
             splitChunks: {
                 cacheGroups: {
                     vendors: {
