@@ -323,7 +323,7 @@ export default {
                         currentComponent.users = data.users || [];
                         currentComponent.groups = data.groups || [];
                         currentComponent.shareType = data.share_type || '';
-                        currentComponent.isShare = data.is_share || true;
+                        currentComponent.isShare = !!data.is_share;
                     }
                     console.error(currentComponent);
                 }
