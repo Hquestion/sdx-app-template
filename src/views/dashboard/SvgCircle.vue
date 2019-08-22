@@ -13,7 +13,8 @@
             {{ completedSteps }}
         </p>
         <p class="content">
-            <span>{{ $t('dashboard.operating_tasks') }}</span>（{{ $t('dashboard.number') }}）
+            <span>{{ $t('dashboard.operating_tasks') }}</span>
+            <span>（{{ $t('dashboard.number') }}）</span>
         </p>
     </sdxu-radial-progress>
 </template>
@@ -50,8 +51,16 @@ export default {
     line-height: 26px;
     height: 16px;
     font-family:Roboto-Black;
-    span {
+    span:first-child {
         font-weight: 900;
+    }
+}
+.is-lang-en {
+    .content {
+        span {
+            display: block;
+            text-align: center;
+        }
     }
 }
 </style>
