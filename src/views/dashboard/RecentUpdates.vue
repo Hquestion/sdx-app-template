@@ -131,5 +131,15 @@ export default {
         }
     }
 }
+
+.recent-updates .is-lang-en {
+    .content {
+        .item {
+            span:first-child {
+                max-width: 68%;
+            }
+        }
+    }
+}
 </style>
 

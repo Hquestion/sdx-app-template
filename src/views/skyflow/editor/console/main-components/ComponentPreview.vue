@@ -43,14 +43,24 @@
                         :image-url="imageUrl"
                         v-if="imageUrl"
                     />
-                    <has-nothing
+                    <!-- <has-nothing
                         v-if="isPreview"
                         class="has-nothing"
                         pic-type="dataframe"
+                    /> -->
+                    <SdxuEmpty
+                        v-if="isPreview"
+                        empty-type="sdx-wushuju"
+                        empty-content="无法预览"
                     />
-                    <has-nothing
+                    <!-- <has-nothing
                         v-if="noPreview"
                         class="has-nothing"
+                    /> -->
+                    <SdxuEmpty
+                        v-if="noPreview"
+                        empty-type="noData"
+                        :empty-content="$t('NoData')"
                     />
                 </SdxuScroll>
             </div>

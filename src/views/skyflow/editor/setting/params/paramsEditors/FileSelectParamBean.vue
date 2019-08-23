@@ -29,6 +29,7 @@
             :checkType="param.onlyFolder ? 'folder' : 'all'"
             :limit="param.limits || 1"
             :string-model="true"
+            :prefix-owner="false"
         >
             {{ param.limits ?'选择文件' : '选择文件夹' }}
         </SdxwFileSelect>

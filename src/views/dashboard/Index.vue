@@ -161,7 +161,7 @@
                                     size="small"
                                     v-model="orderBy"
                                     placeholder="请选择"
-                                    :class="$t('dashboard.task_resources_utilization_Top10').includes('任务资源') ? 'chinese' : 'english'"
+                                    :class="clientENG ? 'minClient' : ''"
                                 >
                                     <el-option
                                         v-for="item in resourceType"
@@ -270,6 +270,8 @@ import { getUserResource, getTaskList, getDisk, getProjects, getModels, getDatas
     getVersions } from 'api/dashboard';
 import MoreBtn from './MoreBtn';
 import RecentUpdates from './RecentUpdates';
+import { getClientWidth } from '@sdx/utils/lib/helper/dom';
+import { debounce } from '../../helper/common-fun';
 
 export default {
     name: 'Dashboard',
@@ -323,7 +325,8 @@ export default {
             taskNameId: [],
             // resource loading
             resourceLoading: true,
-            diskLoading: true
+            diskLoading: true,
+            clientWidth: 1500
         };
     },
     components: {
@@ -346,6 +349,9 @@ export default {
                 count = 0;
             }
             return count;
+        },
+        clientENG() {
+            return this.lang$ === 'en' && this.clientWidth < 1500;
         }
     },
     created() {
@@ -367,7 +373,18 @@ export default {
         this.getSkyflowList();
         this.getVersionList();
     },
+    mounted() {
+        this.clientWidth = getClientWidth();
+        this.__resizeHanlder = debounce(() => {
+            this.clientWidth = getClientWidth();
+        }, 300);
+        window.addEventListener('resize', this.__resizeHanlder);
+    },
+    beforeDestroy() {
+        window.removeEventListener('resize', this.__resizeHanlder);
+    },
     methods: {
+        getClientWidth,
         handleChangeType(command) {
             this.gpuValue = command;
         },
@@ -417,7 +434,7 @@ export default {
                         resolve(res);
                     }
                     ).catch(error => {
-                        this.taskLoading = true;
+                        this.taskLoading = false;
                         reject(error);
                     });
             });
@@ -603,6 +620,11 @@ export default {
                     this.taskNameId = nameId;
                     this.taskData = data.reverse(),
                     this.taskNameList = name.reverse();
+                }, () => {
+                    this.taskNameId = [];
+                    this.taskData = [],
+                    this.taskNameList = [];
+                    this.taskLoading = false;
                 });
             }
         }
@@ -769,12 +791,13 @@ export default {
                 position: absolute;
                 top: 15px;
                 right: 85px;
-            }
-            .chinese {
                 width: 92px;
             }
-            .english {
-                width: 150px;
+            .minClient {
+                right: 50px;
+            }
+            .is-lang-en .el-select {
+                width: 86px;
             }
             .sdxu-content-panel {
                 position: relative;
