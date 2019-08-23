@@ -101,5 +101,6 @@ module.exports = {
     Tasks_of_the_same_name_already_exist: 'The task of the same name already exists. Please revise it and try again!',
     Project_name_exist: 'Project name exist！',
     Task_name_exist: 'Task name exist！',
-    Template_exist: 'Resource template exist！'
+    Template_exist: 'Resource template exist！',
+    Image_Not_Exist: 'Image does not exist!'
 };

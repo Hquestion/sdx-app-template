@@ -101,5 +101,6 @@ module.exports = {
     Tasks_of_the_same_name_already_exist: '同名任务已存在，请修改后重试！',
     Project_name_exist: '项目名称已存在！',
     Task_name_exist: '任务名称已存在！',
-    Template_exist: '资源模板已存在！'
+    Template_exist: '资源模板已存在！',
+    Image_Not_Exist: '任务所用镜像不存在！'
 };

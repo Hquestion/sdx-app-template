@@ -379,6 +379,11 @@ module.exports = {
             },
             {
                 httpCode: '',
+                code: '180307',
+                msg: 'Image_Not_Exist'
+            },
+            {
+                httpCode: '',
                 code: '190001',
                 msg: 'Resources_do_not_exist'
             },
