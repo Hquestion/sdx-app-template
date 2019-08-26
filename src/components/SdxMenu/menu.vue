@@ -19,6 +19,7 @@
                 <childMenu
                     :menu-data="item.children"
                     :idx="idx+'-'+index"
+                    :style="lang$ === 'en' ? 'paddingLeft: 16px': 'paddingLeft: 20px'"
                 >
                     {{ item.name }}
                 </childMenu>
@@ -27,6 +28,7 @@
                 v-else
                 :index="idx+'-'+index"
                 :class="menu_is_active(item)?'is-active2':''"
+                :style="lang$ === 'en' ? 'paddingLeft: 16px': 'paddingLeft: 20px'"
             >
                 <span
                     class="main-menu-icon"
@@ -136,5 +138,11 @@ export default {
     position: relative;
     top: -1px;
     font-size: 18px;
+}
+
+.is-lang-en.sdx-menu {
+    & /deep/ .el-submenu__icon-arrow {
+        right: 4px;
+    }
 }
 </style>
