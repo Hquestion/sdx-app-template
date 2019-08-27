@@ -1,6 +1,6 @@
 <template>
     <div class="share-container skyflow-dialog private-dialog">
-        <el-dialog
+        <sdxu-dialog
             title="结果导出"
             :visible.sync="dialogVisible"
             custom-class="selfStyle"
@@ -100,7 +100,7 @@
                     确 认
                 </el-button>
             </span>
-        </el-dialog>
+        </sdxu-dialog>
     </div>
 </template>
 <script>

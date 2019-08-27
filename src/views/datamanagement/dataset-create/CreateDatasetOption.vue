@@ -1,5 +1,5 @@
 <template>
-    <el-dialog
+    <sdxu-dialog
         title="选择数据类型"
         :visible.sync="createDatasetVisible"
         width="400px"
@@ -18,7 +18,7 @@
                 非结构化数据
             </el-button>
         </div>
-    </el-dialog>
+    </sdxu-dialog>
 </template>
 
 <script>

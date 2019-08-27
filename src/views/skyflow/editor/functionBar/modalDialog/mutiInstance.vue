@@ -1,6 +1,6 @@
 <template>
     <div class="mutil-container skyflow-dialog">
-        <el-dialog
+        <sdxu-dialog
             title="多实例设置"
             :visible.sync="dialogVisible"
             width="520px"
@@ -62,7 +62,7 @@
                     确 认
                 </el-button>
             </span>
-        </el-dialog>
+        </sdxu-dialog>
     </div>
 </template>
 <script>

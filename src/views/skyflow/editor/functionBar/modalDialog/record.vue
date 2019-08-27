@@ -1,6 +1,6 @@
 <template>
     <div class="record-container skyflow-dialog">
-        <el-dialog
+        <sdxu-dialog
             title="执行记录"
             :visible.sync="dialogVisible"
             width="80%"
@@ -42,7 +42,7 @@
                     </el-form-item>
                 </el-form>
             </div>
-        </el-dialog>
+        </sdxu-dialog>
     </div>
 </template>
 <script>

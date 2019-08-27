@@ -1,6 +1,6 @@
 <template>
     <div class="share-container skyflow-dialog">
-        <el-dialog
+        <sdxu-dialog
             title="分享设置"
             :visible.sync="dialogVisible"
             custom-class="selfStyle"
@@ -58,7 +58,7 @@
                     确 认
                 </el-button>
             </span>
-        </el-dialog>
+        </sdxu-dialog>
     </div>
 </template>
 <script>

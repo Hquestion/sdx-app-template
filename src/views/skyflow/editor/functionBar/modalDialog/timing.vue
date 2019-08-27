@@ -1,6 +1,6 @@
 <template>
     <div class="timing-container skyflow-dialog ">
-        <el-dialog
+        <sdxu-dialog
             title="定时运行设置"
             :visible.sync="dialogVisible"
             width="560px"
@@ -187,7 +187,7 @@
                     保 存
                 </el-button>
             </span>
-        </el-dialog>
+        </sdxu-dialog>
     </div>
 </template>
 <script>

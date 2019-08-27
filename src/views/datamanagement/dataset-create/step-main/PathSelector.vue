@@ -17,7 +17,7 @@
             <i :class="['iconfont', fileIcon]" />
             <span>{{ selectedPath }}</span>
         </div>
-        <el-dialog
+        <sdxu-dialog
             class="path-selector-dialog"
             :close-on-click-modal="false"
             :visible.sync="visible"
@@ -83,7 +83,7 @@
                     选择
                 </el-button>
             </div>
-        </el-dialog>
+        </sdxu-dialog>
     </div>
 </template>
 
