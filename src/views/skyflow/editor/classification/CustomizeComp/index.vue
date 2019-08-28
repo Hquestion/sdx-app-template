@@ -1,6 +1,6 @@
 <template>
     <div class="customize-comp skyflow-dialog">
-        <el-dialog
+        <sdxu-dialog
             :visible="visible"
             custom-class="selfStyle"
             width="870px"
@@ -63,7 +63,7 @@
                     </footer>
                 </section>
             </div>
-        </el-dialog>
+        </sdxu-dialog>
     </div>
 </template>
 

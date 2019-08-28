@@ -29,6 +29,7 @@
 <script>
 import { getWorkFlowLog } from '@sdx/utils/lib/api/skyflow';
 import { nodeState as nodeStateConf } from '../../js/skyflowConfig';
+import { dateFormatter } from '@sdx/utils/lib/helper/transform';
 export default {
     name: 'WorkFlowLog',
     componentName: 'WorkFlowLog',
@@ -92,7 +93,11 @@ export default {
             })
                 .then(data => {
                     this.offset = data.offset;
-                    if (data.content) this.workFlowLog.push(data.content);
+                    let content = data.content;
+                    if (Array.isArray(content)) {
+                        content = content.map(item => `${dateFormatter(item.time)} message: ${item.message} reason: ${item.reason}`).join('\n');
+                    }
+                    if (content) this.workFlowLog.push(content);
                     this.workFlowLogLoading = false;
                     this.$emit('scrollToBottom');
                     this.stopPull();

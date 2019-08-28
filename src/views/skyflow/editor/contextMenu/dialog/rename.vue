@@ -1,6 +1,6 @@
 <template>
     <div class="rename-container skyflow-dialog">
-        <el-dialog
+        <sdxu-dialog
             title="重命名"
             :visible.sync="dialogVisible"
             custom-class="selfStyle"
@@ -48,7 +48,7 @@
                     确 认
                 </el-button>
             </span>
-        </el-dialog>
+        </sdxu-dialog>
     </div>
 </template>
 <script>

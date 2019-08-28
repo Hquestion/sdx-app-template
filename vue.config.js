@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const FlowWebpackPlugin = require('flow-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const isProduction = process.env.NODE_ENV === 'production';
 const componentDevEnv = !!require('./package.json').componentDevEnv;
 
@@ -91,7 +92,13 @@ module.exports = {
             }),
             new webpack.LoaderOptionsPlugin({
                 vue: {}
-            })
+            }),
+            new CopyWebpackPlugin([
+                {
+                    from: './node_modules/@sdx/utils/gateway',
+                    to: 'gateway'
+                }
+            ]),
         ],
         optimization: {
             splitChunks: {

@@ -1,6 +1,6 @@
 <template>
     <div class="exec-container skyflow-dialog">
-        <el-dialog
+        <sdxu-dialog
             title="执行设置"
             :visible.sync="dialogVisible"
             width="520px"
@@ -59,7 +59,7 @@
                     确 认
                 </el-button>
             </span>
-        </el-dialog>
+        </sdxu-dialog>
     </div>
 </template>
 <script>

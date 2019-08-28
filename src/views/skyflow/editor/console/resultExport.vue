@@ -1,6 +1,6 @@
 <template>
     <div class="result-export ">
-        <el-dialog
+        <sdxu-dialog
             title="评估结果导出"
             class="skyflow-dialog"
             append-to-body
@@ -90,7 +90,7 @@
                     确 定
                 </el-button>
             </span>
-        </el-dialog>
+        </sdxu-dialog>
     </div>
 </template>
 <script>

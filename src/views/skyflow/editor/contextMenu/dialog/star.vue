@@ -1,6 +1,6 @@
 <template>
     <div class="star-container skyflow-dialog">
-        <el-dialog
+        <sdxu-dialog
             title="组件收藏"
             :visible.sync="dialogVisible"
             custom-class="selfStyle"
@@ -48,7 +48,7 @@
                     确 认
                 </el-button>
             </span>
-        </el-dialog>
+        </sdxu-dialog>
     </div>
 </template>
 <script>

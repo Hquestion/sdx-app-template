@@ -1,6 +1,6 @@
 <template>
     <div class="saveas-container skyflow-dialog">
-        <el-dialog
+        <sdxu-dialog
             title="另存为"
             :visible.sync="dialogVisible"
             custom-class="selfStyle"
@@ -79,7 +79,7 @@
                     确 认
                 </el-button>
             </span>
-        </el-dialog>
+        </sdxu-dialog>
     </div>
 </template>
 <script>

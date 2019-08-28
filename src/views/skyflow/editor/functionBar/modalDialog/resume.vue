@@ -1,6 +1,6 @@
 <template>
     <div class="resume-container skyflow-dialog">
-        <el-dialog
+        <sdxu-dialog
             title="恢复运行"
             :visible.sync="dialogVisible"
             width="420px"
@@ -36,7 +36,7 @@
                     确 认
                 </el-button>
             </span>
-        </el-dialog>
+        </sdxu-dialog>
     </div>
 </template>
 <script>

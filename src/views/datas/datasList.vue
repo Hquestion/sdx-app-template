@@ -237,7 +237,7 @@
                 <div class="clear" />
             </div>
         </section>
-        <el-dialog
+        <sdxu-dialog
             title="编辑数据集"
             :visible.sync="detailDialogVisible"
             v-if="detailDialogVisible"
@@ -319,9 +319,9 @@
                     确 定
                 </el-button>
             </span>
-        </el-dialog>
+        </sdxu-dialog>
 
-        <el-dialog
+        <sdxu-dialog
             title="用户确认"
             :visible.sync="userVisible"
             width="520px"
@@ -363,7 +363,7 @@
                     取 消
                 </el-button>
             </span>
-        </el-dialog>
+        </sdxu-dialog>
         <CreateDatasetOption v-model="createDatasetOptionVisible" />
     </div>
 </template>
