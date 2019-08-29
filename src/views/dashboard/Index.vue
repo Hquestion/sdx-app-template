@@ -639,7 +639,7 @@ export default {
     flex-flow:row;/*伸缩项目单行排列*/
     & /deep/ {
         .sdxu-content-panel__main {
-            margin-top: 0px !important;
+            padding-top: 0px !important;
         }
         .sdxu-content-panel {
             padding: 20px;
