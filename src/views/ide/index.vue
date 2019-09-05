@@ -1,15 +1,18 @@
 <template>
     <div class="sky-ide-wrapper">
-        <SkyNotebook :file="file"/>
+        <!--        <SkyNotebook :file="file"/>-->
+        <SkyIDE />
     </div>
 </template>
 
 <script>
 import SkyNotebook from '@sdx/view/components/sky-ide/src/widgets/notebook/SkyNotebook';
+import SkyIDE from '@sdx/view/components/sky-ide/src/Main';
 export default {
     name: 'Index',
     components: {
-        SkyNotebook
+        SkyNotebook,
+        SkyIDE
     },
     data() {
         return {
@@ -23,6 +26,10 @@ export default {
 };
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.sky-ide-wrapper {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
 </style>
