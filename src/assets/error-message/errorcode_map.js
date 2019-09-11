@@ -398,6 +398,11 @@ module.exports = {
                 msg: 'Illegal_parameters'
             },
             {
+                httpCode: '',
+                code: '190005',
+                msg: 'Image_Not_Ready'
+            },
+            {
                 httpCode: '',
                 code: '190101',
                 msg: 'Image_does_not_exist'

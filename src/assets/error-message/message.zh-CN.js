@@ -102,5 +102,6 @@ module.exports = {
     Project_name_exist: '项目名称已存在！',
     Task_name_exist: '任务名称已存在！',
     Template_exist: '资源模板已存在！',
-    Image_Not_Exist: '任务所用镜像不存在！'
+    Image_Not_Exist: '任务所用镜像不存在！',
+    Image_Not_Ready: '镜像服务初始化未完成，请稍后再试！'
 };

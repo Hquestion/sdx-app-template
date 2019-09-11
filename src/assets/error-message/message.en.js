@@ -102,5 +102,6 @@ module.exports = {
     Project_name_exist: 'Project name exist！',
     Task_name_exist: 'Task name exist！',
     Template_exist: 'Resource template exist！',
-    Image_Not_Exist: 'Image does not exist!'
+    Image_Not_Exist: 'Image does not exist!',
+    Image_Not_Ready: 'Image service is not ready yet!'
 };
