@@ -722,12 +722,14 @@ export const contextMenuIcon = [{
     name: 'edit-code',
     icon: 'sf-daochujieguo',
     group: 1
-}, {
-    label: '模型部署',
-    name: 'model',
-    icon: 'iconbushu',
-    group: 5
-}];
+}
+// , {
+//     label: '模型部署',
+//     name: 'model',
+//     icon: 'iconbushu',
+//     group: 5
+// }
+];
 
 // 左侧自定义组件右键菜单
 export const contextMenuClassification = [{
