@@ -139,7 +139,9 @@ export default {
             return map[this.task.state];
         },
         operationAdaptor() {
-            return STATE_TYPE_OPERATION[this.task.state];
+            let arr = STATE_TYPE_OPERATION[this.task.state];
+            arr = arr.filter(item => item !== 'entry');
+            return arr;
         }
     },
     methods: {

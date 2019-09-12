@@ -19,7 +19,6 @@
                 <childMenu
                     :menu-data="item.children"
                     :idx="idx+'-'+index"
-                    :style="lang$ === 'en' ? 'paddingLeft: 16px': 'paddingLeft: 20px'"
                 >
                     {{ item.name }}
                 </childMenu>

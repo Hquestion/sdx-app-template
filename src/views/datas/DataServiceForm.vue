@@ -257,11 +257,11 @@ export default {
             if (nval) {
                 this.params = { ...this.params,
                     ...{
-                        projectId: nval.project && nval.project.uuid,
+                        projectId: '',
                         name: nval.name,
                         description: nval.description,
                         type: 'DATA_SERVICE',
-                        imageId: nval.image.uuid,
+                        imageId: nval.imageId,
                         resourceConfig: nval.resourceConfig
                     }
                 };

@@ -162,6 +162,11 @@ module.exports = {
                 ws: true,
                 changeOrigin: true
             },
+            '^/terminals': {
+                target: 'http://localhost:8888',
+                ws: true,
+                changeOrigin: true
+            },
         },
         overlay: true
     },
