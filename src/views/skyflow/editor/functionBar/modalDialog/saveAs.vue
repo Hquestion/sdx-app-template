@@ -52,7 +52,12 @@
                 label="模板种类："
                 prop="skyflowTemplate"
             >
-                <el-select v-model="currentData.skyflowTemplate">
+                <el-select
+                    v-model="currentData.skyflowTemplate"
+                    filterable
+                    allow-create
+                    default-first-option
+                >
                     <el-option
                         v-for="(item, i) in templateList"
                         :key="i"
@@ -131,7 +136,7 @@ export default {
             currentData: {
                 name: '',
                 description: '',
-                isTemplate: true,
+                isTemplate: false,
                 skyflowTemplate: '',
                 users: [],
                 groups: []
