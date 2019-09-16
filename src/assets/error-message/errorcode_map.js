@@ -688,7 +688,7 @@ module.exports = {
                 msg: 'Bad_file_format'
             }
         ]
-    },
+    }/* ,
     req: [
         {
             reg: /\/login/,
@@ -709,5 +709,5 @@ module.exports = {
                 ]
             }
         }
-    ]
+    ] */
 };
