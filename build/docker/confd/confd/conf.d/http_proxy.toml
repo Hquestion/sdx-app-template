@@ -1,0 +1,9 @@
+[template]
+src = "http_proxy.tmpl"
+dest = "/etc/nginx/confd-generated/http/proxy.conf"
+keys = [
+    "/proxy_services/http",
+]
+
+check_cmd = "/usr/bin/openresty -t"
+reload_cmd = "/usr/bin/openresty -s reload -c /etc/nginx/nginx.conf"

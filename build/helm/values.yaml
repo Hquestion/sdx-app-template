@@ -1,0 +1,41 @@
+# Default values for nginx-proxy.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: skydiscovery/nginx-proxy
+  tag: v0.1.1
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 80
+
+etcd:
+  caCert: "/etc/kubernetes/pki/etcd/ca.pem"
+  certCert: "/etc/kubernetes/pki/etcd/client.pem"
+  certKey: "/etc/kubernetes/pki/etcd/client-key.pem"
+
+resources:
+  limits:
+    cpu: 1
+    memory: 2Gi
+  requests:
+    cpu: 1
+    memory: 2Gi
+
+nodeSelector: {}
+
+tolerations:
+  - key: node-role.kubernetes.io/master
+    effect: NoSchedule
+
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: iluvatar.ai/skydiscovery-system-workload
+          operator: Exists

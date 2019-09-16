@@ -1,0 +1,100 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ template "nginx-proxy.fullname" . }}
+  labels:
+    app: {{ template "nginx-proxy.name" . }}
+    chart: {{ template "nginx-proxy.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "nginx-proxy.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "nginx-proxy.name" . }}
+        release: {{ .Release.Name }
+        iluvartar.ai/skydiscovery-podpreset: "true"
+        iluvartar.ai/nginx-proxy-podpreset: "true"
+    spec:
+#      hostNetwork: true
+#      dnsPolicy: ClusterFirstWithHostNet
+      volumes:
+      - name: etcd-ca-cert
+        hostPath:
+          path: "{{ .Values.etcd.caCert }}"
+      - name: etcd-cert-cert
+        hostPath:
+          path: "{{ .Values.etcd.certCert }}"
+      - name: etcd-cert-key
+        hostPath:
+          path: "{{ .Values.etcd.certKey }}"
+      - name: kubetcl
+        hostPath:
+          path: "/usr/bin/"
+      - name: kube-config
+        hostPath:
+          path: "/root/.kube/config/"
+      containers:
+        - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          name: {{ template "nginx-proxy.fullname" . }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["/run.sh"]
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              hostPort: {{ .Values.service.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          readinessProbe:
+            httpGet:
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+            #env:
+            #{{- .Values.env | toYaml | nindent 10 }}
+          volumeMounts:
+          - name: etcd-ca-cert
+            mountPath: "{{ .Values.etcd.caCert }}"
+            readOnly: true
+          - name: etcd-cert-cert
+            mountPath: "{{ .Values.etcd.certCert }}"
+            readOnly: true
+          - name: etcd-cert-key
+            mountPath: "{{ .Values.etcd.certKey }}"
+            readOnly: true
+          - name: kubetcl
+            mountPath: "/usr/bin/kubectl"
+            subPath: kubectl
+            readOnly: true
+          - name: kube-config
+            mountPath: "/root/.kube/config/"
+            readOnly: true
+
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+

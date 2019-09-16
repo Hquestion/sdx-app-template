@@ -63,12 +63,19 @@ clean:
 	@echo
 	rm -rf $(OUTPUTPATH)
 
-.PHONY: help
-help:
-	@echo "$$HELP_INFO"
-
 .PHONY: build
 build: clean
 	$(info start to build ...)
 	@echo
-	bash $(CURDIR)/build.sh
+	dos2unix $(CURDIR)/build/docker/run.sh
+	dos2unix $(CURDIR)/build/build.sh
+	dos2unix $(CURDIR)/build/install.sh
+	bash $(CURDIR)/build/build.sh
+
+.PHONY: test-in-docker
+test-in-docker:
+	$(info skip test ...)
+
+.PHONY: help
+help:
+	@echo "$$HELP_INFO"

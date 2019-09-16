@@ -1,0 +1,9 @@
+[template]
+src = "http_proxy.tmpl"
+dest = "/etc/nginx/confd-generated/http/proxy.conf"
+keys = [
+    "/proxy_services/http",
+]
+
+check_cmd = "/usr/sbin/nginx -t"
+reload_cmd = "/usr/sbin/nginx -s reload"

@@ -1,0 +1,168 @@
+application:
+  - key: APPLICATION:MANAEGR_PLATFORM_MENU:ACCESS
+    name: 菜单访问权限
+    description: 菜单访问权限
+    tags:
+      - MENU
+    roles:
+      - user_role
+      - admin_role
+
+  - key: APPLICATION:USER_MANAGER_MENU:ACCESS
+    name: 用户管理菜单访问权限
+    description: 用户管理菜单访问权限
+    tags:
+      - MENU
+    roles:
+      - user_role
+      - admin_role
+
+  - key: APPLICATION:PERMISSION_MANAGER_MENU:ACCESS
+    name: 权限管理菜单访问权限
+    description: 权限管理菜单访问权限
+    tags:
+      - MENU
+    roles:
+      - user_role
+      - admin_role
+
+  - key: APPLICATION:RESOURCE_MANAGER_MENU:ACCESS
+    name: 资源管理菜单访问权限
+    description: 资源管理菜单访问权限
+    tags:
+      - MENU
+    roles:
+      - user_role
+      - admin_role
+
+  - key: APPLICATION:SYSTEM_MANAGER_MENU:ACCESS
+    name: 监控中心菜单访问权限
+    description: 监控中心菜单访问权限
+    tags:
+      - MENU
+    roles:
+      - admin_role
+
+  - key: APPLICATION:DASHBOARD_MENU:ACCESS
+    name: 用户平台"用户首页"菜单访问权限
+    description: 用户平台"用户首页"菜单访问权限
+    tags:
+      - MENU
+    roles:
+      - user_role
+      - admin_role
+
+  - key: APPLICATION:PROJECT_MANAGER_MENU:ACCESS
+    name: 用户平台"项目管理"菜单访问权限
+    description: 用户平台"项目管理"菜单访问权限
+    tags:
+      - MENU
+    roles:
+      - user_role
+      - admin_role
+
+  - key: APPLICATION:DATA_MANAGER_MENU:ACCESS
+    name: 用户平台"数据管理"菜单访问权限
+    description: 用户平台"数据管理"菜单访问权限
+    tags:
+      - MENU
+    roles:
+      - user_role
+      - admin_role
+
+  - key: APPLICATION:SKYFLOW_MANAGER_MENU:ACCESS
+    name: 用户平台"SkyFlow"菜单访问权限
+    description: 用户平台"SkyFlow"菜单访问权限
+    tags:
+      - MENU
+    roles:
+      - user_role
+      - admin_role
+
+  - key: APPLICATION:FILE_MANAGER_MENU:ACCESS
+    name: 用户平台"文件管理"菜单访问权限
+    description: 用户平台"文件管理"菜单访问权限
+    tags:
+      - MENU
+    roles:
+      - user_role
+      - admin_role
+
+  - key: APPLICATION:IMAGE_MANAGER_MENU:ACCESS
+    name: 用户平台"镜像管理"菜单访问权限
+    description: 用户平台"镜像管理"菜单访问权限
+    tags:
+      - MENU
+    roles:
+      - user_role
+      - admin_role
+
+  - key: APPLICATION:MODEL_MANAGER_MENU:ACCESS
+    name: 用户平台"模型管理"菜单访问权限
+    description: 用户平台"模型管理"菜单访问权限
+    tags:
+      - MENU
+    roles:
+      - user_role
+      - admin_role
+
+  - key: APPLICATION:TEMPLATE_PROJECT_BUTTON:ACCESS
+    name: 用户平台模板项目创建按钮访问权限
+    description: 用户平台模板项目创建按钮访问权限
+    tags:
+      - BUTTON
+    roles:
+      - admin_role
+
+  - key: APPLICATION:TEMPLATE_FLOW_BUTTON:ACCESS
+    name: 用户平台SkyFlow模板创建按钮访问权限
+    description: 用户平台SkyFlow模板创建按钮访问权限
+    tags:
+      - BUTTON
+    roles:
+      - admin_role
+
+  - key: APPLICATION:GLOBAL_IMAGE_BUTTON:ACCESS
+    name: 用户平台镜像全局分享按钮访问权限
+    description: 用户平台镜像全局分享按钮访问权限
+    tags:
+      - BUTTON
+    roles:
+      - admin_role
+
+  - key: APPLICATION:GLOBAL_FILE_BUTTON:ACCESS
+    name: 用户平台文件全局分享按钮访问权限
+    description: 用户平台文件全局分享按钮访问权限
+    tags:
+      - BUTTON
+    roles:
+      - admin_role
+
+  - key: APPLICATION:GLOBAL_DATASET_BUTTON:ACCESS
+    name: 用户平台数据集全局分享按钮访问权限
+    description: 用户平台数据集全局分享按钮访问权限
+    tags:
+      - BUTTON
+    roles:
+      - admin_role
+
+  - key: APPLICATION:GLOBAL_MODEL_BUTTON:ACCESS
+    name: 用户平台模型全局分享按钮访问权限
+    description: 用户平台模型全局分享按钮访问权限
+    tags:
+      - BUTTON
+    roles:
+      - admin_role
+
+  - key: APPLICATION:GLOBAL_SKYFLOW_BUTTON:ACCESS
+    name: 用户平台SkyFlow全局分享按钮访问权限
+    description: 用户平台SkyFlow全局分享按钮访问权限
+    tags:
+      - BUTTON
+    roles:
+      - admin_role
+
+
+
+
+

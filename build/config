@@ -1,0 +1,12 @@
+REPO_NAME=nginx-proxy
+# dockerfile:image_name, split with ",", no any extra blank
+# dockerfile must under build/docker
+# example:
+# file1:test1,file2:test2
+IMAGE_LIST=Dockerfile:nginx-proxy
+# no need to add "v" as prefix
+IMAGE_TAG=
+USECACHE=YES
+ENABLE_ENCRYPT=
+APP_DIR=nginx-proxy
+PERMISSION_FILE_DIR=nginx-proxy/app/config
