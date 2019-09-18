@@ -2,6 +2,17 @@
     <div class="sdx-avatar">
         <SdxuButton
             type="default"
+            :plain="true"
+            icon="iconfont iconbaobijiao"
+            @click="handleJumpToUserManual"
+        >
+            {{ $t('UserManual') }}
+        </SdxuButton>
+        <div
+            class="split-line"
+        />
+        <SdxuButton
+            type="default"
             trigger="click"
             :plain="true"
             icon="iconfont iconicon-jiankongzhongxin1"
@@ -245,6 +256,9 @@ export default {
             // 因为配置文件中的一些资源无法刷新，这里直接刷新页面
             localStorage.setItem('lang', val);
             location.reload();
+        },
+        handleJumpToUserManual() {
+            window.open('/help/');
         }
     },
     mounted() {
