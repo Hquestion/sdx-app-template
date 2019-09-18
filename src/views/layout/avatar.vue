@@ -3,7 +3,7 @@
         <SdxuButton
             type="default"
             :plain="true"
-            icon="iconfont iconbaobijiao"
+            icon="iconfont iconshouce"
             @click="handleJumpToUserManual"
         >
             {{ $t('UserManual') }}
