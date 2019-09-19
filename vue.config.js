@@ -167,6 +167,11 @@ module.exports = {
                 ws: true,
                 changeOrigin: true
             },
+            '/help': {
+                target: 'http://10.115.1.130',
+                ws: true,
+                changeOrigin: true
+            },
         },
         overlay: true
     },
