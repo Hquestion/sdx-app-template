@@ -17,7 +17,7 @@ spec:
     metadata:
       labels:
         app: {{ template "nginx-proxy.name" . }}
-        release: {{ .Release.Name }
+        release: {{ .Release.Name }}
         iluvartar.ai/skydiscovery-podpreset: "true"
         iluvartar.ai/nginx-proxy-podpreset: "true"
     spec:
@@ -63,8 +63,6 @@ spec:
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 1
-            #env:
-            #{{- .Values.env | toYaml | nindent 10 }}
           volumeMounts:
           - name: etcd-ca-cert
             mountPath: "{{ .Values.etcd.caCert }}"
