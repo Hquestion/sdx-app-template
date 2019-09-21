@@ -144,7 +144,7 @@ export default {
             return (con.scrollTop + con.clientHeight) === con.scrollHeight;
         },
         scrollToBottom() {
-            if (this.isReachBottom) {
+            if (this.isReachBottom && this.activeComp && this.activeComp.comp !== 'OutputPreview') {
                 let con = this.$refs.consoleMain;
                 this.$nextTick(() => {
                     this.contentHeight = con.querySelector('div').clientHeight;
