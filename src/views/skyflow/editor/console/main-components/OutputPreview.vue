@@ -45,7 +45,10 @@
                 </el-tabs>
             </div>
             <div v-if="path">
-                <ComponentPreview :path="path" />
+                <ComponentPreview
+                    :path="path"
+                    :performance="performance"
+                />
             </div>
             <!-- <div
                 class="empty-content"
@@ -137,6 +140,7 @@ export default {
             this.isLoading = true;
             getCompOutputPreview(this.nid, this.executeId)
                 .then(data => {
+                    console.log('data', data);
                     this.dataframe = Object.freeze(data.dataframe);
                     this.performance = data.performance;
                     this.path = data.path;

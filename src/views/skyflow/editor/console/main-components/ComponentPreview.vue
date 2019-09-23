@@ -43,6 +43,10 @@
                         :image-url="imageUrl"
                         v-if="imageUrl"
                     />
+                    <PreviewCharts
+                        :data="performance"
+                        v-if="performance && showPerformance"
+                    />
                     <!-- <has-nothing
                         v-if="isPreview"
                         class="has-nothing"
@@ -78,6 +82,7 @@ import hasNothing from '../../../../datas/rely/util/hasNothing';
 import { getPreviewPath } from '@sdx/utils/lib/api/skyflow';
 import { getFilesList } from '@sdx/utils/lib/api/file';
 import { getUser } from '@sdx/utils/lib/helper/shareCenter';
+import PreviewCharts from './PreviewCharts';
 
 export default {
     name: '',
@@ -142,7 +147,8 @@ export default {
             // 不可预览
             isPreview: false,
             noPreview: false,
-            imageUrl: ''
+            imageUrl: '',
+            showPerformance: false
         };
     },
     props: {
@@ -157,6 +163,10 @@ export default {
         path: {
             type: String,
             default: ''
+        },
+        performance: {
+            type: Object,
+            default: null
         }
     },
     computed: {
@@ -197,7 +207,8 @@ export default {
         datasListView,
         DataSetPreview,
         dataImage,
-        hasNothing
+        hasNothing,
+        PreviewCharts
     },
     methods: {
         init() {
@@ -424,6 +435,7 @@ export default {
         },
         // 处理"单文件选择"问题
         handleCheckChange(data, checked) {
+            this.showPerformance = false;
             if (checked) {
                 this.data_file = data.fullpath;
                 this.previewData.ownerId = data.ownerId;
@@ -458,6 +470,10 @@ export default {
                     this.imageUrl = '';
                 } else if (data.mimeType.indexOf('image/') === 0) {
                     this.imageUrl = `${location.origin}/file-manager/api/v1/files/download?ownerId=${data.ownerId}&path=${data.path}&filesystem=cephfs`;
+                    this.isPreview = false;
+                    this.datalistHide = false;
+                } else if (data.name === 'preformace.json') {
+                    this.showPerformance = true;
                     this.isPreview = false;
                     this.datalistHide = false;
                 } else {
