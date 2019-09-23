@@ -599,6 +599,21 @@ module.exports = {
             },
             {
                 httpCode: '',
+                code: '230000',
+                msg: 'Model_Wrong_Params'
+            },
+            {
+                httpCode: '',
+                code: '230001',
+                msg: 'Model_No_Resource'
+            },
+            {
+                httpCode: '',
+                code: '230003',
+                msg: 'Model_Auth_Deny'
+            },
+            {
+                httpCode: '',
                 code: '230101',
                 msg: 'Current_model_does_not_exist'
             },
@@ -606,6 +621,11 @@ module.exports = {
                 httpCode: '',
                 code: '230102',
                 msg: 'Model_with_the_same_name_already_exists'
+            },
+            {
+                httpCode: '',
+                code: '230103',
+                msg: 'Model_Delete_Forbidden'
             },
             {
                 httpCode: '',

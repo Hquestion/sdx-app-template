@@ -103,5 +103,9 @@ module.exports = {
     Task_name_exist: '任务名称已存在！',
     Template_exist: '资源模板已存在！',
     Image_Not_Exist: '任务所用镜像不存在！',
-    Image_Not_Ready: '镜像服务初始化未完成，请稍后再试！'
+    Image_Not_Ready: '镜像服务初始化未完成，请稍后再试！',
+    Model_Wrong_Params: '参数错误，请确认后重试！',
+    Model_No_Resource: '暂无资源，请确认后重试！',
+    Model_Auth_Deny: '暂无授权，请确认后重试！',
+    Model_Delete_Forbidden: '模型禁止删除，请确认后重试！'
 };

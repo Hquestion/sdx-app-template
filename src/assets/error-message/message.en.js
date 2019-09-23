@@ -103,5 +103,9 @@ module.exports = {
     Task_name_exist: 'Task name exist！',
     Template_exist: 'Resource template exist！',
     Image_Not_Exist: 'Image does not exist!',
-    Image_Not_Ready: 'Image service is not ready yet!'
+    Image_Not_Ready: 'Image service is not ready yet!',
+    Model_Wrong_Params: 'Wrong params!',
+    Model_No_Resource: 'No resource!',
+    Model_Auth_Deny: 'No authorization!',
+    Model_Delete_Forbidden: 'Delete forbidden!'
 };
