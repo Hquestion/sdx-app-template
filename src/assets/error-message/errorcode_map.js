@@ -681,6 +681,11 @@ module.exports = {
                 httpCode: '',
                 code: '180212',
                 msg: 'Tasks_of_the_same_name_already_exist'
+            },
+            {
+                httpCode: '',
+                code: '219001',
+                msg: 'Bad_file_format'
             }
         ]
     },

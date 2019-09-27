@@ -1,32 +1,39 @@
 import httpService from '../helper/httpService';
+import { getDashResourceStates } from '@sdx/utils/lib/api/resource';
+import { getTaskList as getTasks, getProjectList } from '@sdx/utils/lib/api/project';
+import { getModelList } from '@sdx/utils/lib/api/model';
+import { authWrapper } from '@sdx/utils/lib/api/helper';
+import readAuths from '@sdx/utils/lib/api/config';
+import { getSkyflowList } from '@sdx/utils/lib/api/skyflow';
 
-export function getUserResource(params) {
-    return httpService.get('/resource-manager/api/v1/resource_states', params);
-}
+export const getUserResource = getDashResourceStates;
 
-export function getTaskList(params) {
-    return httpService.get('/project-manager/api/v1/tasks', params);
-}
+export const getTaskList = getTasks;
 
 export function getDisk(params) {
     return httpService.get('/storage-manager/api/v1/volumes/stats', params);
 }
 
-export function getProjects(params) {
-    return httpService.get('/project-manager/api/v1/projects', params);
-}
-export function getModels(params) {
-    return httpService.get('/model-manager/api/v1/models', params);
-}
+export const getProjects = getProjectList;
 
-export function getDatasets(params) {
-    return httpService.get('/data-manager/api/v1/dataset', params);
-}
+export const getModels = getModelList;
 
-export function getSkyflows(params) {
-    return httpService.get('/skyflow-manager/api/v1/skyflows', params);
-}
+// export function getDatasets(params) {
+//     return httpService.get('/data-manager/api/v1/dataset', params);
+// }
+export const getDatasets = authWrapper(params => httpService.get('/data-manager/api/v1/dataset', params),
+    readAuths.DATA_DATA_SET_READ
+);
 
-export function getVersions(url, params) {
-    return httpService.get(`/model-manager/api/v1/models/${url}/versions`, params);
-}
+// export function getSkyflows(params) {
+//     return httpService.get('/skyflow-manager/api/v1/skyflows', params);
+// }
+export const getSkyflows = getSkyflowList;
+
+// export function getVersions(url, params) {
+//     return httpService.get(`/model-manager/api/v1/models/${url}/versions`, params);
+// }
+
+export const getVersions = authWrapper((url, params) => httpService.get(`/model-manager/api/v1/models/${url}/versions`, params),
+    readAuths.MODEL_MODEL_VERSION_READ
+);

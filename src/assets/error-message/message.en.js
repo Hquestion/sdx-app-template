@@ -108,5 +108,6 @@ module.exports = {
     Model_No_Resource: 'No resource!',
     Model_Auth_Deny: 'No authorization!',
     Model_Delete_Forbidden: 'Delete forbidden!',
-    Over_Resource_Limit: 'Exceed resource limit!'
+    Over_Resource_Limit: 'Exceed resource limit!',
+    Bad_file_format: 'Incorrect file format!'
 };

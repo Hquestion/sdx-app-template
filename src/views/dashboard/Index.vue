@@ -47,7 +47,7 @@
                                                 <el-dropdown
                                                     @command="handleChangeType"
                                                     trigger="click"
-                                                    v-if="options.length"
+                                                    v-if="options && options.length "
                                                 >
                                                     <span
                                                         class="el-dropdown-link"
@@ -278,7 +278,7 @@ export default {
     data() {
         return {
             resource: {},
-            options: [],
+            options: null,
             gpuValue: '',
             taskCompleted: 0,
             taskTotal: 0,
@@ -340,13 +340,17 @@ export default {
     computed: {
         gpuCount() {
             let count = -1;
-            for (let i = 0; i < this.options.length; i++) {
-                if (this.options[i].value === this.gpuValue) {
-                    count = this.options[i].count;
+            if (this.options === null) {
+                count = '-';
+            } else {
+                for (let i = 0; i < this.options.length; i++) {
+                    if (this.options[i].value === this.gpuValue) {
+                        count = this.options[i].count;
+                    }
                 }
-            }
-            if (this.options.length === 0) {
-                count = 0;
+                if (this.options.length === 0) {
+                    count = 0;
+                }
             }
             return count;
         },
