@@ -599,11 +599,6 @@ module.exports = {
             },
             {
                 httpCode: '',
-                code: '219001',
-                msg: 'Bad_File_Format'
-            },
-            {
-                httpCode: '',
                 code: '219999',
                 msg: 'Unknown_error'
             },
