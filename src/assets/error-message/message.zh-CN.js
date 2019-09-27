@@ -107,5 +107,7 @@ module.exports = {
     Model_Wrong_Params: '参数错误，请确认后重试！',
     Model_No_Resource: '暂无资源，请确认后重试！',
     Model_Auth_Deny: '暂无授权，请确认后重试！',
-    Model_Delete_Forbidden: '模型禁止删除，请确认后重试！'
+    Model_Delete_Forbidden: '模型禁止删除，请确认后重试！',
+    Over_Resource_Limit: '超出资源限制，请确认后重试！',
+    Bad_File_Format: '文件格式不正确，请确认后重试！'
 };

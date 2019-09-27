@@ -107,5 +107,7 @@ module.exports = {
     Model_Wrong_Params: 'Wrong params!',
     Model_No_Resource: 'No resource!',
     Model_Auth_Deny: 'No authorization!',
-    Model_Delete_Forbidden: 'Delete forbidden!'
+    Model_Delete_Forbidden: 'Delete forbidden!',
+    Over_Resource_Limit: 'Exceed resource limit!',
+    Bad_File_Format: 'Bad file format!'
 };

@@ -359,6 +359,11 @@ module.exports = {
             },
             {
                 httpCode: '',
+                code: '180215',
+                msg: 'Over_Resource_Limit'
+            },
+            {
+                httpCode: '',
                 code: '180301',
                 msg: 'server_internal_error'
             },
@@ -591,6 +596,11 @@ module.exports = {
                 httpCode: '',
                 code: '210301',
                 msg: 'Unallocated_storage_space'
+            },
+            {
+                httpCode: '',
+                code: '219001',
+                msg: 'Bad_File_Format'
             },
             {
                 httpCode: '',
