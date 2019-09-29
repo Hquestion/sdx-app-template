@@ -48,6 +48,7 @@
                 <ComponentPreview
                     :path="path"
                     :performance="performance"
+                    :node="node"
                 />
             </div>
             <!-- <div
@@ -119,6 +120,7 @@ export default {
         }
     },
     activated() {
+        console.log('node', this.node);
         this.dataframe = Object.freeze([]);
         this.performance = null;
         this.path = '';

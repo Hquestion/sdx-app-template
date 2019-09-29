@@ -1,5 +1,5 @@
 <template>
-    <sdxu-content-panel title="数据预处理">
+    <sdxu-content-panel :title="(node && node.label) || '数据预处理'">
         <div class="preview-container-comp">
             <div
                 class="preview-file-tree tree"
@@ -165,6 +165,10 @@ export default {
             default: ''
         },
         performance: {
+            type: Object,
+            default: null
+        },
+        node: {
             type: Object,
             default: null
         }
