@@ -23,7 +23,7 @@
         -client-ca-keys "$etcd_ca" \
         -client-cert "$etcd_cert" \
         -client-key "$etcd_key" \
-        -interval 5 \
+        -interval 3 \
         --log-level debug
 }&
 

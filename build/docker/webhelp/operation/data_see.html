@@ -1,0 +1,118 @@
+
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:whc="http://www.oxygenxml.com/webhelp/components" xml:lang="zh-cn" lang="zh-cn" whc:version="21.0">
+    <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /><meta charset="UTF-8" /><meta name="copyright" content="(C) 版权 2019" /><meta name="DC.rights.owner" content="(C) 版权 2019" /><meta name="DC.type" content="concept" /><meta name="description" content="可视化建模主要是在SkyFlow中完成的，本章节为您介绍如何在机器学习平台上完成以下可视化建模的基本任务。" /><meta name="indexterms" content="可视化建模" /><meta name="DC.subject" content="可视化建模" /><meta name="keywords" content="可视化建模" /><meta name="DC.relation" scheme="URI" content="../operation/gettingstart.html" /><meta name="DC.relation" scheme="URI" content="../operation/dataset_new.html" /><meta name="DC.relation" scheme="URI" content="../operation/fixed_comp.html" /><meta name="DC.relation" scheme="URI" content="../operation/ml_forecast.html" /><meta name="DC.relation" scheme="URI" content="../operation/other_opr.html" /><meta name="DC.format" content="HTML5" /><meta name="DC.identifier" content="concept-1-5C08FEBC" /><meta name="DC.language" content="zh-CN" />        
+      <title>可视化建模</title><!--  Generated with Oxygen version 21.0, build number 2019032912.  --><meta name="wh-path2root" content="../" /><meta name="wh-toc-id" content="concept-1-5C08FEBC-d62e562" /><link rel="stylesheet" type="text/css" href="../oxygen-webhelp/lib/bootstrap/css/bootstrap.min.css" /><link rel="stylesheet" href="../oxygen-webhelp/lib/jquery-ui/jquery-ui.min.css" /><link rel="stylesheet" type="text/css" href="../oxygen-webhelp/app/topic-page.css?buildId=2019032912" /><script type="text/javascript" src="../oxygen-webhelp/lib/jquery/jquery-3.1.1.min.js"><!----></script><script data-main="../oxygen-webhelp/app/topic-page.js" src="../oxygen-webhelp/lib/requirejs/require.js"></script><link rel="stylesheet" type="text/css" href="../oxygen-webhelp/template/oxygen.css?buildId=2019032912" /></head>
+
+    <body id="concept-1-5C08FEBC" class="wh_topic_page frmBody">
+        <a href="#wh_topic_body" class="sr-only sr-only-focusable">jump.to.content</a>
+        <!-- EXM-36950 - Expand the args.hdr parameter here -->
+        
+        
+        
+        <header class="navbar navbar-default wh_header" whc:version="21.0">
+    <div class="container-fluid">
+        <div class="wh_header_flex_container navbar-nav navbar-expand-md navbar-dark">
+            <div class="wh_logo_and_publication_title_container">
+                <div class="wh_logo_and_publication_title">
+                    
+                    <!--
+                            This component will be generated when the next parameters are specified in the transformation scenario:
+                            'webhelp.logo.image' and 'webhelp.logo.image.target.url'.
+                            See: http://oxygenxml.com/doc/versions/17.1/ug-editor/#topics/dita_webhelp_output.html.
+                    -->
+                    
+                    <div class=" wh_publication_title "><a href="../index.html"><span class="title">SDX用户手册</span></a></div>
+                    
+                </div>
+                
+                <!-- The menu button for mobile devices is copied in the output only when the 'webhelp.show.top.menu' parameter is set to 'yes' -->
+                <button type="button" data-target="#wh_top_menu_and_indexterms_link" id="wh_menu_mobile_button" data-toggle="collapse" class="navbar-toggler collapsed wh_toggle_button" aria-expanded="false" aria-label="toggle.menu" aria-controls="wh_top_menu_and_indexterms_link">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+
+            <div class="wh_top_menu_and_indexterms_link collapse navbar-collapse" id="wh_top_menu_and_indexterms_link">
+                
+                <nav class=" wh_top_menu "><ul xmlns:xhtml="http://www.w3.org/1999/xhtml" role="menubar" aria-label="Menu"><li role="menuitem" aria-haspopup="true" aria-expanded="false" class="has-children"><span id="concept-1-5B7ECF51-d62e11-mi" data-tocid="concept-1-5B7ECF51-d62e11" data-state="not-ready" class=" topicref " data-id="concept-1-5B7ECF51"><span class="title"><a href="../overview/product_overview.html">产品简介</a></span></span></li><li role="menuitem" aria-haspopup="true" aria-expanded="false" class="has-children"><span id="concept-1-5B7EDB99-d62e54-mi" data-tocid="concept-1-5B7EDB99-d62e54" data-state="not-ready" class=" topicref " data-id="concept-1-5B7EDB99"><span class="title"><a href="../page/page.html">基本界面</a></span></span></li><li role="menuitem" aria-haspopup="true" aria-expanded="false" class="has-children"><span id="concept-1-5B7FB1A0-d62e198-mi" data-tocid="concept-1-5B7FB1A0-d62e198" data-state="not-ready" class=" topicref " data-id="concept-1-5B7FB1A0"><span class="title"><a href="../operation/gettingstart.html">快速入门</a></span></span></li></ul></nav>
+                <div class=" wh_indexterms_link "><a href="../indexTerms.html" title="webhelp.index" aria-label="webhelp.index.aria.label"><span>webhelp.index</span></a></div>
+                
+            </div>
+        </div>
+    </div>
+</header>
+        
+        <div class=" wh_search_input "><form id="searchForm" method="get" role="search" action="../search.html"><div><input type="search" placeholder="webhelp.search " class="wh_search_textfield" id="textToSearch" name="searchQuery" aria-label="search.query" required="required" /><button type="submit" class="wh_search_button" aria-label="webhelp.search"><span>webhelp.search</span></button></div></form></div>
+        
+        <div class="container-fluid">
+            <div class="row">
+
+                <nav class="wh_tools d-print-none">
+                    <div data-tooltip-position="bottom" class=" wh_breadcrumb "><ol xmlns:html="http://www.w3.org/1999/xhtml" class="d-print-none"><li><span class="home"><a href="../index.html"><span>label.home</span></a></span></li><li><span class="topicref" data-id="concept-1-5B7FB1A0"><span class="title"><a href="../operation/gettingstart.html">快速入门</a><span class="wh-tooltip"><p xmlns:toc="http://www.oxygenxml.com/ns/webhelp/toc" xmlns:xhtml="http://www.w3.org/1999/xhtml" class="shortdesc">本节主要为用户提供快速进行机器学习的指导，通过对本章节的熟悉，用户可以快速对一个简单的机器学习模型进行训练和预测。</p></span></span></span></li><li class="active"><span class="topicref" data-id="concept-1-5C08FEBC"><span class="title"><a href="../operation/data_see.html">可视化建模</a><span class="wh-tooltip"><p xmlns:toc="http://www.oxygenxml.com/ns/webhelp/toc" xmlns:xhtml="http://www.w3.org/1999/xhtml" class="shortdesc">可视化建模主要是在SkyFlow中完成的，本章节为您介绍如何在机器学习平台上完成以下可视化建模的基本任务。</p></span></span></span></li></ol></div>
+
+                    <div class="wh_right_tools">
+                        <button class="wh_hide_highlight" aria-label="toggleHighlights" title="toggleHighlights"></button>
+                        <button class="webhelp_expand_collapse_sections" data-next-state="collapsed" aria-label="collapseSections" title="collapseSections"></button>
+                        <div class=" wh_navigation_links "><span id="topic_navigation_links" class="navheader">
+  </span></div>
+                        <div class=" wh_print_link print d-none d-md-inline-block "><button onClick="window.print()" title="printThisPage" aria-label="printThisPage"></button></div>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="wh_content_area">
+                <div class="row">
+                    
+                        <nav role="navigation" id="wh_publication_toc" class="col-lg-3 col-md-3 d-none d-md-block d-print-none">
+                            <div class=" wh_publication_toc " data-tooltip-position="right"><ul role="tree" aria-label="Table of Contents"><span class="expand-button-action-labels"><span id="button-expand-action" aria-label="Expand"></span><span id="button-collapse-action" aria-label="Collapse"></span><span id="button-pending-action" aria-label="Pending"></span></span><li role="treeitem" aria-expanded="true"><span data-tocid="concept-1-5B7FB1A0-d62e198" class="topicref" data-id="concept-1-5B7FB1A0" data-state="expanded"><span role="button" tabindex="0" aria-labelledby="button-collapse-action concept-1-5B7FB1A0-d62e198-link" class="wh-expand-btn"></span><span class="title"><a href="../operation/gettingstart.html" id="concept-1-5B7FB1A0-d62e198-link">快速入门</a><span class="wh-tooltip"><p xmlns:toc="http://www.oxygenxml.com/ns/webhelp/toc" xmlns:xhtml="http://www.w3.org/1999/xhtml" class="shortdesc">本节主要为用户提供快速进行机器学习的指导，通过对本章节的熟悉，用户可以快速对一个简单的机器学习模型进行训练和预测。</p></span></span></span><ul role="group" class="navbar-nav nav-list"><span class="expand-button-action-labels"><span id="button-expand-action" aria-label="Expand"></span><span id="button-collapse-action" aria-label="Collapse"></span><span id="button-pending-action" aria-label="Pending"></span></span><li role="treeitem"><span data-tocid="concept-1-5C06E9AD-d62e209" class="topicref" data-id="concept-1-5C06E9AD" data-state="leaf"><span role="button" class="wh-expand-btn"></span><span class="title"><a href="../operation/start_ml.html" id="concept-1-5C06E9AD-d62e209-link">开始使用机器学习</a><span class="wh-tooltip"><p xmlns:toc="http://www.oxygenxml.com/ns/webhelp/toc" xmlns:xhtml="http://www.w3.org/1999/xhtml" class="shortdesc"></p></span></span></span></li><li role="treeitem" aria-expanded="false"><span data-tocid="concept-1-5C683CBA-d62e219" class="topicref" data-id="concept-1-5C683CBA" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action concept-1-5C683CBA-d62e219-link" class="wh-expand-btn"></span><span class="title"><a href="../operation/code_model.html" id="concept-1-5C683CBA-d62e219-link">编程建模</a><span class="wh-tooltip"><p xmlns:toc="http://www.oxygenxml.com/ns/webhelp/toc" xmlns:xhtml="http://www.w3.org/1999/xhtml" class="shortdesc">编程建模主要是在项目中进行的，项目中包含了四类任务：模型开发、模型训练、模型评估和自定义容器。</p></span></span></span></li><li role="treeitem" aria-expanded="true" class="active"><span data-tocid="concept-1-5C08FEBC-d62e562" class="topicref" data-id="concept-1-5C08FEBC" data-state="expanded"><span role="button" tabindex="0" aria-labelledby="button-collapse-action concept-1-5C08FEBC-d62e562-link" class="wh-expand-btn"></span><span class="title"><a href="../operation/data_see.html" id="concept-1-5C08FEBC-d62e562-link">可视化建模</a><span class="wh-tooltip"><p xmlns:toc="http://www.oxygenxml.com/ns/webhelp/toc" xmlns:xhtml="http://www.w3.org/1999/xhtml" class="shortdesc">可视化建模主要是在SkyFlow中完成的，本章节为您介绍如何在机器学习平台上完成以下可视化建模的基本任务。</p></span></span></span><ul role="group" class="navbar-nav nav-list"><span class="expand-button-action-labels"><span id="button-expand-action" aria-label="Expand"></span><span id="button-collapse-action" aria-label="Collapse"></span><span id="button-pending-action" aria-label="Pending"></span></span><li role="treeitem"><span data-tocid="concept-1-5B8053BC-d62e573" class="topicref" data-id="concept-1-5B8053BC" data-state="leaf"><span role="button" class="wh-expand-btn"></span><span class="title"><a href="../operation/dataset_new.html" id="concept-1-5B8053BC-d62e573-link">准备数据源或数据集</a><span class="wh-tooltip"><p xmlns:toc="http://www.oxygenxml.com/ns/webhelp/toc" xmlns:xhtml="http://www.w3.org/1999/xhtml" class="shortdesc"></p></span></span></span></li><li role="treeitem"><span data-tocid="concept-1-5C65A255-d62e583" class="topicref" data-id="concept-1-5C65A255" data-state="leaf"><span role="button" class="wh-expand-btn"></span><span class="title"><a href="../operation/fixed_comp.html" id="concept-1-5C65A255-d62e583-link">新建工作流</a><span class="wh-tooltip"><p xmlns:toc="http://www.oxygenxml.com/ns/webhelp/toc" xmlns:xhtml="http://www.w3.org/1999/xhtml" class="shortdesc"></p></span></span></span></li><li role="treeitem"><span data-tocid="concept-1-5B8137D4-d62e593" class="topicref" data-id="concept-1-5B8137D4" data-state="leaf"><span role="button" class="wh-expand-btn"></span><span class="title"><a href="../operation/ml_forecast.html" id="concept-1-5B8137D4-d62e593-link">进入画布进行模型预测</a><span class="wh-tooltip"><p xmlns:toc="http://www.oxygenxml.com/ns/webhelp/toc" xmlns:xhtml="http://www.w3.org/1999/xhtml" class="shortdesc"></p></span></span></span></li><li role="treeitem" aria-expanded="false"><span data-tocid="concept-1-61A90D13-d62e603" class="topicref" data-id="concept-1-61A90D13" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action concept-1-61A90D13-d62e603-link" class="wh-expand-btn"></span><span class="title"><a href="../operation/other_opr.html" id="concept-1-61A90D13-d62e603-link">其他相关操作</a><span class="wh-tooltip"><p xmlns:toc="http://www.oxygenxml.com/ns/webhelp/toc" xmlns:xhtml="http://www.w3.org/1999/xhtml" class="shortdesc"></p></span></span></span></li></ul></li></ul></li></ul></div>
+                        </nav>
+                    
+                    
+                    <div class="col-lg-9 col-md-9 col-sm-12" id="wh_topic_body">
+                        <div class=" wh_topic_content body "><main role="main"><article role="article" aria-labelledby="ariaid-title1">
+<h1 class="title topictitle1" id="ariaid-title1">可视化建模</h1>
+
+
+<div class="body conbody"><p class="shortdesc">可视化建模主要是在SkyFlow中完成的，本章节为您介绍如何在机器学习平台上完成以下可视化建模的基本任务。</p>
+<p class="p">本节主要介绍如何进行拖拉拽的可视化建模。</p>
+<p class="p"><img class="image" src="img/see_model.png" /></p>
+<ol class="ol">
+<li class="li"><p class="p">数据准备</p></li>
+<li class="li"><p class="p">配置画布</p></li>
+<li class="li"><p class="p">运行画布</p></li>
+<li class="li"><p class="p">查看运行结果</p></li>
+</ol>
+</div>
+</article></main></div>
+                        
+                        
+                        
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div> 
+        <footer class="navbar navbar-default wh_footer" whc:version="21.0">
+  <div class=" footer-container mx-auto ">
+    2019<a class="oxyFooter" href="http://iluvatar.ai" target="_blank">南京天数智芯科技有限公司 © 版权所有</a>
+  </div>
+</footer>
+        
+        <div id="go2top">
+            <span class="oxy-icon oxy-icon-up"></span>
+        </div>
+        
+        <!-- The modal container for images -->
+        <div id="modal_img_large" class="modal">
+            <span class="close oxy-icon oxy-icon-remove"></span>
+            <!-- Modal Content (The Image) -->
+            <img class="modal-content" id="modal-img" />
+            <!-- Modal Caption (Image Text) -->
+            <div id="caption"></div>
+        </div>
+        
+        
+    </body>
+</html>

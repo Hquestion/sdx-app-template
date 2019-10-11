@@ -20,6 +20,8 @@ RUN mkdir -p /etc/nginx/confd-generated/http && mkdir -p /etc/nginx/confd-genera
 
 ADD dist /web/axe/static/dist
 
+ADD build/docker/webhelp /webhelp
+
 ADD build/docker/run.sh /run.sh
 # will auto tar xzvf
 ADD build/docker/node-v8.13.0-linux-x64.tar.gz /

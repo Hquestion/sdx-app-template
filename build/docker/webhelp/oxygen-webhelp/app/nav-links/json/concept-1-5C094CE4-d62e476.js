@@ -1,0 +1,1 @@
+define({"topics" : [{"title":"TensorBoard的使用","shortdesc":"<p class=\"shortdesc\">模型的评估主要有几个指标：平均准确率、识别的时间、loss下降变化等。Tensorflow提供了一个log可视化的工具tensroboard。</p>","href":"operation\/tensorboard_use.html","attributes": {"data-id":"concept-1-5C64EF90",},"menu": {"hasChildren":false,},"tocID":"concept-1-5C64EF90-d62e486","topics":[]}]});
