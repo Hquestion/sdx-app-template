@@ -31,6 +31,7 @@ import ComponentState from '@sdx/view/lib/component-state';
 
 import Skyflow from '@sdx/view/lib/skyflow';
 import FileManage from '@sdx/view/lib/file';
+import SkyIDE from '@sdx/view/lib/sky-ide';
 
 // datas
 import datasManager from '../views/datas/index';
@@ -229,5 +230,6 @@ FileManage.viewRouter.register(router, '/assets');
 TaskManagement.viewRouter.register(router, '/assets');
 ResourceStatistics.viewRouter.register(router, '/home');
 ComponentState.viewRouter.register(router, '/home');
+SkyIDE.viewRouter.register(router);
 
 export default router;
