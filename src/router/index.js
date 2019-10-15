@@ -19,6 +19,7 @@ import Editor from '../views/skyflow/editor/';
 import RoleManage from '@sdx/view/lib/role-manage';
 import AuthorizeManage from '@sdx/view/lib/authorize-manage';
 import ProjectManage from '@sdx/view/lib/project-management';
+import ProjectManageNext from '@sdx/view/lib/project-manage-next';
 import ModelManage from '@sdx/view/lib/model-manage';
 import ImageManage from '@sdx/view/lib/image-management';
 import SdxvPrivilege from '@sdx/view/lib/privilege';
@@ -237,5 +238,6 @@ TaskManagement.viewRouter.register(router, '/assets');
 ResourceStatistics.viewRouter.register(router, '/home');
 ComponentState.viewRouter.register(router, '/home');
 SkyIDE.viewRouter.register(router);
+ProjectManageNext.viewRouter.register(router, '/home');
 
 export default router;

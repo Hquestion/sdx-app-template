@@ -17,6 +17,20 @@ const leftmenu = [
         auth: permissions.DATA_MENU_ACCESS
     },
     {
+        name: i18n.t('menu.Project'),
+        icon: 'iconfont iconicon-project',
+        activeIcon: 'iconfont iconicon-project-selected',
+        path: '/sdxv-project-manage-next',
+        auth: permissions.PROJECT_MENU_ACCESS
+    },
+    {
+        name: '项目管理 - old',
+        icon: 'iconfont iconicon-project',
+        activeIcon: 'iconfont iconicon-project-selected',
+        path: '/sdxv-project-manage',
+        auth: permissions.PROJECT_MENU_ACCESS
+    },
+    {
         name: i18n.t('menu.SkyFlow'),
         icon: 'iconfont iconSkyflowIOCN',
         activeIcon: 'iconfont iconicon-Skyflow-selected',
