@@ -1,7 +1,7 @@
 application:
   - key: APPLICATION:MANAEGR_PLATFORM_MENU:ACCESS
-    name: 菜单访问权限
-    description: 菜单访问权限
+    name: 管理平台菜单访问权限
+    description: 管理平台菜单访问权限
     tags:
       - MENU
     roles:
