@@ -67,6 +67,10 @@ export default {
     },
     methods: {
         handleGetCompLog() {
+            if (!this.node || !this.node.nodeState || !this.executeId) {
+                this.compLogLoading = false;
+                return;
+            }
             getCompLog({ nid: this.node.nodeState.node_id, offset: this.offset, execute_id: this.executeId })
                 .then(data => {
                     if (data.content) this.compLog.push(data.content);
@@ -74,11 +78,12 @@ export default {
                     this.$emit('scrollToBottom');
                     this.stopPull();
                     this.startPull();
+                }).finally(() => {
                     this.compLogLoading = false;
                 });
         },
         startPull() {
-            if (this.node.nodeState.state && [nodeStateConf.SUCCESS, nodeStateConf.FAILED, nodeStateConf.STOPED, nodeStateConf.FORCESTOPED].indexOf(this.node.nodeState.state) === -1) {
+            if (this.node && this.node.nodeState.state && [nodeStateConf.SUCCESS, nodeStateConf.FAILED, nodeStateConf.STOPED, nodeStateConf.FORCESTOPED].indexOf(this.node.nodeState.state) === -1) {
                 if (!this.getCompLogInterval) {
                     this.getCompLogInterval = setTimeout(this.handleGetCompLog.bind(this), 1000);
                 }
@@ -99,10 +104,8 @@ export default {
         this.compLog = [];
         this.offset = 0;
         this.stopPull();
-        if (this.node && this.node.nodeState) {
-            this.handleGetCompLog();
-            this.startPull();
-        }
+        this.handleGetCompLog();
+        this.startPull();
         this.unWatch = this.$watch('node', ({ nodeState }) => {
             if (nodeState && nodeState.state && [nodeStateConf.SUCCESS, nodeStateConf.FAILED, nodeStateConf.STOPED, nodeStateConf.FORCESTOPED].indexOf(nodeState.state) === -1) {
                 // 启定时器

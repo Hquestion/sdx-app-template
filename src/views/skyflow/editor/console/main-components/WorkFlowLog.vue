@@ -84,6 +84,7 @@ export default {
         // 获取执行流状态
         getWorkFlowState() {
             if (!this.executeId) {
+                this.workFlowLogLoading = false;
                 return;
             }
             getWorkFlowLog({
