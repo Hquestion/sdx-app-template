@@ -1,0 +1,7 @@
+{{range getvs "/proxy_services/tcp/*"}}
+    {{$data := json .}}
+    server {
+        listen {{$data.port}};
+        proxy_pass {{$data.backend}};
+    }
+{{end}}
