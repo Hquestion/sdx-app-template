@@ -3,6 +3,7 @@
         <i
             class="iconfont iconicon-shousuo toggle-icon"
             @click="toggleSideBar"
+            style="opacity: 0;font-size: 0;padding: 0"
         />
         <avatar />
     </div>

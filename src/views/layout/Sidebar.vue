@@ -9,21 +9,25 @@
                     iconClass="iconicon-Logo"
                     class="logo-icon"
                 />
-                <i class="iconfont iconico_project logo-icon-mini" />
+                <wscn-icon-svg iconClass="iconlogoshouqi" class="logo-icon-mini"></wscn-icon-svg>
             </div>
         </div>
         <ElScrollbar
             class="sdx--slidebar--scrollbar"
             wrap-class="layout-aside-wrap"
         >
-            <SdxMenu :menu-data="permissionRoutes" />
+            <SdxMenu :menus="permissionRoutes" :collapse="!sidebar.opened" />
         </ElScrollbar>
+        <div class="collapse-toggler" :class="{'is-collapse': !sidebar.opened}" @click="toggleCollapse">
+            <i class="iconfont iconcebianlanzhankaiICON"></i>
+        </div>
     </div>
 </template>
 
 <script>
 import { leftmenu, manageMenus } from '../../config/menuConfig';
-import SdxMenu from '../../components/SdxMenu/index.vue';
+// import SdxMenu from '../../components/SdxMenu/index.vue';
+import SdxMenu from '../../components/Menu/Main';
 
 export default {
     name: 'Sidebar',
@@ -38,6 +42,11 @@ export default {
     computed: {
         sidebar() {
             return this.$store.state.app.sidebar;
+        }
+    },
+    methods: {
+        toggleCollapse() {
+            this.$store.dispatch('ToggleSideBar');
         }
     },
     mounted() {
@@ -92,16 +101,15 @@ export default {
     height: 100%;
     width: $ls-siderbar;
     overflow: hidden;
+    position: relative;
     .logo {
-        background: $menu-bg-dark;
+        background: $sdx-primary-color;
         position: relative;
         width: 100%;
         height: $ls-headerbar;
         text-align: center;
         transition: all 0.1s ease-out;
         .inner {
-            /*background: url('../../assets/images/logonew.png') no-repeat;*/
-            /*background-size:cover;*/
             width: 100%;
             height: 100%;
             position: relative;
@@ -118,9 +126,11 @@ export default {
             .logo-icon-mini {
                 display: inline-block;
                 font-size: 30px;
+                width: 30px;
+                height: 30px;
                 position: absolute;
                 left: 50%;
-                top: 0;
+                top: 15px;
                 transform: translate(155px, 0);
                 color: $sdx-success-color;
                 transition: transform ease-in .1s;
@@ -134,6 +144,37 @@ export default {
         & /deep/ .layout-aside-wrap {
             height: 100%;
             overflow-x: hidden;
+        }
+    }
+    .collapse-toggler {
+        position: absolute;
+        right: 16px;
+        bottom: 24px;
+        cursor: pointer;
+        color: #fff;
+        background: #013293;
+        border-radius: 4px;
+        width: 48px;
+        height: 48px;
+        line-height: 48px;
+        text-align: center;
+        z-index: 10;
+        opacity: 0.5;
+        &:hover {
+            opacity: 1;
+        }
+        i {
+            font-size: 20px;
+            display: inline-block;
+            will-change: transfrom;
+            transition: transform ease-in .3s;
+            transform: rotate(180deg);
+        }
+        &.is-collapse {
+            transform: translateX(-169px);
+            i {
+                transform: rotate(0);
+            }
         }
     }
 }

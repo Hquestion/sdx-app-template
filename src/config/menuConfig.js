@@ -41,6 +41,7 @@ const leftmenu = [
         name: i18n.t('menu.AssetsManage'),
         icon: 'iconfont iconicon-zichanguanli',
         activeIcon: 'iconfont iconicon-zichanguanli-selected',
+        path: '/sdxv-task-management',
         children: [
             {
                 name: i18n.t('menu.TaskManage'),

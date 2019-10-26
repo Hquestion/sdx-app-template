@@ -42,48 +42,48 @@ export default {
     overflow: hidden;
     &.hideSidebar {
         .sidebar-wrapper {
-            transform: translate(-170px, 0);
+            transform: translate(-176px, 0);
             .sidebar-container {
-                transform: translate(155px, 0);
-                & /deep/ .el-menu {
-                    .main-menu-icon {
-                        margin-right: 26px;
-                    }
-                    .el-menu {
-                        height: 0;
-                        overflow: hidden;
-                    }
-                }
+                transform: translate(176px, 0);
+                /*& /deep/ .el-menu {*/
+                /*    .main-menu-icon {*/
+                /*        margin-right: 26px;*/
+                /*    }*/
+                /*    .el-menu {*/
+                /*        height: 0;*/
+                /*        overflow: hidden;*/
+                /*    }*/
+                /*}*/
                 & /deep/ .logo-icon {
                     transform: translate(-$ls-siderbar, 0);
                 }
                 & /deep/ .logo-icon-mini {
-                    transform: translate(-85px, 0);
+                    transform: translate(-105px, 0);
                 }
             }
             &:hover {
-                 transform: translate(0, 0);
+                 /*transform: translate(0, 0);*/
                  .sidebar-container {
-                     transform: translate(0, 0);
-                     & /deep/ .el-menu {
-                         .main-menu-icon {
-                             margin-right: 14px;
-                         }
-                         .el-menu {
-                             height: auto;
-                         }
-                     }
+                     /*transform: translate(0, 0);*/
+                     /*& /deep/ .el-menu {*/
+                     /*    .main-menu-icon {*/
+                     /*        margin-right: 14px;*/
+                     /*    }*/
+                     /*    .el-menu {*/
+                     /*        height: auto;*/
+                     /*    }*/
+                     /*}*/
                      & /deep/ .logo-icon {
-                         transform: translate(0, 0);
+                         /*transform: translate(0, 0);*/
                      }
                      & /deep/ .logo-icon-mini {
-                         transform: translate(155px, 0);
+                         /*transform: translate(155px, 0);*/
                      }
                  }
             }
         }
         .main-container {
-            margin-left: 50px;
+            margin-left: 64px;
         }
     }
     .sidebar-wrapper {
@@ -99,7 +99,7 @@ export default {
     }
     .sidebar-container {
         transition: all 0.1s ease-out;
-        background: $menu-bg-dark;
+        background: $sdx-primary-color;
     }
     .main-container {
         height: 100%;

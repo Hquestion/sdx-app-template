@@ -27,4 +27,14 @@ body {
 a {
     text-decoration: none;
 }
-
+.sdx-menu-popup {
+    .el-menu--popup-right-start {
+        margin-left: 10px !important;
+        margin-right: 10px !important;
+        padding: 0;
+        .el-menu--item {
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+        }
+    }
+}
