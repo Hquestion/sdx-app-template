@@ -4,42 +4,49 @@ import i18n from '../i18n';
 const leftmenu = [
     {
         name: i18n.t('menu.Home'),
-        icon: 'iconfont iconicon-home',
+        icon: 'iconfont iconshouyeICON',
         activeIcon: 'iconfont iconicon-home-selected',
         path: '/dashboard',
         auth: permissions.DASHBOARD_MENU_ACCESS
     },
     {
         name: i18n.t('menu.Data'),
-        icon: 'iconfont iconicon-data',
+        icon: 'iconfont iconshujuICON',
         activeIcon: 'iconfont iconicon-data-selected',
         path: '/datasManage',
         auth: permissions.DATA_MENU_ACCESS
     },
     {
-        name: i18n.t('menu.Project'),
-        icon: 'iconfont iconicon-project',
-        activeIcon: 'iconfont iconicon-project-selected',
-        path: '/sdxv-project-manage',
-        auth: permissions.PROJECT_MENU_ACCESS
-    },
-    {
         name: i18n.t('menu.SkyFlow'),
-        icon: 'iconfont iconicon-Skyflow',
+        icon: 'iconfont iconSkyflowIOCN',
         activeIcon: 'iconfont iconicon-Skyflow-selected',
         path: '/sdxv-skyflow',
         auth: permissions.SKYFLOW_MENU_ACCESS
     },
     {
         name: i18n.t('menu.Model'),
-        icon: 'iconfont iconicon-model',
+        icon: 'iconfont iconmoxingICON',
         activeIcon: 'iconfont iconicon-model-selected',
         path: '/sdxv-model-manage',
         auth: permissions.MODEL_MENU_ACCESS
     },
     {
+        name: i18n.t('menu.AIPlatform'),
+        icon: 'iconfont iconkaifagongzuotaiICON',
+        activeIcon: 'iconfont iconicon-project-selected',
+        path: '/sdxv-project-manage',
+        auth: permissions.PROJECT_MENU_ACCESS
+    },
+    {
+        name: i18n.t('menu.Project'),
+        icon: 'iconfont iconxiangmuguanliICON',
+        activeIcon: 'iconfont iconicon-project-selected',
+        path: '/sdxv-project-manage',
+        auth: permissions.PROJECT_MENU_ACCESS
+    },
+    {
         name: i18n.t('menu.AssetsManage'),
-        icon: 'iconfont iconicon-zichanguanli',
+        icon: 'iconfont iconzichanguanliICON',
         activeIcon: 'iconfont iconicon-zichanguanli-selected',
         path: '/sdxv-task-management',
         children: [
@@ -59,7 +66,14 @@ const leftmenu = [
                 auth: permissions.IMAGE_MENU_ACCESS
             }
         ]
-    }
+    },
+    {
+        name: i18n.t('menu.Setting'),
+        icon: 'iconfont iconxitongshezhiICON',
+        activeIcon: 'iconfont iconicon-project-selected',
+        path: '/sdxv-project-manage',
+        auth: permissions.PROJECT_MENU_ACCESS
+    },
 ];
 
 const manageMenus = [
