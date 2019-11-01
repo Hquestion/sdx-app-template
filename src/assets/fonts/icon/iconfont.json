@@ -1691,6 +1691,13 @@
       "font_class": "tijiaoyunhang",
       "unicode": "e6f6",
       "unicode_decimal": 59126
+    },
+    {
+      "icon_id": "11578021",
+      "name": "SDX Logo",
+      "font_class": "SDXLogo",
+      "unicode": "e7d8",
+      "unicode_decimal": 59352
     }
   ]
 }

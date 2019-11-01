@@ -6,7 +6,7 @@
                 :class="{hideLogo:!sidebar.opened}"
             >
                 <wscn-icon-svg
-                    iconClass="iconicon-Logo"
+                    iconClass="iconSDXLogo"
                     class="logo-icon"
                 />
                 <wscn-icon-svg iconClass="iconlogoshouqi" class="logo-icon-mini"></wscn-icon-svg>
