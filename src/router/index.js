@@ -43,7 +43,6 @@ import DataSourceCreate from '../views/datamanagement/datasource/DataSourceCreat
 import CreateDataset from '../views/datamanagement/dataset-create/index';
 import JupyterForm from '../views/datas/jupyterForm';
 import jupyterloading from '../views/datas/jupyterloading';
-import SkyIDE from '../views/ide/index';
 import i18n from '../i18n';
 // febAlive.resetHistory();
 Vue.use(Router);
@@ -214,11 +213,6 @@ const router = new Router({
             component: Editor,
             name: 'Editor',
             hidden: true
-        },
-        {
-            path: '/skyide',
-            name: 'SkyIDE',
-            component: SkyIDE
         }
     ]
 });
