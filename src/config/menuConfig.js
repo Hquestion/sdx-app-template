@@ -21,13 +21,6 @@ const leftmenu = [
         icon: 'iconfont iconkaifagongzuotaiICON',
         path: '/sdxv-dev-platform'
     },
-    {
-        name: i18n.t('menu.Project'),
-        icon: 'iconfont iconicon-project',
-        activeIcon: 'iconfont iconicon-project-selected',
-        path: '/sdxv-project-manage-next',
-        auth: permissions.PROJECT_MENU_ACCESS
-    },
     /* {
         name: '项目管理 - old',
         icon: 'iconfont iconicon-project',
@@ -51,16 +44,16 @@ const leftmenu = [
     },
     {
         name: i18n.t('menu.AIPlatform'),
-        icon: 'iconfont iconkaifagongzuotaiICON',
+        icon: 'iconfont iconAIkaifazhepingtaiICON',
         activeIcon: 'iconfont iconicon-project-selected',
         path: '/sdxv-project-manage',
         auth: permissions.PROJECT_MENU_ACCESS
     },
     {
-        name: i18n.t('menu.Project'),
+        name: i18n.t('menu.ProjectManage'),
         icon: 'iconfont iconxiangmuguanliICON',
         activeIcon: 'iconfont iconicon-project-selected',
-        path: '/sdxv-project-manage',
+        path: '/sdxv-project-manage-next',
         auth: permissions.PROJECT_MENU_ACCESS
     },
     {

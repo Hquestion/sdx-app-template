@@ -76,7 +76,8 @@
         "ComponentState": "Component State",
         "Workbench": "Workbench",
         "AIPlatform": "AI Open Platform",
-        "Setting": "Setting"
+        "Setting": "Setting",
+        "ProjectManage": "Project Management"
     },
     "login": {
         "Large_Data_Machine_Learning_Platform": "Large Data Machine Learning Platform",
