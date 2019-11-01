@@ -29,6 +29,7 @@ import UserGroupManage from '@sdx/view/lib/user-group';
 import TaskManagement from '@sdx/view/lib/task-management';
 import ResourceStatistics from '@sdx/view/lib/resource-statistics';
 import ComponentState from '@sdx/view/lib/component-state';
+import DevPlatform from '@sdx/view/lib/dev-platform';
 
 import Skyflow from '@sdx/view/lib/skyflow';
 import FileManage from '@sdx/view/lib/file';
@@ -226,6 +227,7 @@ ResourceManageView.viewRouter.register(router, '/home');
 RoleManage.viewRouter.register(router, '/home');
 AuthorizeManage.viewRouter.register(router, '/home');
 ProjectManage.viewRouter.register(router, '/home');
+DevPlatform.viewRouter.register(router, '/home');
 ModelManage.viewRouter.register(router, '/home');
 ImageManage.viewRouter.register(router, '/home');
 
