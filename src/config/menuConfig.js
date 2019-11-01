@@ -18,7 +18,7 @@ const leftmenu = [
     },
     {
         name: '开发工作台',
-        icon: 'iconfont iconicon-project',
+        icon: 'iconfont iconkaifagongzuotaiICON',
         path: '/sdxv-dev-platform'
     },
     {
