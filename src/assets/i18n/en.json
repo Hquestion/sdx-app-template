@@ -59,6 +59,7 @@
         "Project": "Project",
         "SkyFlow": "SkyFlow",
         "Model": "Model",
+        "DevPlatform": "Development Platform",
         "AssetsManage": "Assets Management",
         "TaskManage": "Task Management",
         "FileManage": "File Management",

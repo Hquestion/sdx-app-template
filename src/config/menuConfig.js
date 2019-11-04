@@ -17,7 +17,7 @@ const leftmenu = [
         auth: permissions.DATA_MENU_ACCESS
     },
     {
-        name: '开发工作台',
+        name: i18n.t('menu.DevPlatform'),
         icon: 'iconfont iconkaifagongzuotaiICON',
         path: '/sdxv-dev-platform'
     },
