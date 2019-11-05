@@ -70,7 +70,7 @@
         "fast-sass-loader": "^1.5.0",
         "flow-bin": "^0.97.0",
         "flow-webpack-plugin": "^1.2.0",
-        "node-sass": "^4.11.0",
+        "node-sass": "^4.13.0",
         "nodemon": "^1.18.11",
         "sass-bem-constructor": "^1.1.0",
         "sass-loader": "^7.1.0",
