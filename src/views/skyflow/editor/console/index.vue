@@ -232,7 +232,7 @@ export default {
         color: #3f5973;
         line-height: 41px;
         font-size:14px;
-        font-family:siyuan-bd;
+        font-family:siyuan;font-weight:600;;
         font-weight:bold;
         .console-item {
             padding: 0 20px;

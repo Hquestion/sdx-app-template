@@ -372,7 +372,7 @@ export default {
                 font-size: 12px;
                 color: #fff;
                 opacity: 0.8;
-                font-family: siyuan-lt;
+                font-family: siyuan;font-weight:200;;
                 margin-top: 3px;
             }
         }

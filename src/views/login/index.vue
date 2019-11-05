@@ -143,7 +143,7 @@ export default {
         }
         span {
             font-size: 16px;
-            font-family: siyuan-bd;
+            font-family: siyuan;font-weight:600;;
             font-weight: bold;
             color: rgba(255, 255, 255, 1);
             position: relative;
@@ -258,7 +258,7 @@ export default {
             font-size: 14px;
             font-weight: 300;
             color: #3c84c6;
-            font-family: siyuan-rg;
+            font-family: siyuan;font-weight:400;;
             margin-bottom: 5px;
         }
         .el-form-item {

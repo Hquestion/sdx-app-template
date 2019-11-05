@@ -35,7 +35,7 @@ export default {
         padding: 20px 10px 10px;
         .params-panel_header {
             font-size: 14px;
-            font-family: siyuan-rg;
+            font-family: siyuan;font-weight:400;;
             color: rgba(39, 63, 88, 1);
             display: flex;
             justify-content: space-between;

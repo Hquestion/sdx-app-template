@@ -638,20 +638,20 @@ export default {
 
     .custom-dialog label {
         font-size: 14px;
-        font-family: siyuan-rg;
+        font-family: siyuan;font-weight:400;;
         color: rgba(63, 89, 115, 1);
     }
 
     .custom-dialog-title {
         font-size: 16px;
-        font-family: siyuan-rg;
+        font-family: siyuan;font-weight:400;;
         color: rgba(39, 63, 88, 1);
     }
 
     .custom-group {
         display: block;
         font-size: 14px;
-        font-family: siyuan-rg;
+        font-family: siyuan;font-weight:400;;
         font-weight: bold !important;
         color: rgba(39, 63, 88, 1);
         margin-bottom: 16px;

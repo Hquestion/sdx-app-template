@@ -164,7 +164,7 @@ export default {
 <style scoped>
 .resource-info {
     font-size: 12px;
-    font-family: siyuan-rg;
+    font-family: siyuan;;
     color: #3f5973;
     /* margin: 20px; */
 }

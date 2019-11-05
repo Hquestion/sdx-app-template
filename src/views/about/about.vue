@@ -37,7 +37,7 @@ export default {
             // margin: 64px auto;
             // border: 1px solid rgba(227, 230, 240, 1);
             font-size: 14px;
-            font-family: siyuan-rg;
+            font-family: siyuan;font-weight:400;;
             color: rgba(117, 119, 122, 1);
             line-height: 22px;
 
@@ -56,7 +56,7 @@ export default {
         }
         .footer {
             font-size: 12px;
-            font-family: siyuan-rg;
+            font-family: siyuan;font-weight:400;;
             color: rgba(75, 77, 82, 1);
             line-height: 16px;
             text-align: center;

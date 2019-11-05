@@ -138,7 +138,7 @@ export default {
 
 .component-setting .setting-type span {
     font-size: 14px;
-    font-family: siyuan-bd;
+    font-family: siyuan;font-weight:600;;
     font-weight: bold !important;
     color: rgba(81, 107, 134, 1);
     align-self: center;
@@ -161,7 +161,7 @@ export default {
 }
 /* .setting-option > label {
   font-size: 12px;
-  font-family: siyuan-rg;
+  font-family: siyuan;font-weight:400;;
   color: rgba(81, 107, 134, 1);
   line-height: 26px;
   display: inline;

@@ -330,7 +330,7 @@ export default {
     & > span {
       height: 28px;
       font-size: 14px;
-      font-family: siyuan-bd;
+      font-family: siyuan;font-weight:600;;
       font-weight: bold !important;
       line-height: 28px;
       /* 名称超过两行显示... */
@@ -385,7 +385,7 @@ export default {
       & > div,
       & > span > div {
         font-size: 12px;
-        font-family: siyuan-rg;
+        font-family: siyuan;font-weight:400;;
         color: rgba(63, 89, 115, 1);
         line-height: 16px;
         margin-top: 6px;

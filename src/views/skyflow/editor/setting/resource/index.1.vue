@@ -240,7 +240,7 @@ export default {
 <style scoped>
 .resource-info {
     font-size: 12px;
-    font-family: siyuan-rg;
+    font-family: siyuan;font-weight:400;;
     color: #3f5973;
     /* margin: 20px; */
 }

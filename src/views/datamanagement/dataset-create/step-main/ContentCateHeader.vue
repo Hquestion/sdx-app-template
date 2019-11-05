@@ -25,7 +25,7 @@ export default {
         padding: 0 30px;
         text-align: left;
         font-size:16px;
-        font-family:siyuan-rg;
+        font-family:siyuan;font-weight:400;;
         color: #45474C;
         box-shadow:0px 2px 0px 0px rgba(201,210,225,0.3);
     }

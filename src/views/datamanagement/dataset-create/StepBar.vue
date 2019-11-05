@@ -120,7 +120,7 @@ export default {
                 color: #fff;
                 border: none;
                 font-size:24px;
-                font-family:siyuan-rg;
+                font-family:siyuan;font-weight:400;;
                 line-height:31px;
             }
             &.is-process {

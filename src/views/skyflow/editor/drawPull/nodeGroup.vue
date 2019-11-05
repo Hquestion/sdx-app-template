@@ -482,7 +482,7 @@ export default {
     .node-text {
       height: 32px;
       font-size: 14px;
-      font-family: siyuan-bd;
+      font-family: siyuan;font-weight:600;;
       font-weight: bold !important;
       line-height: 32px;
       // 超过限制宽度,显示省略号
@@ -517,7 +517,7 @@ export default {
           height: 10px;
           color: #2d455d;
           font-size: 12px;
-          font-family: siyuan-lt;
+          font-family: siyuan;font-weight:200;;
           .detail-item-label {
             width: 65px;
             font-weight: bold !important;

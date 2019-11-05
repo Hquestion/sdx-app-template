@@ -504,7 +504,7 @@ export default {
                 height: 40px;
                 line-height: 40px;
                 font-size: 14px;
-                font-family: siyuan-rg;
+                font-family: siyuan;;
                 font-weight: bold !important;
                 color: rgba(63, 89, 115, 1);
                 float: left;
@@ -574,7 +574,7 @@ export default {
                 // display: block;
                 // width: 4em;
                 font-size: 12px;
-                font-family: siyuan-rg;
+                font-family: siyuan;font-weight:400;;
                 line-height: 1.2;
                 color: rgba(63, 89, 115, 1);
                 margin-top: 5px;
@@ -644,7 +644,7 @@ export default {
     text-align: center;
     & > span {
         font-size: 12px;
-        font-family: siyuan-rg;
+        font-family: siyuan;font-weight:400;;
         color: rgba(104, 124, 145, 1);
         line-height: 16px;
     }
