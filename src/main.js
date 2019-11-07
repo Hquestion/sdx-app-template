@@ -48,7 +48,7 @@ shareCenter.setup({
     i18n
 });
 
-new Vue({
+const app = new Vue({
     router,
     store,
     i18n,
@@ -61,29 +61,52 @@ new Vue({
     }
 }).$mount('#app');
 
-store.dispatch('auth').then(() => {
-    router.beforeEach((to, from, next) => {
-        NProgress.start(); // 开启Progress
+router.beforeEach((to, from, next) => {
+    NProgress.start();
+    store.dispatch('auth').then(() => {
         next();
-    });
-
-    router.afterEach(to => {
-        NProgress.done();
-    });
-
-    // 生产环境错误日志
-    if (process.env.NODE_ENV === 'production') {
-        Vue.config.errorHandler = function(err, vm) {
-            console.log(err, window.location.href);
-            errLog.pushLog({
-                err,
-                url: window.location.href,
-                vm
+    }, () => {
+        if (to.name !== 'Login') {
+            const path = encodeURIComponent(location.href);
+            next({
+                name: 'Login',
+                replace: true,
+                query: {
+                    redirect: path
+                }
             });
-        };
-    }
-}, () => {
-    router.replace({
-        name: 'Login'
+        } else {
+            next();
+        }
     });
 });
+
+router.afterEach(to => {
+    NProgress.done();
+});
+
+// 生产环境错误日志
+if (process.env.NODE_ENV === 'production') {
+    Vue.config.errorHandler = function(err, vm) {
+        console.error(err, window.location.href);
+        errLog.pushLog({
+            err,
+            url: window.location.href,
+            vm
+        });
+    };
+}
+
+store.dispatch('auth').then(() => true, () => {
+    if (app.$route.name !== 'Login') {
+        const path = encodeURIComponent(location.href);
+        router.replace({
+            name: 'Login',
+            replace: true,
+            query: {
+                redirect: path
+            }
+        });
+    }
+});
+

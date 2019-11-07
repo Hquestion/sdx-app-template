@@ -3,7 +3,12 @@ import router from '../router';
 
 function unauthorizeHandler() {
     store.commit('REMOVE_ALL');
-    router.replace('/login');
+    const path = encodeURIComponent(location.href);
+    router.replace('/login', {
+        query: {
+            redirect: path
+        }
+    });
 }
 
 export default {

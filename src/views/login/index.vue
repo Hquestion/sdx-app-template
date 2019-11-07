@@ -109,7 +109,13 @@ export default {
                             this.loading = false;
                             // 设置显式登陆状态
                             this.$store.commit('SET_EXPLICIT_LOGIN');
-                            this.$router.push({ name: 'Home' });
+                            const urlParams = new URLSearchParams(location.search);
+                            const redirect = this.$route.query.redirect || urlParams.get('redirect');
+                            if (redirect) {
+                                location.replace(decodeURIComponent(redirect));
+                            } else {
+                                this.$router.replace({ name: 'Home' });
+                            }
                         })
                         .catch(() => {
                             this.loading = false;
