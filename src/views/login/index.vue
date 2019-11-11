@@ -85,6 +85,7 @@
 </template>
 
 <script>
+import VueCookie from 'vue-cookies';
 export default {
     name: 'Login',
     data() {
@@ -111,8 +112,19 @@ export default {
                             this.$store.commit('SET_EXPLICIT_LOGIN');
                             const urlParams = new URLSearchParams(location.search);
                             const redirect = this.$route.query.redirect || urlParams.get('redirect');
+                            const withCredentials = (this.$route.query.withCredentials || urlParams.get('withCredentials')) === '1';
                             if (redirect) {
-                                location.replace(decodeURIComponent(redirect));
+                                debugger;
+                                let redirectUrl = decodeURIComponent(redirect);
+                                if (withCredentials) {
+                                    const token = VueCookie.get('authorization-token');
+                                    if (redirectUrl.indexOf('?') > 0) {
+                                        redirectUrl = redirectUrl + '&authorization-token=' + token;
+                                    } else {
+                                        redirectUrl = redirectUrl + '?authorization-token=' + token;
+                                    }
+                                }
+                                location.replace(redirectUrl);
                             } else {
                                 this.$router.replace({ name: 'Home' });
                             }
