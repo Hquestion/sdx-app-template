@@ -114,7 +114,6 @@ export default {
                             const redirect = this.$route.query.redirect || urlParams.get('redirect');
                             const withCredentials = (this.$route.query.withCredentials || urlParams.get('withCredentials')) === '1';
                             if (redirect) {
-                                debugger;
                                 let redirectUrl = decodeURIComponent(redirect);
                                 if (withCredentials) {
                                     const token = VueCookie.get('authorization-token');
