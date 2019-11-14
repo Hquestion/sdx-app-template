@@ -21,7 +21,7 @@
         "@sdx/utils": "latest",
         "@sdx/view": "latest",
         "@sdx/widget": "latest",
-        "@skyide/services": "latest",
+        "@skyide/services": "^1.1.7",
         "async-validator": "^1.11.2",
         "axios": "^0.18.0",
         "babel-polyfill": "^6.26.0",
