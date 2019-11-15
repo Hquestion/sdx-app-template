@@ -26,6 +26,7 @@ env:
   - name: "NGINX_PORT"
     value: "80"
 
+
 resources:
   limits:
     cpu: 1
