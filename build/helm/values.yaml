@@ -23,6 +23,8 @@ env:
     value: "10.115.1.130"
   - name: "ETCD_PORT"
     value: "2379"
+  - name: "NGINX_PORT"
+    value: "80"
 
 resources:
   limits:
