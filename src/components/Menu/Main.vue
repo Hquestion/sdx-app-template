@@ -74,7 +74,7 @@ export default {
         );
     },
     mounted() {
-        // todo
+        this.current = this.$route.fullPath;
     }
 };
 </script>
