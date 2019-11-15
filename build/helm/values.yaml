@@ -18,6 +18,12 @@ etcd:
   certCert: "/etc/kubernetes/pki/etcd/client.pem"
   certKey: "/etc/kubernetes/pki/etcd/client-key.pem"
 
+env:
+  - name: "ETCD_HOST"
+    value: "10.115.1.130"
+  - name: "ETCD_PORT"
+    value: "2379"
+
 resources:
   limits:
     cpu: 1
