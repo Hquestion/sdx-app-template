@@ -1,11 +1,17 @@
 <template>
     <section class="app-main">
-        <div class="app-main-breadcrumb">
-            <SdxwBreadcrumb/>
-        </div>
         <div class="app-main-view">
+            <div class="app-main-breadcrumb">
+                <SdxwBreadcrumb />
+            </div>
+            <div
+                class="app-main-header"
+                v-if="$route.meta.header"
+            >
+                {{ $route.meta.header }}
+            </div>
             <!--            <feb-alive>-->
-            <router-view />
+            <router-view class="app-main-body" />
             <!--            </feb-alive>-->
         </div>
     </section>
@@ -45,17 +51,24 @@ export default {
         width: 100%;
 		height: calc(100% - 60px);
         flex: 1;
+        overflow: auto;
         .app-main-breadcrumb {
-            line-height: 48px;
-            height: 48px;
-            padding:0 20px;
+            margin-top: 24px;
             display: flex;
             align-items: center;
         }
         .app-main-view {
             overflow: auto;
-            height: calc(100% - 48px);
-            padding: 10px 20px 20px;
+            min-height: 100%;
+            padding: 0 24px 24px;
+            .app-main-header {
+                margin-top: 24px;
+                font-size: 24px;
+                font-weight: 400;
+            }
+            .app-main-body {
+                margin-top: 32px;
+            }
         }
 	}
 </style>

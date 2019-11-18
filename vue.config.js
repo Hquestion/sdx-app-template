@@ -5,6 +5,13 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const isProduction = process.env.NODE_ENV === 'production';
 const componentDevEnv = !!require('./package.json').componentDevEnv;
 
+const envMap = {
+    'development': process.env.VUE_APP_DEV_ENV,
+    'test': process.env.VUE_APP_TEST_ENV
+};
+
+const PROXY_HREF = envMap[process.env.NODE_ENV];
+
 const resolve = dir => path.join(__dirname, dir);
 
 const alias = {
@@ -135,17 +142,16 @@ module.exports = {
             })
         })
     },
-
     devServer: {
         port: 3100,
         proxy: {
             '^/.*-manager': {
-                target: 'http://10.115.1.130',
+                target: PROXY_HREF,
                 ws: true,
                 changeOrigin: true,
             },
             '/fe-compose': {
-                target: 'http://10.115.1.130',
+                target: PROXY_HREF,
                 ws: true,
                 changeOrigin: true,
             },
