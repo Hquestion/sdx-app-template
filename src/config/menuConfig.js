@@ -148,6 +148,10 @@ const manageMenus = [
             {
                 name: i18n.t('menu.ComponentState'),
                 path: '/sdxv-component-state'
+            },
+            {
+                name: i18n.t('menu.TaskManage'),
+                path: '/sdxv-task-manage-platform'
             }
         ]
     },

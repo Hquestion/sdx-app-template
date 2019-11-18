@@ -21,6 +21,7 @@ import AuthorizeManage from '@sdx/view/lib/authorize-manage';
 import ProjectManage from '@sdx/view/lib/project-management';
 import ProjectManageNext from '@sdx/view/lib/project-manage-next';
 import ModelManage from '@sdx/view/lib/model-manage';
+import ModelManageNext from '@sdx/view/lib/model-manage-next';
 import ImageManage from '@sdx/view/lib/image-management';
 import SdxvPrivilege from '@sdx/view/lib/privilege';
 import ResourceManageView from '@sdx/view/lib/resource-manage';
@@ -30,7 +31,7 @@ import TaskManagement from '@sdx/view/lib/task-management';
 import ResourceStatistics from '@sdx/view/lib/resource-statistics';
 import ComponentState from '@sdx/view/lib/component-state';
 import DevPlatform from '@sdx/view/lib/dev-platform';
-
+import TaskManagePlatForm from '@sdx/view/lib/task-manage-platform';
 import Skyflow from '@sdx/view/lib/skyflow';
 import FileManage from '@sdx/view/lib/file';
 import SkyIDE from '@sdx/view/lib/sky-ide';
@@ -235,5 +236,6 @@ ResourceStatistics.viewRouter.register(router, '/home');
 ComponentState.viewRouter.register(router, '/home');
 SkyIDE.viewRouter.register(router);
 ProjectManageNext.viewRouter.register(router, '/home');
-
+ModelManageNext.viewRouter.register(router, '/home');
+TaskManagePlatForm.viewRouter.register(router, '/home');
 export default router;
