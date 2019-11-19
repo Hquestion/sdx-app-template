@@ -54,7 +54,7 @@
 </template>
 <script>
 import { hdfsLs } from './rely/dataApi';
-import { getFilesList } from '@sdx/utils/lib/api/file';
+import { getNativeFilesList } from '@sdx/utils/lib/api/file';
 import dataImage from './dataImage';
 export default {
     name: 'DatasListView',
@@ -125,7 +125,7 @@ export default {
         },
         // 文件列表
         getFlieList(path, ownerId) {
-            getFilesList({ path, ownerId })
+            getNativeFilesList({ path, ownerId })
                 .then(data => {
                     if (data.children) {
                         for (let i = 0; i < data.children.length; i++) {

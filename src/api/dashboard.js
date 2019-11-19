@@ -1,10 +1,10 @@
 import httpService from '../helper/httpService';
 import { getDashResourceStates } from '@sdx/utils/lib/api/resource';
-import { getTaskList as getTasks, getProjectList } from '@sdx/utils/lib/api/project';
-import { getModelList } from '@sdx/utils/lib/api/model';
+import { getNativeTaskList as getTasks, getNativeProjectList as getProjectList } from '@sdx/utils/lib/api/project';
+import { getNativeModelList as getModelList } from '@sdx/utils/lib/api/model';
 import { authWrapper } from '@sdx/utils/lib/api/helper';
 import readAuths from '@sdx/utils/lib/api/config';
-import { getSkyflowList } from '@sdx/utils/lib/api/skyflow';
+import { getNativeSkyflowList as getSkyflowList } from '@sdx/utils/lib/api/skyflow';
 
 export const getUserResource = getDashResourceStates;
 

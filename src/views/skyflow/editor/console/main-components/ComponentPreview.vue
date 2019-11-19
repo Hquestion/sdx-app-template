@@ -80,7 +80,7 @@ import DataSetPreview from '../../../../datamanagement/dataset-create/step-main/
 import dataImage from '../../../../datas/dataImage';
 import hasNothing from '../../../../datas/rely/util/hasNothing';
 import { getPreviewPath } from '@sdx/utils/lib/api/skyflow';
-import { getFilesList } from '@sdx/utils/lib/api/file';
+import { getNativeFilesList } from '@sdx/utils/lib/api/file';
 import { getUser } from '@sdx/utils/lib/helper/shareCenter';
 import PreviewCharts from './PreviewCharts';
 
@@ -297,7 +297,7 @@ export default {
         // 文件列表
         getFileList(path) {
             this.isTreeLoading = true;
-            getFilesList({ path, userId: getUser().userId })
+            getNativeFilesList({ path, userId: getUser().userId })
                 .then(data => {
                     if (data.children) {
                         for (let i = 0; i < data.children.length; i++) {
@@ -415,7 +415,7 @@ export default {
             } else {
                 path = node.data.path;
             }
-            return getFilesList({ path, userId: this.viewData.creator })
+            return getNativeFilesList({ path, userId: this.viewData.creator })
                 .then(data => {
                     if (resolve) {
                         if (data.children) {

@@ -287,7 +287,7 @@ import hasNothing from './rely/util/hasNothing';
 import poploadmore from './js/loadMore';
 import datasListView from './datasListView';
 import SkyTitleGoBack from './rely/skyTitleGoBack';
-import { getFilesList, download, pack } from '@sdx/utils/lib/api/file';
+import { getNativeFilesList, download, pack } from '@sdx/utils/lib/api/file';
 import dataImage from './dataImage';
 // import { mapMutations } from 'vuex';
 export default {
@@ -501,7 +501,7 @@ export default {
         // 文件列表
         getFlieList(path) {
             this.isTreeLoading = true;
-            getFilesList({ path, ownerId: this.viewData.creator })
+            getNativeFilesList({ path, ownerId: this.viewData.creator })
                 .then(data => {
                     if (data.children) {
                         for (let i = 0; i < data.children.length; i++) {
@@ -611,7 +611,7 @@ export default {
                         this.datalistHide = false;
                     });
             } else {
-                return getFilesList({ path, ownerId: this.viewData.creator })
+                return getNativeFilesList({ path, ownerId: this.viewData.creator })
                     .then(data => {
                         if (resolve) {
                             if (data.children) {
