@@ -50,22 +50,41 @@
         >
             &nbsp;
         </div>
+        <div class="pagination">
+            <sdxu-pagination
+                v-if="total"
+                :current-page.sync="current"
+                :page-size="pageSize"
+                :total="total"
+                @current-change="currentChange"
+            />
+        </div>
     </div>
 </template>
 <script>
 import { hdfsLs } from './rely/dataApi';
 import { getNativeFilesList } from '@sdx/utils/lib/api/file';
 import dataImage from './dataImage';
+import Pagination from '@sdx/ui/components/pagination';
+import { paginate } from '@sdx/utils/src/helper/tool';
 export default {
     name: 'DatasListView',
     data() {
         return {
             list: [],
             fullpath: '',
-            loading: false
+            loading: false,
+            total: 0,
+            pageSize: 100,
+            current: 1,
+            savePath: '',
+            saveOwnerId: ''
         };
     },
-    components: { dataImage },
+    components: {
+        dataImage,
+        [Pagination.name]: Pagination
+    },
     props: {
         dataListPath: {
             type: String,
@@ -124,8 +143,19 @@ export default {
             return ext;
         },
         // 文件列表
-        getFlieList(path, ownerId) {
-            getNativeFilesList({ path, ownerId })
+        getFlieList(path, ownerId, currentChange) {
+            this.loading = true;
+            if (!currentChange) {
+                this.current = 1;
+            }
+            this.saveOwnerId = ownerId;
+            this.savePath = path;
+            let params = Object.assign({}, {
+                path,
+                ownerId,
+                ...paginate(this.current, this.pageSize)
+            });
+            getNativeFilesList(params)
                 .then(data => {
                     if (data.children) {
                         for (let i = 0; i < data.children.length; i++) {
@@ -136,9 +166,14 @@ export default {
                     }
                     data.paths = data.children;
                     this.list = data.paths;
+                    this.total = data.childrenCount;
                 }).finally(() => {
                     this.loading = false;
                 });
+        },
+        currentChange(val) {
+            this.current = val;
+            this.getFlieList(this.savePath, this.saveOwnerId, true);
         },
         // HDFS 列表
         getHdfsList(datasource, path, only_dir) {
@@ -254,6 +289,13 @@ export default {
         width: 268px;
         line-height: 0;
         display: inline-block;
+    }
+    .pagination {
+        width: 100%;
+        margin-top: 20px;
+        .sdxu-pagination.el-pagination {
+            float: right;
+        }
     }
 }
 

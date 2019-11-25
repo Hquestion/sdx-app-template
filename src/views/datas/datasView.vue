@@ -501,7 +501,7 @@ export default {
         // 文件列表
         getFlieList(path) {
             this.isTreeLoading = true;
-            getNativeFilesList({ path, ownerId: this.viewData.creator })
+            getNativeFilesList({ path, ownerId: this.viewData.creator, count: 100 })
                 .then(data => {
                     if (data.children) {
                         for (let i = 0; i < data.children.length; i++) {
@@ -611,7 +611,7 @@ export default {
                         this.datalistHide = false;
                     });
             } else {
-                return getNativeFilesList({ path, ownerId: this.viewData.creator })
+                return getNativeFilesList({ path, ownerId: this.viewData.creator, count: 100 })
                     .then(data => {
                         if (resolve) {
                             if (data.children) {
