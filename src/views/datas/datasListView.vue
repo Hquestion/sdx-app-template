@@ -65,8 +65,8 @@
 import { hdfsLs } from './rely/dataApi';
 import { getNativeFilesList } from '@sdx/utils/lib/api/file';
 import dataImage from './dataImage';
-import Pagination from '@sdx/ui/components/pagination';
-import { paginate } from '@sdx/utils/src/helper/tool';
+import Pagination from '@sdx/ui/lib/pagination';
+import { paginate } from '@sdx/utils/lib/helper/tool';
 export default {
     name: 'DatasListView',
     data() {

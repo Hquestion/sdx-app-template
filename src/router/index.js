@@ -47,7 +47,7 @@ import jupyterloading from '../views/datas/jupyterloading';
 import i18n from '../i18n';
 // febAlive.resetHistory();
 
-import ApiDetail from '../views/model/ModelIndex';
+// import ApiDetail from '../views/model/ModelIndex';
 Vue.use(Router);
 
 /**
@@ -195,16 +195,16 @@ const router = new Router({
                             breadcrumb: i18n.t('data.New_Jupyter_Task')
                         }
                     },
-                    {
-                        path: '/api-detail',
-                        component: ApiDetail,
-                        name: 'ApiDetail',
-                        meta: {
-                            name: 'API详情',
-                            breadcrumb: i18n.t('API详情'),
-                            header: 'API详情'
-                        }
-                    }
+                    // {
+                    //     path: '/api-detail',
+                    //     component: ApiDetail,
+                    //     name: 'ApiDetail',
+                    //     meta: {
+                    //         name: 'API详情',
+                    //         breadcrumb: i18n.t('API详情'),
+                    //         header: 'API详情'
+                    //     }
+                    // }
                     ]
                 }
             ]
