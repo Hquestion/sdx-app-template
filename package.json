@@ -18,11 +18,11 @@
         "link:sdx": "yarn link @sdx/ui @sdx/utils @sdx/widget @sdx/view"
     },
     "dependencies": {
-        "@sdx/ui": "latest",
-        "@sdx/utils": "latest",
-        "@sdx/view": "latest",
-        "@sdx/widget": "latest",
-        "@skyide/services": "^1.1.8",
+        "@sdx/ui": "^2.x",
+        "@sdx/utils": "^2.x",
+        "@sdx/view": "^2.x",
+        "@sdx/widget": "^2.x",
+        "@skyide/services": "^1.1.10",
         "async-validator": "^1.11.2",
         "axios": "^0.18.1",
         "babel-polyfill": "^6.26.0",
