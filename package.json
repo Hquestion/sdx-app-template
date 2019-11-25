@@ -19,7 +19,7 @@
     },
     "dependencies": {
         "@sdx/ui": "^2.x",
-        "@sdx/utils": "^2.x",
+        "@sdx/utils": "^2.0.8",
         "@sdx/view": "^2.x",
         "@sdx/widget": "^2.x",
         "@skyide/services": "^1.1.10",
