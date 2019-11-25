@@ -1,3 +1,8 @@
+import Heartbeat from '@sdx/utils/lib/helper/heartbeat';
+import Cache from '@sdx/utils/lib/helper/cache';
+import shareCenter from '@sdx/utils/lib/helper/shareCenter';
+import { RESOURCE_KEY, RESOURCE_TMPL_KEY, RESOURCE_CONFIG_KEY } from '@sdx/utils/lib/const/cache';
+
 const app = {
     state: {
         sidebar: {
@@ -10,7 +15,9 @@ const app = {
             visible: false,
             neverShow: !!JSON.parse(localStorage.getItem('guideNeverShow')) || false
         },
-        isExplicitLogin: false
+        isExplicitLogin: false,
+        heartbeat: null,
+        cache: {}
     },
     mutations: {
         TOGGLE_SIDEBAR: state => {
@@ -45,6 +52,34 @@ const app = {
         },
         SET_EXPLICIT_LOGIN(state) {
             state.isExplicitLogin = true;
+        },
+        INIT_HEARTBEAT(state) {
+            state.heartbeat = Heartbeat.getSingleton({
+                interfaces: [
+                    {
+                        method: 'get',
+                        url: '/fe-compose/api/v1/heartbeat',
+                        key: 'result',
+                        data: {
+                            userId: shareCenter.getUser() && shareCenter.getUser().uuid
+                        }
+                    }
+                ]
+            });
+        },
+        START_HEARTBEAT(state) {
+            state.heartbeat.start(result => {
+                let list = result.result[0];
+                [RESOURCE_KEY, RESOURCE_TMPL_KEY, RESOURCE_CONFIG_KEY].forEach((key, index) => {
+                    const resp = Object.assign({}, list[index]);
+                    state.cache[key] = resp;
+                    Cache.set(key, resp);
+                });
+                console.log(Cache._cache);
+            });
+        },
+        CANCEL_HEARTBEAT(state) {
+            state.heartbeat.cancel();
         }
     },
     actions: {
@@ -62,6 +97,10 @@ const app = {
         },
         setGuideShown({ commit }, flag) {
             commit('SET_GUIDE_SHOWN', flag);
+        },
+        startHeartbeat({ commit }) {
+            commit('INIT_HEARTBEAT');
+            commit('START_HEARTBEAT');
         }
     }
 };

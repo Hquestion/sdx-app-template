@@ -39,7 +39,7 @@ const leftmenu = [
         name: i18n.t('menu.Model'),
         icon: 'iconfont iconmoxingICON',
         activeIcon: 'iconfont iconicon-model-selected',
-        path: '/sdxv-model-manage',
+        path: '/sdxv-model-manage-next',
         auth: permissions.MODEL_MENU_ACCESS
     },
     {

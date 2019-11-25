@@ -216,7 +216,8 @@ export default {
         ...mapActions(['toggleGuide']),
         logout() {
             this.$store.dispatch('logout').then(() => {
-                this.$store.commit('removeAll');
+                this.$store.commit('REMOVE_ALL');
+                this.$store.commit('CANCEL_HEARTBEAT');
                 this.$router.push({ path: '/login' });
             });
         },

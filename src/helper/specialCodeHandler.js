@@ -3,6 +3,7 @@ import router from '../router';
 
 function unauthorizeHandler() {
     store.commit('REMOVE_ALL');
+    store.commit('CANCEL_HEARTBEAT');
     const path = encodeURIComponent(location.href);
     router.replace('/login', {
         query: {

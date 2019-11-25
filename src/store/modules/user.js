@@ -3,6 +3,7 @@ import { getUserDetail } from '@sdx/utils/lib/api/user';
 import moment from 'moment';
 import VueCookie from 'vue-cookies';
 import router from '../../router';
+import store from "@/store";
 
 let cachedToken = localStorage.getItem('token');
 if (cachedToken) {
@@ -46,6 +47,7 @@ const user = {
                 })
                 .catch(error => {
                     commit('REMOVE_ALL');
+                    commit('CANCEL_HEARTBEAT');
                     return Promise.reject(error);
                 });
         },
@@ -53,6 +55,7 @@ const user = {
             return logout()
                 .then(() => {
                     commit('REMOVE_ALL');
+                    commit('CANCEL_HEARTBEAT');
                 });
         },
         userInfo({ commit, state }) {
@@ -73,7 +76,7 @@ const user = {
                 }
             });
         },
-        auth({ commit, state }) {
+        auth({ commit, dispatch, state }) {
             return new Promise((resolve, reject) => {
                 if (!VueCookie.get('authorization-token')) {
                     // 没有用户信息直接退出登陆
@@ -92,6 +95,7 @@ const user = {
                         expireTimer = setTimeout(() => {
                             logout().then(() => {
                                 commit('REMOVE_ALL');
+                                commit('CANCEL_HEARTBEAT');
                                 router.replace({
                                     name: 'Login'
                                 });
@@ -103,6 +107,8 @@ const user = {
                     // 没有用户信息直接退出登陆
                     reject();
                 }
+            }).then(() => {
+                dispatch('startHeartbeat');
             });
         }
     }
