@@ -47,20 +47,11 @@
                         :data="performance"
                         v-if="performance && showPerformance"
                     />
-                    <!-- <has-nothing
-                        v-if="isPreview"
-                        class="has-nothing"
-                        pic-type="dataframe"
-                    /> -->
                     <SdxuEmpty
                         v-if="isPreview"
                         empty-type="sdx-wushuju"
                         empty-content="无法预览"
                     />
-                    <!-- <has-nothing
-                        v-if="noPreview"
-                        class="has-nothing"
-                    /> -->
                     <SdxuEmpty
                         v-if="noPreview"
                         empty-type="noData"
@@ -78,7 +69,6 @@ import { getDatasetPreview } from '../../../../datas/rely/dataApi';
 import datasListView from '../../../../datas/datasListView';
 import DataSetPreview from '../../../../datamanagement/dataset-create/step-main/DataSetPreview';
 import dataImage from '../../../../datas/dataImage';
-import hasNothing from '../../../../datas/rely/util/hasNothing';
 import { getPreviewPath } from '@sdx/utils/lib/api/skyflow';
 import { getNativeFilesList } from '@sdx/utils/lib/api/file';
 import { getUser } from '@sdx/utils/lib/helper/shareCenter';
@@ -211,7 +201,6 @@ export default {
         datasListView,
         DataSetPreview,
         dataImage,
-        hasNothing,
         PreviewCharts
     },
     methods: {
@@ -297,7 +286,7 @@ export default {
         // 文件列表
         getFileList(path) {
             this.isTreeLoading = true;
-            getNativeFilesList({ path, userId: getUser().userId })
+            getNativeFilesList({ path, userId: getUser().userId, count: 100 })
                 .then(data => {
                     if (data.children) {
                         for (let i = 0; i < data.children.length; i++) {
@@ -415,7 +404,7 @@ export default {
             } else {
                 path = node.data.path;
             }
-            return getNativeFilesList({ path, userId: this.viewData.creator })
+            return getNativeFilesList({ path, userId: this.viewData.creator, count: 100 })
                 .then(data => {
                     if (resolve) {
                         if (data.children) {
