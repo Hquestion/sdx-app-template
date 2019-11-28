@@ -80,7 +80,9 @@
         "Workbench": "开发工作台",
         "AIPlatform": "AI开放平台",
         "Setting": "系统设置",
-        "ProjectManage": "项目管理"
+        "ProjectManage": "项目管理",
+        "ModelServiceList": "模型服务列表",
+        "ModelList": "模型列表"
     },
     "login": {
         "Large_Data_Machine_Learning_Platform": "大数据机器学习平台",

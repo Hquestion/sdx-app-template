@@ -1,7 +1,7 @@
 import Heartbeat from '@sdx/utils/lib/helper/heartbeat';
 import Cache from '@sdx/utils/lib/helper/cache';
 import shareCenter from '@sdx/utils/lib/helper/shareCenter';
-import { RESOURCE_KEY, RESOURCE_TMPL_KEY, RESOURCE_CONFIG_KEY } from '@sdx/utils/lib/const/cache';
+import { RESOURCE_KEY, RESOURCE_TMPL_KEY, RESOURCE_CONFIG_KEY, RESOURCE_USED_KEY } from '@sdx/utils/lib/const/cache';
 
 const app = {
     state: {
@@ -70,7 +70,7 @@ const app = {
         START_HEARTBEAT(state) {
             state.heartbeat.start(result => {
                 let list = result.result[0];
-                [RESOURCE_KEY, RESOURCE_TMPL_KEY, RESOURCE_CONFIG_KEY].forEach((key, index) => {
+                [RESOURCE_KEY, RESOURCE_TMPL_KEY, RESOURCE_CONFIG_KEY, RESOURCE_USED_KEY].forEach((key, index) => {
                     const resp = Object.assign({}, list[index]);
                     state.cache[key] = resp;
                     Cache.set(key, resp);

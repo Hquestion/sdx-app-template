@@ -80,7 +80,9 @@
         "Workbench": "Workbench",
         "AIPlatform": "AI Open Platform",
         "Setting": "Setting",
-        "ProjectManage": "Project Management"
+        "ProjectManage": "Project Management",
+        "ModelServiceList": "Model Service",
+        "ModelList": "Model List"
     },
     "login": {
         "Large_Data_Machine_Learning_Platform": "Large Data Machine Learning Platform",
