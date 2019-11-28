@@ -40,7 +40,17 @@ const leftmenu = [
         icon: 'iconfont iconmoxingICON',
         activeIcon: 'iconfont iconicon-model-selected',
         path: '/sdxv-model-manage-next',
-        auth: permissions.MODEL_MENU_ACCESS
+        auth: permissions.MODEL_MENU_ACCESS,
+        children: [
+            {
+                name: i18n.t('menu.ModelWarehouse'),
+                path: '/sdxv-model-manage-next/modelList',
+            },
+            {
+                name: i18n.t('menu.ServiceList'),
+                path: '/sdxv-model-manage-next/modelService',
+            },
+        ]
     },
     {
         name: i18n.t('menu.AIPlatform'),

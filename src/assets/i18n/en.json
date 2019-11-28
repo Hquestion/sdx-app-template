@@ -59,6 +59,8 @@
         "Project": "Project",
         "SkyFlow": "SkyFlow",
         "Model": "Model",
+        "ModelWarehouse": "Model Warehouse",
+        "ServiceList": "Service List",
         "DevPlatform": "Development Platform",
         "AssetsManage": "Assets Management",
         "TaskManage": "Task Management",

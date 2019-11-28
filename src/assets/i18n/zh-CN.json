@@ -59,6 +59,8 @@
         "Project": "项目",
         "SkyFlow": "SkyFlow",
         "Model": "模型",
+        "ModelWarehouse": "模型仓库",
+        "ServiceList": "服务列表",
         "DevPlatform": "开发工作台",
         "AssetsManage": "资产管理",
         "TaskManage": "任务管理",
