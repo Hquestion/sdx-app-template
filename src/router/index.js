@@ -20,7 +20,6 @@ import RoleManage from '@sdx/view/lib/role-manage';
 import AuthorizeManage from '@sdx/view/lib/authorize-manage';
 import ProjectManage from '@sdx/view/lib/project-management';
 import ProjectManageNext from '@sdx/view/lib/project-manage-next';
-import ModelManage from '@sdx/view/lib/model-manage';
 import ModelManageNext from '@sdx/view/lib/model-manage-next';
 import ImageManage from '@sdx/view/lib/image-management';
 import SdxvPrivilege from '@sdx/view/lib/privilege';
@@ -194,7 +193,7 @@ const router = new Router({
                             name: '新建Jupyter任务',
                             breadcrumb: i18n.t('data.New_Jupyter_Task')
                         }
-                    },
+                    }
                     // {
                     //     path: '/api-detail',
                     //     component: ApiDetail,
@@ -235,7 +234,6 @@ RoleManage.viewRouter.register(router, '/home');
 AuthorizeManage.viewRouter.register(router, '/home');
 ProjectManage.viewRouter.register(router, '/home');
 DevPlatform.viewRouter.register(router, '/home');
-ModelManage.viewRouter.register(router, '/home');
 ImageManage.viewRouter.register(router, '/home');
 
 Skyflow.viewRouter.register(router, '/home');

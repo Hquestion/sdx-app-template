@@ -48,7 +48,7 @@ const leftmenu = [
             },
             {
                 name: i18n.t('menu.ServiceList'),
-                path: '/sdxv-model-manage-next/modelService',
+                path: '/sdxv-model-manage-service',
             },
         ]
     },
