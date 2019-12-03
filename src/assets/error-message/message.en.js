@@ -109,5 +109,6 @@ module.exports = {
     Model_Auth_Deny: 'No authorization!',
     Model_Delete_Forbidden: 'Delete forbidden!',
     Over_Resource_Limit: 'Exceed resource limit!',
-    Bad_file_format: 'Incorrect file format!'
+    Bad_file_format: 'Incorrect file format!',
+    Workflow_Name_Exist: 'The workflow name already exists, please confirm and try again!'
 };

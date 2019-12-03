@@ -604,6 +604,11 @@ module.exports = {
             },
             {
                 httpCode: '',
+                code: '223016',
+                msg: 'Workflow_Name_Exist'
+            },
+            {
+                httpCode: '',
                 code: '230000',
                 msg: 'Model_Wrong_Params'
             },
