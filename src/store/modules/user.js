@@ -3,7 +3,6 @@ import { getUserDetail } from '@sdx/utils/lib/api/user';
 import moment from 'moment';
 import VueCookie from 'vue-cookies';
 import router from '../../router';
-import store from "@/store";
 
 let cachedToken = localStorage.getItem('token');
 if (cachedToken) {
@@ -33,7 +32,8 @@ const user = {
         },
         SET_TOKEN(state, token) {
             localStorage.setItem('token', JSON.stringify(token));
-            VueCookie.set('authorization-token', token.accessToken);
+            VueCookie.remove('authorization-token');
+            VueCookie.set('authorization-token', token.accessToken, { domain: location.host });
             state.token = token;
         }
     },
@@ -78,7 +78,7 @@ const user = {
         },
         auth({ commit, dispatch, state }) {
             return new Promise((resolve, reject) => {
-                if (!VueCookie.get('authorization-token')) {
+                if (!VueCookie.get('authorization-token') && !state.token.accessToken) {
                     // 没有用户信息直接退出登陆
                     reject();
                 }
