@@ -78,7 +78,7 @@ const user = {
         },
         auth({ commit, dispatch, state }) {
             return new Promise((resolve, reject) => {
-                if (!VueCookie.get('authorization-token') && !state.token.accessToken) {
+                if (!VueCookie.get('authorization-token')) {
                     // 没有用户信息直接退出登陆
                     reject();
                 }
