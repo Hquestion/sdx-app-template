@@ -21,9 +21,6 @@ import ElementUI from 'element-ui';
 import SdxUI from '@sdx/ui';
 import SdxWidget from '@sdx/widget';
 import shareCenter from '@sdx/utils/lib/helper/shareCenter';
-// import febAlive from 'feb-alive';
-
-// Vue.use(febAlive, { router, keyName: 'feb' });
 Vue.use(EmitAsync);
 
 // import directives by shaojs 2018年 2月22日 星期四 17时11分29秒 CST

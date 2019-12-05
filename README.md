@@ -2,7 +2,20 @@
 
 This repo contains sdx-ui and nginx-proxy.
 
+## Start
+
+> 必须：设置yarn或npm registry='http://192.168.20.38:4873'
+
+## Package.json 配置
+
++ ComponentDevEnv： Boolean
+
+使用组件库开发环境模式，设置为```true``` 时，@sdx/xx/lib将是@sdx/xx/components的别名（webpack alias）
+
+
 ## UI
+
+> 也可使用npm
 
 ### Project setup
 ```

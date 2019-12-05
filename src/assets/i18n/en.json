@@ -94,11 +94,5 @@
         "Copyright": "Copyright",
         "Record_No": "Record No:",
         "Please_enter_a_user_name": "Please enter a user name"
-    },
-    "data": {
-        "New_Data_Source": "New Data Source",
-        "Dataset_Preview": "Dataset Preview",
-        "Create_dataset": "Create Dataset",
-        "New_Jupyter_Task": "New Jupyter Task"
     }
 }

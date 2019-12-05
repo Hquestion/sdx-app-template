@@ -106,5 +106,5 @@
         "last 2 versions",
         "not ie <= 8"
     ],
-    "componentDevEnv": true
+    "componentDevEnv": false
 }
