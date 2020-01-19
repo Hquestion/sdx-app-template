@@ -18,7 +18,8 @@ httpService.register({
         tokenKey: 'Authorization',
         tokenValue() {
             return store && store.state.user && (store.state.user.token.tokenType + ' ' + store.state.user.token.accessToken) || '';
-        }
+        },
+        baseURL: '/gateway'
     }
     // mock: MOCK_API_CONFIG
 });
