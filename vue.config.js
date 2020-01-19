@@ -4,6 +4,7 @@ const FlowWebpackPlugin = require('flow-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const isProduction = process.env.NODE_ENV === 'production';
 const componentDevEnv = !!require('./package.json').componentDevEnv;
+const gatewayConfig = require('./package').gateway;
 
 const envMap = {
     'development': process.env.VUE_APP_DEV_ENV,
@@ -54,6 +55,21 @@ if (!isProduction && componentDevEnv) {
     alias['@sdx/view/lib'] = '@sdx/view/components';
     alias['@sdx/utils/lib'] = '@sdx/utils/src';
 }
+
+const plugins =  [
+    // new FlowWebpackPlugin({
+    //     failOnError: true,
+    //     // flowPath: require.main.require('flow-bin'),
+    //     flowArgs: ['--color=always']
+    // }),
+    new webpack.ProvidePlugin({
+        _: 'lodash'
+    }),
+    new webpack.LoaderOptionsPlugin({
+        vue: {}
+    })
+];
+isProduction && plugins.push(new CopyWebpackPlugin(makeGatewayFolderCopyConfig()));
 
 module.exports = {
     lintOnSave: !isProduction ? false : false,
@@ -191,3 +207,61 @@ module.exports = {
       }
     }
 };
+
+function makeGatewayFolderCopyConfig() {
+    const folderBase = './node_modules/@sdx/utils/gateway';
+    const { include, exclude } = gatewayConfig;
+    let entry = [];
+    const composeFiles = fs.readdirSync(path.resolve(folderBase, 'compose'));
+    const scriptSet = new Set();
+    if (exclude) {
+        composeFiles.forEach(item => {
+            if (!exclude.find(ef => item.startsWith(ef))) {
+                scriptSet.add(item);
+            }
+        });
+    }
+    if (include && include.length > 0) {
+        include.forEach(inf => {
+            const name = composeFiles.find(item => item.startsWith(inf));
+            if (name) {
+                scriptSet.add(name);
+            }
+        });
+    }
+    const scriptList = [...scriptSet];
+    const ignoreScripts = composeFiles.filter(item => !scriptList.includes(item));
+    entry.push({
+        from: path.resolve(folderBase, 'compose'),
+        to: 'gateway/compose/',
+        ignore: ignoreScripts
+    });
+    entry.push({
+        from: './gateway-dist/compose',
+        to: 'gateway/compose/',
+        ignore: ignoreScripts
+    });
+    entry.push({
+        from: folderBase,
+        to: 'gateway',
+        ignore: ['compose/*'],
+        transform(content, filePath) {
+            if (filePath === path.resolve(folderBase, 'config.js')) {
+                const contentStr = content.toString();
+                const matched = `${contentStr.match(/\s\[[\S\s]+\]/)[0]}`;
+                let configList = matched.replace(/[\r|\n|\s]/g, '').slice(2, matched.endsWith(',];') ? -3 : -2).split('},{');
+                configList = configList.filter(item => !!scriptList.find(sItem => item.indexOf(sItem.split('.')[0] + '.handler') > 0));
+                configList = `{${configList.join('},{')}}`;
+                if (fs.existsSync('./gateway-dist/config.js')) {
+                    const customizeGatewayCfg = require('./gateway-dist/config');
+                    configList = configList + ',' + customizeGatewayCfg.map(item => JSON.stringify(item)).join(',');
+                }
+                return `module.exports = [${configList}]`;
+            } else {
+                return content;
+            }
+        }
+    });
+    return entry;
+}
+
